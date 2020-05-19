@@ -1,0 +1,38 @@
+/**
+* Numerierte Headings
+*/
+.define-numbered-headings() {
+    counter-reset+_: h1Counter;
+
+    h1 {
+        counter-reset: h2Counter h3Counter h4Counter;
+    }
+
+    h2 {
+        counter-reset: h3Counter h4Counter;
+    }
+
+    h3 {
+        counter-reset: h4Counter;
+    }
+
+    h1:before {
+        counter-increment: h1Counter;
+        content          : counter(h1Counter) " ";
+    }
+
+    h2:before {
+        counter-increment: h2Counter;
+        content          : counter(h1Counter) "."counter(h2Counter) " ";
+    }
+
+    h3:before {
+        counter-increment: h3Counter;
+        content          : counter(h1Counter) "."counter(h2Counter) "."counter(h3Counter) " "
+    }
+
+    h4:before {
+        counter-increment: h4Counter;
+        content          : counter(h1Counter) "."counter(h2Counter) "."counter(h3Counter) "."counter(h4Counter) " ";
+    }
+}

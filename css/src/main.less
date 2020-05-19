@@ -1,0 +1,48 @@
+/** Globales Cyfex CSS für Markdown */
+@import "github.less";
+@import (inline) "fonts.less";
+@import "numbered-headings.less";
+@import "images.less";
+@import "header.less";
+
+html body {
+
+  .basic{
+    /* base style */
+    .github(#1d1d1d, #fdf6e3, #08c);
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color      : #00acd1;
+      font-family: "Museo Sans", "Fira Sans", "Helvetica", sans-serif;
+      font-weight: bold;
+    }
+
+    /* cyfex variants */
+    font-family: 'Museo',
+    "Fira Sans",
+    "Helvetica",
+    serif;
+
+    .define-header();
+    .define-images();
+  }
+
+  #main-markdown{
+    .basic();
+  }
+
+  #main-markdown-numbered {
+
+    .basic();
+
+    .define-numbered-headings();
+    .define-numbered-images();
+  }
+
+
+}

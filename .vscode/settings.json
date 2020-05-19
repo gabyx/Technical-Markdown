@@ -1,0 +1,28 @@
+{
+    "files.autoGuessEncoding": false,
+    "files.encoding": "utf8",
+    "markdown-preview-enhanced.mathInlineDelimiters": [
+        [
+            "\\f$",
+            "\\f$"
+        ],
+        [
+            "$",
+            "$"
+        ]
+    ],
+    "markdown-preview-enhanced.mathBlockDelimiters": [
+        [
+            "\\f[",
+            "\\f]"
+        ],
+        [
+            "$$",
+            "$$"
+        ]
+    ],
+    "markdown-preview-enhanced.enableScriptExecution": true,
+    "markdown-preview-enhanced.mathRenderingOption": "MathJax",
+    "markdown-preview-enhanced.enableExtendedTableSyntax": true,
+    "markdown-preview-enhanced.imageFolderPath": "/files",
+}

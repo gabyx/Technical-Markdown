@@ -1,0 +1,11 @@
+/**
+* numbered images
+*/
+.define-numbered-images() {
+    counter-reset+_: imgCounter;
+
+    .img-with-caption .caption:before {
+        counter-increment: imgCounter;
+        content          : "Fig. "counter(imgCounter) ": "
+    }
+}
