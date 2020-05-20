@@ -26,18 +26,9 @@ gulp.task("compile-markdown", async function () {
 
 /* Task to compile all markdown files */
 gulp.task("compile-markdown", async function (done) {
-  var mathjax = fs
-    .readFileSync("./convert/mathjax-config.js", "utf8")
-    .replace(/(\r\n|\n|\r| )/gm, "").replace(/\$/gm, "$$$$");
-  console.log(mathjax)
-
   file = "./Content.md";
   console.log("Exporting " + file + " to html...");
   await markdown.exportToHTML(file);
-
-  console.log("Adjusting mathjax in " + file + " ...");
-  let regex = /MathJax\.Hub\.Config\(.*\);/;
-  gulp.src("Content.html").pipe(replace(regex, mathjax)).pipe(gulp.dest("./"));
 });
 
 /* Task to watch all markdown files */

@@ -6,13 +6,13 @@
         {
             "label": "Start Markdown Conversion",
             "type": "shell",
-            "command": "npm run build",
+            "command": "yarn run build",
             "problemMatcher": []
         },
         {
             "label": "Start Markdown Browser Sync",
             "type": "shell",
-            "command": "npm run show",
+            "command": "yarn run show",
             "problemMatcher": []
         }
     ]
