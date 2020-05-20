@@ -22,7 +22,7 @@ Normally one would use the [Markdown Preview Enhanced](https://shd101wyy.github.
 Run the following commands in `.vscode/tasks.json` in VS Code or use the following shell commands:
 - **Start Markdown Conversion**: Runs the markdown conversion with [MPE](https://github.com/shd101wyy/mume) continuously while monitoring changes to `.less` style files and markdown `.md` files:
     ```shell
-    yarv build
+    yarn build
     ```
 
 - **Start Markdown Browser Sync**: Serves the HTML for preview in a browser with autoreload.
