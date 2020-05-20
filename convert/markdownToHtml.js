@@ -1,4 +1,4 @@
-const path = require('path')
+const path = require("path");
 const mume = require("@shd101wyy/mume");
 
 // es6
@@ -10,6 +10,8 @@ async function exportToHTML(file) {
     await mume.init(configPath); // default uses "~/.mume"
 
     const config = {
+        configPath: configPath,
+
         // Enable this option will render markdown by pandoc instead of markdown-it.
         usePandocParser: false,
 
