@@ -11,7 +11,9 @@ module.exports = {
             "AMSmath.js",
             "AMSsymbols.js",
             "noErrors.js",
-            "noUndefined.js"
+            "noUndefined.js",
+            "colors.js",
+            "extpfeil.js"
         ],
         "equationNumbers": { "autoNumber": "AMS" }
     },
