@@ -25,4 +25,5 @@
     "markdown-preview-enhanced.mathRenderingOption": "MathJax",
     "markdown-preview-enhanced.enableExtendedTableSyntax": true,
     "markdown-preview-enhanced.imageFolderPath": "/files",
+    "markdown-preview-enhanced.configPath": "${projectDir}/convert/html",
 }

@@ -1,13 +1,47 @@
 ---
+title: "Technical Document"
+author: Gabriel Nützi
+fontsize: 12pt
+documentclass: scrartcl
+classoption:
+    - 12pt
+    - a4paper
+    - twoside
+    - titlepage
+    - openright
+    - numbers=noenddot
+    - chapterprefix=true
+    - headings=optiontohead
+output:
+    pdf_document:
+        pandoc_args:
+            [
+                "-f",
+                "markdown-markdown_in_html_blocks+raw_html-raw_tex+tex_math_dollars",
+                "--log=pandoc.log",
+            ]
+        latex_engine: xelatex
+        includes:
+            in_header: convert/pandoc/template.tex
+        toc: true
+        toc_depth: 2
+        citation_package: biblatex
+        number_sections: true
 html:
-  embed_local_images: false
-  embed_svg: true
-  offline: false
-  toc: true
-export_on_save:
-  html: false
+    embed_local_images: false
+    embed_svg: true
+    offline: false
+    toc: true
+puppeteer:
+    path: "./Content-Chrome.pdf"
+    landscape: false
+    format: "A4"
+    printBackground: true
+    timeout: 3000 # <= Special config, which means waitFor 3000 ms
 id: "main-markdown-numbered"
 class: "main"
+export_on_save:
+    html: false
 ---
 
 @import "css/src/main.less"
@@ -24,6 +58,5 @@ class: "main"
 This is a setup demonstrating the power and use of markdown for technical documents by using
 the VS Code extension [Markdown Preview Enhanced](https://shd101wyy.github.io/markdown-preview-enhanced) and a fully automated conversion sequence with `yarn`, `gulp`.
 Read the [Readme.md](https://github.com/gabyx/TechnicalMarkdown/blob/master/Readme.md) for futher information.
-
 
 @import "chapters/convex-analysis/KonvexeProbleme.md"
