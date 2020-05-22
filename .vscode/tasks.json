@@ -4,9 +4,21 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Start Markdown Conversion",
+            "label": "Start Markdown HTML Conversion",
             "type": "shell",
-            "command": "yarn run build",
+            "command": "yarn run build:html",
+            "problemMatcher": []
+        },
+        {
+            "label": "Start Markdown Pandoc Conversion",
+            "type": "shell",
+            "command": "yarn run build:pandoc",
+            "problemMatcher": []
+        },
+        {
+            "label": "Start Markdown Chrome Conversion",
+            "type": "shell",
+            "command": "yarn run build:chrome",
             "problemMatcher": []
         },
         {
