@@ -5,7 +5,7 @@ This is a markdown setup demonstrating the power and use of markdown for **techn
 - using `yarn`+ `gulp` for a **fully automated conversion** sequence such that exporting is done in the background:
 
     - export with `chrome`
-    - export with `pandoc` to `xelatex`
+    - export with `pandoc` to `latexmk` using `xelatex`
     - to `html`
 
     with [Markdown Preview Enhanced Engine](https://github.com/shd101wyy/mume).
@@ -58,7 +58,6 @@ Run the following tasks defined in `.vscode/tasks.json` from VS Code or use the 
     - `convert/pandoc/filters/transformMath.py`: Transform all math expressions.
     - `convert/pandoc/filters/transformImages.py`: Transforms all HTML images.
 
-    Parser adjustments have been made in `convert/pandoc/parser.js` to transform math expressions.
     **Note**: Install the latest [pandoc release](https://github.com/jgm/pandoc/releases).
 
 # Editing Styles
