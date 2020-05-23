@@ -161,7 +161,7 @@
 html body .basic {
   /* base style */
   /* cyfex variants */
-  font-family: 'Museo', "Fira Sans", "Helvetica", serif;
+  font-family: "Museo", "Fira Sans", "Helvetica", serif;
 }
 html body .basic body {
   font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
@@ -507,10 +507,13 @@ html body .basic .img-with-caption .caption {
   padding-right: 18pt;
   font-size: 12pt;
 }
+html body .basic .latex-math-define {
+  display: none;
+}
 html body #main-markdown {
   /* base style */
   /* cyfex variants */
-  font-family: 'Museo', "Fira Sans", "Helvetica", serif;
+  font-family: "Museo", "Fira Sans", "Helvetica", serif;
 }
 html body #main-markdown body {
   font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
@@ -856,10 +859,13 @@ html body #main-markdown .img-with-caption .caption {
   padding-right: 18pt;
   font-size: 12pt;
 }
+html body #main-markdown .latex-math-define {
+  display: none;
+}
 html body #main-markdown-numbered {
   /* base style */
   /* cyfex variants */
-  font-family: 'Museo', "Fira Sans", "Helvetica", serif;
+  font-family: "Museo", "Fira Sans", "Helvetica", serif;
   counter-reset: h1Counter imgCounter;
 }
 html body #main-markdown-numbered body {
@@ -1205,6 +1211,9 @@ html body #main-markdown-numbered .img-with-caption .caption {
   padding-left: 18pt;
   padding-right: 18pt;
   font-size: 12pt;
+}
+html body #main-markdown-numbered .latex-math-define {
+  display: none;
 }
 html body #main-markdown-numbered h1 {
   counter-reset: h2Counter h3Counter h4Counter;

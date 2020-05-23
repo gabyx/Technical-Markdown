@@ -1,5 +1,5 @@
 <!-- No empty lines in this file -->
-<div style="display:none;">
+<div class="latex-math-define">
 $$
 \newcommand{\vvec}[1]{\mathbf{#1}}
 \newcommand{\mat}[1]{\mathbf{#1}}

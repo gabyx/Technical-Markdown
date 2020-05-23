@@ -40,7 +40,7 @@ gulp.task("transform-math", async function () {
     gulp.src(["includes/Math.md"])
         .pipe(rename("includes/Math.tex"))
         .pipe(replace(re, "$1"))
-        .pipe(gulp.dest("."));
+        .pipe(gulp.dest("convert/pandoc"));
 });
 
 /* Task to watch all markdown files */

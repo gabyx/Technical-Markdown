@@ -1,0 +1,24 @@
+\ProvidesPackage{GeneralMacros}[general style definitions]
+\RequirePackage{graphicx}
+\RequirePackage{xparse}
+\RequirePackage{svg}
+
+% Image with caption
+\NewDocumentCommand\imageWithCaption{mmmo}{
+\begin{figure}[h]
+    \centering
+    \includegraphics[#3]{#1}
+    \caption{#2}
+    \IfValueT{#4}{\label{#4}}
+\end{figure}
+}
+
+% SVG with caption
+\NewDocumentCommand\svgWithCaption{mmmo}{
+\begin{figure}[h] 
+    \centering
+    \includesvg[inkscapepath=svgsubdir,#3]{#1}
+    \caption{#2}
+    \IfValueT{#4}{\label{#4}}
+\end{figure}
+}

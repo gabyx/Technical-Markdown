@@ -26,4 +26,8 @@
     "markdown-preview-enhanced.enableExtendedTableSyntax": true,
     "markdown-preview-enhanced.imageFolderPath": "/files",
     "markdown-preview-enhanced.configPath": "${projectDir}/convert/html",
+    "python.pythonPath": "/home/gabyx/envs/pythonEnv3.8/bin/python",
+    "python.formatting.provider": "yapf",
+    "editor.formatOnPaste": true,
+    "editor.formatOnType": true
 }

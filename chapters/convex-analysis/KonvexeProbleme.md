@@ -156,8 +156,8 @@ Anstatt $\frac{d}{d\vvec{x}}\indf{C}$ nehmen wir einfach das Subdifferential $\p
 
 ```math
 \begin{align}
-\vvec{0} \in \frac{df}{d\vvec{x}}(\vvec{x}^*) + \partial_{\vvec{x}} \indf{C}(\vvec{x}^*)
 \label{eq-optimality-strict-convex}
+\vvec{0} \in \frac{df}{d\vvec{x}}(\vvec{x}^*) + \partial_{\vvec{x}} \indf{C}(\vvec{x}^*)
 \end{align}
 ```
 
@@ -175,7 +175,7 @@ Da man zeigen kann, dass das Subdifferential, also die mengenwertige Ableitung, 
 Das bringt uns nicht viel mehr ausser einer visuellen Erkenntnis durch folgende Visualisierung:
 
 <div class="img-with-caption">
-    <img src="/files/ConvexOptimizationProblem.svg" style="max-width:600px;width:600px"/>
+    <img src="/files/ConvexOptimizationProblem.svg" style="max-width:600px;width:80%"/>
     <div class="caption" id="nomal-cone-vis">Konvexes Optimierungs Problem innerhalb der Menge $\set{C}$ auf einer $2$d-Funktion $f(\vvec{x}) \in \mathbb{R}$. Der negative Gradient liegt im Optimum $\vvec{x}^*$ genau innerhalb des Normalkegels an $\vvec{x}^*$.</div>
 </div>
 
