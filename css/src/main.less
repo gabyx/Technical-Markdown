@@ -4,45 +4,40 @@
 @import "numbered-headings.less";
 @import "images.less";
 @import "header.less";
+@import "math.less";
 
 html body {
+    .basic {
+        /* base style */
+        .github(#1d1d1d, #fdf6e3, #08c);
 
-  .basic{
-    /* base style */
-    .github(#1d1d1d, #fdf6e3, #08c);
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: #00acd1;
+            font-family: "Museo Sans", "Fira Sans", "Helvetica", sans-serif;
+            font-weight: bold;
+        }
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      color      : #00acd1;
-      font-family: "Museo Sans", "Fira Sans", "Helvetica", sans-serif;
-      font-weight: bold;
+        /* cyfex variants */
+        font-family: "Museo", "Fira Sans", "Helvetica", serif;
+
+        .define-header();
+        .define-images();
+        .define-math();
     }
 
-    /* cyfex variants */
-    font-family: 'Museo',
-    "Fira Sans",
-    "Helvetica",
-    serif;
+    #main-markdown {
+        .basic();
+    }
 
-    .define-header();
-    .define-images();
-  }
+    #main-markdown-numbered {
+        .basic();
 
-  #main-markdown{
-    .basic();
-  }
-
-  #main-markdown-numbered {
-
-    .basic();
-
-    .define-numbered-headings();
-    .define-numbered-images();
-  }
-
-
+        .define-numbered-headings();
+        .define-numbered-images();
+    }
 }

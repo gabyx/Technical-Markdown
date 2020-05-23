@@ -1,32 +1,5 @@
 ---
-title: "Technical Document"
-author: Gabriel Nützi
-fontsize: 12pt
-documentclass: scrartcl
-classoption:
-    - 12pt
-    - a4paper
-    - twoside
-    - titlepage
-    - openright
-    - numbers=noenddot
-    - chapterprefix=true
-    - headings=optiontohead
-output:
-    pdf_document:
-        pandoc_args:
-            [
-                "-f",
-                "markdown-markdown_in_html_blocks+raw_html-raw_tex+tex_math_dollars",
-                "--log=pandoc.log",
-            ]
-        latex_engine: xelatex
-        includes:
-            in_header: convert/pandoc/template.tex
-        toc: true
-        toc_depth: 2
-        citation_package: biblatex
-        number_sections: true
+# Markdown Preview Enhanced
 html:
     embed_local_images: false
     embed_svg: true
@@ -42,6 +15,55 @@ id: "main-markdown-numbered"
 class: "main"
 export_on_save:
     html: false
+output:
+    pdf_document:
+        pandoc_args:
+            [
+                "--fail-if-warnings",
+                "-f",
+                "markdown+markdown_in_html_blocks+native_divs+raw_html+raw_tex+tex_math_dollars",
+                "--filter=convert/pandoc/filters/transformImages.py",
+                "--filter=convert/pandoc/filters/transformMath.py",
+                "--pdf-engine-opt=-xelatex",
+                "--pdf-engine-opt=-r",
+                "--pdf-engine-opt=.latexmkrc",
+                "--pdf-engine-opt=-g",
+                "--pdf-engine-opt=-outdir=pandoc"
+            ]
+        latex_engine: latexmk
+        template: convert/pandoc/includes/Template.tex
+        includes:
+            in_header: convert/pandoc/includes/Header.tex
+        toc: true
+        toc_depth: 2
+        citation_package: biblatex
+        number_sections: true  
+# Pandoc
+title: "Technical Document"
+author: Gabriel Nützi
+fontsize: 12pt
+mainfont: Latin Modern Roman
+sansfont: Latin Modern Sans
+monofont: Latin Modern Mono
+documentclass: scrreprt
+classoption:
+    - a4paper
+    - twoside
+    - titlepage
+    - openright
+    - numbers=noenddot
+    - chapterprefix=true
+    - headings=optiontohead
+    - svgnames
+    - dvipsnames
+hyperrefoptions:
+    - linktoc=all
+    - hidelinks
+linkcolor: DarkGray
+filecolor: DarkBlue
+citecolor: DarkBlue
+urlcolor: MediumBlue
+toccolor: DarkGreen
 ---
 
 @import "css/src/main.less"

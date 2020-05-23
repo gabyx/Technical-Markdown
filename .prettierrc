@@ -1,5 +1,6 @@
 {
   "trailingComma": "none",
   "tabWidth": 4,
-  "quoteProps": "preserve"
+  "quoteProps": "preserve",
+  "printWidth": 120
 }

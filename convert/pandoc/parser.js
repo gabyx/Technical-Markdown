@@ -11,10 +11,6 @@ module.exports = {
     },
     onWillTransformMarkdown: function (markdown) {
         return new Promise((resolve, reject) => {
-            console.log("Replace Math.md ...");
-            markdown = markdown
-                .replace(/@import.*Math.md.*/gm, "")
-                .replace(/```math\s+((?:.*\n)*?)```/gm, "$1");
             return resolve(markdown);
         });
     },
