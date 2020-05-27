@@ -14,7 +14,7 @@
     "markdown-preview-enhanced.mathRenderingOption": "MathJax",
     "markdown-preview-enhanced.enableExtendedTableSyntax": true,
     "markdown-preview-enhanced.imageFolderPath": "/files",
-    "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": true,
+    "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": false,
     "python.formatting.provider": "yapf",
     "editor.formatOnPaste": true,
     "editor.formatOnType": true,

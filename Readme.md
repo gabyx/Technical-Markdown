@@ -71,11 +71,14 @@ You can edit the `css/src/main.less` file to change the look of the markdown.
 Edit the `main.less` file to see changes in the conversion from `Content.md`.
 
 # Engine Configs
-The config path for the [engine](https://github.com/shd101wyy/mume) is adjusted for the different exports. See `convert/convert.js` and the paths:
+The config path for the [engine](https://github.com/shd101wyy/mume) is `convert/pandoc` . See `convert/convert.js`.
 
-- `convert/html`
-- `convert/pandoc` 
+# Debugging
+There is a debug configuration in `.vscode/launch.sh` for both the HTML and the PDF export.
+
+## Pandoc Filters
+Pandoc filters are harder to debug. There is an included unix-like `convert/pandoc/filters/tee.py` filter which can be put anywhere into the filter chain as needed, to see the output in `pandoc/filter-out` (see `pandoc/filters/module/dev.py` for adjustments).
+The filter `convert/pandoc/filters/teeStart.py` first clears all output before doing the same as `tee.py`. 
 
 # Todo
-- Applying `pandoc-crossref` over the document.
 - Correct scaling of images for latex and html output.

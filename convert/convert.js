@@ -2,7 +2,7 @@ const path = require("path");
 const mume = require("@shd101wyy/mume");
 
 function getConfigPathHtml() {
-    return path.resolve("./convert/html"); // use here your own config folder, default is "~/.mume"
+    return path.resolve("./convert/pandoc"); // use here your own config folder, default is "~/.mume"
 }
 
 function getConfigPathPandoc() {
@@ -16,7 +16,7 @@ async function createEngine(configPath, file) {
         configPath: configPath,
 
         // Enable this option will render markdown by pandoc instead of markdown-it.
-        usePandocParser: false,
+        usePandocParser: true,
 
         // In Markdown, a single newline character doesn't cause a line break in the generated HTML. In GitHub Flavored Markdown, that is not true. Enable this config option to insert line breaks in rendered HTML for single newlines in Markdown source.
         breakOnSingleNewLine: false,

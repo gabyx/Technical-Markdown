@@ -14,16 +14,25 @@ puppeteer:
     printBackground: true
     timeout: 3000 # <= Special config, which means waitFor 3000 ms
 pandoc_args: 
-    ["-f",
-     "markdown+markdown_in_html_blocks+tex_math_dollars"]
+    [
+        "--from=markdown+markdown_in_html_blocks+tex_math_dollars",
+        "--filter=convert/pandoc/filters/transformMath.py",
+        # "--filter=convert/pandoc/filters/teeStart.py" ,
+        "--filter=pandoc-crossref",
+        # "--filter=convert/pandoc/filters/tee.py",
+        "--filter=pandoc-citeproc",
+        # "--filter=convert/pandoc/filters/tee.py",
+        "--filter=convert/pandoc/filters/transformImages.py",
+        # "--filter=convert/pandoc/filters/tee.py"
+    ]
 output:
     pdf_document:
         pandoc_args:
             [
                 "--fail-if-warnings",
-                "--format=markdown+markdown_in_html_blocks+native_divs+raw_tex+tex_math_dollars",
+                "--from=markdown+markdown_in_html_blocks+native_divs+raw_tex+tex_math_dollars",
                 "--filter=convert/pandoc/filters/transformMath.py",
-                # "-filter=convert/pandoc/filters/teeStart.py" ,
+                # "--filter=convert/pandoc/filters/teeStart.py" ,
                 "--filter=pandoc-crossref",
                 # "--filter=convert/pandoc/filters/tee.py",
                 "--filter=pandoc-citeproc",
