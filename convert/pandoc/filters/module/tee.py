@@ -40,7 +40,7 @@ def tee(clear=False):
         i = 1
 
         def filename(x):
-            file + "-{0}.json".format(x)
+            return file + "-{0}.json".format(x)
 
         t = filename(i)
         while os.path.exists(t):

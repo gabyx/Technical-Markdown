@@ -13,7 +13,7 @@ puppeteer:
     format: "A4"
     printBackground: true
     timeout: 3000 # <= Special config, which means waitFor 3000 ms
-pandoc_args: 
+pandoc_args:
     [
         "--from=markdown+markdown_in_html_blocks+tex_math_dollars",
         "--filter=convert/pandoc/filters/transformMath.py",
@@ -29,6 +29,7 @@ output:
     pdf_document:
         pandoc_args:
             [
+                "--columns=120",
                 "--fail-if-warnings",
                 "--from=markdown+markdown_in_html_blocks+native_divs+raw_tex+tex_math_dollars",
                 "--filter=convert/pandoc/filters/transformMath.py",
@@ -43,7 +44,7 @@ output:
                 "--pdf-engine-opt=-r",
                 "--pdf-engine-opt=.latexmkrc",
                 "--pdf-engine-opt=-g",
-                "--pdf-engine-opt=-outdir=pandoc"
+                "--pdf-engine-opt=-outdir=output-tex",
             ]
         latex_engine: latexmk
         template: convert/pandoc/includes/Template.tex
@@ -52,7 +53,7 @@ output:
         toc: true
         toc_depth: 2
         citation_package: biblatex
-        number_sections: true  
+        number_sections: true
 # Pandoc
 title: "Technical Document"
 author: Gabriel Nützi
@@ -78,7 +79,7 @@ linkcolor: DarkGray
 filecolor: DarkBlue
 citecolor: DarkBlue
 urlcolor: MediumBlue
-toccolor: DarkGreen
+toccolor: Black
 ---
 
 @import "css/src/main.less"
@@ -91,7 +92,7 @@ toccolor: DarkGreen
 </p>
 </header>
 
-# Technical Document s
+# Technical Documents
 
 This is a setup demonstrating the power and use of markdown for technical documents by using
 the VS Code extension [Markdown Preview Enhanced](https://shd101wyy.github.io/markdown-preview-enhanced) and a fully automated conversion sequence with `yarn`, `gulp`.

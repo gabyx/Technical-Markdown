@@ -7,7 +7,7 @@ Pandoc filter to convert
 
 import sys
 import os
-from panflute import Doc, Element, Image, RawInline, run_filter
+from panflute import Doc, Element, Image, RawInline, RawInline, LineBreak, run_filter
 from module.utils import log
 
 assert sys.version_info >= (3, 0)
@@ -48,17 +48,20 @@ def transformImgToLatex(image: Image):
     width = toScaling(image.attributes.get("width", "100%"), proportionalTo=r"\textwidth")
     height = toScaling(image.attributes.get("height", None), proportionalTo=r"\textwidth")
     # Caption
-    caption = image.title
+    caption = image.content
 
     # Latex command options
     lGraphicsOpts = "width={0}".format(width)
     if height:
         lGraphicsOpts += ", height={0}".format(height)
 
-    args = [url, caption if caption else "", lGraphicsOpts, label]
-    lArgs = "".join(["{" + a + "}" for a in args if a is not None])
+    latexElements = [
+        latexblock(r"\{0}{{{1}}}{{".format(baseCommand, url)),
+        *caption,
+        latexblock(r"}}{{{0}}}{{{1}}}".format(lGraphicsOpts, label))
+    ]
 
-    return latexblock(r"\{0}{1}".format(baseCommand, lArgs))
+    return latexElements
 
 
 def transformImages(elem: Element, doc: Doc):

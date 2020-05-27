@@ -7,7 +7,7 @@
 """
 
 import sys
-from panflute import Para, Math, Div, CodeBlock, Element, Doc, run_filter
+from panflute import Para, RawInline, Div, CodeBlock, Element, Doc, run_filter
 
 assert sys.version_info >= (3, 0)
 
@@ -15,7 +15,7 @@ fName = "tfMath"
 
 
 def mathblock(code):
-    return Para(Math(code, format="DisplayMath"))
+    return Para(RawInline(code, format="tex"))
 
 
 def transformMath(elem: Element, doc: Doc):
