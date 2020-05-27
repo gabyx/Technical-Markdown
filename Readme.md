@@ -26,12 +26,12 @@ yarn
 ```
 
 Install [pandoc](https://pandoc.org/installing.html) [Version >= 2.9.2.1]
-For Linux and macOs:
+For **Linux** and **macOs**:
 ```shell
 brew install pandoc pandoc-citeproc pandoc-crossref
 ```
 
-Install a recent `python` and the following packages
+Install a recent `python` [Version >= 3.6] and the following packages
 
 ```shell
 pip install -r .requirements
@@ -83,4 +83,6 @@ Pandoc filters are harder to debug. There is an included unix-like `convert/pand
 The filter `convert/pandoc/filters/teeStart.py` first clears all output before doing the same as `tee.py`.
 
 # Todo
-- Correct scaling of images for latex and html output.
+- Customize scaling of images for latex and html output inside the pandoc filter
+- Add CI
+- Add tests
