@@ -6,11 +6,15 @@ This is a markdown setup demonstrating the power and use of markdown for **techn
 
     - export with `chrome`
     - export with `pandoc` to `latexmk` using `xelatex`
-    - to `html`
+    - export with `pandoc` to `html`
 
     with [Markdown Preview Enhanced Engine](https://github.com/shd101wyy/mume).
-- previewing in VS Code with [Markdown Preview Enhanced](https://shd101wyy.github.io/markdown-preview-enhanced).
+- previewing in VS Code with [Markdown Preview Enhanced](https://github.com/shd101wyy/vscode-markdown-preview-enhanced).
 
+- Using the following [pandoc filters](https://pandoc.org/filters.html):
+    - [panflute](https://github.com/sergiocorreia/panflute) [doc](http://scorreia.com/software/panflute)
+    - [pandoc-crosscite](https://github.com/jgm/pandoc-citeproc) [doc](https://github.com/jgm/pandoc-citeproc/blob/master/man/pandoc-citeproc.1.md)
+    - [pandoc-crossref](https://github.com/lierdakil/pandoc-crossref) [doc](http://lierdakil.github.io/pandoc-crossref)
 
 **See live demo here [Content.html](https://gabyx.github.io/TechnicalMarkdown/Content.html)**
 
@@ -74,7 +78,7 @@ Edit the `main.less` file to see changes in the conversion from `Content.md`.
 The config path for the [engine](https://github.com/shd101wyy/mume) is `convert/pandoc` . See `convert/convert.js`.
 
 # Debugging
-There is a debug configuration in `.vscode/launch.sh` for both the HTML and the PDF export.
+There is a debug configuration in `.vscode/launch.json` for both the HTML and the PDF export.
 
 ## Pandoc Filters
 Pandoc filters are harder to debug. There is an included unix-like `convert/pandoc/filters/tee.py` filter which can be put anywhere into the filter chain as needed, to see the output in `pandoc/filter-out` (see `pandoc/filters/module/dev.py` for adjustments).
