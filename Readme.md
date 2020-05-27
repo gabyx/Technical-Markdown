@@ -2,11 +2,11 @@
 
 This is a markdown setup demonstrating the power and use of markdown for **technical documents**:
 
-- using `yarn`+ `gulp` for a **fully automated conversion** sequence such that exporting is done in the background:
+- using `yarn`+ `gulp` for a **fully automated conversion** sequence such that exporting ([Content.md](https://raw.githubusercontent.com/gabyx/TechnicalMarkdown/master/Content.md)) is done in the background:
 
     - export with `pandoc` to `html` then to `chrome`
-    - export with `pandoc` to `latexmk` using `xelatex`
-    - export with `pandoc` to `html`
+    - export with `pandoc` to `latexmk` using `xelatex` [See Output](output-tex/input.pdf)
+    - export with `pandoc` to `html` [See Output](https://gabyx.github.io/TechnicalMarkdown/Content.html)
 
     with [Markdown Preview Enhanced Engine](https://github.com/shd101wyy/mume).
 - previewing in VS Code with [Markdown Preview Enhanced](https://github.com/shd101wyy/vscode-markdown-preview-enhanced).
@@ -15,8 +15,6 @@ This is a markdown setup demonstrating the power and use of markdown for **techn
     - [panflute](https://github.com/sergiocorreia/panflute) [doc](http://scorreia.com/software/panflute)
     - [pandoc-crosscite](https://github.com/jgm/pandoc-citeproc) [doc](https://github.com/jgm/pandoc-citeproc/blob/master/man/pandoc-citeproc.1.md)
     - [pandoc-crossref](https://github.com/lierdakil/pandoc-crossref) [doc](http://lierdakil.github.io/pandoc-crossref)
-
-**See live demo here [Content.html](https://gabyx.github.io/TechnicalMarkdown/Content.html)**
 
 # Dependencies
 Install all dependencies with [yarn](https://www.yarnjs.com/get-yarn):
@@ -27,13 +25,13 @@ cd TechnicalMarkdown
 yarn
 ```
 
-Install [pandoc](https://pandoc.org/installing.html):
+Install [pandoc](https://pandoc.org/installing.html) [Version >= 2.9.2.1]
 For Linux and macOs:
 ```shell
 brew install pandoc pandoc-citeproc pandoc-crossref
 ```
 
-Install a recent `python` and the following packages 
+Install a recent `python` and the following packages
 
 ```shell
 pip install -r .requirements
@@ -68,7 +66,7 @@ Run the following tasks defined in `.vscode/tasks.json` from VS Code or use the 
     - `convert/pandoc/filters/transformMath.py`: Transform all math expressions.
     - `convert/pandoc/filters/transformImages.py`: Transforms all HTML images.
 
-    **Note**: Install the latest [pandoc release](https://github.com/jgm/pandoc/releases).
+    The latex output can be inspected in `output-tex/input.tex`.
 
 # Editing Styles
 You can edit the `css/src/main.less` file to change the look of the markdown.
@@ -82,7 +80,7 @@ There is a debug configuration in `.vscode/launch.json` for both the HTML and th
 
 ## Pandoc Filters
 Pandoc filters are harder to debug. There is an included unix-like `convert/pandoc/filters/tee.py` filter which can be put anywhere into the filter chain as needed, to see the output in `pandoc/filter-out` (see `pandoc/filters/module/dev.py` for adjustments).
-The filter `convert/pandoc/filters/teeStart.py` first clears all output before doing the same as `tee.py`. 
+The filter `convert/pandoc/filters/teeStart.py` first clears all output before doing the same as `tee.py`.
 
 # Todo
 - Correct scaling of images for latex and html output.

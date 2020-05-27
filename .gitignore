@@ -1,9 +1,6 @@
 node_modules
 __pycache__
 
-pandoc/*
-!pandoc/.gitkeep
-
 svg-inkscape
 
 *.pdf
@@ -25,3 +22,8 @@ svg-inkscape
 *_latexindent*
 
 Test*
+
+pandoc
+output-tex/*
+!output-tex/.gitkeep
+!output-tex/input.pdf

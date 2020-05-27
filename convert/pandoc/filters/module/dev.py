@@ -7,4 +7,3 @@ class FilterFlags:
     """
     debugOutput = True
     teeOutput = os.path.join(os.getcwd(), "pandoc/filter-out")
-^
