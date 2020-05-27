@@ -5,29 +5,36 @@ Pandoc filter to convert
     - remove `<div class="latex-math-define" />`
 """
 
-from pandocfilters import toJSONFilter, Null, Para, RawInline
+import sys
+import typing
+from panflute import Para, Math, Div, CodeBlock, Element, Doc, run_filter
 import pypandoc as pyp
 
+assert sys.version_info >= (3, 0)
 
-def latexblock(code):
-    """LaTeX block"""
-    return Para([RawInline('tex', code)])
+fName = "tfMath"
+
+def mathblock(code):
+    return Para(Math(code, format="DisplayMath"))
 
 
-def transformMath(key, value, format, meta):
-    if format in ["latex", "native", "json"]:
-        if key == 'Div':
-            [[_ident, classes, _kvs], contents] = value
-            if "latex-math-define" in classes:
+def transformMath(elem: Element, doc: Doc):
+
+    if doc.format in ["latex"]:
+        if isinstance(elem, Div):
+            if "latex-math-define" in elem.classes:
                 return []  # remove
 
-        elif key == 'CodeBlock':
-            [[_ident, classes, _kvs], contents] = value
-            if "math" in classes:
-                return latexblock(contents)
+        elif isinstance(elem, CodeBlock):
+            if "math" in elem.classes:
+                return mathblock(elem.text)
 
     return None
 
 
+def main(doc: Doc = None):
+    return run_filter(transformMath, doc=doc)
+
+
 if __name__ == "__main__":
-    toJSONFilter(transformMath)
+    main()

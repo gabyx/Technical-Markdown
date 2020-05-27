@@ -1,5 +1,7 @@
 node_modules
+__pycache__
 
+pandoc/*
 !pandoc/.gitkeep
 
 svg-inkscape
@@ -21,3 +23,5 @@ svg-inkscape
 *.synctex.gz
 *synctex(busy)
 *_latexindent*
+
+Test*
