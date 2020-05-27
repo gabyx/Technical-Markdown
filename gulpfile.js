@@ -25,7 +25,7 @@ gulp.task("compile-markdown-html", async function () {
 });
 
 /* Task to compile all markdown files */
-gulp.task("compile-markdown-pandoc", async function () {
+gulp.task("compile-markdown-latex", async function () {
     await markdown.pandocExport(path.resolve("./Content.md"));
 });
 
@@ -52,7 +52,7 @@ gulp.task("watch-markdown-html", async function () {
 gulp.task("watch-markdown-pandoc", async function () {
     gulp.watch(
         "./**/*.md",
-        gulp.series(["transform-math", "compile-markdown-pandoc"])
+        gulp.series(["transform-math", "compile-markdown-latex"])
     );
 });
 

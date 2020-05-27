@@ -1,14 +1,13 @@
 #!/usr/bin/env python
 """
-Pandoc filter to convert 
+Pandoc filter to convert
     - ```math``` code blocks to raw inline latex.
     - remove `<div class="latex-math-define" />`
 """
 
-import typing
-import os
 import sys
-from panflute import Doc, Element, Image, Para, RawInline, run_filter
+import os
+from panflute import Doc, Element, Image, RawInline, run_filter
 from module.utils import log
 
 assert sys.version_info >= (3, 0)
@@ -25,11 +24,11 @@ def transformImgToLatex(image: Image):
     url = image.url
     label = image.identifier
 
-    log("Transforming image '{1}' to latex ...", fName, url)
+    log("Transforming image '{0}' to latex ...", fName, url)
 
     # Set `/fig.png` to `./fig.png`
     if os.path.isabs(url):
-        src = "." + os.path.splitdrive(src)[1]
+        url = "." + os.path.splitdrive(url)[1]
 
     baseCommand = r"imageWithCaption"
     if os.path.splitext(url)[1] == ".svg":
@@ -46,10 +45,8 @@ def transformImgToLatex(image: Image):
         else:
             return size
 
-    width = toScaling(image.attributes.get("width", "100%"),
-                      proportionalTo=r"\textwidth")
-    height = toScaling(image.attributes.get("height", None),
-                       proportionalTo=r"\textwidth")
+    width = toScaling(image.attributes.get("width", "100%"), proportionalTo=r"\textwidth")
+    height = toScaling(image.attributes.get("height", None), proportionalTo=r"\textwidth")
     # Caption
     caption = image.title
 

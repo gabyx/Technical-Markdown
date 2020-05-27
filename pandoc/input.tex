@@ -359,8 +359,8 @@
 }
 Author: Gabriel Nützi Reviewer: Michael Baumann Date: 28.04.2020
 
-\hypertarget{technical-document}{%
-\chapter{Technical Document}\label{technical-document}}
+\hypertarget{technical-document-s}{%
+\chapter{Technical Document s}\label{technical-document-s}}
 
 This is a setup demonstrating the power and use of markdown for
 technical documents by using the VS Code extension
@@ -413,9 +413,9 @@ R. Tyrell Rockefeller gegeben.
 Eine Menge \(\set{C} \subseteq V\), also ein Teilmenge eines Vektorraums
 \(V\), wird \textbf{konvex} genannt, falls und nur falls
 
-\begin{align}
+\[\begin{align}
 \lambda \vvec{a} + (1-\lambda) \vvec{b} \in \set{C} \quad \forall \vvec{a},\vvec{b} \in \set{C}, \ \lambda \in [0,1] \ .
-\end{align}
+\end{align}\]
 
 gilt. Das heisst alle Punkte auf einer geraden Linie zwischen zwei
 beliebigen Punkten aus der Menge \(\set{C}\) müssen \textbf{auch} in
@@ -440,9 +440,9 @@ induziert direkt die Standardnorm
 \(\norm{\vvec{x}}_2 := \sqrt{\vvec{x}^\transp \vvec{x}} \geq 0\). Diese
 wiederum induziert direkt die Metrik
 
-\begin{align}
+\[\begin{align}
 d(\vvec{x},\vvec{y}) := \norm{\vvec{x} - \vvec{y}}_2.
-\end{align}
+\end{align}\]
 
 Wir können somit über die Metrik \(d(\vvec{x},\vvec{y})\) die Länge
 zwischen zwei Vektoren \(\vvec{x},\vvec{y} \in \mathbb{E}^3\) berechnen.
@@ -455,9 +455,9 @@ nun die Projektion \(\prox{C}(\vvec{p})\) eines Punktes \(\vvec{p}\) mit
 minimaler Distanz auf eine konvexe Menge \(\set{C}\) relativ leicht
 definieren zu
 
-\begin{align}
+\[\begin{align}
 \prox{C}(\vvec{p}) :=  \underset{\vvec{x} \ \in \ \set{C}}{\argmin} \norm{\vvec{x} - \vvec{p}}_2.
-\end{align}
+\end{align}\]
 
 Das heisst \(\prox{C}(\vvec{p})\) minimiert den Punkt \(\vvec{x}\) in
 der Menge \(\set{C}\) so, dass sein Abstand zu \(\vvec{p}\) minimal ist.
@@ -474,9 +474,9 @@ im Anschluss wie sich dieser Kegel visualisiert:
 Ein Normalkegel \(\ncone{C}\) auf ein konvexes Set \(\set{C}\) im Punkt
 \(\vvec{x} \in \set{C}\) ist definert als
 
-\begin{align}
+\[\begin{align}
     \ncone{C}(\vvec{x}) := \left\{ \vvec{y} \ | \ \vvec{y}^\transp(\vvec{x}^* - \vvec{x}) \leq 0, \quad \forall \vvec{x}^* \in \set{C} \right\}
-\end{align}
+\end{align}\]
 
 Das ist nun ein wenig kryptisch, heisst jedoch nichts anderes als
 folgendes: Der Normalkegel \(\ncone{C}(\vvec{x})\) besteht aus allen
@@ -490,7 +490,7 @@ Vektoren (das wäre \(\vvec{y}\)) ausgehend von \(\vvec{x}\) welche mit
 Das folgende Bild visualisiert für eine konvexe Menge \(\set{C}\) die
 verschiedenen Normalkegel.
 
-\svgWithCaption{files/NormalKegel.svg}{Normalkegel an die Punkte $\vvec{x}$, $\vvec{y}$ und $\vvec{z}$. Der Normalkegel an einen innerhalb der Menge $\set{C}$ liegenden Punkt $\vvec{z}$ degeneriert zum $\vvec{0}$-Vektor. Der Vektor $\vvec{v}$ ist in der Menge des Normalkegels an $\vvec{x}$.}{width=0.8\textwidth}
+\svgWithCaption{files/NormalKegel.svg}{fig:}{width=0.8\textwidth}{}
 
 \hypertarget{zusammenhang-von-normalkegel-und-proximaler-punkt}{%
 \section{Zusammenhang von Normalkegel und Proximaler
@@ -508,10 +508,10 @@ projektive Iterationen direkte Anwendung findet.
 
 Der Zusammenhang ist wie folgt:
 
-\begin{align}
+\[\begin{align}
 \vvec{y} \in \ncone{C}(\vvec{x}) \quad \Leftrightarrow \quad \vvec{x} = \prox{C}(\vvec{x} + \vvec{y})
 \label{eq-prox-to-ncone}
-\end{align}
+\end{align}\]
 
 Das heisst, eine Normalkegel-\emph{Inklusion} (die Relation
 \(\vvec{a} \in \set{B}\) wird \emph{Mengen-Inklusion} genannt) ist
@@ -522,16 +522,16 @@ Damit lässt sich nun ein interessanter wichtiget Fakt ableiten. Aus der
 \(\vvec{p}-\vvec{x}\) in der Menge \(\ncone{C}(\vvec{x})\) liegt, also
 lässt sich schreiben
 
-\begin{align}
+\[\begin{align}
 \vvec{p}-\vvec{x} \in \ncone{C}(\vvec{x}).
-\end{align}
+\end{align}\]
 
 Dies lässt sich mit obiger Beziehung direkt zu
 
-\begin{align}
+\[\begin{align}
 \vvec{x} &= \prox{C}(\vvec{x} + \vvec{p} - \vvec{x}) \\
 &= \prox{C}(\vvec{p}).
-\end{align}
+\end{align}\]
 
 umschreiben. Aus dem erkennen wir, dass der Ursprung des Normalkegels,
 worin ein \textbf{beliebiger} Punkt \(\vvec{p}\) liegt, direkt der
@@ -540,7 +540,7 @@ worin ein \textbf{beliebiger} Punkt \(\vvec{p}\) liegt, direkt der
 Müssten wir nun eine Projektionsfunktion auf ein \(2\)d-Dreieck
 herleiten, würden wir folgendes Bild malen:
 
-\svgWithCaption{files/NormalKegelDreieck.svg}{Normalkegel an die Punkte $\vvec{a}$, $\vvec{b}$ und $\vvec{c}$ eines Dreiecks.}{width=0.8\textwidth}
+\svgWithCaption{files/NormalKegelDreieck.svg}{fig:}{width=0.8\textwidth}{}
 
 Das heisst es gibt genau 3 nicht triviale Normalkegel und 3 einfachere
 Normalkegel (bestehend lediglich aus den Normalen auf die
@@ -559,10 +559,10 @@ Optimization}} verwiesen und die darin enthaltenen Referenzen.
 Betrachte man folgendes allgemeine restriktierte \textbf{konvexe}
 Optimierungsproblem:
 
-\begin{align}
+\[\begin{align}
 \vvec{x}^* = \underset{\vvec{x} \ \in \ \set{C}}{\argmin} f(\vvec{x}),
 \label{eq-convexproblem}
-\end{align}
+\end{align}\]
 
 wobei die Funktion \(f(\vvec{x}) \in \mathbb{R}\) \textbf{strikt konvex}
 und \textbf{differenzierbar} (man stelle sich den oberen Teil eines
@@ -576,9 +576,9 @@ Dann kann man das Problem in ein freies \textbf{konvexes} Programm
 umschreiben indem man die Einschränkung \(\vvec{x} \in \set{C}\) mit
 einer Bestrafungsfunktion \(\indf{C}(\vvec{x})\) ersetzt
 
-\begin{align}
+\[\begin{align}
 \vvec{x}^* = \underset{\vvec{x}}{\argmin} f(\vvec{x}) + \indf{C}(\vvec{x}).
-\end{align}
+\end{align}\]
 
 Die Bestrafungsfunktion \(\indf{C}(\vvec{x})\) liefert \(0\) falls
 \(\vvec{x} \in \set{C}\) und sonst \(+\infty\). Diese Funktion wird
@@ -588,10 +588,10 @@ Die Frage ist nun wie kriegen wir eine Bedingung an den optimalen
 (minimierenden) Punkt \(\vvec{x}^*\). Das geht ziemlich analog zu der
 Bedindung für Minima/Maxima einer differenzierbaren Funktionen \(f\) :
 
-\begin{align}
+\[\begin{align}
 \vvec{0} = \frac{df}{d\vvec{x}}(\vvec{x}^*)
 \label{eq-optimality-difffunc}
-\end{align}
+\end{align}\]
 
 was konkret heisst, dass der Nullvektor \(\vvec{0}\) gleich dem Gradient
 \(\frac{df}{d\vvec{x}}\) ist an der optimalen Stelle \(\vvec{x}^*\).
@@ -614,10 +614,10 @@ Anstatt \(\frac{d}{d\vvec{x}}\indf{C}\) nehmen wir einfach das
 Subdifferential \(\partial_{\vvec{x}} \indf{C}\) und die Bedingung
 \(\eqref{eq-optimality-difffunc}\) wird dann zu
 
-\begin{align}
+\[\begin{align}
 \label{eq-optimality-strict-convex}
 \vvec{0} \in \frac{df}{d\vvec{x}}(\vvec{x}^*) + \partial_{\vvec{x}} \indf{C}(\vvec{x}^*)
-\end{align}
+\end{align}\]
 
 Nur was machen wir nun mit dieser \textbf{mengenwertigen Relation}?
 
@@ -627,24 +627,24 @@ Ableitung, der Indikatorfunktion
 \(\ncone{C}(\vvec{x})\) entspricht, können wir die obige Inklusion so
 schreiben:
 
-\begin{align}
+\[\begin{align}
 \vvec{0} \in \frac{df}{d\vvec{x}}(\vvec{x}^*) + \ncone{C}(\vvec{x}^*) \quad \Leftrightarrow \quad -\frac{df}{d\vvec{x}}(\vvec{x}^*) \in \ncone{C}(\vvec{x}^*)
 \label{eq-optimality-strict-convex-2}
-\end{align}
+\end{align}\]
 
 Das bringt uns nicht viel mehr ausser einer visuellen Erkenntnis durch
 folgende Visualisierung:
 
-\svgWithCaption{files/ConvexOptimizationProblem.svg}{Konvexes Optimierungs Problem innerhalb der Menge $\set{C}$ auf einer $2$d-Funktion $f(\vvec{x}) \in \mathbb{R}$. Der negative Gradient liegt im Optimum $\vvec{x}^*$ genau innerhalb des Normalkegels an $\vvec{x}^*$.}{width=0.8\textwidth}
+\svgWithCaption{files/ConvexOptimizationProblem.svg}{fig:}{width=0.8\textwidth}{}
 
 Mit der Beziehung zwischen \textbf{proximalem Punkt} und
 \textbf{Normalkegel} \(\eqref{eq-prox-to-ncone}\) kriegen wir daraus
 direkt eine \textbf{implizite Projektionsgleichung} für den optimalen
 Punkt \(\vvec{x}^*\):
 
-\begin{align}
+\[\begin{align}
 -\frac{df}{d\vvec{x}}(\vvec{x}^*) \in \ncone{C}(\vvec{x}^*) \quad \Leftrightarrow \quad \vvec{x}^* = \prox{C}(\vvec{x}^* - \frac{df}{d\vvec{x}}(\vvec{x}^*)),
-\end{align}
+\end{align}\]
 
 welche man iterative lösen kann, was zum
 \textbf{Gradienten-Projektionsverfahren} führt (Gradient Projection

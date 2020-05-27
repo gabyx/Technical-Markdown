@@ -5,11 +5,11 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "compile-markdown-pandoc",
+            "name": "compile-markdown-latex",
             "type": "node",
             "request": "launch",
             "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
-            "args": ["compile-markdown-pandoc"],
+            "args": ["compile-markdown-latex"],
             "cwd": "${workspaceRoot}/",
             "console": "internalConsole",
             "sourceMaps": true,
