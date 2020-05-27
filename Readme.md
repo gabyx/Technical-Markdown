@@ -55,13 +55,13 @@ Run the following tasks defined in `.vscode/tasks.json` from VS Code or use the 
 - **Start Markdown Chrome Conversion**: Runs the markdown conversion with Chrome over [MPE](https://github.com/shd101wyy/mume) continuously while monitoring changes to markdown `.md` files:
 
     ```shell
-    yarn build:chrome
+    yarn build:pdf-chrome
     ```
 
 - **Start Markdown Pandoc Conversion**: Runs the markdown conversion with Pandoc (`latexmk` and `xelatex`) over [MPE](https://github.com/shd101wyy/mume) continuously while monitoring markdown `.md` files:
 
     ```shell
-    yarn build:pandoc
+    yarn build:pdf-tex
     ```
 
     The conversion with pandoc applies two filters:

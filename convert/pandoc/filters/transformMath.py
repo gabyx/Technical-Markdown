@@ -1,18 +1,18 @@
 #!/usr/bin/env python
 """
-Pandoc filter to convert 
+    Pandoc filter to convert
+
     - ```math``` code blocks to raw inline latex.
     - remove `<div class="latex-math-define" />`
 """
 
 import sys
-import typing
 from panflute import Para, Math, Div, CodeBlock, Element, Doc, run_filter
-import pypandoc as pyp
 
 assert sys.version_info >= (3, 0)
 
 fName = "tfMath"
+
 
 def mathblock(code):
     return Para(Math(code, format="DisplayMath"))

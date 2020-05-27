@@ -2,3 +2,5 @@ panflute>=1.12.5
 pypandoc>=1.5.0
 cssutils>=1.0.2
 lxml>=4.5.1
+pylama>=7.7.1
+yapf>=0.30.0

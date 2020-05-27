@@ -18,8 +18,10 @@
     "scripts": {
         "all": "npm-run-all -p build show",
         "build:html": "gulp build-markdown-html",
-        "build:pandoc": "gulp build-markdown-pandoc",
-        "build:chrome": "gulp build-markdown-chrome",
+        "build:pdf-tex": "gulp build-markdown-pandoc",
+        "build:pdf-chrome": "gulp build-markdown-chrome",
+        "lint": "pylama",
+        "format:all" : "yapf -i --recursive .",
         "show": "gulp show-markdown"
     }
 }

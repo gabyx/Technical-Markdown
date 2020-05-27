@@ -38,7 +38,10 @@ def tee(clear=False):
 
         # Increment counter ...
         i = 1
-        filename = lambda x: file + "-{0}.json".format(x)
+
+        def filename(x):
+            file + "-{0}.json".format(x)
+
         t = filename(i)
         while os.path.exists(t):
             i += 1

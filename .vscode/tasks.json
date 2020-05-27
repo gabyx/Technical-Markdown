@@ -10,19 +10,19 @@
             "problemMatcher": []
         },
         {
-            "label": "Start Markdown Pandoc Conversion",
+            "label": "Start Markdown PDF TeX Conversion",
             "type": "shell",
-            "command": "yarn run build:pandoc",
+            "command": "yarn run build:pdf-tex",
             "problemMatcher": []
         },
         {
-            "label": "Start Markdown Chrome Conversion",
+            "label": "Start Markdown PDF Chrome Conversion",
             "type": "shell",
-            "command": "yarn run build:chrome",
+            "command": "yarn run build:pdf-chrome",
             "problemMatcher": []
         },
         {
-            "label": "Start Markdown Browser Sync",
+            "label": "Start Markdown HTML Browser Sync",
             "type": "shell",
             "command": "yarn run show",
             "problemMatcher": []
