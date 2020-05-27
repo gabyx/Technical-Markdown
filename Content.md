@@ -1,5 +1,7 @@
 ---
 # Markdown Preview Enhanced
+class: "main"
+id: "main-markdown-numbered"
 html:
     embed_local_images: false
     embed_svg: true
@@ -11,8 +13,9 @@ puppeteer:
     format: "A4"
     printBackground: true
     timeout: 3000 # <= Special config, which means waitFor 3000 ms
-id: "main-markdown-numbered"
-class: "main"
+pandoc_args: 
+    ["-f",
+     "markdown+markdown_in_html_blocks+tex_math_dollars"]
 export_on_save:
     html: false
 output:
@@ -20,10 +23,15 @@ output:
         pandoc_args:
             [
                 "--fail-if-warnings",
-                "-f",
-                "markdown+markdown_in_html_blocks+native_divs+raw_html+raw_tex+tex_math_dollars",
-                "--filter=convert/pandoc/filters/transformImages.py",
+                "--format=markdown+markdown_in_html_blocks+native_divs+raw_tex+tex_math_dollars",
                 "--filter=convert/pandoc/filters/transformMath.py",
+                # "-filter=convert/pandoc/filters/teeStart.py" ,
+                "--filter=pandoc-crossref",
+                # "--filter=convert/pandoc/filters/tee.py",
+                "--filter=pandoc-citeproc",
+                # "--filter=convert/pandoc/filters/tee.py",
+                "--filter=convert/pandoc/filters/transformImages.py",
+                # "--filter=convert/pandoc/filters/tee.py",
                 "--pdf-engine-opt=-xelatex",
                 "--pdf-engine-opt=-r",
                 "--pdf-engine-opt=.latexmkrc",
@@ -67,6 +75,7 @@ toccolor: DarkGreen
 ---
 
 @import "css/src/main.less"
+@import "/includes/Math.md"
 
 <header>
 <p><strong>Author:</strong> Gabriel Nützi<br>

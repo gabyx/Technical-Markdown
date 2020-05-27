@@ -5,105 +5,74 @@ Pandoc filter to convert
     - remove `<div class="latex-math-define" />`
 """
 
+import typing
 import os
-import json
-from io import StringIO, BytesIO
-from lxml import etree as ET
-from cssutils import parseStyle
-import pypandoc as pyp
-from pandocfilters import toJSONFilter, Para, RawInline
+import sys
+from panflute import Doc, Element, Image, Para, RawInline, run_filter
+from module.utils import log
 
-htmlParser = ET.HTMLParser()
+assert sys.version_info >= (3, 0)
+
+fName = "tfImg"
 
 
 def latexblock(code):
-    """LaTeX block"""
-    return Para([RawInline('tex', code)])
+    return RawInline(code, format="tex")
 
 
-def transformImgToLatex(image, caption=None, style=None):
+def transformImgToLatex(image: Image):
 
-    src = image.attrib["src"]
-    label = None
+    url = image.url
+    label = image.identifier
+
+    log("Transforming image '{1}' to latex ...", fName, url)
 
     # Set `/fig.png` to `./fig.png`
-    if os.path.isabs(src):
+    if os.path.isabs(url):
         src = "." + os.path.splitdrive(src)[1]
 
     baseCommand = r"imageWithCaption"
-    if os.path.splitext(src)[1] == ".svg":
+    if os.path.splitext(url)[1] == ".svg":
         baseCommand = r"svgWithCaption"
 
     # Default values
     width = "100%"
     height = None
 
-    width = style.getProperty("width")
-    if width:
-        width = width.value
-
-    height = style.getProperty("height")
-    if height:
-        height = height.value
-
     def toScaling(size: str, proportionalTo: str):
-        s = float(size.replace("%", "")) / 100.0
-        return "{0}{1}".format(s, proportionalTo)
+        if size and "%" in size:
+            s = float(size.strip().replace("%", "")) / 100.0
+            return "{0}{1}".format(s, proportionalTo)
+        else:
+            return size
 
-    if "%" in width:
-        width = toScaling(width, r"\textwidth")
-    if height and "%" in height:
-        height = toScaling(height, r"\textheight")
-
+    width = toScaling(image.attributes.get("width", "100%"),
+                      proportionalTo=r"\textwidth")
+    height = toScaling(image.attributes.get("height", None),
+                       proportionalTo=r"\textwidth")
     # Caption
-    if caption is not None:
-        caption = caption.text
+    caption = image.title
 
     # Latex command options
     lGraphicsOpts = "width={0}".format(width)
     if height:
         lGraphicsOpts += ", height={0}".format(height)
 
-    args = [src, caption if caption else "", lGraphicsOpts, label]
+    args = [url, caption if caption else "", lGraphicsOpts, label]
     lArgs = "".join(["{" + a + "}" for a in args if a is not None])
 
     return latexblock(r"\{0}{1}".format(baseCommand, lArgs))
 
 
-def convert(contents):
-    out = pyp.convert_text(
-        contents,
-        to="json",
-        format=
-        "markdown-markdown_in_html_blocks+raw_html-raw_tex+tex_math_dollars")
-    return json.load(out)
+def transformImages(elem: Element, doc: Doc):
+    if doc.format == "latex":
+        if isinstance(elem, Image):
+            return transformImgToLatex(elem)
 
 
-def transformImageWithCaption(format, kvs, contents):
-    t = contents.get("t")
-    if t == "CodeBlock":
-        [[_ident, _classes, _kvs], contents] = contents['c']
-
-        dom = ET.parse(StringIO(contents), htmlParser).getroot()
-
-        img = dom.find(".//img")
-        if img is not None:
-            caption = dom.find(".//div[@class='caption']")
-
-            if "style" in img.attrib:
-                style = parseStyle(img.attrib["style"])
-
-            if format in ["latex", "native", "json"]:
-                return transformImgToLatex(img, caption, style)
-
-
-def transformImages(key, value, format, meta):
-    if key == 'Div':
-        [[_ident, classes, kvs], contents] = value
-        if "img-with-caption" in classes:
-            if contents:
-                return transformImageWithCaption(format, kvs, contents[0])
+def main(doc: Doc = None):
+    return run_filter(transformImages, doc=doc)
 
 
 if __name__ == "__main__":
-    toJSONFilter(transformImages)
+    main()
