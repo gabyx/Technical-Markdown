@@ -22,8 +22,14 @@ git clone https://github.com/gabyx/TechnicalMarkdown.git
 cd TechnicalMarkdown
 yarn
 ```
-## Latex Conversion with Pandoc
-Install [pandoc](https://pandoc.org/installing.html) and a recent `python` and the following packages 
+
+Install [pandoc](https://pandoc.org/installing.html):
+For Linux and macOs:
+```shell
+brew install pandoc pandoc-citeproc pandoc-crossref
+```
+
+Install a recent `python` and the following packages 
 
 ```shell
 pip install -r .requirements
