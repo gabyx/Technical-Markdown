@@ -4,7 +4,7 @@ This is a markdown setup demonstrating the power and use of markdown for **techn
 
 - using `yarn`+ `gulp` for a **fully automated conversion** sequence such that exporting is done in the background:
 
-    - export with `chrome`
+    - export with `pandoc` to `html` then to `chrome`
     - export with `pandoc` to `latexmk` using `xelatex`
     - export with `pandoc` to `html`
 
