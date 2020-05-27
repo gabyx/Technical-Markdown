@@ -14,8 +14,8 @@
     "markdown-preview-enhanced.mathRenderingOption": "MathJax",
     "markdown-preview-enhanced.enableExtendedTableSyntax": true,
     "markdown-preview-enhanced.imageFolderPath": "/files",
-    "python.pythonPath": "/home/gabyx/envs/pythonEnv3.8/bin/python",
+    "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": true,
     "python.formatting.provider": "yapf",
     "editor.formatOnPaste": true,
-    "editor.formatOnType": true
+    "editor.formatOnType": true,
 }

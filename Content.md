@@ -16,8 +16,6 @@ puppeteer:
 pandoc_args: 
     ["-f",
      "markdown+markdown_in_html_blocks+tex_math_dollars"]
-export_on_save:
-    html: false
 output:
     pdf_document:
         pandoc_args:
@@ -84,7 +82,7 @@ toccolor: DarkGreen
 </p>
 </header>
 
-# Technical Document
+# Technical Document s
 
 This is a setup demonstrating the power and use of markdown for technical documents by using
 the VS Code extension [Markdown Preview Enhanced](https://shd101wyy.github.io/markdown-preview-enhanced) and a fully automated conversion sequence with `yarn`, `gulp`.
