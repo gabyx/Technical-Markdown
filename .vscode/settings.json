@@ -2,32 +2,20 @@
     "files.autoGuessEncoding": false,
     "files.encoding": "utf8",
     "markdown-preview-enhanced.mathInlineDelimiters": [
-        [
-            "\\f$",
-            "\\f$"
-        ],
-        [
-            "$",
-            "$"
-        ]
+        ["\\(", "\\)"],
+        ["$", "$"]
     ],
     "markdown-preview-enhanced.mathBlockDelimiters": [
-        [
-            "\\f[",
-            "\\f]"
-        ],
-        [
-            "$$",
-            "$$"
-        ]
+        ["\\[", "\\]"],
+        ["$$", "$$"]
     ],
+    "markdown-preview-enhanced.usePandocParser": true,
     "markdown-preview-enhanced.enableScriptExecution": true,
     "markdown-preview-enhanced.mathRenderingOption": "MathJax",
     "markdown-preview-enhanced.enableExtendedTableSyntax": true,
     "markdown-preview-enhanced.imageFolderPath": "/files",
-    "markdown-preview-enhanced.configPath": "${projectDir}/convert/html",
-    "python.pythonPath": "/home/gabyx/envs/pythonEnv3.8/bin/python",
+    "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": false,
     "python.formatting.provider": "yapf",
     "editor.formatOnPaste": true,
-    "editor.formatOnType": true
+    "editor.formatOnType": true,
 }

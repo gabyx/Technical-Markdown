@@ -4,7 +4,7 @@
 .define-numbered-images() {
     counter-reset+_: imgCounter;
 
-    .img-with-caption .caption:before {
+    figure figcaption:before {
         counter-increment: imgCounter;
         content          : "Fig. "counter(imgCounter) ": "
     }
