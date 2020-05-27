@@ -30,11 +30,11 @@ async function createEngine(configPath, file) {
         // Math
         mathRenderingOption: "MathJax", // "KaTeX" | "MathJax" | "None"
         mathInlineDelimiters: [
-            ["\\f$", "\\f$"],
+            ["\\(", "\\)"],
             ["$", "$"]
         ],
         mathBlockDelimiters: [
-            ["\\f[", "\\f]"],
+            ["\\[", "\\]"],
             ["$$", "$$"]
         ],
         mathRenderingOnLineService: "https://latex.codecogs.com/gif.latex", // "https://latex.codecogs.com/svg.latex", "https://latex.codecogs.com/png.latex"
@@ -72,7 +72,7 @@ async function createEngine(configPath, file) {
  
         // Accepted protocols for links.
         protocolsWhiteList:
-            "http://, https://, atom://, file://, fdr://, mailto:, tel:",
+            "http://, https://, atom://, file://, mailto:, tel:",
 
         // When using Image Helper to copy images, by default images will be copied to root image folder path '/assets'
         imageFolderPath: "/files",
