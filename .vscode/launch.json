@@ -9,18 +9,25 @@
             "type": "node",
             "request": "launch",
             "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
-            "args": ["compile-markdown-latex"],
+            "args": [
+                "compile-markdown-latex",
+                "-p",
+                "${config:python.pythonPath}"
+            ],
             "cwd": "${workspaceRoot}/",
             "console": "internalConsole",
-            "sourceMaps": true,
-        }
-        ,
+            "sourceMaps": true
+        },
         {
             "name": "compile-markdown-html",
             "type": "node",
             "request": "launch",
             "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
-            "args": ["compile-markdown-html"],
+            "args": [
+                "compile-markdown-html",
+                "-p",
+                "${config:python.pythonPath}"
+            ],
             "cwd": "${workspaceRoot}/",
             "console": "internalConsole",
             "sourceMaps": true,
