@@ -30,6 +30,12 @@ For **Linux** and **macOs**:
 ```shell
 brew install pandoc pandoc-citeproc pandoc-crossref
 ```
+For **Windows**
+```shell
+choco install pandoc
+git clone https://github.com/gabyx/chocolatey-packages.git@patch-1 temp
+cd temp && choco install .\pandoc-crossref\pandoc-crossref.nuspec
+```
 
 Install a recent `python` [Version >= 3.6] and the following packages
 
