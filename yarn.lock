@@ -2,10 +2,9 @@
 # yarn lockfile v1
 
 
-"@shd101wyy/mume@^0.5.7":
+"@shd101wyy/mume@https://github.com/gabyx/mume#gabyx":
   version "0.5.7"
-  resolved "https://registry.yarnpkg.com/@shd101wyy/mume/-/mume-0.5.7.tgz#7ab638e780bcc761b68bf2176aa7709ddd139b28"
-  integrity sha512-ahDIuLGDuvM/dH+m0nIR69uDnfAxKW0moW/UayRZjUJ+M8O+qHapAXDOa9v+sqVnWHh2fX4eXIbM7LHTq5cVgA==
+  resolved "https://github.com/gabyx/mume#b47a4eb36507209e7f4b0c46f066f31e4aa2efb7"
   dependencies:
     babyparse "^0.4.6"
     cheerio "^1.0.0-rc.3"
@@ -1938,6 +1937,14 @@ gulp-cli@^2.2.0:
     semver-greatest-satisfied-range "^1.1.0"
     v8flags "^3.0.1"
     yargs "^7.1.0"
+
+gulp-env@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/gulp-env/-/gulp-env-0.4.0.tgz#8370646949a32493dc06dad94a0643296faadbe8"
+  integrity sha1-g3BkaUmjJJPcBtrZSgZDKW+q2+g=
+  dependencies:
+    ini "^1.3.4"
+    through2 "^2.0.0"
 
 gulp-less@^4.0.1:
   version "4.0.1"
@@ -4867,6 +4874,13 @@ which@^1.0.5, which@^1.2.14, which@^1.2.9:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/which/-/which-1.3.1.tgz#a45043d54f5805316da8d62f9f50918d3da70b0a"
   integrity sha512-HxJdYWq1MTIQbJ3nw0cqssHoTNU267KlrDuGZ1WYlxDStUtKUhOaJmh112/TZmHxxUfuJqPXSOm7tDyas0OSIQ==
+  dependencies:
+    isexe "^2.0.0"
+
+which@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/which/-/which-2.0.2.tgz#7c6a8dd0a636a0327e10b59c9286eee93f3f51b1"
+  integrity sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==
   dependencies:
     isexe "^2.0.0"
 

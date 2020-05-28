@@ -6,19 +6,37 @@
         {
             "label": "Start Markdown HTML Conversion",
             "type": "shell",
-            "command": "yarn run build:html",
+            "command": "yarn",
+            "args": [
+                "run",
+                "build:html",
+                "-p",
+                "'${config:python.pythonPath}'"
+            ],
             "problemMatcher": []
         },
         {
             "label": "Start Markdown PDF TeX Conversion",
             "type": "shell",
-            "command": "yarn run build:pdf-tex",
+            "command": "yarn",
+            "args": [
+                "run",
+                "build:pdf-tex",
+                "-p",
+                "'${config:python.pythonPath}'"
+            ],
             "problemMatcher": []
         },
         {
             "label": "Start Markdown PDF Chrome Conversion",
             "type": "shell",
-            "command": "yarn run build:pdf-chrome",
+            "command": "yarn",
+            "args": [
+                "run",
+                "build:pdf-chrome",
+                "-p",
+                "'${config:python.pythonPath}'"
+            ],
             "problemMatcher": []
         },
         {
