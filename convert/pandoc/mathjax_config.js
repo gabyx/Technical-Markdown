@@ -7,15 +7,8 @@ module.exports = {
         processEscapes: true
     },
     TeX: {
-        extensions: [
-            "AMSmath.js",
-            "AMSsymbols.js",
-            "noErrors.js",
-            "noUndefined.js",
-            "colors.js",
-            "extpfeil.js"
-        ],
-        "equationNumbers": { "autoNumber": "AMS" }
+        extensions: ["AMSmath.js", "AMSsymbols.js", "noErrors.js", "noUndefined.js", "colors.js", "extpfeil.js"],
+        equationNumbers: { autoNumber: "AMS" }
     },
     "HTML-CSS": { availableFonts: ["TeX"] }
 };
