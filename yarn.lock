@@ -2,9 +2,10 @@
 # yarn lockfile v1
 
 
-"@shd101wyy/mume@https://github.com/gabyx/mume#gabyx":
-  version "0.5.6"
-  resolved "https://github.com/gabyx/mume#bfbc8d994f41520dbc6129ab5487cda686d60c3e"
+"@shd101wyy/mume@^0.5.7":
+  version "0.5.7"
+  resolved "https://registry.yarnpkg.com/@shd101wyy/mume/-/mume-0.5.7.tgz#7ab638e780bcc761b68bf2176aa7709ddd139b28"
+  integrity sha512-ahDIuLGDuvM/dH+m0nIR69uDnfAxKW0moW/UayRZjUJ+M8O+qHapAXDOa9v+sqVnWHh2fX4eXIbM7LHTq5cVgA==
   dependencies:
     babyparse "^0.4.6"
     cheerio "^1.0.0-rc.3"
@@ -376,9 +377,9 @@ aws-sign2@~0.7.0:
   integrity sha1-tG6JCTSpWR8tL2+G1+ap8bP+dqg=
 
 aws4@^1.8.0:
-  version "1.9.1"
-  resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.9.1.tgz#7e33d8f7d449b3f673cd72deb9abdc552dbe528e"
-  integrity sha512-wMHVg2EOHaMRxbzgFJ9gtjOOCrI80OHLG14rxi28XwOW8ux6IiEbRCGGGqCtdAIg4FQCbW20k9RsT4y3gJlFug==
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.10.0.tgz#a17b3a8ea811060e74d47d306122400ad4497ae2"
+  integrity sha512-3YDiu347mtVtjpyV3u5kVqQLP242c06zwDOgpeRnybmXlYYsLbtTrUBUm8i8srONt+FWobl5aibnU1030PeeuA==
 
 axios@0.19.0:
   version "0.19.0"
@@ -2864,9 +2865,9 @@ mime@^1.3.4, mime@^1.4.1:
   integrity sha512-x0Vn8spI+wuJ1O6S7gnbaQg8Pxh4NNHb7KSINmEWKiPE4RKOplvijn+NkmYmmRgP68mc70j2EbeTFRsrswaQeg==
 
 mime@^2.0.3, mime@^2.4.4:
-  version "2.4.5"
-  resolved "https://registry.yarnpkg.com/mime/-/mime-2.4.5.tgz#d8de2ecb92982dedbb6541c9b6841d7f218ea009"
-  integrity sha512-3hQhEUF027BuxZjQA3s7rIv/7VCQPa27hN9u9g87sEkWaKwQPuXOkVKtOeiyUrnWqTDiOs8Ed2rwg733mB0R5w==
+  version "2.4.6"
+  resolved "https://registry.yarnpkg.com/mime/-/mime-2.4.6.tgz#e5b407c90db442f2beb5b162373d07b69affa4d1"
+  integrity sha512-RZKhC3EmpBchfTGBVb8fb+RL2cWyw/32lshnsETttkBAyAUXSGHxbEJWWRXc751DrIxG1q04b8QwMbAwkRPpUA==
 
 minimatch@^3.0.2, minimatch@^3.0.4:
   version "3.0.4"
@@ -4564,9 +4565,9 @@ ultron@~1.1.0:
   integrity sha512-UIEXBNeYmKptWH6z8ZnqTeS8fV74zG0/eRU9VGkpzz+LIJNs8W/zM/L+7ctCkRrgbNnnR0xxw4bKOr0cW0N0Og==
 
 unbzip2-stream@^1.3.3:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/unbzip2-stream/-/unbzip2-stream-1.4.2.tgz#84eb9e783b186d8fb397515fbb656f312f1a7dbf"
-  integrity sha512-pZMVAofMrrHX6Ik39hCk470kulCbmZ2SWfQLPmTWqfJV/oUm0gn1CblvHdUu4+54Je6Jq34x8kY6XjTy6dMkOg==
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/unbzip2-stream/-/unbzip2-stream-1.4.3.tgz#b0da04c4371311df771cdc215e87f2130991ace7"
+  integrity sha512-mlExGW4w71ebDJviH16lQLtZS32VKqsSfk80GCfUlwT/4/hNRFsoscrF/c++9xinkMzECL1uL9DDwXqFWkruPg==
   dependencies:
     buffer "^5.2.1"
     through "^2.3.8"
@@ -4753,9 +4754,9 @@ value-or-function@^3.0.0:
   integrity sha1-HCQ6ULWVwb5Up1S/7OhWO5/42BM=
 
 vega-format@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/vega-format/-/vega-format-1.0.0.tgz#47725e164fe3581d7499bf758404149b9dab604b"
-  integrity sha512-V+vq7gETMC9REGaa96XObhIVeiZChO/EUn+Q9Yra9WMQL7nGpa3Ao+xATxbzUEt/d667p8LqlvfY0pl0tJ8/MQ==
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/vega-format/-/vega-format-1.0.1.tgz#94b5be9eb3d6a8b315fcf3d523ed6a1bb2ea4d71"
+  integrity sha512-f9IZ+SDHVFFneDDc+d8RfeJhXXvUgquAuM+1MZ2Rjf4xqpg+E8FSNQkh8wjeo82mc6G3KVa9hynSdfN/a0AktQ==
   dependencies:
     d3-array "^2.4.0"
     d3-format "^1.4.4"
@@ -4775,9 +4776,9 @@ vega-loader@^4.1.0:
     vega-util "^1.14.0"
 
 vega-time@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/vega-time/-/vega-time-2.0.0.tgz#27b0b1f8c8e604aae27fc18070572d0589cbea9f"
-  integrity sha512-our6vlm4W4OtvDpuaGDpbU2jmH1PRHwm+u2g4ijAE4Lo0sxhnM6XtqIeZ0sBUZjAb9/V3i1pZ49jkNqUpWi3zw==
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/vega-time/-/vega-time-2.0.1.tgz#2a91c3acafd091e6724063dea26e4b3fe6061d2f"
+  integrity sha512-Ij0gmABKDRKAMUTh/1AGSSkU6ocWiteLkIK/cmcnt98u8LiuVcFT5w7gusd0+ibO9EooeMKazn5xPmjvQs0qEg==
   dependencies:
     d3-array "^2.4.0"
     d3-time "^1.1.0"

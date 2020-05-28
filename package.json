@@ -4,7 +4,7 @@
     "license": "MIT",
     "description": "A markdown setup for technical documents",
     "dependencies": {
-        "@shd101wyy/mume": "https://github.com/gabyx/mume#gabyx",
+        "@shd101wyy/mume": "^0.5.7",
         "browser-sync": "^2.26.7",
         "gulp": "^4.0.2",
         "gulp-less": "^4.0.1",
@@ -21,7 +21,7 @@
         "build:pdf-tex": "gulp build-markdown-pandoc",
         "build:pdf-chrome": "gulp build-markdown-chrome",
         "lint": "pylama",
-        "format:all" : "yapf -i --recursive .",
+        "format:all": "yapf -i --recursive .",
         "show": "gulp show-markdown"
     }
 }

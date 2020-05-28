@@ -3,7 +3,7 @@
 class: "main"
 id: "main-markdown-numbered"
 html:
-    embed_local_images: false
+    embed_local_images: true
     embed_svg: true
     offline: false
     toc: true
@@ -15,6 +15,7 @@ puppeteer:
     timeout: 3000 # <= Special config, which means waitFor 3000 ms
 pandoc_args:
     [
+        "--standalone",
         "--from=markdown+markdown_in_html_blocks+tex_math_dollars",
         "--filter=convert/pandoc/filters/transformMath.py",
         # "--filter=convert/pandoc/filters/teeStart.py" ,
@@ -55,8 +56,7 @@ output:
         citation_package: biblatex
         number_sections: true
 # Pandoc
-title: "Technical Document"
-author: Gabriel Nützi
+title: "Technical Documents"
 fontsize: 12pt
 mainfont: Latin Modern Roman
 sansfont: Latin Modern Sans
@@ -85,14 +85,9 @@ toccolor: Black
 @import "css/src/main.less"
 @import "/includes/Math.md"
 
-<header>
-<p><strong>Author:</strong> Gabriel Nützi<br>
-<strong>Reviewer:</strong> Michael Baumann<br>
-<strong>Date:</strong> 28.04.2020
-</p>
-</header>
-
-# Technical Documents
+**Author:** Gabriel Nützi<br>
+**Reviewer:** Michael Baumann<br>
+**Date:** 28.05.2020
 
 This is a setup demonstrating the power and use of markdown for technical documents by using
 the VS Code extension [Markdown Preview Enhanced](https://shd101wyy.github.io/markdown-preview-enhanced) and a fully automated conversion sequence with `yarn`, `gulp`.
