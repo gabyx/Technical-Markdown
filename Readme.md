@@ -22,7 +22,7 @@ This is a markdown setup demonstrating the power and use of markdown for **techn
 
 ## Yarn
 
-Install all dependencies with [yarn](https://www.yarnjs.com/get-yarn):
+Install all **local** Node.js dependencies with [yarn](https://www.yarnjs.com/get-yarn):
 
 ```shell
 git clone https://github.com/gabyx/TechnicalMarkdown.git
