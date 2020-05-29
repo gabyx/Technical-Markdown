@@ -69,7 +69,7 @@ async function createEngine(configPath, file) {
 
         // Revealjs presentation theme
         revealjsTheme: "none.css",
- 
+
         // Accepted protocols for links.
         protocolsWhiteList:
             "http://, https://, atom://, file://, mailto:, tel:",
@@ -96,7 +96,7 @@ async function createEngine(configPath, file) {
         pandocArguments: [],
 
         // Default latex engine for Pandoc export and latex code chunk.
-        latexEngine: "pdflatex",
+        latexEngine: "latexmk",
 
         // Enables executing code chunks and importing javascript files.
         // ⚠ ️ Please use this feature with caution because it may put your security at risk!

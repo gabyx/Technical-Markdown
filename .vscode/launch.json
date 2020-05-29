@@ -5,14 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "compile-markdown-latex",
+            "name": "compile-markdown-tex",
             "type": "node",
             "request": "launch",
             "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
             "args": [
-                "compile-markdown-latex",
+                "compile-markdown-tex",
                 "-p",
-                "${config:python.pythonPath}"
+                "${config:python.interpreterPath}"
             ],
             "cwd": "${workspaceRoot}/",
             "console": "internalConsole",
@@ -26,7 +26,7 @@
             "args": [
                 "compile-markdown-html",
                 "-p",
-                "${config:python.pythonPath}"
+                "${config:python.interpreterPath}"
             ],
             "cwd": "${workspaceRoot}/",
             "console": "internalConsole",

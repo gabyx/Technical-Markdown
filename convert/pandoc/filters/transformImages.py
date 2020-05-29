@@ -7,7 +7,7 @@ Pandoc filter to convert
 
 import sys
 import os
-from panflute import Doc, Element, Image, RawInline, RawInline, LineBreak, run_filter
+from panflute import Doc, Element, Image, RawInline, run_filter
 from module.utils import log
 
 assert sys.version_info >= (3, 0)
