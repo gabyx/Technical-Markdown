@@ -132,11 +132,11 @@ There is a debug configuration in [launch.json](.vscode/launch.json) for both th
 
 ## Pandoc Filters
 
-Pandoc filters are harder to debug. There is an included unix-like (convert/pandoc/filters/tee.py) filter
+Pandoc filters are harder to debug. There is an included unix-like [tee.py](convert/pandoc/filters/tee.py) filter
 which can be put anywhere into the filter chain as needed, to see the output in `pandoc/filter-out`
 (see [dev.py](convert/pandoc/filters/module/dev.py) for adjustments). The filter [teeStart.py](convert/pandoc/filters/teeStart.py)
 first clears all output before doing the same as [tee.py](convert/pandoc/filters/tee.py).
-Uncomment the `tee.py` filters in [pandoc-filters.yaml](convert/pandoc/defaults/pandoc-filters.yaml)`.
+Uncomment the `tee.py` filters in [pandoc-filters.yaml](convert/pandoc/defaults/pandoc-filters.yaml).
 
 # Todo
 
