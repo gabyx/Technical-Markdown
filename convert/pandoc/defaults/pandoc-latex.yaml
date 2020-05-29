@@ -1,0 +1,45 @@
+from: markdown+markdown_in_html_blocks+native_divs+raw_tex+tex_math_dollars
+
+variables:
+    documentclass: scrreprt
+
+    classoption:
+        - a4paper
+        - twoside
+        - titlepage
+        - openright
+        - numbers=noenddot
+        - chapterprefix=true
+        - headings=optiontohead
+        - svgnames
+        - dvipsnames
+
+    hyperrefoptions:
+        - linktoc=all
+        - hidelinks
+
+    linkcolor: DarkGray
+    filecolor: DarkBlue
+    citecolor: DarkBlue
+    urlcolor: MediumBlue
+    toccolor: Black
+
+    cite-method: biblatex
+
+    mainfont: Latin Modern Roman
+    sansfont: Latin Modern Sans
+    monofont: Latin Modern Mono
+
+pdf-engine: latexmk
+pdf-engine-opt:
+    - "-xelatex"
+    - "-r"
+    - ".latexmkrc"
+    - "-g"
+    - "-outdir=output-tex"
+
+template: includes/Template.tex
+include-in-header: ["includes/Header.tex"]
+eol: lf
+
+log-file: pandoc-latex.log

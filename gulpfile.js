@@ -74,7 +74,7 @@ gulp.task("compile-markdown-html", async function () {
 });
 
 /* Task to compile all markdown files */
-gulp.task("compile-markdown-latex", async function () {
+gulp.task("compile-markdown-tex", async function () {
     await parseArguments();
     await markdown.pandocExport(path.resolve("./Content.md"));
 });
@@ -100,8 +100,8 @@ gulp.task("watch-markdown-html", async function () {
 });
 
 /* Task to watch all markdown files */
-gulp.task("watch-markdown-pandoc", async function () {
-    gulp.watch("./**/*.md", gulp.series(["transform-math", "compile-markdown-latex"]));
+gulp.task("watch-markdown-latex", async function () {
+    gulp.watch("./**/*.md", gulp.series(["transform-math", "compile-markdown-tex"]));
 });
 
 /* Task to watch all markdown files */
@@ -118,7 +118,7 @@ gulp.task("watch-markdown-chrome", async function () {
 gulp.task("build-html", gulp.parallel(["watch-less", "watch-markdown-html"]));
 
 /* Task when running `gulp` from terminal */
-gulp.task("build-pdf-tex", gulp.parallel(["watch-math-markdown", "watch-markdown-pandoc"]));
+gulp.task("build-pdf-tex", gulp.parallel(["watch-math-markdown", "watch-markdown-latex"]));
 
 /* Task when running `gulp` from terminal */
 gulp.task("build-pdf-crhome", gulp.parallel(["watch-less", "watch-markdown-chrome"]));

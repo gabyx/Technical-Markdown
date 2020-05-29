@@ -1,0 +1,10 @@
+filters:
+    # - teeStart.py
+    - transformMath.py
+    # - tee.py
+    - pandoc-crossref
+    # - tee.py
+    - pandoc-citeproc
+    # - tee.py
+    - transformImages.py
+    # - tee.py

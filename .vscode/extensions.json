@@ -1,6 +1,8 @@
 {
     "recommendations": [
         "shd101wyy.markdown-preview-enhanced",
-        "esbenp.prettier-vscode"
+        "esbenp.prettier-vscode",
+        "monofon.pandoc-format",
+        "davidanson.vscode-markdownlint"
     ]
 }

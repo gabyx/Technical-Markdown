@@ -23,7 +23,9 @@ svg-inkscape
 
 Test*
 
-pandoc
+filter-out
 output-tex/*
 !output-tex/.gitkeep
 !output-tex/input.pdf
+
+.envrc

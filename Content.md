@@ -15,75 +15,35 @@ puppeteer:
     timeout: 3000 # <= Special config, which means waitFor 3000 ms
 pandoc_args:
     [
+        "--fail-if-warnings",
         "--standalone",
-        "--from=markdown+markdown_in_html_blocks+tex_math_dollars",
-        "--filter=convert/pandoc/filters/transformMath.py",
-        # "--filter=convert/pandoc/filters/teeStart.py" ,
-        "--filter=pandoc-crossref",
-        # "--filter=convert/pandoc/filters/tee.py",
-        "--filter=pandoc-citeproc",
-        # "--filter=convert/pandoc/filters/tee.py",
-        "--filter=convert/pandoc/filters/transformImages.py",
-        # "--filter=convert/pandoc/filters/tee.py"
+        "--data-dir=convert/pandoc",
+        "--resource-path=convert/pandoc",
+        "--defaults=pandoc-html.yaml",
+        "--defaults=pandoc-filters.yaml"
     ]
 output:
     pdf_document:
-        pandoc_args:
-            [
-                "--columns=120",
+        pandoc_args: [
                 "--fail-if-warnings",
-                "--from=markdown+markdown_in_html_blocks+native_divs+raw_tex+tex_math_dollars",
-                "--filter=convert/pandoc/filters/transformMath.py",
-                # "--filter=convert/pandoc/filters/teeStart.py" ,
-                "--filter=pandoc-crossref",
-                # "--filter=convert/pandoc/filters/tee.py",
-                "--filter=pandoc-citeproc",
-                # "--filter=convert/pandoc/filters/tee.py",
-                "--filter=convert/pandoc/filters/transformImages.py",
-                # "--filter=convert/pandoc/filters/tee.py",
-                "--pdf-engine-opt=-xelatex",
-                "--pdf-engine-opt=-r",
-                "--pdf-engine-opt=.latexmkrc",
-                "--pdf-engine-opt=-g",
-                "--pdf-engine-opt=-outdir=output-tex",
+                "--data-dir=convert/pandoc",
+                "--resource-path=convert/pandoc",
+                "--defaults=pandoc-latex.yaml",
+                "--defaults=pandoc-filters.yaml"
             ]
-        latex_engine: latexmk
-        template: convert/pandoc/includes/Template.tex
-        includes:
-            in_header: convert/pandoc/includes/Header.tex
-        toc: true
-        toc_depth: 2
-        citation_package: biblatex
-        number_sections: true
+        latex_engine: "latexmk"
 # Pandoc
 title: "Technical Documents"
 fontsize: 12pt
-mainfont: Latin Modern Roman
-sansfont: Latin Modern Sans
-monofont: Latin Modern Mono
-documentclass: scrreprt
-classoption:
-    - a4paper
-    - twoside
-    - titlepage
-    - openright
-    - numbers=noenddot
-    - chapterprefix=true
-    - headings=optiontohead
-    - svgnames
-    - dvipsnames
-hyperrefoptions:
-    - linktoc=all
-    - hidelinks
-linkcolor: DarkGray
-filecolor: DarkBlue
-citecolor: DarkBlue
-urlcolor: MediumBlue
-toccolor: Black
+lang: en-US
+toc: true
+toc-depth: 2
+top-level-division: chapter
+number-sections: true
 ---
 
 @import "css/src/main.less"
-@import "/includes/Math.md"
+@import "includes/Math.md"
 
 **Author:** Gabriel Nützi<br>
 **Reviewer:** Michael Baumann<br>

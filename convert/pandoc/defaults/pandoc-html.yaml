@@ -1,0 +1,7 @@
+from: markdown+markdown_in_html_blocks+tex_math_dollars
+
+cite-method: citeproc
+
+eol: lf
+
+log-file: pandoc-html.log
