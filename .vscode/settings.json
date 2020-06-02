@@ -1,26 +1,62 @@
 {
-    "files.autoGuessEncoding": false,
-    "files.encoding": "utf8",
-    "markdown-preview-enhanced.mathInlineDelimiters": [
-        ["\\(", "\\)"],
-        ["$", "$"]
-    ],
-    "markdown-preview-enhanced.mathBlockDelimiters": [
-        ["\\[", "\\]"],
-        ["$$", "$$"]
-    ],
-    "markdown-preview-enhanced.usePandocParser": true,
-    "markdown-preview-enhanced.enableScriptExecution": true,
-    "markdown-preview-enhanced.mathRenderingOption": "MathJax",
-    "markdown-preview-enhanced.enableExtendedTableSyntax": true,
-    "markdown-preview-enhanced.imageFolderPath": "/files",
-    "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": false,
-    "python.formatting.provider": "yapf",
     "editor.formatOnPaste": true,
     "editor.formatOnType": true,
-    "python.linting.pylintEnabled": false,
-    "python.linting.pylamaEnabled": true,
+    "files.autoGuessEncoding": false,
+    "files.encoding": "utf8",
+    "latex-workshop.latex.autoBuild.run": "never",
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "latexmk 🔃",
+            "tools": [
+                "latexmk"
+            ]
+        }
+    ],
+    "latex-workshop.latex.tools": [
+        {
+            "args": [
+                "-r",
+                "../.latexmkrc",
+                "-xelatex",
+                "-cd-",
+                "%DOC%"
+            ],
+            "command": "latexmk",
+            "env": {},
+            "cwd":"",
+            "name": "latexmk"
+        }
+    ],
+    "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": false,
+    "markdown-preview-enhanced.enableExtendedTableSyntax": true,
+    "markdown-preview-enhanced.enableScriptExecution": true,
+    "markdown-preview-enhanced.imageFolderPath": "/files",
+    "markdown-preview-enhanced.mathBlockDelimiters": [
+        [
+            "\\[",
+            "\\]"
+        ],
+        [
+            "$$",
+            "$$"
+        ]
+    ],
+    "markdown-preview-enhanced.mathInlineDelimiters": [
+        [
+            "\\(",
+            "\\)"
+        ],
+        [
+            "$",
+            "$"
+        ]
+    ],
+    "markdown-preview-enhanced.mathRenderingOption": "MathJax",
+    "markdown-preview-enhanced.usePandocParser": true,
+    "python.formatting.provider": "yapf",
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": false,
-    "python.linting.pycodestyleEnabled": false
+    "python.linting.pycodestyleEnabled": false,
+    "python.linting.pylamaEnabled": true,
+    "python.linting.pylintEnabled": false
 }

@@ -1,6 +1,9 @@
 
 \makeatletter
 \providecommand*{\input@path}{}
+% For latex-workshop only
+\edef\input@path{{../convert/pandoc/includes/}{../pandoc/}{./../}\input@path}%
+% Normal paths
 \edef\input@path{{convert/pandoc/includes/}{pandoc/}{./}\input@path}% prepend
 \makeatother
 
@@ -287,3 +290,7 @@
 %\input{literature/bibliography.tex}
 
 \KOMAoptions{cleardoublepage=empty}
+
+% Indentation
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.8mm}
