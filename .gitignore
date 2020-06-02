@@ -1,8 +1,6 @@
 node_modules
 __pycache__
 
-svg-inkscape
-
 *.pdf
 *.log
 *.swp
@@ -24,9 +22,11 @@ svg-inkscape
 Test*
 
 filter-out
+svg-inkscape
 output-tex/*
 !output-tex/.gitkeep
-!output-tex/input.pdf
+!output-tex/input.tex
+!Content.pdf
 
 .DS_Store
 .envrc

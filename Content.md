@@ -1,7 +1,7 @@
 ---
 # Markdown Preview Enhanced
 class: "main"
-id: "main-markdown-numbered"
+id: "main-markdown"
 html:
     embed_local_images: true
     embed_svg: true
@@ -17,6 +17,7 @@ pandoc_args:
     [
         "--fail-if-warnings",
         "--standalone",
+        "--number-sections",
         #"--verbose",
         "--data-dir=convert/pandoc",
         "--resource-path=convert/pandoc",
@@ -38,14 +39,15 @@ output:
 title: "Technical Documents"
 bibliography: "literature/bibliography.bib"
 csl: "literature/ieee-with-url.csl"
+crossrefYaml: "includes/pandoc-crossref.yaml"
 link-citations: true
 fontsize: 12pt
 lang: en-US
 toc: true
 toc-depth: 2
 top-level-division: chapter
-secnumdepth: 3
 numbersections: true
+secnumdepth: 3
 ---
 
 @import "css/src/main.less"

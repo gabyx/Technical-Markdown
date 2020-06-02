@@ -1,0 +1,10 @@
+cref: true
+linkReferences: true
+figureTitle: "Figure"
+tableTitle: "Table"
+secPrefix: "chap."
+figPrefix: "fig."
+eqnPrefix: "eq."
+tblPrefix: "tbl."
+loftitle: "# List of Figures"
+lotTitle: "# List of Tables"

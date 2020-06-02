@@ -5,7 +5,7 @@ Dieses Kapitel möchte nicht mathematisch abschliessend sein, sondern lediglich 
 
 Das Vorhandensein eines *konvexen* Optimierungsproblems oder auch einer *konvexen Menge* beim Lösen eines Problems in $3$D, oder auch mehr Dimensionen, erlaubt es, auf eine Fülle von mathematisch sehr etablierten Definitionen und Konzepte aus der *konvexen Analysis* zurückzugreifen. Diese schon fast 50-jährige Theorie ist sehr fundiert und ein abgeschlossenes Untergebiet in der Mathematik.
 
-Die *konvexe Analysis* ist ein Grenzgebiet von *Geometrie*, *Analysis* und *Funktionalanalysis*, das sich mit den Eigenschaften **konvexer Mengen** und **konvexer Funktionen** befaßt und Anwendungen sowohl in der reinen Mathematik besitzt (von Existenzsätzen in der Theorie der Differential- und Integralgleichungen bis zum Gitterpunktsatz von Minkowski in der Zahlentheorie) als auch in Bereichen wie der mathematischen Ökonomie und den Ingenieurswissenschaften, wo man es oft mit Optimierungs- und Gleichgewichtsproblemen zu tun hat. Als einschlägige Referenz auf diesem Gebiet sei hier mal das Standardwerk [@rockafellar_convex_2015, p. 19] gegeben.
+Die *konvexe Analysis* ist ein Grenzgebiet von *Geometrie*, *Analysis* und *Funktionalanalysis*, das sich mit den Eigenschaften **konvexer Mengen** und **konvexer Funktionen** befaßt und Anwendungen sowohl in der reinen Mathematik besitzt (von Existenzsätzen in der Theorie der Differential- und Integralgleichungen bis zum Gitterpunktsatz von Minkowski in der Zahlentheorie) als auch in Bereichen wie der mathematischen Ökonomie und den Ingenieurswissenschaften, wo man es oft mit Optimierungs- und Gleichgewichtsproblemen zu tun hat. Als einschlägige Referenz auf diesem Gebiet sei hier mal das Standardwerk [@rockafellar_convex_2015] gegeben.
 
 ## Konvexe Menge
 Eine Menge $\set{C} \subseteq V$, also ein Teilmenge eines Vektorraums $V$, wird **konvex** genannt, falls und nur falls
@@ -58,9 +58,9 @@ Das ist nun ein wenig kryptisch, heisst jedoch nichts anderes als folgendes:
 Der Normalkegel $\ncone{C}(\vvec{x})$ besteht aus allen Vektoren (das wäre $\vvec{y}$) ausgehend von $\vvec{x}$ welche mit **allen** Vektoren welche vom Punkt $\vvec{x}$ in die Menge $\set{C}$ zeigen (das wäre $\vvec{x}^* - \vvec{x}$), einen **stumpfen** Winkel bilden (das wäre das Skalatprodukt mit $\leq 0$).
 Der Ursprung der Menge $\ncone{C}(\vvec{x})$ ist im Punkt $\vvec{x}$.
 
-Das folgende Bild visualisiert für eine konvexe Menge $\set{C}$ die verschiedenen Normalkegel.
+Die Abbildung [-@fig:normalkegel] visualisiert für eine konvexe Menge $\set{C}$ die verschiedenen Normalkegel.
 
-![Normalkegel an die Punkte $\vvec{x}$, $\vvec{y}$ und $\vvec{z}$. Der Normalkegel an einen innerhalb der Menge $\set{C}$ liegenden Punkt $\vvec{z}$ degeneriert zum $\vvec{0}$-Vektor. Der Vektor $\vvec{v}$ ist in der Menge des Normalkegels an $\vvec{x}$.](files/NormalKegel.svg){ width=80% max-width=400px}
+![Normalkegel an die Punkte $\vvec{x}$, $\vvec{y}$ und $\vvec{z}$. Der Normalkegel an einen innerhalb der Menge $\set{C}$ liegenden Punkt $\vvec{z}$ degeneriert zum $\vvec{0}$-Vektor. Der Vektor $\vvec{v}$ ist in der Menge des Normalkegels an $\vvec{x}$.](files/NormalKegel.svg){#fig:normalkegel width=80% max-width=400px}
 
 ## Zusammenhang von Normalkegel und Proximaler Punkt
 

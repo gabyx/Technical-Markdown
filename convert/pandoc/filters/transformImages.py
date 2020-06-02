@@ -58,7 +58,7 @@ def transformImgToLatex(image: Image):
     latexElements = [
         latexblock(r"\{0}{{{1}}}{{".format(baseCommand, url)),
         *caption,
-        latexblock(r"}}{{{0}}}{{{1}}}".format(lGraphicsOpts, label))
+        latexblock(r"}}{{{0}}}[{1}]".format(lGraphicsOpts, label))
     ]
 
     return latexElements
