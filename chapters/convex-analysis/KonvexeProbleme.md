@@ -80,7 +80,7 @@ Der Zusammenhang ist wie folgt:
 Das heisst, eine Normalkegel-*Inklusion* (die Relation $\vvec{a} \in \set{B}$ wird *Mengen-Inklusion* genannt) ist direkt an eine **implizite** *projektive* Gleichung gekoppelt.
 
 Damit lässt sich nun ein interessanter wichtiget Fakt ableiten.
-Aus der [Visualisierung](#nomal-cone-vis) entnehmen wir, dass $\vvec{p}-\vvec{x}$ in der Menge $\ncone{C}(\vvec{x})$ liegt, also lässt sich schreiben
+Aus der Visualisierung [-@fig:normalkegel] entnehmen wir, dass $\vvec{p}-\vvec{x}$ in der Menge $\ncone{C}(\vvec{x})$ liegt, also lässt sich schreiben
 
 ```math
 \begin{align}
@@ -106,7 +106,7 @@ Müssten wir nun eine Projektionsfunktion auf ein $2$d-Dreieck herleiten, würde
 Das heisst es gibt genau 3 nicht triviale Normalkegel und 3 einfachere Normalkegel (bestehend lediglich aus den Normalen auf die Seitenflächen). Eine Projektionsfunktion auf ein Dreieck muss diese 6 Bereiche beachten und ist so auch optimal und richtig implementiert.
 
 ## Zusammenhang von Normalkegel und Konvexer Optimierung
-Um hier mathematisch nicht in einen Exzess zu geraten, wird hier nur eine abgespeckte Erklärung gegeben. Für mehr Informationen sei auf [Kapitel 6 *Convex Optimization*](http://dx.doi.org/10.3929/ethz-a-010662262) verwiesen und die darin enthaltenen Referenzen.
+Um hier mathematisch nicht in einen Exzess zu geraten, wird hier nur eine abgespeckte Erklärung gegeben. Für mehr Informationen sei auf [@nuetzig_thesis_2016, chap. 6] verwiesen und die darin enthaltenen Referenzen.
 
 Betrachte man folgendes allgemeine restriktierte **konvexe** Optimierungsproblem:
 
