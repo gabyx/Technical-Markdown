@@ -4,7 +4,7 @@
 
 "@shd101wyy/mume@https://github.com/gabyx/mume#gabyx":
   version "0.5.7"
-  resolved "https://github.com/gabyx/mume#b155dc6edee2f0c1ee65f78c2e6c5878a6b7fdbf"
+  resolved "https://github.com/gabyx/mume#01f82135ebf227aefdce99ca0f072c0b8753bcf7"
   dependencies:
     babyparse "^0.4.6"
     cheerio "^1.0.0-rc.3"
