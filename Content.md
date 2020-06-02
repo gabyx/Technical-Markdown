@@ -38,7 +38,7 @@ output:
 # Pandoc
 title: "Technical Documents"
 bibliography: "literature/bibliography.bib"
-csl: "literature/ieee-with-url.csl"
+csl: "literature/apa.csl"
 crossrefYaml: "includes/pandoc-crossref.yaml"
 link-citations: true
 fontsize: 12pt
