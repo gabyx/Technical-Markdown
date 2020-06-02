@@ -17,8 +17,10 @@ pandoc_args:
     [
         "--fail-if-warnings",
         "--standalone",
+        #"--verbose",
         "--data-dir=convert/pandoc",
         "--resource-path=convert/pandoc",
+        "--resource-path=literature",
         "--defaults=pandoc-html.yaml",
         "--defaults=pandoc-filters.yaml"
     ]
@@ -26,6 +28,7 @@ output:
     pdf_document:
         pandoc_args: [
                 "--fail-if-warnings",
+                "--verbose",
                 "--data-dir=convert/pandoc",
                 "--resource-path=convert/pandoc",
                 "--defaults=pandoc-latex.yaml",
@@ -34,6 +37,9 @@ output:
         latex_engine: "latexmk"
 # Pandoc
 title: "Technical Documents"
+bibliography: "literature/bibliography.bib"
+csl: "literature/ieee-with-url.csl"
+link-citations: true
 fontsize: 12pt
 lang: en-US
 toc: true
@@ -54,3 +60,5 @@ the VS Code extension [Markdown Preview Enhanced](https://shd101wyy.github.io/ma
 Read the [Readme.md](https://github.com/gabyx/TechnicalMarkdown/blob/master/Readme.md) for futher information.
 
 @import "chapters/convex-analysis/KonvexeProbleme.md"
+
+# References
