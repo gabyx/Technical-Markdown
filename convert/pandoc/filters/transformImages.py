@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
 Pandoc filter to convert
     - ```math``` code blocks to raw inline latex.
