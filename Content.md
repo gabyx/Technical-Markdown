@@ -17,7 +17,6 @@ pandoc_args:
     [
         "--fail-if-warnings",
         "--standalone",
-        "--number-sections",
         #"--verbose",
         "--data-dir=convert/pandoc",
         "--resource-path=convert/pandoc",
