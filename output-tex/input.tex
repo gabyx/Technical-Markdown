@@ -1,0 +1,692 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode,linktoc=all,hidelinks}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
+%
+\documentclass[
+  12pt,
+  american,
+  a4paper,
+  twoside,
+  titlepage,
+  openright,
+  numbers=noenddot,
+  chapterprefix=true,
+  headings=optiontohead,
+  svgnames,
+  dvipsnames]{scrreprt}
+
+
+
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+  \setmainfont[]{Latin Modern Roman}
+  \setsansfont[]{Latin Modern Sans}
+  \setmonofont[]{Latin Modern Mono}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Technical Documents},
+  pdflang={en-US},
+  colorlinks=true,
+  linkcolor=DarkGray,
+  filecolor=DarkBlue,
+  citecolor=DarkBlue,
+  urlcolor=MediumBlue,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{3}
+
+\makeatletter
+\providecommand*{\input@path}{}
+% For latex-workshop only
+\edef\input@path{{../convert/pandoc/includes/}{../pandoc/}{./../}\input@path}%
+% Normal paths
+\edef\input@path{{convert/pandoc/includes/}{pandoc/}{./}\input@path}% prepend
+\makeatother
+
+% English ============================================
+\usepackage{microtype}
+\usepackage[british]{babel}
+\selectlanguage{british}
+\input{hyphenex/ushyphex.tex}
+
+% Calculations =======================================
+\usepackage{calc}
+
+% Some booleans ======================================
+\usepackage{ifthen}
+\newboolean{printVersion}
+\setboolean{printVersion}{true}
+
+
+%% Numerals ==========================================
+\usepackage{nth}
+
+%% Geometry ==========================================
+\newlength{\innermargin}
+\setlength{\innermargin}{2.1cm}
+\usepackage[nomarginpar,
+            textwidth=16.5cm,
+            textheight=240mm,
+            bottom=2.5cm,
+            headheight=15pt,
+            headsep=30pt,
+            footskip=30pt,
+            bindingoffset=7mm,
+            inner=\innermargin,
+            twoside
+            ]{geometry}
+\usepackage[final]{pdfpages}
+
+%% Grafics ==========================================
+\usepackage{graphicx}
+\usepackage[export]{adjustbox}
+\usepackage{tikz}
+\usepackage{wrapfig}
+\usepackage[absolute]{textpos}
+
+\usepackage[%
+    format=plain,%
+    justification=justified,%
+    margin=3mm,%
+    font=normal,%
+    labelfont=bf%
+]{caption}
+
+\DeclareCaptionStyle{mycaption}{
+    format=plain,%
+    justification=justified,%
+    margin=12pt,%
+    font=normal,%
+    labelfont=bf,%
+    %aboveskip=10pt,
+    belowskip=-5pt%
+}
+
+%% Caption ===========================================
+\usepackage[]{subcaption}
+\captionsetup[figure]{style=mycaption}
+
+%\usepackage[]{overpic}
+%\usepackage{lpic}
+%\usepackage{rotating}
+
+%% Header/Footer =====================================
+\usepackage[automark,headsepline]{scrlayer-scrpage}
+\clearpairofpagestyles
+\setkomafont{pagehead}{\normalfont\rmfamily\bfseries}
+%\setkomafont{pagenumber}{\normalfont\rmfamily}
+
+\automark[chapter]{chapter}
+\renewcommand{\chaptermarkformat}{}
+\renewcommand{\sectionmarkformat}{\thesection\autodot\enskip}
+\cfoot[\pagemark]{\pagemark}
+\lehead{Chapter \thechapter}
+\rohead{\headmark}
+\rehead{}
+\lohead{}
+
+% Footnotes
+\usepackage[perpage,para]{footmisc}
+% ====================================================
+
+%% Tables ============================================
+\usepackage{array}
+%\usepackage{ctable}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{supertabular}
+\usepackage{ltxtable}
+\usepackage{collcell}
+\usepackage{makecell}
+\usepackage{colortbl}
+\usepackage{xcolor}
+% ====================================================
+
+%% Use Links & Refs ==================================
+\ifthenelse{\boolean{printVersion}}{
+    \colorlet{myurlcolor}{gray!50!black}%
+    \colorlet{mylinkcolor}{gray!50!black}%
+    \colorlet{mycitecolor}{gray!50!black}%
+    \colorlet{myanchorcolor}{gray!50!black}%
+    \colorlet{mybackrefcolor}{gray!10!black}%
+}{%
+    \colorlet{myurlcolor}{blue!50!black}%
+    \colorlet{mylinkcolor}{blue!50!black}%
+    \colorlet{mycitecolor}{blue!50!black}%
+    \colorlet{myanchorcolor}{blue!50!black}%
+    \colorlet{mybackrefcolor}{green!35!black}%
+}
+
+% Loaded from pandoc
+% \usepackage[hidelinks,
+% colorlinks = true,
+% linkcolor = black,
+% urlcolor  = myurlcolor,
+% citecolor = black,
+% anchorcolor = black]{hyperref}
+
+%% Quotes =============================================
+\usepackage[font=itshape,vskip=5pt]{quoting}
+
+%% Glossary ==========================================
+% \usepackage[hyperfirst=true]{glossaries}
+% \glstoctrue
+% \renewcommand*{\glstextformat}[1]{\textnormal{#1}}
+% \newcommand{\glsp}{\protect\gls}
+% \loadglsentries{chapter/GlossaryEntries}
+%\makeglossaries
+% ====================================================
+
+%% Own styles! ========================================
+\input{GeneralMacros.sty}
+\input{Math.sty}
+% ====================================================
+
+%% Todo Notes =========================================
+% \usepackage[textsize=tiny,disable]{todonotes}
+% \newcommand{\disscomment}[1]{%
+%     \todo[color=black!40]{#1}%
+% }%
+
+%% Fonts  =============================================
+% \usepackage[no-math]{fontspec}
+
+% Hypenate tt text
+\usepackage[htt]{hyphenat}
+
+%% Title & Headings ==================================
+% Change Part Heading
+\addtokomafont{part}{\Huge\selectfont\rmfamily\bfseries}
+\addtokomafont{partprefix}{\Large\rmfamily\bfseries}
+%\newcommand*\partcolor{\color{blue!50}}% Part is coloured blue
+\renewcommand*\partheadstartvskip{\vspace*{.2\textheight}}
+\renewcommand*\partheadmidvskip{%
+    \par
+    \vspace*{30pt}%
+}
+\makeatletter
+\renewcommand*\partheadendvskip{%
+    \vspace{\baselineskip}%
+    \partquotenote%
+    %{\hrulefill\par\nobreak}%
+    \vfil\newpage%
+    \if@twoside%
+        \if@openright%
+        \null%
+        \thispagestyle{plain}%
+        %<<<<<<<<<<<<<<<<<<<<
+        \vspace*{\fill}%
+        %\begin{quote}%
+        \partnote%
+        %\end{quote}%
+        \vspace*{\fill}%
+        %<<<<<<<<<<<<<<<<<<<<
+        %\newpage%
+        \fi%
+    \else%
+         \thispagestyle{plain}%
+         %<<<<<<<<<<<<<<<<<<<<
+         \vspace*{\fill}%
+         %\begin{quote}%
+         \partnote%
+         %\end{quote}%
+         \vspace*{\fill}%
+         %<<<<<<<<<<<<<<<<<<<<
+         \newpage%
+    \fi%
+    \if@tempswa%
+    \twocolumn%
+    \fi%
+}
+\makeatother
+
+\newcommand\partnote{}
+\newcommand\partquotenote{}
+\renewcommand\partformat{\hfill\color{lightgray}\partname~\fontsize{85}{70}\selectfont\thepart\if@altsecnumformat.\fi}
+
+% Change Chapter Heading
+\ifthenelse{\boolean{printVersion}}{
+    \colorlet{mychaptercolor}{white!55!black}%
+}{%
+    \colorlet{mychaptercolor}{lightgray}%
+}
+
+\renewcommand*\chapterheadstartvskip{\vspace*{.02\textheight}}
+\renewcommand*\chapterheadendvskip{%
+    \noindent{\setlength{\parskip}{0pt}\hrulefill\par}%
+    \vspace*{30pt}%
+}
+\renewcommand*{\chapterformat}{%
+    \parbox{\textwidth}{\hfill\chapappifchapterprefix{\ }\fontsize{85}{70}\selectfont\thechapter\autodot\enskip}%
+    \vspace{4ex}%
+    }
+\addtokomafont{disposition}{\normalfont\bfseries}
+\addtokomafont{chapterprefix}{\Large\bfseries\color{mychaptercolor}}
+
+% Part Quotes
+\setkomafont{dictumtext}{\itshape\small}
+\setkomafont{dictumauthor}{\normalfont}
+\renewcommand*\dictumwidth{0.9\linewidth}
+\renewcommand*\raggeddictum{\centering}
+\renewcommand*\dictumauthorformat[1]{--- #1}
+\renewcommand*\dictumrule{
+    %\vskip-1ex\hrulefill\par}
+}
+
+\setkomafont{chapter}{\huge\rmfamily}
+\addtokomafont{section}{\rmfamily}
+\addtokomafont{subsection}{\rmfamily}
+\addtokomafont{subsubsection}{\rmfamily}
+
+%=====================================================
+
+% % TOC ================================================
+% \usepackage{titletoc}
+% \newcommand{\setupTOC}[2]{%
+%     \titlecontents{#1}
+%     [8em] % ie, 1.5em (chapter) + 2.3em
+%     {\rightskip=10mm plus 1fil\hyphenpenalty=10000\normalsize\bfseries\protect\addvspace{15pt}\contentsmargin{3em}}
+%     {\contentslabel[{\color{gray}#2\enspace\thecontentslabel}]{8em}}
+%     {\hspace*{-8em}}
+%     {\hfill\contentspage}
+% }
+% \setupTOC{chapter}{\chaptername}
+% %=====================================================
+
+% Tocless Command ====================================
+\newcommand{\nocontentsline}[3]{}
+\newcommand{\tocless}[2]{\bgroup\let\addcontentsline=\nocontentsline#1{#2}\egroup}
+
+% Make some floats adjustments =======================
+% make floatbarrier at each section
+\usepackage[section]{placeins}
+
+% \setcounter{topnumber}{2}
+% \setcounter{bottomnumber}{2}
+% \setcounter{totalnumber}{3}     % 2 may work better
+% \setcounter{dbltopnumber}{2}    % for 2-column pages
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.8}
+\renewcommand{\textfraction}{0.07}
+\renewcommand{\floatpagefraction}{0.8}
+%\renewcommand{\dbltopfraction}{.66}
+%\renewcommand{\dblfloatpagefraction}{.8}
+
+% Allow display break
+%\allowdisplaybreaks[3]
+%=====================================================
+
+% Clever Refs
+\usepackage{cleveref} % load it after thmtools (there is some problem)
+\crefname{appsec}{appendix}{appendices}
+
+% Bibliography
+%\input{literature/bibliography.tex}
+
+\KOMAoptions{cleardoublepage=empty}
+
+% Indentation
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.8mm}
+\ifxetex
+  % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
+  \usepackage{polyglossia}
+  \setmainlanguage[variant=american]{english}
+\else
+  \usepackage[shorthands=off,main=american]{babel}
+\fi
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newenvironment{cslreferences}%
+  {}%
+  {\par}
+
+\title{Technical Documents}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+{
+\hypersetup{linkcolor=Black}
+\setcounter{tocdepth}{2}
+\tableofcontents
+}
+\textbf{Author:} Gabriel Nützi \textbf{Reviewer:} Michael Baumann
+\textbf{Date:} 28.05.2020
+
+This is a setup demonstrating the power and use of markdown for
+technical documents by using the VS Code extension
+\href{https://shd101wyy.github.io/markdown-preview-enhanced}{Markdown
+Preview Enhanced} and a fully automated conversion sequence with
+\texttt{yarn}, \texttt{gulp}. Read the
+\href{https://github.com/gabyx/TechnicalMarkdown/blob/master/Readme.md}{Readme.md}
+for futher information.
+
+\hypertarget{konvexe-probleme}{%
+\chapter{Konvexe Probleme}\label{konvexe-probleme}}
+
+In diesem Abschnitt geht es darum ein besseres Verständnis zu geben über
+Algorithmen und Konzepte welche zum Beispiel bei der
+\(2\)d-/\(3\)d-Kollisionsdetektion oder in Optimierungs-Algorithmen
+genutzt werden. Die Erklärungen sind eine stärkere und vereinfachte
+Zusammenfassung aus dem
+\href{http://dx.doi.org/10.3929/ethz-a-010662262}{Kapitel 6:
+\emph{Convex Optimization}}. Dieses Kapitel möchte nicht mathematisch
+abschliessend sein, sondern lediglich (nach der Ansicht des Autors) ein
+paar wichtige Grundkonzepte vermitteln, welche einen wunderbaren
+Einstieg in dieses Thema geben. Die erwähnten Konzepte sind in der
+generellsten Form der konvexen Analysis zu finden und können sehr wohl
+als die wichtigsten Standbeine verinnerlicht werden. Auf Beweise wird
+bewusst verzichtet. Es wird versucht die mathematischen Definitionen
+anschaulich zu erklären.
+
+Das Vorhandensein eines \emph{konvexen} Optimierungsproblems oder auch
+einer \emph{konvexen Menge} beim Lösen eines Problems in \(3\)D, oder
+auch mehr Dimensionen, erlaubt es, auf eine Fülle von mathematisch sehr
+etablierten Definitionen und Konzepte aus der \emph{konvexen Analysis}
+zurückzugreifen. Diese schon fast 50-jährige Theorie ist sehr fundiert
+und ein abgeschlossenes Untergebiet in der Mathematik.
+
+Die \emph{konvexe Analysis} ist ein Grenzgebiet von \emph{Geometrie},
+\emph{Analysis} und \emph{Funktionalanalysis}, das sich mit den
+Eigenschaften \textbf{konvexer Mengen} und \textbf{konvexer Funktionen}
+befaßt und Anwendungen sowohl in der reinen Mathematik besitzt (von
+Existenzsätzen in der Theorie der Differential- und Integralgleichungen
+bis zum Gitterpunktsatz von Minkowski in der Zahlentheorie) als auch in
+Bereichen wie der mathematischen Ökonomie und den
+Ingenieurswissenschaften, wo man es oft mit Optimierungs- und
+Gleichgewichtsproblemen zu tun hat. Als einschlägige Referenz auf diesem
+Gebiet sei hier mal das Standardwerk
+{[}\protect\hyperlink{ref-rockafellar_convex_2015}{1}{]} gegeben.
+
+\hypertarget{konvexe-menge}{%
+\section{Konvexe Menge}\label{konvexe-menge}}
+
+Eine Menge \(\set{C} \subseteq V\), also ein Teilmenge eines Vektorraums
+\(V\), wird \textbf{konvex} genannt, falls und nur falls
+
+\begin{align}
+\lambda \vvec{a} + (1-\lambda) \vvec{b} \in \set{C} \quad \forall \vvec{a},\vvec{b} \in \set{C}, \ \lambda \in [0,1] \ .
+\end{align}
+
+gilt. Das heisst alle Punkte auf einer geraden Linie zwischen zwei
+beliebigen Punkten aus der Menge \(\set{C}\) müssen \textbf{auch} in
+dieser Menge liegen damit es \textbf{konvex} ist. Stellt man sich eine
+Banane vor oder eine Oberfläche eines \(3\)d-Würfels, dann erfüllen
+diese Mengen das Kriterium nicht. Ein ausgefülltes \(2\)d-Rechteck , ein
+gefüllter \(3\)d-Würfel oder eine gefüllte Kugel jedoch schon. Eine
+\textbf{konvexe} Menge ist eine Teilmenge eines Vektorraums. Ein
+Beispiel ist der euklidische Raum \(\mathbb{E}^3\) in \(3\)D.
+
+Man interessiert sich nun zum Beispiel für die Projektion eines Punktes
+\(\vvec{x}\) auf ein konvexe Menge \(\set{C}\). Die Projektion sollte so
+sein, dass der Abstand zwischen dem Punkt \(\vvec{x}\) und dem
+projezierten Punkt \(\vvec{y} \in \set{C}\) \textbf{minimal} ist.
+
+Der Abstand wird über eine Metrik \(d(\vvec{x},\vvec{y}) \geq 0\)
+definiert - die \emph{Distanzfunktion}. Der euklidische Vektorraum
+\(\mathbb{E}^3\) ist ein Vektorraum mit einer Metrik und ist daher ein
+\emph{metrischer Raum}. Das Standard-Skalarprodukt
+\(\vvec{x}^\transp \vvec{y}\) im euklidischen Raum \(\mathbb{E}^3\)
+induziert direkt die Standardnorm
+\(\norm{\vvec{x}}_2 := \sqrt{\vvec{x}^\transp \vvec{x}} \geq 0\). Diese
+wiederum induziert direkt die Metrik
+
+\begin{align}
+d(\vvec{x},\vvec{y}) := \norm{\vvec{x} - \vvec{y}}_2.
+\end{align}
+
+Wir können somit über die Metrik \(d(\vvec{x},\vvec{y})\) die Länge
+zwischen zwei Vektoren \(\vvec{x},\vvec{y} \in \mathbb{E}^3\) berechnen.
+
+\hypertarget{proximaler-punkt}{%
+\section{Proximaler Punkt}\label{proximaler-punkt}}
+
+Mit der Metrik, also unserem Lineal zum Messen von Distanzen, lässt sich
+nun die Projektion \(\prox{C}(\vvec{p})\) eines Punktes \(\vvec{p}\) mit
+minimaler Distanz auf eine konvexe Menge \(\set{C}\) relativ leicht
+definieren zu
+
+\begin{align}
+\prox{C}(\vvec{p}) :=  \underset{\vvec{x} \ \in \ \set{C}}{\argmin} \norm{\vvec{x} - \vvec{p}}_2.
+\end{align}
+
+Das heisst \(\prox{C}(\vvec{p})\) minimiert den Punkt \(\vvec{x}\) in
+der Menge \(\set{C}\) so, dass sein Abstand zu \(\vvec{p}\) minimal ist.
+
+\hypertarget{normalkegel}{%
+\section{Normalkegel}\label{normalkegel}}
+
+Eines der \textbf{wichtigsten} Konzept der konvexen Analysis ist die des
+\textbf{Normalkegels}. Wie der Name schon sagt, handelt es sich um einen
+Kegel welcher durch Normalenvektoren auf der Oberfläche einer konvexen
+Menge aufgespannt wird. Wir geben hier direkt die Definition und sehen
+im Anschluss wie sich dieser Kegel visualisiert:
+
+Ein Normalkegel \(\ncone{C}\) auf ein konvexes Set \(\set{C}\) im Punkt
+\(\vvec{x} \in \set{C}\) ist definert als
+
+\begin{align}
+    \ncone{C}(\vvec{x}) := \left\{ \vvec{y} \ | \ \vvec{y}^\transp(\vvec{x}^* - \vvec{x}) \leq 0, \quad \forall \vvec{x}^* \in \set{C} \right\}
+\end{align}
+
+Das ist nun ein wenig kryptisch, heisst jedoch nichts anderes als
+folgendes: Der Normalkegel \(\ncone{C}(\vvec{x})\) besteht aus allen
+Vektoren (das wäre \(\vvec{y}\)) ausgehend von \(\vvec{x}\) welche mit
+\textbf{allen} Vektoren welche vom Punkt \(\vvec{x}\) in die Menge
+\(\set{C}\) zeigen (das wäre \(\vvec{x}^* - \vvec{x}\)), einen
+\textbf{stumpfen} Winkel bilden (das wäre das Skalatprodukt mit
+\(\leq 0\)). Der Ursprung der Menge \(\ncone{C}(\vvec{x})\) ist im Punkt
+\(\vvec{x}\).
+
+Die Abbildung \labelcref{fig:normalkegel} visualisiert für eine konvexe
+Menge \(\set{C}\) die verschiedenen Normalkegel.
+
+\svgWithCaption{files/NormalKegel.svg}{Normalkegel an die Punkte
+\(\vvec{x}\), \(\vvec{y}\) und \(\vvec{z}\). Der Normalkegel an einen
+innerhalb der Menge \(\set{C}\) liegenden Punkt \(\vvec{z}\) degeneriert
+zum \(\vvec{0}\)-Vektor. Der Vektor \(\vvec{v}\) ist in der Menge des
+Normalkegels an \(\vvec{x}\).}{width=0.8\textwidth}[fig:normalkegel]
+
+\hypertarget{zusammenhang-von-normalkegel-und-proximaler-punkt}{%
+\section{Zusammenhang von Normalkegel und Proximaler
+Punkt}\label{zusammenhang-von-normalkegel-und-proximaler-punkt}}
+
+Man fragt sich natürlich nun: \emph{Was bringen uns diese mathematische
+Definitionen?}
+
+Es stellt sich heraus, dass es einen Zusammenhang gibt zwischen
+\(\prox{C}\) und \(\ncone{C}\) welcher extremst nützlich ist und heute
+im Feld der konvexen Optimierung, beim Machine-Learning, in der
+Starrkörper-Mechanik (Starrkörper-Simulationen und Physics-Engines in
+Games) oder auch in der Kollisionsdetektion (GJK Algorithmus) durch
+projektive Iterationen direkte Anwendung findet.
+
+Der Zusammenhang ist wie folgt:
+
+\begin{align}
+\vvec{y} \in \ncone{C}(\vvec{x}) \quad \Leftrightarrow \quad \vvec{x} = \prox{C}(\vvec{x} + \vvec{y})
+\label{eq-prox-to-ncone}
+\end{align}
+
+Das heisst, eine Normalkegel-\emph{Inklusion} (die Relation
+\(\vvec{a} \in \set{B}\) wird \emph{Mengen-Inklusion} genannt) ist
+direkt an eine \textbf{implizite} \emph{projektive} Gleichung gekoppelt.
+
+Damit lässt sich nun ein interessanter wichtiget Fakt ableiten. Aus der
+\protect\hyperlink{nomal-cone-vis}{Visualisierung} entnehmen wir, dass
+\(\vvec{p}-\vvec{x}\) in der Menge \(\ncone{C}(\vvec{x})\) liegt, also
+lässt sich schreiben
+
+\begin{align}
+\vvec{p}-\vvec{x} \in \ncone{C}(\vvec{x}).
+\end{align}
+
+Dies lässt sich mit obiger Beziehung direkt zu
+
+\begin{align}
+\vvec{x} &= \prox{C}(\vvec{x} + \vvec{p} - \vvec{x}) \\
+&= \prox{C}(\vvec{p}).
+\end{align}
+
+umschreiben. Aus dem erkennen wir, dass der Ursprung des Normalkegels,
+worin ein \textbf{beliebiger} Punkt \(\vvec{p}\) liegt, direkt der
+\textbf{proximale} Punkt ist zu \(\vvec{p}\).
+
+Müssten wir nun eine Projektionsfunktion auf ein \(2\)d-Dreieck
+herleiten, würden wir folgendes Bild malen:
+
+\svgWithCaption{files/NormalKegelDreieck.svg}{Normalkegel an die Punkte
+\(\vvec{a}\), \(\vvec{b}\) und \(\vvec{c}\) eines
+Dreiecks.}{width=0.8\textwidth}[]
+
+Das heisst es gibt genau 3 nicht triviale Normalkegel und 3 einfachere
+Normalkegel (bestehend lediglich aus den Normalen auf die
+Seitenflächen). Eine Projektionsfunktion auf ein Dreieck muss diese 6
+Bereiche beachten und ist so auch optimal und richtig implementiert.
+
+\hypertarget{zusammenhang-von-normalkegel-und-konvexer-optimierung}{%
+\section{Zusammenhang von Normalkegel und Konvexer
+Optimierung}\label{zusammenhang-von-normalkegel-und-konvexer-optimierung}}
+
+Um hier mathematisch nicht in einen Exzess zu geraten, wird hier nur
+eine abgespeckte Erklärung gegeben. Für mehr Informationen sei auf
+\href{http://dx.doi.org/10.3929/ethz-a-010662262}{Kapitel 6 \emph{Convex
+Optimization}} verwiesen und die darin enthaltenen Referenzen.
+
+Betrachte man folgendes allgemeine restriktierte \textbf{konvexe}
+Optimierungsproblem:
+
+\begin{align}
+\vvec{x}^* = \underset{\vvec{x} \ \in \ \set{C}}{\argmin} f(\vvec{x}),
+\label{eq-convexproblem}
+\end{align}
+
+wobei die Funktion \(f(\vvec{x}) \in \mathbb{R}\) \textbf{strikt konvex}
+und \textbf{differenzierbar} (man stelle sich den oberen Teil eines
+Weinglases vor, wobei \(\vvec{x} \in \mathbb{R}^2\)) ist und die
+minimierenden Punkte \(\vvec{x}\) auf eine \textbf{konvexe} Menge
+\(\set{C}\) restriktiert sind. Der minimierende Punkt ist hier mit
+\(\vvec{x}^*\) bezeichnet. Es gibt nur \textbf{einen} solchen globalen
+minimierenden Punkt
+
+Dann kann man das Problem in ein freies \textbf{konvexes} Programm
+umschreiben indem man die Einschränkung \(\vvec{x} \in \set{C}\) mit
+einer Bestrafungsfunktion \(\indf{C}(\vvec{x})\) ersetzt
+
+\begin{align}
+\vvec{x}^* = \underset{\vvec{x}}{\argmin} f(\vvec{x}) + \indf{C}(\vvec{x}).
+\end{align}
+
+Die Bestrafungsfunktion \(\indf{C}(\vvec{x})\) liefert \(0\) falls
+\(\vvec{x} \in \set{C}\) und sonst \(+\infty\). Diese Funktion wird
+\textbf{Indikatorfunktion} genannt.
+
+Die Frage ist nun wie kriegen wir eine Bedingung an den optimalen
+(minimierenden) Punkt \(\vvec{x}^*\). Das geht ziemlich analog zu der
+Bedindung für Minima/Maxima einer differenzierbaren Funktionen \(f\) :
+
+\begin{align}
+\vvec{0} = \frac{df}{d\vvec{x}}(\vvec{x}^*)
+\label{eq-optimality-difffunc}
+\end{align}
+
+was konkret heisst, dass der Nullvektor \(\vvec{0}\) gleich dem Gradient
+\(\frac{df}{d\vvec{x}}\) ist an der optimalen Stelle \(\vvec{x}^*\).
+
+Da wir aber bei unserem Problem \(\eqref{eq-convexproblem}\) diese
+\textbf{unstetige}, \textbf{nicht-differenzierbare} Bestrafungsfunktion
+\(\indf{C}\) eingebaut haben, ist dies nicht direkt mit der normalen
+Differentiation zu machen. Man braucht in der konvexen Analysis eine
+verallgemeinerte Ableitung - das \textbf{Subdifferential}, welches nicht
+mehr nur einfache Steigungen (d.h. die Steigung für \(1\)-dimensionale
+Funktionen \(f(x)\) oder allgemeiner der Gradient für \(n\)-dimensionale
+Funktionen \(f(\vvec{x})\)) zurück geben kann sondern auch \textbf{ganze
+Mengen} von solchen Steigungen. Das heisst, das Subdifferential an einem
+Punkt ist eine Menge aller Gradienten an diesen Punkt der Funktion. Das
+heisst direkt, dass eine Gleicheit zu \(\vvec{0}\) wie in
+\(\eqref{eq-optimality-difffunc}\) nicht mehr richtig wäre und hier eine
+Mengen-Inklusion \(\vvec{0} \in \dots\) stehen muss.
+
+Anstatt \(\frac{d}{d\vvec{x}}\indf{C}\) nehmen wir einfach das
+Subdifferential \(\partial_{\vvec{x}} \indf{C}\) und die Bedingung
+\(\eqref{eq-optimality-difffunc}\) wird dann zu
+
+\begin{align}
+\label{eq-optimality-strict-convex}
+\vvec{0} \in \frac{df}{d\vvec{x}}(\vvec{x}^*) + \partial_{\vvec{x}} \indf{C}(\vvec{x}^*)
+\end{align}
+
+Nur was machen wir nun mit dieser \textbf{mengenwertigen Relation}?
+
+Da man zeigen kann, dass das Subdifferential, also die mengenwertige
+Ableitung, der Indikatorfunktion
+\(\partial_{\vvec{x}} \indf{C}(\vvec{x})\) genau dem Normalkegel
+\(\ncone{C}(\vvec{x})\) entspricht, können wir die obige Inklusion so
+schreiben:
+
+\begin{align}
+\vvec{0} \in \frac{df}{d\vvec{x}}(\vvec{x}^*) + \ncone{C}(\vvec{x}^*) \quad \Leftrightarrow \quad -\frac{df}{d\vvec{x}}(\vvec{x}^*) \in \ncone{C}(\vvec{x}^*)
+\label{eq-optimality-strict-convex-2}
+\end{align}
+
+Das bringt uns nicht viel mehr ausser einer visuellen Erkenntnis durch
+folgende Visualisierung:
+
+\svgWithCaption{files/ConvexOptimizationProblem.svg}{Konvexes
+Optimierungs Problem innerhalb der Menge \(\set{C}\) auf einer
+\(2\)d-Funktion \(f(\vvec{x}) \in \mathbb{R}\). Der negative Gradient
+liegt im Optimum \(\vvec{x}^*\) genau innerhalb des Normalkegels an
+\(\vvec{x}^*\).}{width=0.8\textwidth}[]
+
+Mit der Beziehung zwischen \textbf{proximalem Punkt} und
+\textbf{Normalkegel} \(\eqref{eq-prox-to-ncone}\) kriegen wir daraus
+direkt eine \textbf{implizite Projektionsgleichung} für den optimalen
+Punkt \(\vvec{x}^*\):
+
+\begin{align}
+-\frac{df}{d\vvec{x}}(\vvec{x}^*) \in \ncone{C}(\vvec{x}^*) \quad \Leftrightarrow \quad \vvec{x}^* = \prox{C}(\vvec{x}^* - \frac{df}{d\vvec{x}}(\vvec{x}^*)),
+\end{align}
+
+welche man iterative lösen kann, was zum
+\textbf{Gradienten-Projektionsverfahren} führt (Gradient Projection
+Algorithm).
+
+\hypertarget{references}{%
+\chapter*{References}\label{references}}
+\addcontentsline{toc}{chapter}{References}
+
+\hypertarget{refs}{}
+\begin{cslreferences}
+\leavevmode\hypertarget{ref-rockafellar_convex_2015}{}%
+{[}1{]} R. T. Rockafellar, \emph{Convex analysis}. Princeton: Princeton
+University Press, 2015 {[}Online{]}. Available:
+\url{https://www.degruyter.com/view/title/516543}
+\end{cslreferences}
+
+\end{document}

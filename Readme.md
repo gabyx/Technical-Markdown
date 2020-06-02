@@ -5,7 +5,7 @@ This is a markdown setup demonstrating the power and use of markdown for **techn
 - using `yarn`+ `gulp` for a **fully automated conversion** sequence such that exporting ([Content.md](https://raw.githubusercontent.com/gabyx/TechnicalMarkdown/master/Content.md)) is done in the background:
 
     - export to **PDF** with `pandoc` to `html` then to `chrome`
-    - export to **PDF** with `pandoc` to `latexmk` using `xelatex` [See Output](output-tex/input.pdf)
+    - export to **PDF** with `pandoc` to `latexmk` using `xelatex` [See Output](Content.pdf)
     - export to **HTML** with `pandoc` to `html` [See Output](https://gabyx.github.io/TechnicalMarkdown/Content.html)
 
     with [Markdown Preview Enhanced Engine](https://github.com/shd101wyy/mume).
