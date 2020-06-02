@@ -18,6 +18,7 @@
         "which": "^2.0.2"
     },
     "scripts": {
+        "bootstrap": "yarn cache clean; rm yarn.lock; yarn install",
         "all": "npm-run-all -p build show",
         "build:html": "gulp build-html",
         "build:pdf-tex": "gulp build-pdf-tex",
