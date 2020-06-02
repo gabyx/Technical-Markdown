@@ -28,7 +28,6 @@ output:
     pdf_document:
         pandoc_args: [
                 "--fail-if-warnings",
-                "--verbose",
                 "--data-dir=convert/pandoc",
                 "--resource-path=convert/pandoc",
                 "--defaults=pandoc-latex.yaml",
