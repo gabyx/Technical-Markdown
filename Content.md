@@ -44,7 +44,8 @@ lang: en-US
 toc: true
 toc-depth: 2
 top-level-division: chapter
-number-sections: true
+secnumdepth: 3
+numbersections: true
 ---
 
 @import "css/src/main.less"
