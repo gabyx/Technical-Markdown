@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 """
     Pandoc filter to convert
 
@@ -29,7 +29,6 @@ def transformMath(elem: Element, doc: Doc):
 
         elif isinstance(elem, CodeBlock):
             if "math" in elem.classes:
-                log("Transform math...", fName)
                 return mathblock(elem.text)
 
     return None

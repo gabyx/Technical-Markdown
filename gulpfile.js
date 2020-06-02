@@ -45,7 +45,7 @@ async function parseArguments() {
         });
     }
 
-    await which("python")
+    await which("python3")
         .then((path) => {
             console.log(`Found python in path: '${path}'`);
         })
