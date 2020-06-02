@@ -53,6 +53,7 @@
     ],
     "markdown-preview-enhanced.mathRenderingOption": "MathJax",
     "markdown-preview-enhanced.usePandocParser": true,
+    "markdown-preview-enhanced.breakOnSingleNewLine": false,
     "python.formatting.provider": "yapf",
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": false,
