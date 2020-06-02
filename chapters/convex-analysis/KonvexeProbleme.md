@@ -1,6 +1,6 @@
 # Konvexe Probleme
 
-In diesem Abschnitt geht es darum ein besseres Verständnis zu geben über Algorithmen und Konzepte welche zum Beispiel bei der $2$d-/$3$d-Kollisionsdetektion oder in Optimierungs-Algorithmen genutzt werden. Die Erklärungen sind eine stärkere und vereinfachte Zusammenfassung aus dem [Kapitel 6: *Convex Optimization*](http://dx.doi.org/10.3929/ethz-a-010662262).
+In diesem Abschnitt geht es darum ein besseres Verständnis zu geben über Algorithmen und Konzepte welche zum Beispiel bei der $2$d-/$3$d-Kollisionsdetektion oder in Optimierungs-Algorithmen genutzt werden. Die Erklärungen sind eine stärkere und vereinfachte Zusammenfassung aus [@nuetzig_thesis_2016, chap. 6].
 Dieses Kapitel möchte nicht mathematisch abschliessend sein, sondern lediglich (nach der Ansicht des Autors) ein paar wichtige Grundkonzepte vermitteln, welche einen wunderbaren Einstieg in dieses Thema geben. Die erwähnten Konzepte sind in der generellsten Form der konvexen Analysis zu finden und können sehr wohl als die wichtigsten Standbeine verinnerlicht werden. Auf Beweise wird bewusst verzichtet. Es wird versucht die mathematischen Definitionen anschaulich zu erklären.
 
 Das Vorhandensein eines *konvexen* Optimierungsproblems oder auch einer *konvexen Menge* beim Lösen eines Problems in $3$D, oder auch mehr Dimensionen, erlaubt es, auf eine Fülle von mathematisch sehr etablierten Definitionen und Konzepte aus der *konvexen Analysis* zurückzugreifen. Diese schon fast 50-jährige Theorie ist sehr fundiert und ein abgeschlossenes Untergebiet in der Mathematik.

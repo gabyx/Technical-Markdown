@@ -361,7 +361,8 @@
 \newlength{\cslhangindent}
 \setlength{\cslhangindent}{1.5em}
 \newenvironment{cslreferences}%
-  {}%
+  {\setlength{\parindent}{0pt}%
+  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces}%
   {\par}
 
 \title{Technical Documents}
@@ -394,16 +395,15 @@ In diesem Abschnitt geht es darum ein besseres Verständnis zu geben über
 Algorithmen und Konzepte welche zum Beispiel bei der
 \(2\)d-/\(3\)d-Kollisionsdetektion oder in Optimierungs-Algorithmen
 genutzt werden. Die Erklärungen sind eine stärkere und vereinfachte
-Zusammenfassung aus dem
-\href{http://dx.doi.org/10.3929/ethz-a-010662262}{Kapitel 6:
-\emph{Convex Optimization}}. Dieses Kapitel möchte nicht mathematisch
-abschliessend sein, sondern lediglich (nach der Ansicht des Autors) ein
-paar wichtige Grundkonzepte vermitteln, welche einen wunderbaren
-Einstieg in dieses Thema geben. Die erwähnten Konzepte sind in der
-generellsten Form der konvexen Analysis zu finden und können sehr wohl
-als die wichtigsten Standbeine verinnerlicht werden. Auf Beweise wird
-bewusst verzichtet. Es wird versucht die mathematischen Definitionen
-anschaulich zu erklären.
+Zusammenfassung aus (Nützi,
+\protect\hyperlink{ref-nuetzig_thesis_2016}{2016}, Chapter 6). Dieses
+Kapitel möchte nicht mathematisch abschliessend sein, sondern lediglich
+(nach der Ansicht des Autors) ein paar wichtige Grundkonzepte
+vermitteln, welche einen wunderbaren Einstieg in dieses Thema geben. Die
+erwähnten Konzepte sind in der generellsten Form der konvexen Analysis
+zu finden und können sehr wohl als die wichtigsten Standbeine
+verinnerlicht werden. Auf Beweise wird bewusst verzichtet. Es wird
+versucht die mathematischen Definitionen anschaulich zu erklären.
 
 Das Vorhandensein eines \emph{konvexen} Optimierungsproblems oder auch
 einer \emph{konvexen Menge} beim Lösen eines Problems in \(3\)D, oder
@@ -421,8 +421,8 @@ bis zum Gitterpunktsatz von Minkowski in der Zahlentheorie) als auch in
 Bereichen wie der mathematischen Ökonomie und den
 Ingenieurswissenschaften, wo man es oft mit Optimierungs- und
 Gleichgewichtsproblemen zu tun hat. Als einschlägige Referenz auf diesem
-Gebiet sei hier mal das Standardwerk
-{[}\protect\hyperlink{ref-rockafellar_convex_2015}{1}{]} gegeben.
+Gebiet sei hier mal das Standardwerk (Rockafellar,
+\protect\hyperlink{ref-rockafellar_convex_2015}{2015}) gegeben.
 
 \hypertarget{konvexe-menge}{%
 \section{Konvexe Menge}\label{konvexe-menge}}
@@ -683,10 +683,14 @@ Algorithm).
 
 \hypertarget{refs}{}
 \begin{cslreferences}
+\leavevmode\hypertarget{ref-nuetzig_thesis_2016}{}%
+Nützi, G. (2016). \emph{Non-smooth granular rigid body dynamics with
+applications to chute flows} {[}PhD thesis, ETH Zurich; ETH Zürich{]}.
+\url{https://doi.org/10.3929/ethz-a-010662262}
+
 \leavevmode\hypertarget{ref-rockafellar_convex_2015}{}%
-{[}1{]} R. T. Rockafellar, \emph{Convex analysis}. Princeton: Princeton
-University Press, 2015 {[}Online{]}. Available:
-\url{https://www.degruyter.com/view/title/516543}
+Rockafellar, R. T. (2015). \emph{Convex analysis}. Princeton University
+Press. \url{https://www.degruyter.com/view/title/516543}
 \end{cslreferences}
 
 \end{document}
