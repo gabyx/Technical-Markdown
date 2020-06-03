@@ -1,5 +1,7 @@
 # Markdown Setup for Technical Documents
 
+![](https://img.shields.io/badge/dependencies-pandoc%20%7C%20python3%20%7C%20node%20%7C%20vscode-green)
+
 This is a markdown setup demonstrating the power and use of markdown for **technical documents**:
 
 - using `yarn`+ `gulp` for a **fully automated conversion** sequence such that exporting ([Content.md](https://raw.githubusercontent.com/gabyx/TechnicalMarkdown/master/Content.md)) is done in the background:
