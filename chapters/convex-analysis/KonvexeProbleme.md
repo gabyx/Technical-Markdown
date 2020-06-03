@@ -80,7 +80,7 @@ Der Zusammenhang ist wie folgt:
 Das heisst, eine Normalkegel-*Inklusion* (die Relation $\vvec{a} \in \set{B}$ wird *Mengen-Inklusion* genannt) ist direkt an eine **implizite** *projektive* Gleichung gekoppelt.
 
 Damit lässt sich nun ein interessanter wichtiget Fakt ableiten.
-Aus der Visualisierung [-@fig:normalkegel] entnehmen wir, dass $\vvec{p}-\vvec{x}$ in der Menge $\ncone{C}(\vvec{x})$ liegt, also lässt sich schreiben
+Aus der Visualisierung [-@fig:normalcone] entnehmen wir, dass $\vvec{p}-\vvec{x}$ in der Menge $\ncone{C}(\vvec{x})$ liegt, also lässt sich schreiben
 
 ```math
 \begin{align}
