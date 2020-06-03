@@ -1,4 +1,4 @@
-from: markdown+markdown_in_html_blocks+native_divs+raw_tex+tex_math_dollars
+from: markdown+markdown_in_html_blocks+link_attributes+native_divs+raw_tex+tex_math_dollars
 
 variables:
     documentclass: scrreprt

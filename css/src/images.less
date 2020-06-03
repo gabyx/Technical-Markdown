@@ -3,33 +3,25 @@
 @import "numbered-images.less";
 
 .define-images() {
-
     figure {
-        text-align : center;
+        text-align: center;
         padding-top: 18pt;
 
-        img:before {
-            content       : '';
-            height        : 100%;
-            display       : inline-block;
+        > img {
+            padding: 5px;
+            display: inline-block;
             vertical-align: middle;
-
+            border: 2pt solid #eee;
+            background-color: white;
         }
 
-        img {
-            padding       : 5px;
-            display       : inline-block;
-            vertical-align: middle;
-            border        : 2pt solid #EEE;
-        }
-
-        figcaption {
-            margin        : auto;
-            padding-top   : 12pt;
+        > figcaption {
+            margin: auto;
+            padding-top: 12pt;
             padding-bottom: 12pt;
-            padding-left  : 18pt;
-            padding-right : 18pt;
-            font-size     : 12pt;
+            padding-left: 18pt;
+            padding-right: 18pt;
+            font-size: 12pt;
         }
     }
 }

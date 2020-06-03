@@ -483,23 +483,18 @@ html body .basic header {
   background-size: 7em;
   padding-bottom: 1em;
 }
-html body .basic .img-with-caption {
+html body .basic figure {
   text-align: center;
   padding-top: 18pt;
 }
-html body .basic .img-with-caption img:before {
-  content: '';
-  height: 100%;
-  display: inline-block;
-  vertical-align: middle;
-}
-html body .basic .img-with-caption img {
+html body .basic figure > img {
   padding: 5px;
   display: inline-block;
   vertical-align: middle;
-  border: 2pt solid #EEE;
+  border: 2pt solid #eee;
+  background-color: white;
 }
-html body .basic .img-with-caption .caption {
+html body .basic figure > figcaption {
   margin: auto;
   padding-top: 12pt;
   padding-bottom: 12pt;
@@ -835,23 +830,18 @@ html body #main-markdown header {
   background-size: 7em;
   padding-bottom: 1em;
 }
-html body #main-markdown .img-with-caption {
+html body #main-markdown figure {
   text-align: center;
   padding-top: 18pt;
 }
-html body #main-markdown .img-with-caption img:before {
-  content: '';
-  height: 100%;
-  display: inline-block;
-  vertical-align: middle;
-}
-html body #main-markdown .img-with-caption img {
+html body #main-markdown figure > img {
   padding: 5px;
   display: inline-block;
   vertical-align: middle;
-  border: 2pt solid #EEE;
+  border: 2pt solid #eee;
+  background-color: white;
 }
-html body #main-markdown .img-with-caption .caption {
+html body #main-markdown figure > figcaption {
   margin: auto;
   padding-top: 12pt;
   padding-bottom: 12pt;
@@ -1188,23 +1178,18 @@ html body #main-markdown-numbered header {
   background-size: 7em;
   padding-bottom: 1em;
 }
-html body #main-markdown-numbered .img-with-caption {
+html body #main-markdown-numbered figure {
   text-align: center;
   padding-top: 18pt;
 }
-html body #main-markdown-numbered .img-with-caption img:before {
-  content: '';
-  height: 100%;
-  display: inline-block;
-  vertical-align: middle;
-}
-html body #main-markdown-numbered .img-with-caption img {
+html body #main-markdown-numbered figure > img {
   padding: 5px;
   display: inline-block;
   vertical-align: middle;
-  border: 2pt solid #EEE;
+  border: 2pt solid #eee;
+  background-color: white;
 }
-html body #main-markdown-numbered .img-with-caption .caption {
+html body #main-markdown-numbered figure > figcaption {
   margin: auto;
   padding-top: 12pt;
   padding-bottom: 12pt;
@@ -1240,7 +1225,7 @@ html body #main-markdown-numbered h4:before {
   counter-increment: h4Counter;
   content: counter(h1Counter) "." counter(h2Counter) "." counter(h3Counter) "." counter(h4Counter) " ";
 }
-html body #main-markdown-numbered .img-with-caption .caption:before {
+html body #main-markdown-numbered figure > figcaption:before {
   counter-increment: imgCounter;
   content: "Fig. " counter(imgCounter) ": ";
 }

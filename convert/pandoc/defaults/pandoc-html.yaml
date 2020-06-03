@@ -1,4 +1,4 @@
-from: markdown+markdown_in_html_blocks+tex_math_dollars
+from: markdown+markdown_in_html_blocks+link_attributes+tex_math_dollars
 
 number-sections: true
 cite-method: citeproc
