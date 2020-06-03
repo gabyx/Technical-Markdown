@@ -2,19 +2,19 @@
 
 ![](https://img.shields.io/badge/dependencies-pandoc%20%7C%20python3%20%7C%20node%20%7C%20vscode-green)
 
-This is a markdown setup demonstrating the power and use of markdown for **technical documents**:
+**This is a markdown setup demonstrating the power and use of markdown for technical documents:**
 
-- using `yarn`+ `gulp` for a **fully automated conversion** sequence such that exporting ([Content.md](https://raw.githubusercontent.com/gabyx/TechnicalMarkdown/master/Content.md)) is done in the background:
+- **fully automated conversion sequence** using `yarn`+ `gulp` such that exporting ([Content.md](https://raw.githubusercontent.com/gabyx/TechnicalMarkdown/master/Content.md)) is done in the background:
 
-    - export to **PDF** with `pandoc` to `html` then to `chrome`
-    - export to **PDF** with `pandoc` to `latexmk` using `xelatex` [See Output](Content.pdf)
-    - export to **HTML** with `pandoc` to `html` [See Output](https://gabyx.github.io/TechnicalMarkdown/Content.html)
+    - **export to PDF** with `pandoc` to `html` then to `chrome`
+    - **export to PDF** with `pandoc` to `xelatex` using `latexmk` [See Output](Content.pdf)
+    - **export to HTML** with `pandoc` to `html` [See Output](https://gabyx.github.io/TechnicalMarkdown/Content.html)
 
     with [Markdown Preview Enhanced Engine](https://github.com/shd101wyy/mume).
 
-- previewing in VS Code with [Markdown Preview Enhanced](https://github.com/shd101wyy/vscode-markdown-preview-enhanced).
+- **previewing in VS Code** with the extension [Markdown Preview Enhanced](https://github.com/shd101wyy/vscode-markdown-preview-enhanced).
 
-- Using the following [pandoc filters](https://pandoc.org/filters.html):
+- **[pandoc filters](https://pandoc.org/filters.html)** for different AST (abstrac syntax tree) conversions:
 
     - [2 own filters](https://github.com/gabyx/TechnicalMarkdown/tree/master/convert/pandoc/filters) with [panflute](https://github.com/sergiocorreia/panflute) [[doc](http://scorreia.com/software/panflute)]
     - [pandoc-crosscite](https://github.com/jgm/pandoc-citeproc) [[doc](https://github.com/jgm/pandoc-citeproc/blob/master/man/pandoc-citeproc.1.md)]
@@ -130,7 +130,7 @@ The config path for the [engine](https://github.com/shd101wyy/mume) is [pandoc](
 
 # Debugging
 
-There is a debug configuration in [launch.json](.vscode/launch.json) for both the HTML and the PDF export.
+There is a debug configuration in [launch.json](.vscode/launch.json) for both the HTML and the PDF export. Setting breakpoints inside the `node_modules` folder works.
 
 ## Pandoc Filters
 
@@ -142,6 +142,5 @@ Uncomment the `tee.py` filters in [pandoc-filters.yaml](convert/pandoc/defaults/
 
 # Todo
 
-- Customize scaling of images for latex and html output inside the pandoc filter
 - Add CI
 - Add tests
