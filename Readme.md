@@ -1,4 +1,4 @@
-# Markdown Setup for Technical Documents
+# [Markdown Setup for Technical Documents](https://github.com/gabyx/TechnicalMarkdown)
 
 ![](https://img.shields.io/badge/dependencies-pandoc%20%7C%20python3%20%7C%20node%20%7C%20vscode-green)
 
@@ -16,25 +16,25 @@ This is a markdown setup demonstrating the power and use of markdown for **techn
 
 - Using the following [pandoc filters](https://pandoc.org/filters.html):
 
-    - 2 own filters with [panflute](https://github.com/sergiocorreia/panflute) [[doc](http://scorreia.com/software/panflute)]
+    - [2 own filters](https://github.com/gabyx/TechnicalMarkdown/tree/master/convert/pandoc/filters) with [panflute](https://github.com/sergiocorreia/panflute) [[doc](http://scorreia.com/software/panflute)]
     - [pandoc-crosscite](https://github.com/jgm/pandoc-citeproc) [[doc](https://github.com/jgm/pandoc-citeproc/blob/master/man/pandoc-citeproc.1.md)]
     - [pandoc-crossref](https://github.com/lierdakil/pandoc-crossref) [[doc](http://lierdakil.github.io/pandoc-crossref)]
 
 # Dependencies
 
-## Yarn
+## Node
 
 Install all **local** Node.js dependencies with [yarn](https://classic.yarnpkg.com/en/docs/install):
 
 ```shell
 git clone https://github.com/gabyx/TechnicalMarkdown.git
 cd TechnicalMarkdown
-yarn
+yarn install
 ```
 
 ## Pandoc
 
-Install [pandoc](https://pandoc.org/installing.html) [Version >= 2.9.2.1]
+Install [pandoc](https://pandoc.org/installing.html) (>= 2.9.2.1)
 
 For **Linux** and **macOs**:
 
@@ -52,10 +52,10 @@ cd temp && choco install ./pandoc-crossref/pandoc-crossref.nuspec
 
 ## Python
 
-Install a recent `python` [Version >= 3.6] and the following packages
+Install a recent `python3` (>= 3.6) and the following packages
 
 ```shell
-pip install -r .requirements
+pip3 install -r .requirements
 ```
 
 To make the preview tab **work** make sure that you start VS Code with a variable environment

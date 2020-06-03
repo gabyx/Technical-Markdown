@@ -58,9 +58,9 @@ Das ist nun ein wenig kryptisch, heisst jedoch nichts anderes als folgendes:
 Der Normalkegel $\ncone{C}(\vvec{x})$ besteht aus allen Vektoren (das wäre $\vvec{y}$) ausgehend von $\vvec{x}$ welche mit **allen** Vektoren welche vom Punkt $\vvec{x}$ in die Menge $\set{C}$ zeigen (das wäre $\vvec{x}^* - \vvec{x}$), einen **stumpfen** Winkel bilden (das wäre das Skalatprodukt mit $\leq 0$).
 Der Ursprung der Menge $\ncone{C}(\vvec{x})$ ist im Punkt $\vvec{x}$.
 
-Die Abbildung [-@fig:normalkegel] visualisiert für eine konvexe Menge $\set{C}$ die verschiedenen Normalkegel.
+Die Abbildung [-@fig:normalcone] visualisiert für eine konvexe Menge $\set{C}$ die verschiedenen Normalkegel.
 
-![Normalkegel an die Punkte $\vvec{x}$, $\vvec{y}$ und $\vvec{z}$. Der Normalkegel an einen innerhalb der Menge $\set{C}$ liegenden Punkt $\vvec{z}$ degeneriert zum $\vvec{0}$-Vektor. Der Vektor $\vvec{v}$ ist in der Menge des Normalkegels an $\vvec{x}$.](files/NormalKegel.svg){#fig:normalkegel width=80% max-width=400px}
+![Normalkegel an die Punkte $\vvec{x}$, $\vvec{y}$ und $\vvec{z}$. Der Normalkegel an einen innerhalb der Menge $\set{C}$ liegenden Punkt $\vvec{z}$ degeneriert zum $\vvec{0}$-Vektor. Der Vektor $\vvec{v}$ ist in der Menge des Normalkegels an $\vvec{x}$.](files/NormalKegel.svg){#fig:normalcone style="min-width:10cm"}
 
 ## Zusammenhang von Normalkegel und Proximaler Punkt
 
@@ -101,7 +101,7 @@ umschreiben. Aus dem erkennen wir, dass der Ursprung des Normalkegels, worin ein
 
 Müssten wir nun eine Projektionsfunktion auf ein $2$d-Dreieck herleiten, würden wir folgendes Bild malen:
 
-![Normalkegel an die Punkte $\vvec{a}$, $\vvec{b}$ und $\vvec{c}$ eines Dreiecks.](files/NormalKegelDreieck.svg){width=80% max-width=400px}
+![Normalkegel an die Punkte $\vvec{a}$, $\vvec{b}$ und $\vvec{c}$ eines Dreiecks.](files/NormalKegelDreieck.svg){#fig:normalconetri style="min-width:10cm"}
 
 Das heisst es gibt genau 3 nicht triviale Normalkegel und 3 einfachere Normalkegel (bestehend lediglich aus den Normalen auf die Seitenflächen). Eine Projektionsfunktion auf ein Dreieck muss diese 6 Bereiche beachten und ist so auch optimal und richtig implementiert.
 
@@ -166,7 +166,7 @@ Da man zeigen kann, dass das Subdifferential, also die mengenwertige Ableitung, 
 
 Das bringt uns nicht viel mehr ausser einer visuellen Erkenntnis durch folgende Visualisierung:
 
-![Konvexes Optimierungs Problem innerhalb der Menge $\set{C}$ auf einer $2$d-Funktion $f(\vvec{x}) \in \mathbb{R}$. Der negative Gradient liegt im Optimum $\vvec{x}^*$ genau innerhalb des Normalkegels an $\vvec{x}^*$.](files/ConvexOptimizationProblem.svg){width=80% max-width=600px}
+![Konvexes Optimierungs Problem innerhalb der Menge $\set{C}$ auf einer $2$d-Funktion $f(\vvec{x}) \in \mathbb{R}$. Der negative Gradient liegt im Optimum $\vvec{x}^*$ genau innerhalb des Normalkegels an $\vvec{x}^*$.](files/ConvexOptimizationProblem.svg){#fig:convex-opt-prob style="min-width:17cm"}
 
 Mit der Beziehung zwischen **proximalem Punkt** und **Normalkegel** $\eqref{eq-prox-to-ncone}$ kriegen wir daraus direkt eine **implizite Projektionsgleichung** für den optimalen Punkt $\vvec{x}^*$:
 
