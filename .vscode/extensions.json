@@ -4,6 +4,7 @@
         "shd101wyy.markdown-preview-enhanced",
         "esbenp.prettier-vscode",
         "monofon.pandoc-format",
-        "davidanson.vscode-markdownlint"
+        "davidanson.vscode-markdownlint",
+        "notZaki.pandocciter"
     ]
 }

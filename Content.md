@@ -36,7 +36,7 @@ output:
         latex_engine: "latexmk"
 # Pandoc
 title: "Technical Documents"
-bibliography: "literature/bibliography.bib"
+bibliography: ["literature/bibliography.bib"]
 csl: "literature/apa.csl"
 crossrefYaml: "includes/pandoc-crossref.yaml"
 link-citations: true
