@@ -131,6 +131,7 @@ The config path for the [engine](https://github.com/shd101wyy/mume) is [pandoc](
 # Debugging
 
 There is a debug configuration in [launch.json](.vscode/launch.json) for both the HTML and the PDF export. Setting breakpoints inside the `node_modules` folder works.
+Breakpoints at `execFile(pandocPath...` (search for it)
 
 ## Pandoc Filters
 

@@ -162,6 +162,7 @@ html body .basic {
   /* base style */
   /* cyfex variants */
   font-family: "Museo", "Fira Sans", "Helvetica", serif;
+  text-align: justify;
 }
 html body .basic body {
   font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
@@ -509,6 +510,7 @@ html body #main-markdown {
   /* base style */
   /* cyfex variants */
   font-family: "Museo", "Fira Sans", "Helvetica", serif;
+  text-align: justify;
 }
 html body #main-markdown body {
   font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
@@ -856,6 +858,7 @@ html body #main-markdown-numbered {
   /* base style */
   /* cyfex variants */
   font-family: "Museo", "Fira Sans", "Helvetica", serif;
+  text-align: justify;
   counter-reset: h1Counter imgCounter;
 }
 html body #main-markdown-numbered body {

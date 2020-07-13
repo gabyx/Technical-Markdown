@@ -12,11 +12,11 @@ puppeteer:
     landscape: false
     format: "A4"
     printBackground: true
-    timeout: 3000 # <= Special config, which means waitFor 3000 ms
+    timeout: 3000 # <= Special config, which means wait for 3000 ms, to render all mathjax...
 pandoc_args:
     [
         "--fail-if-warnings",
-        "--standalone",
+        #"--standalone", # adds mathjax 3.0 which conflicts with MPE
         #"--verbose",
         "--data-dir=convert/pandoc",
         "--resource-path=convert/pandoc",
@@ -49,8 +49,13 @@ numbersections: true
 secnumdepth: 3
 ---
 
+
 @import "css/src/main.less"
 @import "includes/Math.md"
+
+<header/>
+
+# Technical Documents {.unnumbered .unlisted}
 
 **Author:** Gabriel Nützi<br>
 **Reviewer:** Michael Baumann<br>
