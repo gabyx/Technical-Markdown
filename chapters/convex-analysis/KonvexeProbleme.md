@@ -8,12 +8,15 @@ Das Vorhandensein eines *konvexen* Optimierungsproblems oder auch einer *konvexe
 Die *konvexe Analysis* ist ein Grenzgebiet von *Geometrie*, *Analysis* und *Funktionalanalysis*, das sich mit den Eigenschaften **konvexer Mengen** und **konvexer Funktionen** befaßt und Anwendungen sowohl in der reinen Mathematik besitzt (von Existenzsätzen in der Theorie der Differential- und Integralgleichungen bis zum Gitterpunktsatz von Minkowski in der Zahlentheorie) als auch in Bereichen wie der mathematischen Ökonomie und den Ingenieurswissenschaften, wo man es oft mit Optimierungs- und Gleichgewichtsproblemen zu tun hat. Als einschlägige Referenz auf diesem Gebiet sei hier mal das Standardwerk [@rockafellar_convex_2015] gegeben.
 
 ## Konvexe Menge
+
 Eine Menge $\set{C} \subseteq V$, also ein Teilmenge eines Vektorraums $V$, wird **konvex** genannt, falls und nur falls
+
 ```math
 \begin{align}
 \lambda \vvec{a} + (1-\lambda) \vvec{b} \in \set{C} \quad \forall \vvec{a},\vvec{b} \in \set{C}, \ \lambda \in [0,1] \ .
 \end{align}
 ```
+
 gilt.
 Das heisst alle Punkte auf einer geraden Linie zwischen zwei beliebigen Punkten aus der Menge $\set{C}$ müssen **auch** in dieser Menge liegen damit es **konvex** ist. Stellt man sich eine Banane vor oder eine Oberfläche eines $3$d-Würfels, dann erfüllen diese Mengen das Kriterium nicht. Ein ausgefülltes $2$d-Rechteck , ein gefüllter $3$d-Würfel oder eine gefüllte Kugel jedoch schon.
 Eine **konvexe** Menge ist eine Teilmenge eines Vektorraums. Ein Beispiel ist der euklidische Raum $\mathbb{E}^3$ in $3$D.
@@ -73,7 +76,7 @@ Der Zusammenhang ist wie folgt:
 ```math
 \begin{align}
 \vvec{y} \in \ncone{C}(\vvec{x}) \quad \Leftrightarrow \quad \vvec{x} = \prox{C}(\vvec{x} + \vvec{y})
-\label{eq-prox-to-ncone}
+\label{eq:prox-to-ncone}
 \end{align}
 ```
 
@@ -106,6 +109,7 @@ Müssten wir nun eine Projektionsfunktion auf ein $2$d-Dreieck herleiten, würde
 Das heisst es gibt genau 3 nicht triviale Normalkegel und 3 einfachere Normalkegel (bestehend lediglich aus den Normalen auf die Seitenflächen). Eine Projektionsfunktion auf ein Dreieck muss diese 6 Bereiche beachten und ist so auch optimal und richtig implementiert.
 
 ## Zusammenhang von Normalkegel und Konvexer Optimierung
+
 Um hier mathematisch nicht in einen Exzess zu geraten, wird hier nur eine abgespeckte Erklärung gegeben. Für mehr Informationen sei auf [@nuetzig_thesis_2016, chap. 6] verwiesen und die darin enthaltenen Referenzen.
 
 Betrachte man folgendes allgemeine restriktierte **konvexe** Optimierungsproblem:
@@ -113,7 +117,7 @@ Betrachte man folgendes allgemeine restriktierte **konvexe** Optimierungsproblem
 ```math
 \begin{align}
 \vvec{x}^* = \underset{\vvec{x} \ \in \ \set{C}}{\argmin} f(\vvec{x}),
-\label{eq-convexproblem}
+\label{eq:convexproblem}
 \end{align}
 ```
 
@@ -135,20 +139,20 @@ Das geht ziemlich analog zu der Bedindung für Minima/Maxima einer differenzierb
 ```math
 \begin{align}
 \vvec{0} = \frac{df}{d\vvec{x}}(\vvec{x}^*)
-\label{eq-optimality-difffunc}
+\label{eq:optimality-difffunc}
 \end{align}
 ```
 
 was konkret heisst, dass der Nullvektor $\vvec{0}$ gleich dem Gradient $\frac{df}{d\vvec{x}}$ ist an der optimalen Stelle $\vvec{x}^*$.
 
-Da wir aber bei unserem Problem $\eqref{eq-convexproblem}$ diese **unstetige**, **nicht-differenzierbare** Bestrafungsfunktion $\indf{C}$ eingebaut haben, ist dies nicht direkt mit der normalen Differentiation zu machen. Man braucht in der konvexen Analysis eine verallgemeinerte Ableitung - das **Subdifferential**, welches nicht mehr nur einfache Steigungen (d.h. die Steigung für $1$-dimensionale Funktionen $f(x)$ oder allgemeiner der Gradient für $n$-dimensionale Funktionen $f(\vvec{x})$) zurück geben kann sondern auch **ganze Mengen** von solchen Steigungen. Das heisst, das Subdifferential an einem Punkt ist eine Menge aller Gradienten an diesen Punkt der Funktion.
-Das heisst direkt, dass eine Gleicheit zu $\vvec{0}$ wie in $\eqref{eq-optimality-difffunc}$ nicht mehr richtig wäre und hier eine Mengen-Inklusion $\vvec{0} \in \dots$ stehen muss.
+Da wir aber bei unserem Problem $\eqref{eq:convexproblem}$ diese **unstetige**, **nicht-differenzierbare** Bestrafungsfunktion $\indf{C}$ eingebaut haben, ist dies nicht direkt mit der normalen Differentiation zu machen. Man braucht in der konvexen Analysis eine verallgemeinerte Ableitung - das **Subdifferential**, welches nicht mehr nur einfache Steigungen (d.h. die Steigung für $1$-dimensionale Funktionen $f(x)$ oder allgemeiner der Gradient für $n$-dimensionale Funktionen $f(\vvec{x})$) zurück geben kann sondern auch **ganze Mengen** von solchen Steigungen. Das heisst, das Subdifferential an einem Punkt ist eine Menge aller Gradienten an diesen Punkt der Funktion.
+Das heisst direkt, dass eine Gleicheit zu $\vvec{0}$ wie in $\eqref{eq:optimality-difffunc}$ nicht mehr richtig wäre und hier eine Mengen-Inklusion $\vvec{0} \in \dots$ stehen muss.
 
-Anstatt $\frac{d}{d\vvec{x}}\indf{C}$ nehmen wir einfach das Subdifferential $\partial_{\vvec{x}} \indf{C}$ und die Bedingung $\eqref{eq-optimality-difffunc}$ wird dann zu
+Anstatt $\frac{d}{d\vvec{x}}\indf{C}$ nehmen wir einfach das Subdifferential $\partial_{\vvec{x}} \indf{C}$ und die Bedingung $\eqref{eq:optimality-difffunc}$ wird dann zu
 
 ```math
 \begin{align}
-\label{eq-optimality-strict-convex}
+\label{eq:optimality-strict-convex}
 \vvec{0} \in \frac{df}{d\vvec{x}}(\vvec{x}^*) + \partial_{\vvec{x}} \indf{C}(\vvec{x}^*)
 \end{align}
 ```
@@ -160,7 +164,7 @@ Da man zeigen kann, dass das Subdifferential, also die mengenwertige Ableitung, 
 ```math
 \begin{align}
 \vvec{0} \in \frac{df}{d\vvec{x}}(\vvec{x}^*) + \ncone{C}(\vvec{x}^*) \quad \Leftrightarrow \quad -\frac{df}{d\vvec{x}}(\vvec{x}^*) \in \ncone{C}(\vvec{x}^*)
-\label{eq-optimality-strict-convex-2}
+\label{eq:optimality-strict-convex-2}
 \end{align}
 ```
 
@@ -168,7 +172,7 @@ Das bringt uns nicht viel mehr ausser einer visuellen Erkenntnis durch folgende 
 
 ![Konvexes Optimierungs Problem innerhalb der Menge $\set{C}$ auf einer $2$d-Funktion $f(\vvec{x}) \in \mathbb{R}$. Der negative Gradient liegt im Optimum $\vvec{x}^*$ genau innerhalb des Normalkegels an $\vvec{x}^*$.](files/ConvexOptimizationProblem.svg){#fig:convex-opt-prob style="min-width:17cm"}
 
-Mit der Beziehung zwischen **proximalem Punkt** und **Normalkegel** $\eqref{eq-prox-to-ncone}$ kriegen wir daraus direkt eine **implizite Projektionsgleichung** für den optimalen Punkt $\vvec{x}^*$:
+Mit der Beziehung zwischen **proximalem Punkt** und **Normalkegel** $\eqref{eq:prox-to-ncone}$ kriegen wir daraus direkt eine **implizite Projektionsgleichung** für den optimalen Punkt $\vvec{x}^*$:
 
 ```math
 \begin{align}
