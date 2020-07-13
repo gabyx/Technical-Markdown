@@ -19,11 +19,11 @@ async function parseArguments() {
         return;
     }
 
-    argv = yargs
+    args = yargs
         .option("p", {
             alias: "pythonPath",
             type: "string",
-            describe: "The path to you python executbale.",
+            describe: "The path to your python executable.",
             demandOption: true
         })
         .coerce("pythonPath", function (p) {
@@ -37,23 +37,31 @@ async function parseArguments() {
         }).argv;
 
     // Add python dir to path
-    pythonDir = path.dirname(argv.pythonPath);
-    if (argv.pythonPath) {
+    pythonDir = null
+    if (args.pythonPath) {
+        pythonDir = path.dirname(args.pythonPath);
         console.log(`Setting python path ${pythonDir}`);
         env.set({
-            Path: pythonDir + ";" + process.env.Path
+            PATH: pythonDir + path.delimiter + process.env.PATH
         });
     }
 
-    await which("python3")
-        .then((path) => {
-            console.log(`Found python in path: '${path}'`);
+    await which("python")
+        .then((p) => {
+            if (pythonDir && !p.includes(pythonDir)) {
+                throw `Executable 'python' not found in path '${pythonDir}'`
+            }
+            console.log(`Found 'python' : '${p}'`);
         })
-        .catch(() => {
-            console.error("You need python in your path!");
-            console.errer(process.env.Path);
+        .catch((e) => {
+            console.error(e);
+            console.error("You need 'python' in your path!");
+            console.errer(process.env.PATH);
             process.exit(1);
         });
+    
+    // Set as parsed
+    argv = args
 }
 
 /* Task to compile less */
