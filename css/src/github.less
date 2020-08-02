@@ -1,15 +1,14 @@
 // out: false
-.github(@fg, @bg, @urlColor) {
+.github(@fg, @bg, @urlColor, @font, @font-size, @line-height) {
   @fg-strong: contrast(@bg, darken(@fg, 32%), lighten(@fg, 32%));
   @fg-subtle: contrast(@fg, lighten(@fg, 16%), darken(@fg, 16%));
   @border   : contrast(@bg, lighten(@bg, 16%), darken(@bg, 16%));
   @margin   : 16px;
 
   body {
-    font-family     : "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
-    // font-size    : 1.2em;
-    font-size       : 16px;
-    line-height     : 1.6;
+    font-family     : @font, "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+    font-size       : @font-size;
+    line-height     : @line-height;
     color           : @fg;
     background-color: @bg;
     overflow        : initial;

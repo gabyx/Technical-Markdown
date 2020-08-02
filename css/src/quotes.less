@@ -1,0 +1,47 @@
+/* Quotes for the language */
+
+@import "defines.less";
+
+.define-quotes() {
+    html[lang="en-US"] q {
+        quotes: "“" "”" "‘" "’";
+    }
+    q:lang(en) {
+        quotes: "“" "”" "‘" "’";
+    }
+}
+
+.define-blockquote() {
+    blockquote {
+        display: block;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        margin-inline-start: 40px;
+        margin-inline-end: 40px;
+
+        position: relative;
+        font-family: @main-font-text;
+        font-size: @main-font-size;
+        line-height: @main-line-height;
+
+        footer {
+            font-size: @main-font-size * 0.8;
+            color: #b6b6b6;
+            float: right;
+
+            &:before {
+                content: "\2015";
+            }
+        }
+        &:after {
+            content: "\201D";
+            position: absolute;
+            top: 0.28em;
+            right: -0.5ex;
+            font-size: 6em;
+            font-style: italic;
+            color: #b6b6b6;
+            z-index: -1;
+        }
+    }
+}
