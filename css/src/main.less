@@ -5,11 +5,13 @@
 @import "images.less";
 @import "header.less";
 @import "math.less";
+@import "quotes.less";
+@import "defines.less";
 
 html body {
     .basic {
         /* base style */
-        .github(#1d1d1d, #fdf6e3, #08c);
+        .github(#1d1d1d, #fdf6e3, #08c, @main-font-text, @main-font-size, @main-line-height);
 
         h1,
         h2,
@@ -18,17 +20,23 @@ html body {
         h5,
         h6 {
             color: #00acd1;
-            font-family: "Museo Sans", "Fira Sans", "Helvetica", sans-serif;
+            font-family: @main-font-headers, "Fira Sans", "Helvetica", sans-serif;
             font-weight: bold;
         }
 
         /* cyfex variants */
-        font-family: "Museo", "Fira Sans", "Helvetica", serif;
-        text-align:justify;
+        font-family: @main-font-text, "Fira Sans", "Helvetica", serif;
+
+        p {
+            text-align: justify;
+            text-justify: auto;
+        }
 
         .define-header();
         .define-images();
         .define-math();
+        .define-quotes();
+        .define-blockquote();
     }
 
     #main-markdown {

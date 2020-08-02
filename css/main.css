@@ -158,16 +158,17 @@
     `<header>Author: Gabriel Nützo</header>`
     which can be placed at the top of the markdown.
 */
+/* Quotes for the language */
+/* General defines for the document */
 html body .basic {
   /* base style */
   /* cyfex variants */
-  font-family: "Museo", "Fira Sans", "Helvetica", serif;
-  text-align: justify;
+  font-family: 'Museo', "Fira Sans", "Helvetica", serif;
 }
 html body .basic body {
-  font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
+  font-family: 'Museo', "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+  font-size: 12pt;
+  line-height: 16pt;
   color: #1d1d1d;
   background-color: #fdf6e3;
   overflow: initial;
@@ -472,8 +473,12 @@ html body .basic h4,
 html body .basic h5,
 html body .basic h6 {
   color: #00acd1;
-  font-family: "Museo Sans", "Fira Sans", "Helvetica", sans-serif;
+  font-family: 'Museo Sans', "Fira Sans", "Helvetica", sans-serif;
   font-weight: bold;
+}
+html body .basic p {
+  text-align: justify;
+  text-justify: auto;
 }
 html body .basic header {
   width: 100%;
@@ -506,16 +511,50 @@ html body .basic figure > figcaption {
 html body .basic .latex-math-define {
   display: none;
 }
+html body .basic html[lang="en-US"] q {
+  quotes: "“" "”" "‘" "’";
+}
+html body .basic q:lang(en) {
+  quotes: "“" "”" "‘" "’";
+}
+html body .basic blockquote {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 40px;
+  margin-inline-end: 40px;
+  position: relative;
+  font-family: 'Museo';
+  font-size: 12pt;
+  line-height: 16pt;
+}
+html body .basic blockquote footer {
+  font-size: 9.6pt;
+  color: #b6b6b6;
+  float: right;
+}
+html body .basic blockquote footer:before {
+  content: "\2015";
+}
+html body .basic blockquote:after {
+  content: "\201D";
+  position: absolute;
+  top: 0.28em;
+  right: -0.5ex;
+  font-size: 6em;
+  font-style: italic;
+  color: #b6b6b6;
+  z-index: -1;
+}
 html body #main-markdown {
   /* base style */
   /* cyfex variants */
-  font-family: "Museo", "Fira Sans", "Helvetica", serif;
-  text-align: justify;
+  font-family: 'Museo', "Fira Sans", "Helvetica", serif;
 }
 html body #main-markdown body {
-  font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
+  font-family: 'Museo', "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+  font-size: 12pt;
+  line-height: 16pt;
   color: #1d1d1d;
   background-color: #fdf6e3;
   overflow: initial;
@@ -820,8 +859,12 @@ html body #main-markdown h4,
 html body #main-markdown h5,
 html body #main-markdown h6 {
   color: #00acd1;
-  font-family: "Museo Sans", "Fira Sans", "Helvetica", sans-serif;
+  font-family: 'Museo Sans', "Fira Sans", "Helvetica", sans-serif;
   font-weight: bold;
+}
+html body #main-markdown p {
+  text-align: justify;
+  text-justify: auto;
 }
 html body #main-markdown header {
   width: 100%;
@@ -854,17 +897,51 @@ html body #main-markdown figure > figcaption {
 html body #main-markdown .latex-math-define {
   display: none;
 }
+html body #main-markdown html[lang="en-US"] q {
+  quotes: "“" "”" "‘" "’";
+}
+html body #main-markdown q:lang(en) {
+  quotes: "“" "”" "‘" "’";
+}
+html body #main-markdown blockquote {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 40px;
+  margin-inline-end: 40px;
+  position: relative;
+  font-family: 'Museo';
+  font-size: 12pt;
+  line-height: 16pt;
+}
+html body #main-markdown blockquote footer {
+  font-size: 9.6pt;
+  color: #b6b6b6;
+  float: right;
+}
+html body #main-markdown blockquote footer:before {
+  content: "\2015";
+}
+html body #main-markdown blockquote:after {
+  content: "\201D";
+  position: absolute;
+  top: 0.28em;
+  right: -0.5ex;
+  font-size: 6em;
+  font-style: italic;
+  color: #b6b6b6;
+  z-index: -1;
+}
 html body #main-markdown-numbered {
   /* base style */
   /* cyfex variants */
-  font-family: "Museo", "Fira Sans", "Helvetica", serif;
-  text-align: justify;
+  font-family: 'Museo', "Fira Sans", "Helvetica", serif;
   counter-reset: h1Counter imgCounter;
 }
 html body #main-markdown-numbered body {
-  font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
+  font-family: 'Museo', "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+  font-size: 12pt;
+  line-height: 16pt;
   color: #1d1d1d;
   background-color: #fdf6e3;
   overflow: initial;
@@ -1169,8 +1246,12 @@ html body #main-markdown-numbered h4,
 html body #main-markdown-numbered h5,
 html body #main-markdown-numbered h6 {
   color: #00acd1;
-  font-family: "Museo Sans", "Fira Sans", "Helvetica", sans-serif;
+  font-family: 'Museo Sans', "Fira Sans", "Helvetica", sans-serif;
   font-weight: bold;
+}
+html body #main-markdown-numbered p {
+  text-align: justify;
+  text-justify: auto;
 }
 html body #main-markdown-numbered header {
   width: 100%;
@@ -1202,6 +1283,41 @@ html body #main-markdown-numbered figure > figcaption {
 }
 html body #main-markdown-numbered .latex-math-define {
   display: none;
+}
+html body #main-markdown-numbered html[lang="en-US"] q {
+  quotes: "“" "”" "‘" "’";
+}
+html body #main-markdown-numbered q:lang(en) {
+  quotes: "“" "”" "‘" "’";
+}
+html body #main-markdown-numbered blockquote {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 40px;
+  margin-inline-end: 40px;
+  position: relative;
+  font-family: 'Museo';
+  font-size: 12pt;
+  line-height: 16pt;
+}
+html body #main-markdown-numbered blockquote footer {
+  font-size: 9.6pt;
+  color: #b6b6b6;
+  float: right;
+}
+html body #main-markdown-numbered blockquote footer:before {
+  content: "\2015";
+}
+html body #main-markdown-numbered blockquote:after {
+  content: "\201D";
+  position: absolute;
+  top: 0.28em;
+  right: -0.5ex;
+  font-size: 6em;
+  font-style: italic;
+  color: #b6b6b6;
+  z-index: -1;
 }
 html body #main-markdown-numbered h1 {
   counter-reset: h2Counter h3Counter h4Counter;

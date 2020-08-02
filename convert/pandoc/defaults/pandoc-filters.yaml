@@ -8,3 +8,6 @@ filters:
     # - tee.py
     - transformImages.py
     # - tee.py
+    # Quote replacement is not needed.
+    # - pandoc-quotes.lua 
+    # - tee .py
