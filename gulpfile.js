@@ -29,7 +29,22 @@ async function parseArguments() {
         .coerce("pythonPath", function (p) {
             p.strip;
             if (!fs.existsSync(p)) {
-                m = `Path does not exists: ${p}`;
+                m = `Python path does not exists: ${p}`;
+                console.error(m);
+                throw m;
+            }
+            return p;
+        })
+        .option("e", {
+            alias: "pandocPath",
+            type: "string",
+            describe: "The path to your pandoc executable.",
+            demandOption: true
+        })
+        .coerce("pandocPath", function (p) {
+            p.strip;
+            if (!fs.existsSync(p)) {
+                m = `Pandoc path does not exists: ${p}`;
                 console.error(m);
                 throw m;
             }
@@ -37,54 +52,72 @@ async function parseArguments() {
         }).argv;
 
     // Add python dir to path
+    paths = [];
+
     pythonDir = null;
     if (args.pythonPath) {
         pythonDir = path.dirname(args.pythonPath);
         console.log(`Setting python path ${pythonDir}`);
-        env.set({
-            PATH: pythonDir + path.delimiter + process.env.PATH
-        });
+        paths.push(pythonDir);
     }
 
-    await which("python")
-        .then((p) => {
-            if (pythonDir && !p.includes(pythonDir)) {
-                throw `Executable 'python' not found in path '${pythonDir}'`;
-            }
-            console.log(`Found 'python' : '${p}'`);
-        })
-        .catch((e) => {
-            console.error(e);
-            console.error("You need 'python' in your path!");
-            console.errer(process.env.PATH);
-            process.exit(1);
+    pandocDir = null;
+    if (args.pandocPath) {
+        pandocDir = path.dirname(args.pandocPath)
+        console.log(`Setting pandoc path ${pandocDir}`);
+        paths.push(pythonDir);
+    }
+
+    paths.push(process.env.PATH);
+    env.set({
+            PATH: paths.join(path.delimiter)
+    });
+
+    [
+        ["python", pythonDir],
+        ["pandoc", pandocDir]
+    ].forEach(async (executable) => {
+            await which(executable[0])
+                .then((p) => {
+                    if (executable[1] && !p.includes(executable[1])) {
+                        throw `Executable 'python' not found in path '${executable[1]}'`;
+                    }
+                    console.log(`Found '${executable[0]}' : '${p}'`);
+                })
+                .catch((e) => {
+                    console.error(e);
+                    console.error("You need 'python' in your path!");
+                    console.errer(process.env.PATH);
+                    process.exit(1);
+                });
         });
 
     // Set as parsed
     argv = args;
 }
 
-/* Task to compile less */
+gulp.task("parse-args", async function () {
+   await parseArguments();
+});
 
+
+/* Task to compile less */
 gulp.task("compile-less", async function () {
     await gulp.src("css/src/main.less").pipe(less()).pipe(gulp.dest("./css"));
 });
 
 /* Task to compile all markdown files */
 gulp.task("compile-markdown-html", async function () {
-    await parseArguments();
     await markdown.htmlExport(path.resolve("./Content.md"));
 });
 
 /* Task to compile all markdown files */
 gulp.task("compile-markdown-tex", async function () {
-    await parseArguments();
     await markdown.pandocExport(path.resolve("./Content.md"));
 });
 
 /* Task to compile all markdown files */
 gulp.task("compile-markdown-chrome", async function () {
-    await parseArguments();
     await markdown.chromeExport(path.resolve("./Content.md"));
 });
 
@@ -102,17 +135,17 @@ const lessFiles = ["css/src/*", "css/fonts/*"];
 
 /* Task to watch all markdown files */
 gulp.task("watch-markdown-html", async function () {
-    return gulp.watch([...exportTriggerFiles, ...lessFiles], gulp.series(["compile-less", "compile-markdown-html"]));
+    return gulp.watch([...exportTriggerFiles, ...lessFiles], gulp.series(["parse-args", "compile-less", "compile-markdown-html"]));
 });
 
 /* Task to watch all markdown files */
 gulp.task("watch-markdown-latex", async function () {
-    gulp.watch(exportTriggerFiles, gulp.series(["transform-math", "compile-markdown-tex"]));
+    gulp.watch(exportTriggerFiles, gulp.series(["parse-args", "transform-math", "compile-markdown-tex"]));
 });
 
 /* Task to watch all markdown files */
 gulp.task("watch-markdown-chrome", async function () {
-    gulp.watch([...exportTriggerFiles, ...lessFiles], gulp.series(["compile-less", "compile-markdown-chrome"]));
+    gulp.watch([...exportTriggerFiles, ...lessFiles], gulp.series(["parse-args", "compile-less", "compile-markdown-chrome"]));
 });
 
 /* Task when running `gulp` from terminal */
