@@ -37,7 +37,7 @@ async function parseArguments() {
         }).argv;
 
     // Add python dir to path
-    pythonDir = null
+    pythonDir = null;
     if (args.pythonPath) {
         pythonDir = path.dirname(args.pythonPath);
         console.log(`Setting python path ${pythonDir}`);
@@ -49,7 +49,7 @@ async function parseArguments() {
     await which("python")
         .then((p) => {
             if (pythonDir && !p.includes(pythonDir)) {
-                throw `Executable 'python' not found in path '${pythonDir}'`
+                throw `Executable 'python' not found in path '${pythonDir}'`;
             }
             console.log(`Found 'python' : '${p}'`);
         })
@@ -59,20 +59,15 @@ async function parseArguments() {
             console.errer(process.env.PATH);
             process.exit(1);
         });
-    
+
     // Set as parsed
-    argv = args
+    argv = args;
 }
 
 /* Task to compile less */
 
 gulp.task("compile-less", async function () {
-    await gulp.src("./css/src/main.less").pipe(less()).pipe(gulp.dest("./css"));
-});
-
-/* Task to watch less changes */
-gulp.task("watch-less", function () {
-    gulp.watch(["./css/src/*", "./css/fonts/*"], gulp.series(["compile-less"]));
+    await gulp.src("css/src/main.less").pipe(less()).pipe(gulp.dest("./css"));
 });
 
 /* Task to compile all markdown files */
@@ -102,34 +97,32 @@ gulp.task("transform-math", async function () {
         .pipe(gulp.dest("convert/pandoc"));
 });
 
+const exportTriggerFiles = ["**/*.md", "literature/**/*", "files/**/*", "includes/**/*"];
+const lessFiles = ["css/src/*", "css/fonts/*"];
+
 /* Task to watch all markdown files */
 gulp.task("watch-markdown-html", async function () {
-    gulp.watch("./**/*.md", gulp.series(["compile-markdown-html"]));
+    return gulp.watch([...exportTriggerFiles, ...lessFiles], gulp.series(["compile-less", "compile-markdown-html"]));
 });
 
 /* Task to watch all markdown files */
 gulp.task("watch-markdown-latex", async function () {
-    gulp.watch("./**/*.md", gulp.series(["transform-math", "compile-markdown-tex"]));
-});
-
-/* Task to watch all markdown files */
-gulp.task("watch-math-markdown", async function () {
-    gulp.watch("./**/Math.md", gulp.series(["transform-math"]));
+    gulp.watch(exportTriggerFiles, gulp.series(["transform-math", "compile-markdown-tex"]));
 });
 
 /* Task to watch all markdown files */
 gulp.task("watch-markdown-chrome", async function () {
-    gulp.watch("./**/*.md", gulp.series(["compile-markdown-chrome"]));
+    gulp.watch([...exportTriggerFiles, ...lessFiles], gulp.series(["compile-less", "compile-markdown-chrome"]));
 });
 
 /* Task when running `gulp` from terminal */
-gulp.task("build-html", gulp.parallel(["watch-less", "watch-markdown-html"]));
+gulp.task("build-html", gulp.parallel(["watch-markdown-html"]));
 
 /* Task when running `gulp` from terminal */
-gulp.task("build-pdf-tex", gulp.parallel(["watch-math-markdown", "watch-markdown-latex"]));
+gulp.task("build-pdf-tex", gulp.parallel(["watch-markdown-latex"]));
 
 /* Task when running `gulp` from terminal */
-gulp.task("build-pdf-crhome", gulp.parallel(["watch-less", "watch-markdown-chrome"]));
+gulp.task("build-pdf-crhome", gulp.parallel(["watch-markdown-chrome"]));
 
 gulp.task("show-markdown", function () {
     browserSync.init({
@@ -138,5 +131,5 @@ gulp.task("show-markdown", function () {
             index: "Content.html"
         }
     });
-    gulp.watch("./**/*.html").on("change", reload);
+    gulp.watch("**/*.html").on("change", reload);
 });
