@@ -20,6 +20,12 @@
     - [pandoc-crosscite](https://github.com/jgm/pandoc-citeproc) [[doc](https://github.com/jgm/pandoc-citeproc/blob/master/man/pandoc-citeproc.1.md)]
     - [pandoc-crossref](https://github.com/lierdakil/pandoc-crossref) [[doc](http://lierdakil.github.io/pandoc-crossref)]
 
+**Future Warning:**
+I am heading towards a `pandoc`-only solution on the `master` branch, because its more reliable and a better solution.
+Markdown Preview Enhanced is nice but sadly a bit a cumbersome to control blackbox and also a bit slow.
+This so far solution will still be archived on another branch.
+
+
 # Dependencies
 
 ## Node
