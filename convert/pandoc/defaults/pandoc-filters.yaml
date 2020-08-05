@@ -1,5 +1,9 @@
 filters:
     # - teeStart.py
+    - pandoc-include-files-set-format.lua
+    # - tee.py
+    - pandoc-include-files.lua
+    # - tee.py
     - transformMath.py
     # - tee.py
     - pandoc-crossref
@@ -9,5 +13,5 @@ filters:
     - transformImages.py
     # - tee.py
     # Quote replacement is not needed.
-    # - pandoc-quotes.lua 
+    # - pandoc-quotes.lua
     # - tee .py

@@ -1,5 +1,18 @@
 from: markdown+markdown_in_html_blocks+link_attributes+tex_math_dollars
 
+metadata:
+    include-format: markdown
+
+template: includes/Template.html
+css: css/main.css
+
+html-math-method:
+    method: mathjax
+    url: https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+standalone: true
+self-contained: false
+
 number-sections: true
 cite-method: citeproc
 html-q-tags: true
