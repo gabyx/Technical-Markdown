@@ -9,17 +9,18 @@ const rename = require("gulp-rename");
 const replace = require("gulp-replace");
 const markdown = require("./convert/convert");
 const browserSync = require("browser-sync").create();
+const { execFile } = require("child_process");
 const reload = browserSync.reload;
 
-let argv = null;
+let parsedArgs = null;
 
 async function parseArguments() {
-    if (argv) {
+    if (parsedArgs) {
         // Already parsed
         return;
     }
 
-    args = yargs
+    let args = yargs
         .option("p", {
             alias: "pythonPath",
             type: "string",
@@ -54,77 +55,131 @@ async function parseArguments() {
     // Add python dir to path
     paths = [];
 
-    pythonDir = null;
+    let pythonDir = null;
     if (args.pythonPath) {
         pythonDir = path.dirname(args.pythonPath);
         console.log(`Setting python path ${pythonDir}`);
         paths.push(pythonDir);
     }
 
-    pandocDir = null;
+    let pandocDir = null;
     if (args.pandocPath) {
-        pandocDir = path.dirname(args.pandocPath)
+        pandocDir = path.dirname(args.pandocPath);
         console.log(`Setting pandoc path ${pandocDir}`);
         paths.push(pythonDir);
     }
 
     paths.push(process.env.PATH);
     env.set({
-            PATH: paths.join(path.delimiter)
+        PATH: paths.join(path.delimiter)
     });
 
+    // Check if the needed executables are found
     [
         ["python", pythonDir],
         ["pandoc", pandocDir]
-    ].forEach(async (executable) => {
-            await which(executable[0])
-                .then((p) => {
-                    if (executable[1] && !p.includes(executable[1])) {
-                        throw `Executable 'python' not found in path '${executable[1]}'`;
-                    }
-                    console.log(`Found '${executable[0]}' : '${p}'`);
-                })
-                .catch((e) => {
-                    console.error(e);
-                    console.error("You need 'python' in your path!");
-                    console.errer(process.env.PATH);
-                    process.exit(1);
-                });
-        });
+    ].forEach((executable) => {
+        const p = which.sync(executable[0], { nothrow: true });
+        if (p) {
+            if (executable[1] && !p.includes(executable[1])) {
+                throw `Executable '${executable[0]}' not found in path '${executable[1]}'`;
+            }
+            args[`${executable[0]}` + "Path"] = p;
+            console.log(`Found '${executable[0]}' : '${p}'`);
+        } else {
+            console.error("You need '${executable[0]}' in your path!");
+            console.errer(process.env.PATH);
+            process.exit(1);
+        }
+    });
 
     // Set as parsed
-    argv = args;
+    parsedArgs = args;
+}
+
+async function runPandoc(args) {
+    if (!parsedArgs || !parsedArgs["pandocPath"]) {
+        throw Error("Arguments not parsed!");
+    }
+
+    return new Promise((resolve, reject) => {
+        try {
+            const program = execFile(
+                parsedArgs["pandocPath"],
+                args,
+                { cwd: process.cwd() },
+                (error, stdout, stderr) => {
+                    console.log(stdout);
+
+                    if (error) {
+                        return reject(error);
+                    } else if (stderr) {
+                        return reject(new Error(`Pandoc error: ${stderr}`));
+                    } else {
+                        return resolve();
+                    }
+                }
+            );
+        } catch (error) {
+            return reject(`Executable '${parsedArgs["pandocPath"]}' could not be started: '${error.toString()}'`);
+        }
+    });
+}
+
+async function htmlExport(markdownFile, outFile) {
+    await runPandoc([
+        "--fail-if-warnings",
+        "--verbose",
+        "--data-dir=convert/pandoc",
+        "--defaults=pandoc-dirs.yaml",
+        "--defaults=pandoc-html.yaml",
+        "--filter",
+        "set-include-format.lua"
+        "--defaults=pandoc-filters.yaml",
+        "-o",
+        outFile,
+        markdownFile,
+    ]);
+}
+
+async function latexExport(markdownFile, outFile) {
+    await runPandoc([
+        "--fail-if-warnings",
+        "--verbose",
+        "--data-dir=convert/pandoc",
+        "--defaults=pandoc-dirs.yaml",
+        "--defaults=pandoc-latex.yaml",
+        "--defaults=pandoc-filters.yaml",
+        "-o",
+        outFile,
+        markdownFile
+    ]);
 }
 
 gulp.task("parse-args", async function () {
-   await parseArguments();
+    await parseArguments();
 });
-
 
 /* Task to compile less */
 gulp.task("compile-less", async function () {
-    await gulp.src("css/src/main.less").pipe(less()).pipe(gulp.dest("./css"));
+    return gulp.src("css/src/main.less").pipe(less()).pipe(gulp.dest("./css"));
 });
 
 /* Task to compile all markdown files */
 gulp.task("compile-markdown-html", async function () {
-    await markdown.htmlExport(path.resolve("./Content.md"));
+    await htmlExport(path.resolve("Content.md"), "Content.html");
 });
 
 /* Task to compile all markdown files */
 gulp.task("compile-markdown-tex", async function () {
-    await markdown.pandocExport(path.resolve("./Content.md"));
-});
-
-/* Task to compile all markdown files */
-gulp.task("compile-markdown-chrome", async function () {
-    await markdown.chromeExport(path.resolve("./Content.md"));
+    await latexExport(path.resolve("Content.md"), "Content.pdf");
 });
 
 /* Task to compile all markdown files */
 gulp.task("transform-math", async function () {
     const re = /.*\$\$\s+(.+)\$\$.*/gms;
-    gulp.src(["includes/Math.md"])
+    return gulp
+        .src(["includes/Math.md"])
         .pipe(rename("includes/Math.tex"))
         .pipe(replace(re, "$1"))
         .pipe(gulp.dest("convert/pandoc"));
@@ -135,7 +190,10 @@ const lessFiles = ["css/src/*", "css/fonts/*"];
 
 /* Task to watch all markdown files */
 gulp.task("watch-markdown-html", async function () {
-    return gulp.watch([...exportTriggerFiles, ...lessFiles], gulp.series(["parse-args", "compile-less", "compile-markdown-html"]));
+    gulp.watch(
+        [...exportTriggerFiles, ...lessFiles],
+        gulp.series(["parse-args", "compile-less", "compile-markdown-html"])
+    );
 });
 
 /* Task to watch all markdown files */
@@ -143,19 +201,11 @@ gulp.task("watch-markdown-latex", async function () {
     gulp.watch(exportTriggerFiles, gulp.series(["parse-args", "transform-math", "compile-markdown-tex"]));
 });
 
-/* Task to watch all markdown files */
-gulp.task("watch-markdown-chrome", async function () {
-    gulp.watch([...exportTriggerFiles, ...lessFiles], gulp.series(["parse-args", "compile-less", "compile-markdown-chrome"]));
-});
-
 /* Task when running `gulp` from terminal */
 gulp.task("build-html", gulp.parallel(["watch-markdown-html"]));
 
 /* Task when running `gulp` from terminal */
 gulp.task("build-pdf-tex", gulp.parallel(["watch-markdown-latex"]));
-
-/* Task when running `gulp` from terminal */
-gulp.task("build-pdf-crhome", gulp.parallel(["watch-markdown-chrome"]));
 
 gulp.task("show-markdown", function () {
     browserSync.init({
