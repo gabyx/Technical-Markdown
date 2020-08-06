@@ -1,20 +1,20 @@
-<script type="text/x-mathjax-config">
-window.MathJax = {
-  tex: {
-    processEnvironments: false,
-    processEscapes: true,
-    /* Escape dollar because its a pandoc template */
-    inlineMath: [["\\(", "\\)"], ["$$", "$$"]],
-    displayMath: [["\\[", "\\]"], ["$$$$", "$$$$"]],
-    tags: "ams",
-    packages: ['base', 'ams', 'noerrors', 'noundefined', 'extpfeil']
-  },
-  options: {
-    ignoreHtmlClass: 'tex2jax_ignore',
-    processHtmlClass: 'tex2jax_process'
-  },
-  loader: {
-    load: ['[tex]/noerrors', '[tex]/extpfeil']
-  }
-};
+<script type="text/javascript">
+  window.MathJax = {
+    tex: {
+      processEnvironments: false,
+      processEscapes: true,
+      /* Escape dollar because its a pandoc template */
+      inlineMath: [["\\(", "\\)"], ["$$", "$$"]],
+      displayMath: [["\\[", "\\]"], ["$$$$", "$$$$"]],
+      tags: "ams",
+      packages: { '[+]': ['extpfeil', 'color', 'boldsymbol', 'newcommand'] }
+    },
+    options: {
+      ignoreHtmlClass: 'tex2jax_ignore',
+      processHtmlClass: 'tex2jax_process'
+    },
+    loader: {
+      load: ['[tex]/extpfeil', '[tex]/color', '[tex]/boldsymbol', '[tex]/newcommand']
+    }
+  };
 </script>

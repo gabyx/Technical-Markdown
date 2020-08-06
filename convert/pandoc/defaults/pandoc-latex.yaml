@@ -1,4 +1,5 @@
 from: markdown+markdown_in_html_blocks+link_attributes+native_divs+raw_tex+tex_math_dollars
+to: latex
 
 meta-data:
     # for the set-include-format.lua filter

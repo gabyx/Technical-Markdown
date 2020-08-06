@@ -8,38 +8,40 @@
 @import "quotes.less";
 @import "defines.less";
 
-html body {
-    .basic {
-        /* base style */
-        .github(#1d1d1d, #fdf6e3, #08c, @main-font-text, @main-font-size, @main-line-height);
+.basic() {
+    /* base style */
+    .github(#1d1d1d, #fdf6e3, #08c, @main-font-text, @main-font-size, @main-line-height);
 
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            color: #00acd1;
-            font-family: @main-font-headers, "Fira Sans", "Helvetica", sans-serif;
-            font-weight: bold;
-        }
-
-        /* cyfex variants */
-        font-family: @main-font-text, "Fira Sans", "Helvetica", serif;
-
-        p {
-            text-align: justify;
-            text-justify: auto;
-        }
-
-        .define-header();
-        .define-images();
-        .define-math();
-        .define-quotes();
-        .define-blockquote();
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: #00acd1;
+        font-family: @main-font-headers, "Fira Sans", "Helvetica", sans-serif;
+        font-weight: bold;
     }
 
+    /* cyfex variants */
+    font-family: @main-font-text, "Fira Sans", "Helvetica", serif;
+
+    p {
+        text-align: justify;
+        text-justify: auto;
+    }
+
+    .define-header();
+    .define-images();
+    .define-math();
+    .define-quotes();
+    .define-blockquote();
+}
+
+html {
     #main-markdown {
+        max-width: 21cm - 2 * 1.5cm;
+        margin: auto;
         .basic();
     }
 

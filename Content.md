@@ -13,15 +13,14 @@ numbersections: true
 secnumdepth: 3
 ---
 
-<!-- ``` { .include }
-includes/Math.md
-``` -->
+``` { .include format=html }
+includes/Math.html
+```
 
 **Author:** Gabriel Nützi<br>
 **Reviewer:** Michael Baumann<br>
 **Date:** 28.05.2020
 
-$asd$
 This is a setup demonstrating the power and use of markdown for technical documents by using
 the VS Code extension [Markdown Preview Enhanced](https://shd101wyy.github.io/markdown-preview-enhanced) and a fully automated conversion sequence with `yarn`, `gulp`.
 Read the [Readme.md](https://github.com/gabyx/TechnicalMarkdown/blob/master/Readme.md) for futher information.
