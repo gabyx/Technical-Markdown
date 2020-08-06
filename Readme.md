@@ -4,21 +4,18 @@
 
 **This is a markdown setup demonstrating the power and use of markdown for technical documents:**
 
-- **fully automated conversion sequence** using `yarn`+ `gulp` such that exporting ([Content.md](https://raw.githubusercontent.com/gabyx/TechnicalMarkdown/master/Content.md)) is done in the background:
+- **fully automated conversion sequence** using [`yarn`](https://github.com/yarnpkg/yarn) + [`gulp`](https://github.com/gulpjs/gulp) + [`pandoc`](https://github.com/jgm/pandoc) such that exporting ([Content.md](https://raw.githubusercontent.com/gabyx/TechnicalMarkdown/master/Content.md)) is done in the background:
 
-    - **export to PDF** with `pandoc` to `html` then to `chrome`
     - **export to PDF** with `pandoc` to `xelatex` using `latexmk` [See Output](Content.pdf)
     - **export to HTML** with `pandoc` to `html` [See Output](https://gabyx.github.io/TechnicalMarkdown/Content.html)
+    - [todo] **export to PDF** with `pandoc` to `html` then to `chrome` with `pupeteer`
 
-    with [Markdown Preview Enhanced Engine](https://github.com/shd101wyy/mume).
-
-- **previewing in VS Code** with the extension [Markdown Preview Enhanced](https://github.com/shd101wyy/vscode-markdown-preview-enhanced).
-
-- **[pandoc filters](https://pandoc.org/filters.html)** for different AST (abstrac syntax tree) conversions:
+- **[pandoc filters](https://pandoc.org/filters.html)** for different AST (abstract syntax tree) conversions:
 
     - [2 own filters](https://github.com/gabyx/TechnicalMarkdown/tree/master/convert/pandoc/filters) with [panflute](https://github.com/sergiocorreia/panflute) [[doc](http://scorreia.com/software/panflute)]
-    - [pandoc-crosscite](https://github.com/jgm/pandoc-citeproc) [[doc](https://github.com/jgm/pandoc-citeproc/blob/master/man/pandoc-citeproc.1.md)]
-    - [pandoc-crossref](https://github.com/lierdakil/pandoc-crossref) [[doc](http://lierdakil.github.io/pandoc-crossref)]
+    - [pandoc-crosscite](https://github.com/jgm/pandoc-citeproc) [[doc](https://github.com/jgm/pandoc-citeproc/blob/master/man/pandoc-citeproc.1.md)] for citing
+    - [pandoc-crossref](https://github.com/lierdakil/pandoc-crossref) [[doc](http://lierdakil.github.io/pandoc-crossref)] for cross referencing
+    - [pandoc-include-files](https://github.com/pandoc/lua-filters/tree/master/include-files) for file transclusion
 
 # Dependencies
 
@@ -73,15 +70,14 @@ cd TechnicalMarkdown && code -n .
 
 You can also use the ignored [.envrc](.envrc) file with [direnv](https://github.com/direnv/direnv).
 
-The VS Code Tasks **dont have this caveat**, since we inject the `${config:python.pythonPath}`
+The VS Code tasks **dont have this caveat**, since we inject the `${config:python.pythonPath}`
 directly and modify the environement.
 
 # Building and Viewing
 
 Normally the use of the [Markdown Preview Enhanced](https://github.com/shd101wyy/vscode-markdown-preview-enhanced)
-extension with an opened preview panel works well and is nice for previewing.
-However, complex includes do not retrigger an autoreload and complex conversions
-should take place in the background continuously anyway:
+is for simple previewing.
+However, we use priorily **only** the pandoc pipeline for the conversion as it is the most powerful and most customizable and well testet tool for markdown conversion. All the conversion is done in the background continuously:
 
 Run the following tasks defined in [tasks.json](.vscode/tasks.json) from VS Code or use the following shell commands:
 
@@ -98,40 +94,38 @@ Run the following tasks defined in [tasks.json](.vscode/tasks.json) from VS Code
     yarn build:html
     ```
 
-- **Start Markdown Chrome Conversion**: Runs the markdown conversion with Chrome
-  over [MPE](https://github.com/shd101wyy/mume) continuously while monitoring changes to markdown `.md` files:
+- **Start Markdown Chrome Conversion**: Runs the markdown conversion with Chrome continuously while monitoring input files:
 
     ```shell
     yarn build:pdf-chrome
     ```
 
 - **Start Markdown Pandoc Conversion**: Runs the markdown conversion with Pandoc
-  (`latexmk` and `xelatex`) over [MPE](https://github.com/shd101wyy/mume) continuously while monitoring markdown `.md` files:
+  (`latexmk` and `xelatex`) continuously while monitoring input files:
 
     ```shell
     yarn build:pdf-tex
     ```
 
-    The conversion with pandoc applies two filters:
+    The conversion with pandoc applies the following filters (see [defaults](convert/pandoc/defaults/pandoc-filters.yaml)):
 
-    - [transformMath.py](convert/pandoc/filters/transformMath.py): Transform all math expressions.
-    - [transformImages.py](convert/pandoc/filters/transformImages.py): Transforms all HTML images.
+    1. [pandoc-include-files-set-format.lua](convert/pandoc/filters/pandoc-include-files-set-format.lua)
+    2. [pandoc-include-files.lua](convert/pandoc/filters/pandoc-include-files.lua)
+    3. [transformMath.py](convert/pandoc/filters/transformMath.py)
+    4. [pandoc-crossref](convert/pandoc/filters/pandoc-crossref)
+    5. [pandoc-citeproc](convert/pandoc/filters/pandoc-citeproc)
+    6. [transformImages.py](convert/pandoc/filters/transformImages.py)
 
     The latex output can be inspected in `output-tex/input.tex`.
 
 # Editing Styles
 
 You can edit the [main.less](css/src/main.less) file to change the look of the markdown.
-Edit the [main.less](css/src/main.less) file to see changes in the conversion from [Content.md](Content.md)`.
-
-# Engine Configs
-
-The config path for the [engine](https://github.com/shd101wyy/mume) is [pandoc](convert/pandoc) . See [convert.js](convert/convert.js).
+Edit the [main.less](css/src/main.less) file to see changes in the conversion from [Content.md](Content.md).
 
 # Debugging
 
-There is a debug configuration in [launch.json](.vscode/launch.json) for both the HTML and the PDF export. Setting breakpoints inside the `node_modules` folder works.
-Breakpoints at `execFile(pandocPath...` (search for it)
+There is a debug configuration in [launch.json](.vscode/launch.json) for both the HTML and the PDF export.
 
 ## Pandoc Filters
 
