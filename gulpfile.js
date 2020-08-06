@@ -7,10 +7,9 @@ const gulp = require("gulp");
 const less = require("gulp-less");
 const rename = require("gulp-rename");
 const replace = require("gulp-replace");
-const markdown = require("./convert/convert");
 const browserSync = require("browser-sync").create();
-const { execFile } = require("child_process");
 const reload = browserSync.reload;
+const { spawn } = require("child_process");
 
 let parsedArgs = null;
 
@@ -97,6 +96,12 @@ async function parseArguments() {
     parsedArgs = args;
 }
 
+function getFileSizeMb(path) {
+    const stats = fs.statSync(path);
+    const fileSizeInBytes = stats["size"];
+    return stats["size"] / 1000000.0;
+}
+
 async function runPandoc(args) {
     if (!parsedArgs || !parsedArgs["pandocPath"]) {
         throw Error("Arguments not parsed!");
@@ -104,24 +109,25 @@ async function runPandoc(args) {
 
     return new Promise((resolve, reject) => {
         try {
-            const program = execFile(
-                parsedArgs["pandocPath"],
-                args,
-                { cwd: process.cwd() },
-                (error, stdout, stderr) => {
-                    console.log(stdout);
+            const program = spawn(parsedArgs["pandocPath"], args, {
+                cwd: process.cwd(),
+                stdio: ["ignore", "ignore", "inherit"]
+            });
 
-                    if (error) {
-                        return reject(error);
-                    } else if (stderr) {
-                        return reject(new Error(`Pandoc error: ${stderr}`));
-                    } else {
-                        return resolve();
-                    }
+            program.on("close", (code) => {
+                if (code > 0) {
+                    return reject(new Error(`Pandoc failed: ${code}`));
+                } else {
+                    console.log(
+                        " ======================== \n" + " =  Pandoc successful!  = \n" + " ======================== "
+                    );
+                    return resolve();
                 }
-            );
+            });
         } catch (error) {
-            return reject(`Executable '${parsedArgs["pandocPath"]}' could not be started: '${error.toString()}'`);
+            return reject(
+                new Error(`Executable '${parsedArgs["pandocPath"]}' could not be started: '${error.toString()}'`)
+            );
         }
     });
 }
@@ -133,13 +139,12 @@ async function htmlExport(markdownFile, outFile) {
         "--data-dir=convert/pandoc",
         "--defaults=pandoc-dirs.yaml",
         "--defaults=pandoc-html.yaml",
-        "--filter",
-        "set-include-format.lua"
         "--defaults=pandoc-filters.yaml",
         "-o",
         outFile,
-        markdownFile,
+        markdownFile
     ]);
+    console.log(`Outfile: '${outFile}' :: ${getFileSizeMb(outFile)} mb`);
 }
 
 async function latexExport(markdownFile, outFile) {
@@ -154,6 +159,7 @@ async function latexExport(markdownFile, outFile) {
         outFile,
         markdownFile
     ]);
+    console.log(`Outfile: '${outFile}' :: ${getFileSizeMb(outFile)} mb`);
 }
 
 gulp.task("parse-args", async function () {
@@ -185,7 +191,7 @@ gulp.task("transform-math", async function () {
         .pipe(gulp.dest("convert/pandoc"));
 });
 
-const exportTriggerFiles = ["**/*.md", "literature/**/*", "files/**/*", "includes/**/*"];
+const exportTriggerFiles = ["**/*.md", "literature/**/*", "files/**/*", "includes/**/*", "**/*.yaml"];
 const lessFiles = ["css/src/*", "css/fonts/*"];
 
 /* Task to watch all markdown files */
@@ -214,5 +220,5 @@ gulp.task("show-markdown", function () {
             index: "Content.html"
         }
     });
-    gulp.watch("**/*.html").on("change", reload);
+    gulp.watch(["**/*.html", "**/*.css"]).on("change", reload);
 });

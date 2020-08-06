@@ -1,7 +1,8 @@
 from: markdown+markdown_in_html_blocks+link_attributes+tex_math_dollars
+to: html5
 
 metadata:
-    include-format: markdown
+    include-format: markdown+markdown_in_html_blocks+link_attributes+tex_math_dollars
 
 template: includes/Template.html
 css: css/main.css

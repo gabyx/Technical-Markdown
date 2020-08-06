@@ -1,6 +1,9 @@
 {
     "editor.formatOnPaste": true,
     "editor.formatOnType": true,
+    "search.exclude": {
+        "**/node_modules": true,
+    },
     "files.autoGuessEncoding": false,
     "files.encoding": "utf8",
     "latex-workshop.latex.autoBuild.run": "never",
