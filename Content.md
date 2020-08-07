@@ -22,8 +22,9 @@ includes/Math.html
 **Date:** 28.05.2020
 
 This is a setup demonstrating the power and use of markdown for technical documents by using
-the VS Code extension [Markdown Preview Enhanced](https://shd101wyy.github.io/markdown-preview-enhanced) and a fully automated conversion sequence with `yarn`, `gulp`.
-Read the [Readme.md](https://github.com/gabyx/TechnicalMarkdown/blob/master/Readme.md) for futher information.
+a fully automated conversion sequence with `yarn`, `gulp` and of course [`pandoc`](www.pandoc.org).
+Read the [Readme.md](https://github.com/gabyx/TechnicalMarkdown/blob/master/Readme.md)
+for futher information.
 
 ``` { .include }
 chapters/convex-analysis/KonvexeProbleme.md
