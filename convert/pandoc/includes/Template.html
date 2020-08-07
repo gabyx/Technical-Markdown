@@ -2,63 +2,77 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="$lang$" xml:lang="$lang$" $if(dir)$ dir="$dir$" $endif$>
 
 <head>
-<meta charset="utf-8" />
-<meta name="generator" content="pandoc" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
-$for(author-meta)$
-<meta name="author" content="$author-meta$" />
-$endfor$
-$if(date-meta)$
-<meta name="dcterms.date" content="$date-meta$" />
-$endif$
-$if(keywords)$
-<meta name="keywords" content="$for(keywords)$$keywords$$sep$, $endfor$" />
-$endif$
-<title>$if(title-prefix)$$title-prefix$ – $endif$$pagetitle$</title>
-$for(css)$
-<link rel="stylesheet" href="$css$" />
-$endfor$
-$if(math)$
-${ MathConfig.html() }
-$math$
-$endif$
-<!--[if lt IE 9]>
+    <meta charset="utf-8" />
+    <meta name="generator" content="pandoc" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    $for(author-meta)$
+    <meta name="author" content="$author-meta$" />
+    $endfor$
+    $if(date-meta)$
+    <meta name="dcterms.date" content="$date-meta$" />
+    $endif$
+    $if(keywords)$
+    <meta name="keywords" content="$for(keywords)$$keywords$$sep$, $endfor$" />
+    $endif$
+    <title>$if(title-prefix)$$title-prefix$ – $endif$$pagetitle$</title>
+    $for(css)$
+    <link rel="stylesheet" href="$css$" />
+    $endfor$
+    $if(math)$
+    ${ MathConfig.html() }
+    $math$
+    $endif$
+    <!--[if lt IE 9]>
 <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
 <![endif]-->
-$for(header-includes)$
-$header-includes$
-$endfor$
+    $for(header-includes)$
+    $header-includes$
+    $endfor$
 </head>
 
-<body class="main" id="main-markdown">
+<body id="main">
+    <a id="sidenav-btn" class="button" href="javascript:void(0)" onclick="openSideNav()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="12" viewBox="0 0 18 12">
+            <path fill="currentColor" d="M0 0h18v2H0zM0 5h18v2H0zM0 10h18v2H0z" />
+        </svg>
+    </a>
+
+    <div id="side-nav" class="sidenav">
+        <a href="javascript:void(0)" class="close-btn" onclick="closeSideNav()">&times;</a>
+        $if(toc)$
+        <nav id="$idprefix$TOC" role="doc-toc">
+            $if(toc-title)$
+            <h2 id="$idprefix$toc-title">$toc-title$</h2>
+            $endif$
+            $table-of-contents$
+        </nav>
+        $endif$
+    </div>
+
     $for(include-before)$
     $include-before$
     $endfor$
     $if(title)$
-    <header id="title-block-header">
-        <h1 class="title">$title$</h1>
-        $if(subtitle)$
-        <p class="subtitle">$subtitle$</p>
+
+    <div id="main-markdown">
+        <header id="title-block-header">
+            <h1 class="title">$title$</h1>
+            $if(subtitle)$
+            <p class="subtitle">$subtitle$</p>
+            $endif$
+            $for(author)$
+            <p class="author">$author$</p>
+            $endfor$
+            $if(date)$
+            <p class="date">$date$</p>
+            $endif$
+        </header>
         $endif$
-        $for(author)$
-        <p class="author">$author$</p>
-        $endfor$
-        $if(date)$
-        <p class="date">$date$</p>
-        $endif$
-    </header>
-    $endif$
-    $if(toc)$
-    <nav id="$idprefix$TOC" role="doc-toc">
-        $if(toc-title)$
-        <h2 id="$idprefix$toc-title">$toc-title$</h2>
-        $endif$
-        $table-of-contents$
-    </nav>
-    $endif$
-    $body$
+        $body$
+    </div>
     $for(include-after)$
     $include-after$
     $endfor$
 </body>
+
 </html>

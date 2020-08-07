@@ -136,6 +136,7 @@ async function htmlExport(markdownFile, outFile) {
     await runPandoc([
         "--fail-if-warnings",
         "--verbose",
+        "--toc",
         "--data-dir=convert/pandoc",
         "--defaults=pandoc-dirs.yaml",
         "--defaults=pandoc-html.yaml",
@@ -168,7 +169,7 @@ gulp.task("parse-args", async function () {
 
 /* Task to compile less */
 gulp.task("compile-less", async function () {
-    return gulp.src("css/src/main.less").pipe(less()).pipe(gulp.dest("./css"));
+    gulp.src("css/src/main.less").pipe(less()).pipe(gulp.dest("./css"));
 });
 
 /* Task to compile all markdown files */
@@ -191,7 +192,7 @@ gulp.task("transform-math", async function () {
         .pipe(gulp.dest("convert/pandoc"));
 });
 
-const exportTriggerFiles = ["**/*.md", "literature/**/*", "files/**/*", "includes/**/*", "**/*.yaml"];
+const exportTriggerFiles = ["**/*.md", "literature/**/*", "files/**/*", "includes/**/*", "**/*.yaml", "convert/**/*"];
 const lessFiles = ["css/src/*", "css/fonts/*"];
 
 /* Task to watch all markdown files */

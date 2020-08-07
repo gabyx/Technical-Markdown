@@ -160,6 +160,103 @@
 */
 /* Quotes for the language */
 /* General defines for the document */
+/* The side navigation menu */
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+html #main-markdown {
+  transition: margin-left 0.5s;
+  padding: 20px;
+}
+html #main {
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+}
+html #main .button {
+  display: inline-block;
+  color: #000000;
+  background-color: rgba(194, 194, 194, 0.384);
+  border-color: rgba(90, 90, 90, 0.2);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 0.3rem;
+  transition: color 0.2s, background-color 0.2s, border-color 0.2s;
+}
+html #main .button:hover {
+  text-decoration: none;
+  background-color: rgba(189, 189, 189, 0.596);
+  border-color: #3d3d3d;
+}
+html #main .sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+html #main .sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+html #main .sidenav a:hover {
+  color: #f1f1f1;
+}
+html #main .sidenav .close-btn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+html #main #sidenav-btn {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  padding: 1em;
+  width: auto !important;
+}
+@media screen and (max-height: 450px) {
+  html #main .sidenav {
+    padding-top: 15px;
+  }
+  html #main .sidenav a {
+    font-size: 18px;
+  }
+}
+html #main #TOC {
+  font-family: 'Museo', "Fira Sans", "Helvetica", serif;
+}
+html #main #TOC h1,
+html #main #TOC h2,
+html #main #TOC h3,
+html #main #TOC h4,
+html #main #TOC h5,
+html #main #TOC h6 {
+  color: #00acd1;
+  font-family: 'Museo Sans', "Fira Sans", "Helvetica", sans-serif;
+  font-weight: bold;
+}
+html #main #TOC ul {
+  padding-inline-start: 2ex;
+  list-style-type: none;
+}
+html #main #TOC a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 12pt;
+  color: #acacac;
+  display: block;
+  transition: 0.3s;
+}
+html #main #TOC a:hover {
+  color: #00acd1;
+}
 html #main-markdown {
   max-width: 18cm;
   margin: auto;
@@ -545,6 +642,8 @@ html #main-markdown blockquote:after {
   z-index: -1;
 }
 html #main-markdown-numbered {
+  max-width: 18cm;
+  margin: auto;
   /* base style */
   /* cyfex variants */
   font-family: 'Museo', "Fira Sans", "Helvetica", serif;
