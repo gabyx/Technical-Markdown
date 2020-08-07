@@ -17,12 +17,6 @@
     - [pandoc-crossref](https://github.com/lierdakil/pandoc-crossref) [[doc](http://lierdakil.github.io/pandoc-crossref)] for cross referencing
     - [pandoc-include-files](https://github.com/pandoc/lua-filters/tree/master/include-files) for file transclusion
 
-**Future Warning:**
-I am heading towards a `pandoc`-only solution on the `master` branch, because its more reliable and a better solution.
-Markdown Preview Enhanced is nice but sadly a bit a cumbersome to control blackbox and also a bit slow.
-This so far solution will still be archived on another branch.
-
-
 # Dependencies
 
 ## Node

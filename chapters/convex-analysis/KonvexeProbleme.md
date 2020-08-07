@@ -11,11 +11,11 @@ Die *konvexe Analysis* ist ein Grenzgebiet von *Geometrie*, *Analysis* und *Funk
 
 Eine Menge $\set{C} \subseteq V$, also ein Teilmenge eines Vektorraums $V$, wird **konvex** genannt, falls und nur falls
 
-```math
+$$
 \begin{align}
 \lambda \vvec{a} + (1-\lambda) \vvec{b} \in \set{C} \quad \forall \vvec{a},\vvec{b} \in \set{C}, \ \lambda \in [0,1] \ .
 \end{align}
-```
+$$
 
 gilt.
 Das heisst alle Punkte auf einer geraden Linie zwischen zwei beliebigen Punkten aus der Menge $\set{C}$ müssen **auch** in dieser Menge liegen damit es **konvex** ist. Stellt man sich eine Banane vor oder eine Oberfläche eines $3$d-Würfels, dann erfüllen diese Mengen das Kriterium nicht. Ein ausgefülltes $2$d-Rechteck , ein gefüllter $3$d-Würfel oder eine gefüllte Kugel jedoch schon.
@@ -170,7 +170,7 @@ Da man zeigen kann, dass das Subdifferential, also die mengenwertige Ableitung, 
 
 Das bringt uns nicht viel mehr ausser einer visuellen Erkenntnis durch folgende Visualisierung:
 
-![Konvexes Optimierungs Problem innerhalb der Menge $\set{C}$ auf einer $2$d-Funktion $f(\vvec{x}) \in \mathbb{R}$. Der negative Gradient liegt im Optimum $\vvec{x}^*$ genau innerhalb des Normalkegels an $\vvec{x}^*$.](files/ConvexOptimizationProblem.svg){#fig:convex-opt-prob style="min-width:17cm"}
+![Konvexes Optimierungs Problem innerhalb der Menge $\set{C}$ auf einer $2$d-Funktion $f(\vvec{x}) \in \mathbb{R}$. Der negative Gradient liegt im Optimum $\vvec{x}^*$ genau innerhalb des Normalkegels an $\vvec{x}^*$.](files/ConvexOptimizationProblem.svg){#fig:convex-opt-prob style="min-width:100%"}
 
 Mit der Beziehung zwischen **proximalem Punkt** und **Normalkegel** $\eqref{eq:prox-to-ncone}$ kriegen wir daraus direkt eine **implizite Projektionsgleichung** für den optimalen Punkt $\vvec{x}^*$:
 

@@ -1,0 +1,62 @@
+@import "button.less";
+
+/* The side navigation menu */
+.define-sidenav() {
+    .sidenav {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #111;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+
+        a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        a:hover {
+            color: #f1f1f1;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+    }
+
+    #sidenav-btn {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        padding: 1em;
+        width: auto !important;
+    }
+
+    /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+    @media screen and (max-height: 450px) {
+        .sidenav {
+            padding-top: 15px;
+        }
+        .sidenav a {
+            font-size: 18px;
+        }
+    }
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+html #main-markdown {
+    transition: margin-left 0.5s;
+    padding: 20px;
+}

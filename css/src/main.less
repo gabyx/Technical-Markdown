@@ -7,44 +7,89 @@
 @import "math.less";
 @import "quotes.less";
 @import "defines.less";
+@import "button.less";
+@import "sidenav.less";
 
-html body {
-    .basic {
-        /* base style */
-        .github(#1d1d1d, #fdf6e3, #08c, @main-font-text, @main-font-size, @main-line-height);
+@heading-color: #00acd1;
 
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            color: #00acd1;
-            font-family: @main-font-headers, "Fira Sans", "Helvetica", sans-serif;
-            font-weight: bold;
+.define-title-style() {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: @heading-color;
+        font-family: @main-font-headers, "Fira Sans", "Helvetica", sans-serif;
+        font-weight: bold;
+    }
+}
+
+.define-markdown-style() {
+    /* base style */
+    .github(#1d1d1d, #fdf6e3, #08c, @main-font-text, @main-font-size, @main-line-height);
+
+    .define-title-style();
+
+    /* cyfex variants */
+    font-family: @main-font-text, "Fira Sans", "Helvetica", serif;
+
+    p {
+        text-align: justify;
+        text-justify: auto;
+    }
+
+    .define-header();
+    .define-images();
+    .define-math();
+    .define-quotes();
+    .define-blockquote();
+}
+
+.define-toc-style() {
+    .define-title-style();
+    font-family: @main-font-text, "Fira Sans", "Helvetica", serif;
+
+    ul {
+        padding-inline-start: 2ex;
+        list-style-type: none;
+    }
+    a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: @main-font-size;
+        color: #acacac;
+        display: block;
+        transition: 0.3s;
+    }
+
+    a:hover {
+        color: @heading-color;
+    }
+}
+
+html {
+    #main {
+        .define-button();
+        .define-sidenav();
+
+        #TOC {
+            .define-toc-style();
         }
-
-        /* cyfex variants */
-        font-family: @main-font-text, "Fira Sans", "Helvetica", serif;
-
-        p {
-            text-align: justify;
-            text-justify: auto;
-        }
-
-        .define-header();
-        .define-images();
-        .define-math();
-        .define-quotes();
-        .define-blockquote();
     }
 
     #main-markdown {
-        .basic();
+        max-width: 21cm - 2 * 1.5cm;
+        margin: auto;
+
+        .define-markdown-style();
     }
 
     #main-markdown-numbered {
-        .basic();
+        max-width: 21cm - 2 * 1.5cm;
+        margin: auto;
+
+        .define-markdown-style();
 
         .define-numbered-headings();
         .define-numbered-images();
