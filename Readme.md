@@ -20,7 +20,7 @@
 **Future Warning:**
 I am heading towards a `pandoc`-only solution on the `master` branch, because its more reliable and a better solution.
 Markdown Preview Enhanced is nice but sadly a bit a cumbersome to control blackbox and also a bit slow.
-This so far solution will still be archived on another branch.
+This old solution is still available at commit `13856d37030483679`.
 
 
 # Dependencies
