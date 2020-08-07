@@ -151,7 +151,6 @@ async function htmlExport(markdownFile, outFile) {
 async function latexExport(markdownFile, outFile) {
     await runPandoc([
         "--fail-if-warnings",
-        "--verbose",
         "--data-dir=convert/pandoc",
         "--defaults=pandoc-dirs.yaml",
         "--defaults=pandoc-latex.yaml",
@@ -169,7 +168,7 @@ gulp.task("parse-args", async function () {
 
 /* Task to compile less */
 gulp.task("compile-less", async function () {
-    gulp.src("css/src/main.less").pipe(less()).pipe(gulp.dest("./css"));
+    return gulp.src("css/src/main.less").pipe(less()).pipe(gulp.dest("./css"));
 });
 
 /* Task to compile all markdown files */
@@ -186,13 +185,13 @@ gulp.task("compile-markdown-tex", async function () {
 gulp.task("transform-math", async function () {
     const re = /.*\$\$\s+(.+)\$\$.*/gms;
     return gulp
-        .src(["includes/Math.md"])
-        .pipe(rename("includes/Math.tex"))
+        .src(["includes/Math.html"])
+        .pipe(rename("includes/generated/Math.tex"))
         .pipe(replace(re, "$1"))
-        .pipe(gulp.dest("convert/pandoc"));
+        .pipe(gulp.dest("./"));
 });
 
-const exportTriggerFiles = ["**/*.md", "literature/**/*", "files/**/*", "includes/**/*", "**/*.yaml", "convert/**/*"];
+const exportTriggerFiles = ["**/*.md", "literature/**/*", "files/**/*", "includes/*", "**/*.yaml", "convert/**/*"];
 const lessFiles = ["css/src/*", "css/fonts/*"];
 
 /* Task to watch all markdown files */
