@@ -1,40 +1,4 @@
 ---
-# Markdown Preview Enhanced
-class: "main"
-id: "main-markdown"
-html:
-    embed_local_images: true
-    embed_svg: true
-    offline: false
-    toc: true
-puppeteer:
-    path: "./Content-Chrome.pdf"
-    landscape: false
-    format: "A4"
-    printBackground: true
-    timeout: 3000 # <= Special config, which means wait for 3000 ms, to render all mathjax...
-pandoc_args:
-    [
-        "--fail-if-warnings",
-        #"--standalone", # adds mathjax 3.0 which conflicts with MPE
-        #"--verbose",
-        "--data-dir=convert/pandoc",
-        "--resource-path=convert/pandoc",
-        "--resource-path=literature",
-        "--defaults=pandoc-html.yaml",
-        "--defaults=pandoc-filters.yaml"
-    ]
-output:
-    pdf_document:
-        pandoc_args: [
-                "--fail-if-warnings",
-                "--data-dir=convert/pandoc",
-                "--resource-path=convert/pandoc",
-                "--defaults=pandoc-latex.yaml",
-                "--defaults=pandoc-filters.yaml"
-            ]
-        latex_engine: "latexmk"
-# Pandoc
 title: "Technical Documents"
 bibliography: ["literature/bibliography.bib"]
 csl: "literature/apa.csl"
@@ -49,13 +13,9 @@ numbersections: true
 secnumdepth: 3
 ---
 
-
-@import "css/src/main.less"
-@import "includes/Math.md"
-
-<header/>
-
-# Technical Documents {.unnumbered .unlisted}
+``` { .include format=html }
+includes/Math.html
+```
 
 **Author:** Gabriel Nützi<br>
 **Reviewer:** Michael Baumann<br>
@@ -65,6 +25,8 @@ This is a setup demonstrating the power and use of markdown for technical docume
 the VS Code extension [Markdown Preview Enhanced](https://shd101wyy.github.io/markdown-preview-enhanced) and a fully automated conversion sequence with `yarn`, `gulp`.
 Read the [Readme.md](https://github.com/gabyx/TechnicalMarkdown/blob/master/Readme.md) for futher information.
 
-@import "chapters/convex-analysis/KonvexeProbleme.md"
+``` { .include }
+chapters/convex-analysis/KonvexeProbleme.md
+```
 
 # References
