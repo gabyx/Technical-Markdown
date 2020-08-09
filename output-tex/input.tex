@@ -381,10 +381,9 @@
 \textbf{Date:} 28.05.2020
 
 This is a setup demonstrating the power and use of markdown for
-technical documents by using the VS Code extension
-\href{https://shd101wyy.github.io/markdown-preview-enhanced}{Markdown
-Preview Enhanced} and a fully automated conversion sequence with
-\texttt{yarn}, \texttt{gulp}. Read the
+technical documents by using a fully automated conversion sequence with
+\texttt{yarn}, \texttt{gulp} and of course
+\href{www.pandoc.org}{\texttt{pandoc}}. Read the
 \href{https://github.com/gabyx/TechnicalMarkdown/blob/master/Readme.md}{Readme.md}
 for futher information.
 
@@ -531,7 +530,7 @@ Der Zusammenhang ist wie folgt:
 
 \begin{align}
 \vvec{y} \in \ncone{C}(\vvec{x}) \quad \Leftrightarrow \quad \vvec{x} = \prox{C}(\vvec{x} + \vvec{y})
-\label{eq-prox-to-ncone}
+\label{eq:prox-to-ncone}
 \end{align}
 
 Das heisst, eine Normalkegel-\emph{Inklusion} (die Relation
@@ -584,7 +583,7 @@ Optimierungsproblem:
 
 \begin{align}
 \vvec{x}^* = \underset{\vvec{x} \ \in \ \set{C}}{\argmin} f(\vvec{x}),
-\label{eq-convexproblem}
+\label{eq:convexproblem}
 \end{align}
 
 wobei die Funktion \(f(\vvec{x}) \in \mathbb{R}\) \textbf{strikt konvex}
@@ -613,13 +612,13 @@ Bedindung für Minima/Maxima einer differenzierbaren Funktionen \(f\) :
 
 \begin{align}
 \vvec{0} = \frac{df}{d\vvec{x}}(\vvec{x}^*)
-\label{eq-optimality-difffunc}
+\label{eq:optimality-difffunc}
 \end{align}
 
 was konkret heisst, dass der Nullvektor \(\vvec{0}\) gleich dem Gradient
 \(\frac{df}{d\vvec{x}}\) ist an der optimalen Stelle \(\vvec{x}^*\).
 
-Da wir aber bei unserem Problem \(\eqref{eq-convexproblem}\) diese
+Da wir aber bei unserem Problem \(\eqref{eq:convexproblem}\) diese
 \textbf{unstetige}, \textbf{nicht-differenzierbare} Bestrafungsfunktion
 \(\indf{C}\) eingebaut haben, ist dies nicht direkt mit der normalen
 Differentiation zu machen. Man braucht in der konvexen Analysis eine
@@ -630,15 +629,15 @@ Funktionen \(f(\vvec{x})\)) zurück geben kann sondern auch \textbf{ganze
 Mengen} von solchen Steigungen. Das heisst, das Subdifferential an einem
 Punkt ist eine Menge aller Gradienten an diesen Punkt der Funktion. Das
 heisst direkt, dass eine Gleicheit zu \(\vvec{0}\) wie in
-\(\eqref{eq-optimality-difffunc}\) nicht mehr richtig wäre und hier eine
+\(\eqref{eq:optimality-difffunc}\) nicht mehr richtig wäre und hier eine
 Mengen-Inklusion \(\vvec{0} \in \dots\) stehen muss.
 
 Anstatt \(\frac{d}{d\vvec{x}}\indf{C}\) nehmen wir einfach das
 Subdifferential \(\partial_{\vvec{x}} \indf{C}\) und die Bedingung
-\(\eqref{eq-optimality-difffunc}\) wird dann zu
+\(\eqref{eq:optimality-difffunc}\) wird dann zu
 
 \begin{align}
-\label{eq-optimality-strict-convex}
+\label{eq:optimality-strict-convex}
 \vvec{0} \in \frac{df}{d\vvec{x}}(\vvec{x}^*) + \partial_{\vvec{x}} \indf{C}(\vvec{x}^*)
 \end{align}
 
@@ -652,7 +651,7 @@ schreiben:
 
 \begin{align}
 \vvec{0} \in \frac{df}{d\vvec{x}}(\vvec{x}^*) + \ncone{C}(\vvec{x}^*) \quad \Leftrightarrow \quad -\frac{df}{d\vvec{x}}(\vvec{x}^*) \in \ncone{C}(\vvec{x}^*)
-\label{eq-optimality-strict-convex-2}
+\label{eq:optimality-strict-convex-2}
 \end{align}
 
 Das bringt uns nicht viel mehr ausser einer visuellen Erkenntnis durch
@@ -665,7 +664,7 @@ liegt im Optimum \(\vvec{x}^*\) genau innerhalb des Normalkegels an
 \(\vvec{x}^*\).}{}[fig:convex-opt-prob]
 
 Mit der Beziehung zwischen \textbf{proximalem Punkt} und
-\textbf{Normalkegel} \(\eqref{eq-prox-to-ncone}\) kriegen wir daraus
+\textbf{Normalkegel} \(\eqref{eq:prox-to-ncone}\) kriegen wir daraus
 direkt eine \textbf{implizite Projektionsgleichung} für den optimalen
 Punkt \(\vvec{x}^*\):
 

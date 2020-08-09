@@ -1,0 +1,87 @@
+@import "button.less";
+
+/* The side navigation menu */
+.define-sidenav() {
+    .sidenav {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        background-color: #111;
+        transition: 0.5s;
+
+        #nav-menu {
+            display: flex;
+            justify-content: flex-end;
+            padding-left: 1ex;
+            padding-right: 1ex;
+            padding-top: 0.5ex;
+            padding-bottom: 0;
+            font-size: 26pt;
+        }
+
+        #nav-content {
+            overflow-y: scroll;
+            height: 100%;
+
+            &::-webkit-scrollbar-track {
+                background-color: rgba(119, 119, 119, 0.541);;
+            }
+
+            &::-webkit-scrollbar {
+                width: 5px;
+                background-color: #1d1d1d;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: #d4d4d4;
+            }
+        }
+
+        a {
+            text-decoration: none;
+            color: #818181;
+            transition: 0.3s;
+        }
+
+        a:hover {
+            color: #f1f1f1;
+        }
+
+        .close-btn {
+            margin-left: 1ex;
+        }
+
+        .expand-btn {
+            margin-left: 1ex;
+            font-size: 22pt;
+        }
+    }
+
+    #sidenav-btn {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        padding: 1em;
+        width: auto !important;
+    }
+
+    /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+    @media screen and (max-height: 450px) {
+        .sidenav {
+            padding-top: 15px;
+        }
+        .sidenav a {
+            font-size: 18px;
+        }
+    }
+}
+
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+html #main-markdown {
+    transition: margin-left 0.5s;
+    padding: 20px;
+}

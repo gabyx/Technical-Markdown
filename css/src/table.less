@@ -1,0 +1,40 @@
+@import "alignment.less";
+
+.define-tables() {
+    table {
+        border: none;
+        border-collapse: collapse;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    th{
+        background-color: #e6e6e6
+    }
+
+    th,
+    td {
+        padding-left: 1ex;
+        padding-right: 1ex;
+        padding-bottom: 1ex;
+        padding-top: 1ex;
+        border-bottom: 1pt solid rgb(203, 203, 203);
+    }
+
+    td {
+        border-right: solid 1pt rgba(220, 220, 220, 0.173);
+        border-left: solid 1pt rgba(220, 220, 220, 0.365);
+
+        :first-child {
+            border-left: 0pt;
+        }
+        :last-child {
+            border-right: 0pt;
+        }
+    }
+
+    tr:hover {
+        background-color: #f5f5f5;
+    }
+}
