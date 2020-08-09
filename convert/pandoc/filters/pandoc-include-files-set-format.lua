@@ -12,7 +12,7 @@ end
 
 function setFormat(doc)
     format = doc.meta["include-format"]
-    print("Settings include blocks to format: " .. format)
+    io.stderr:write("Settings include blocks to format: " .. format .. "\n")
 
     local blks =  pandoc.walk_block(
       pandoc.Div(doc.blocks),
