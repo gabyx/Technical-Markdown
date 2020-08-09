@@ -170,7 +170,7 @@ Da man zeigen kann, dass das Subdifferential, also die mengenwertige Ableitung, 
 
 Das bringt uns nicht viel mehr ausser einer visuellen Erkenntnis durch folgende Visualisierung:
 
-![Konvexes Optimierungs Problem innerhalb der Menge $\set{C}$ auf einer $2$d-Funktion $f(\vvec{x}) \in \mathbb{R}$. Der negative Gradient liegt im Optimum $\vvec{x}^*$ genau innerhalb des Normalkegels an $\vvec{x}^*$.](files/ConvexOptimizationProblem.svg){#fig:convex-opt-prob style="min-width:17cm"}
+![Konvexes Optimierungs Problem innerhalb der Menge $\set{C}$ auf einer $2$d-Funktion $f(\vvec{x}) \in \mathbb{R}$. Der negative Gradient liegt im Optimum $\vvec{x}^*$ genau innerhalb des Normalkegels an $\vvec{x}^*$.](files/ConvexOptimizationProblem.svg){#fig:convex-opt-prob style="min-width:100%"}
 
 Mit der Beziehung zwischen **proximalem Punkt** und **Normalkegel** $\eqref{eq:prox-to-ncone}$ kriegen wir daraus direkt eine **implizite Projektionsgleichung** für den optimalen Punkt $\vvec{x}^*$:
 
