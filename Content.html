@@ -37,9 +37,8 @@
                 var m = document.getElementById("main-markdown");
 
                 sidnav.style.width = `${expandWidth}px`;
-                if (m.offsetLeft - expandWidth < 0)
-                {
-                    m.style.marginLeft = `${expandWidth}px`
+                if (m.offsetLeft - expandWidth < 0) {
+                    m.style.marginLeft = `${expandWidth + 40}px`
                 }
             }
 
@@ -47,6 +46,56 @@
                 document.getElementById("side-nav").style.width = "0";
                 document.getElementById("main-markdown").style.marginLeft = null;
             }
+
+            var EXPAND_ALL = "⊞";
+            var COLLAPSE_ALL = "⊟";
+
+            var toggleExpandCollapse = function () {
+                var botton = document.getElementById("expand");
+                if (botton.innerHTML === EXPAND_ALL) {
+                    expandAll();
+                    botton.innerHTML = COLLAPSE_ALL;
+                } else {
+                    collapseAll();
+                    botton.innerHTML = EXPAND_ALL;
+                }
+            };
+
+            var expandAll = function () {
+                var allListItems = document.querySelectorAll('nav ul li');
+                for (var k = 0; k < allListItems.length; k++) {
+                    allListItems[k].classList.add("open");
+                }
+            };
+
+            var collapseAll = function () {
+                var allListItems = document.querySelectorAll('nav ul li');
+                for (var k = 0; k < allListItems.length; k++) {
+                    allListItems[k].classList.remove("open");
+                }
+            };
+
+            var onLoad = function () {
+                var treeListItems = document.querySelectorAll('nav ul a');
+                for (var i = 0; i < treeListItems.length; i++) {
+                    // click handler
+                    treeListItems[i].addEventListener('click', function (e) {
+                        var parent = e.target.parentElement;
+                        var classList = parent.classList;
+                        if (classList.contains("open")) { // close the element and its children
+                            classList.remove('open');
+                            var openChildrenList = parent.querySelectorAll(':scope .open');
+                            for (var j = 0; j < openChildrenList.length; j++) {
+                                openChildrenList[j].classList.remove('open');
+                            }
+                        } else { // open the element
+                            classList.add('open');
+                        }
+                    });
+                }
+            }
+
+            window.addEventListener('load', onLoad);
         </script>
     </head>
 
@@ -58,8 +107,12 @@
     </a>
 
     <div id="side-nav" class="sidenav">
-        <a href="javascript:void(0)" class="close-btn" onclick="closeSideNav()">&times;</a>
-                <nav id="TOC" role="doc-toc">
+        <div id="nav-menu">
+            <a class="expand-btn" id="expand" href="javascript:void(0)" onClick="toggleExpandCollapse()">⊞</a>
+            <a class="close-btn" href="javascript:void(0)" onclick="closeSideNav()">&times;</a>
+        </div>
+                <div id="nav-content">
+        <nav id="TOC" role="doc-toc">
                         <ul>
                         <li><a href="#konvexe-probleme"><span class="toc-section-number">1</span> Konvexe Probleme</a>
                         <ul>
@@ -72,6 +125,7 @@
                         <li><a href="#references">References</a></li>
                         </ul>
         </nav>
+        </div>
             </div>
 
         

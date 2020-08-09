@@ -39,7 +39,7 @@ async function parseArguments() {
             alias: "pandocPath",
             type: "string",
             describe: "The path to your pandoc executable.",
-            demandOption: true
+            demandOption: false
         })
         .coerce("pandocPath", function (p) {
             p.strip;

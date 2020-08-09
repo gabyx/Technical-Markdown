@@ -9,17 +9,41 @@
         z-index: 1;
         top: 0;
         left: 0;
+        overflow: hidden;
         background-color: #111;
-        overflow-x: hidden;
         transition: 0.5s;
-        padding-top: 60px;
+
+        #nav-menu {
+            display: flex;
+            justify-content: flex-end;
+            padding-left: 1ex;
+            padding-right: 1ex;
+            padding-top: 0.5ex;
+            padding-bottom: 0;
+            font-size: 26pt;
+        }
+
+        #nav-content {
+            overflow-y: scroll;
+            height: 100%;
+
+            &::-webkit-scrollbar-track {
+                background-color: rgba(119, 119, 119, 0.541);;
+            }
+
+            &::-webkit-scrollbar {
+                width: 5px;
+                background-color: #1d1d1d;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background-color: #d4d4d4;
+            }
+        }
 
         a {
-            padding: 8px 8px 8px 32px;
             text-decoration: none;
-            font-size: 25px;
             color: #818181;
-            display: block;
             transition: 0.3s;
         }
 
@@ -28,11 +52,12 @@
         }
 
         .close-btn {
-            position: absolute;
-            top: 0;
-            right: 25px;
-            font-size: 36px;
-            margin-left: 50px;
+            margin-left: 1ex;
+        }
+
+        .expand-btn {
+            margin-left: 1ex;
+            font-size: 22pt;
         }
     }
 

@@ -36,7 +36,11 @@ Install [pandoc](https://pandoc.org/installing.html) (>= 2.9.2.1)
 For **Linux** and **macOs**:
 
 ```shell
-brew install pandoc pandoc-citeproc pandoc-crossref
+export HOMEBREW_NO_INSTALL_CLEANUP=1
+cd Homebrew/Library/Taps/homebrew/homebrew-core &&
+    git checkout 36b6c2d8cd71580a4fd3055375f87a8c52cd5846~20 && # installs 2.9.2.1
+    HOMEBREW_NO_AUTO_UPDATE=1 brew install pandoc pandoc-citeproc pandoc-crossref &&
+    brew install pandoc pandoc-citeproc pandoc-crossref # installs 2.10.1
 ```
 
 For **Windows**
@@ -134,6 +138,26 @@ which can be put anywhere into the filter chain as needed, to see the output in 
 (see [dev.py](convert/pandoc/filters/module/dev.py) for adjustments). The filter [teeStart.py](convert/pandoc/filters/teeStart.py)
 first clears all output before doing the same as [tee.py](convert/pandoc/filters/tee.py).
 Uncomment the `tee.py` filters in [pandoc-filters.yaml](convert/pandoc/defaults/pandoc-filters.yaml).
+
+# Issues
+
+### Panflute
+Using pandoc `>=2.10` we have more types and AST changes in
+
+- [jgm/pandoc#1024](https://github.com/jgm/pandoc/issues/1024),
+- [jgm/pandoc#6277](https://github.com/jgm/pandoc/pull/6277),
+- [2.10](https://github.com/jgm/pandoc/releases/tag/2.10)
+
+meaning that also the python library `panflute` needs to be supporting this:
+
+- [Issue](https://github.com/sergiocorreia/panflute/issues/142) : ![](https://img.shields.io/badge/dynamic/json?color=%23FF0000&label=Status&query=%24.state&url=https%3A%2F%2Fapi.github.com%2Frepos%2Fsergiocorreia%2Fpanflute%2Fissues%2F142)
+
+
+## Transclude: Relative file paths
+So far *relative* paths are not yet supported in `pandoc-indluce-files.lua` filter.
+
+- [Issue](https://github.com/pandoc/lua-filters/issues/102) : ![Status](https://img.shields.io/badge/dynamic/json?color=%23FF0000&label=Status&query=%24.state&url=https%3A%2F%2Fapi.github.com%2Frepos%2Fpandoc%2Flua-filters%2Fissues%2F102)
+
 
 # Todo
 

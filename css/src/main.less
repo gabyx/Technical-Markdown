@@ -8,7 +8,10 @@
 @import "quotes.less";
 @import "defines.less";
 @import "button.less";
+@import "table.less";
 @import "sidenav.less";
+@import "scrollbar.less";
+@import "collapsable-list.less";
 
 @heading-color: #00acd1;
 
@@ -44,20 +47,30 @@
     .define-math();
     .define-quotes();
     .define-blockquote();
+    .define-tables();
+
+    // custom styles applied with pandoc attributing in 2.10
+    .define-centering();
 }
 
 .define-toc-style() {
+
     .define-title-style();
     font-family: @main-font-text, "Fira Sans", "Helvetica", serif;
+    font-size: 14pt;
+
+    padding-left: 3ex;
+    padding-right: 1ex;
+    padding-bottom: 3em;
 
     ul {
         padding-inline-start: 2ex;
         list-style-type: none;
     }
     a {
-        padding: 8px 8px 8px 32px;
+        padding-top: 0.5ex;
+        padding-bottom: 0.5ex;
         text-decoration: none;
-        font-size: @main-font-size;
         color: #acacac;
         display: block;
         transition: 0.3s;
@@ -66,11 +79,15 @@
     a:hover {
         color: @heading-color;
     }
+
+    .define-collapsable-list();
 }
 
 html {
+    .define-scrollbar();
     #main {
         .define-button();
+
         .define-sidenav();
 
         #TOC {
