@@ -662,6 +662,10 @@ html #main-markdown header {
 html #main-markdown figure {
   text-align: center;
   padding-top: 18pt;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 html #main-markdown figure > img {
   padding: 5px;
@@ -669,6 +673,7 @@ html #main-markdown figure > img {
   vertical-align: middle;
   border: 2pt solid #eee;
   background-color: white;
+  max-width: 150%;
 }
 html #main-markdown figure > figcaption {
   margin: auto;
@@ -1082,6 +1087,10 @@ html #main-markdown-numbered header {
 html #main-markdown-numbered figure {
   text-align: center;
   padding-top: 18pt;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 html #main-markdown-numbered figure > img {
   padding: 5px;
@@ -1089,6 +1098,7 @@ html #main-markdown-numbered figure > img {
   vertical-align: middle;
   border: 2pt solid #eee;
   background-color: white;
+  max-width: 150%;
 }
 html #main-markdown-numbered figure > figcaption {
   margin: auto;
