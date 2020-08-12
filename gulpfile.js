@@ -218,6 +218,17 @@ gulp.task("show-markdown", function () {
         server: {
             baseDir: "./",
             index: "Content.html"
+        },
+        // Customise the placement of the snippet
+        // and ignore certain paths
+        snippetOptions: {
+            // Provide a custom Regex for inserting the snippet.
+            rule: {
+                match: /<body.*main.*>/i,
+                fn: function (snippet, match) {
+                    return match + snippet;
+                }
+            }
         }
     });
     gulp.watch(["**/*.html", "**/*.css"]).on("change", reload);

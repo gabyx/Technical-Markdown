@@ -39,6 +39,7 @@ function transclude (cb)
   local blocks = List:new()
   for line in cb.text:gmatch('[^\n]+') do
     if line:sub(1,2) ~= '//' then
+      io.stderr:write("Including '" .. line .. "'\n")
       local fh = io.open(line)
       local contents = pandoc.read(fh:read '*a', format).blocks
       -- recursive transclusion
