@@ -1,4 +1,5 @@
 const fs = require("fs");
+const os = require("os");
 const which = require("which");
 const yargs = require("yargs");
 const env = require("gulp-env");
@@ -27,13 +28,13 @@ async function parseArguments() {
             demandOption: true
         })
         .coerce("pythonPath", function (p) {
-            p.strip;
+            console.log(p, typeof p);
             if (!fs.existsSync(p)) {
                 m = `Python path does not exists: ${p}`;
                 console.error(m);
                 throw m;
             }
-            return p;
+            return path.normalize(p);
         })
         .option("e", {
             alias: "pandocPath",
@@ -48,22 +49,26 @@ async function parseArguments() {
                 console.error(m);
                 throw m;
             }
-            return p;
+            return path.normalize(p);
         }).argv;
 
     // Add python dir to path
     paths = [];
 
-    let pythonDir = null;
+    var pythonDir = null;
+    var pythonExe = os.platform() == "win32" ? "python.exe" : "python";
     if (args.pythonPath) {
         pythonDir = path.dirname(args.pythonPath);
+        pythonExe = path.basename(args.pythonPath);
         console.log(`Setting python path ${pythonDir}`);
         paths.push(pythonDir);
     }
 
-    let pandocDir = null;
+    var pandocDir = null;
+    var pandocExe = os.platform() == "win32" ? "pandoc.exe" : "pandoc";
     if (args.pandocPath) {
         pandocDir = path.dirname(args.pandocPath);
+        pandocExe = path.basename(args.pandocPath);
         console.log(`Setting pandoc path ${pandocDir}`);
         paths.push(pythonDir);
     }
@@ -75,18 +80,21 @@ async function parseArguments() {
 
     // Check if the needed executables are found
     [
-        ["python", pythonDir],
-        ["pandoc", pandocDir]
-    ].forEach((executable) => {
-        const p = which.sync(executable[0], { nothrow: true });
+        ["python", pythonExe, pythonDir],
+        ["pandoc", pandocExe, pandocDir]
+    ].forEach((el) => {
+        let key = el[0];
+        let exe = el[1];
+        let dir = el[2];
+        const p = which.sync(exe, { nothrow: true });
         if (p) {
-            if (executable[1] && !p.includes(executable[1])) {
-                throw `Executable '${executable[0]}' not found in path '${executable[1]}'`;
+            if (dir && !p.includes(dir)) {
+                throw `Executable '${exe}' not found in path '${dir}'`;
             }
-            args[`${executable[0]}` + "Path"] = p;
-            console.log(`Found '${executable[0]}' : '${p}'`);
+            args[`${key}` + "Path"] = p;
+            console.log(`Found '${key}' : '${p}'`);
         } else {
-            console.error("You need '${executable[0]}' in your path!");
+            console.error(`You need '${key}' in your path!`);
             console.errer(process.env.PATH);
             process.exit(1);
         }
@@ -98,7 +106,6 @@ async function parseArguments() {
 
 function getFileSizeMb(path) {
     const stats = fs.statSync(path);
-    const fileSizeInBytes = stats["size"];
     return stats["size"] / 1000000.0;
 }
 
