@@ -15,6 +15,9 @@
     <meta name="keywords" content="$for(keywords)$$keywords$$sep$, $endfor$" />
     $endif$
     <title>$if(title-prefix)$$title-prefix$ – $endif$$pagetitle$</title>
+    <style>
+        $styles.html()$
+    </style>
     $for(css)$
     <link rel="stylesheet" href="$css$" />
     $endfor$
@@ -31,53 +34,52 @@
 </head>
 
 <body id="main">
-    <a id="sidenav-btn" class="button" href="javascript:void(0)" onclick="openSideNav()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="12" viewBox="0 0 18 12">
-            <path fill="currentColor" d="M0 0h18v2H0zM0 5h18v2H0zM0 10h18v2H0z" />
-        </svg>
-    </a>
+<a id="sidenav-btn" class="button" href="javascript:void(0)" onclick="openSideNav()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="12" viewBox="0 0 18 12">
+        <path fill="currentColor" d="M0 0h18v2H0zM0 5h18v2H0zM0 10h18v2H0z" />
+    </svg>
+</a>
 
-    <div id="side-nav" class="sidenav">
-        <div id="nav-menu">
-            <a class="expand-btn" id="expand" href="javascript:void(0)" onClick="toggleExpandCollapse()">⊞</a>
-            <a class="close-btn" href="javascript:void(0)" onclick="closeSideNav()">&times;</a>
-        </div>
-        $if(toc)$
-        <div id="nav-content">
-        <nav id="$idprefix$TOC" role="doc-toc">
-            $if(toc-title)$
-            <h2 id="$idprefix$toc-title">$toc-title$</h2>
-            $endif$
-            $table-of-contents$
-        </nav>
-        </div>
-        $endif$
+<div id="side-nav" class="sidenav">
+    <div id="nav-menu">
+        <a class="expand-btn" id="expand" href="javascript:void(0)" onClick="toggleExpandCollapse()">⊞</a>
+        <a class="close-btn" href="javascript:void(0)" onclick="closeSideNav()">&times;</a>
     </div>
-
-    $for(include-before)$
-    $include-before$
-    $endfor$
-    $if(title)$
-
-    <div id="main-markdown">
-        <header id="title-block-header">
-            <h1 class="title">$title$</h1>
-            $if(subtitle)$
-            <p class="subtitle">$subtitle$</p>
-            $endif$
-            $for(author)$
-            <p class="author">$author$</p>
-            $endfor$
-            $if(date)$
-            <p class="date">$date$</p>
-            $endif$
-        </header>
+    $if(toc)$
+    <div id="nav-content">
+    <nav id="$idprefix$TOC" role="doc-toc">
+        $if(toc-title)$
+        <h2 id="$idprefix$toc-title">$toc-title$</h2>
         $endif$
-        $body$
+        $table-of-contents$
+    </nav>
     </div>
-    $for(include-after)$
-    $include-after$
+    $endif$
+</div>
+
+$for(include-before)$
+$include-before$
+$endfor$
+<div id="main-markdown">
+$if(title)$
+<header id="title-block-header">
+    <h1 class="title">$title$</h1>
+    $if(subtitle)$
+    <p class="subtitle">$subtitle$</p>
+    $endif$
+    $for(author)$
+    <p class="author">$author$</p>
     $endfor$
+    $if(date)$
+    <p class="date">$date$</p>
+    $endif$
+</header>
+$endif$
+$body$
+</div>
+$for(include-after)$
+$include-after$
+$endfor$
 </body>
 
 </html>
