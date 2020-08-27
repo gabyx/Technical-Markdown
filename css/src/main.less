@@ -3,6 +3,7 @@
 @import (inline) "fonts.less";
 @import "numbered-headings.less";
 @import "images.less";
+@import "code.less";
 @import "header.less";
 @import "math.less";
 @import "quotes.less";
@@ -49,8 +50,11 @@
     .define-blockquote();
     .define-tables();
 
-    // custom styles applied with pandoc attributing in 2.10
+    // custom styles applied
+    // with pandoc attributing in 2.10
     .define-centering();
+
+    .define-code();
 }
 
 .define-toc-style() {

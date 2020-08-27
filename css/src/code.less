@@ -1,0 +1,26 @@
+@import "defines.less";
+
+.define-code() {
+    div.sourceCode {
+        background-color: @main-float-background-color;
+        padding: 1ex;
+        border-style: solid;
+        border-color: @main-float-border-color;
+        border-width: 1.5pt;
+        margin: 0.5ex;
+        border-radius: 4pt;
+    }
+
+    pre.numberSource {
+        margin-left: 2em;
+        code {
+            span {
+                a:first-child::before {
+                    text-decoration: none;
+                    width: 3.5em;
+                    left: -0.8em;
+                }
+            }
+        }
+    }
+}

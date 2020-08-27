@@ -27,7 +27,8 @@ Read the [Readme.md](https://github.com/gabyx/TechnicalMarkdown/blob/master/Read
 for futher information.
 
 ``` { .include }
-chapters/convex-analysis/KonvexeProbleme.md
+chapters/KonvexeProbleme.md
+chapters/MarkdownSamples.md
 ```
 
 # References
