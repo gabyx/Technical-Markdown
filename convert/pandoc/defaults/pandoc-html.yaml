@@ -6,7 +6,7 @@ metadata:
 
 template: includes/Template.html
 css: css/main.css
-highlight-style: pygments
+highlight-style: tango
 
 html-math-method:
     method: mathjax

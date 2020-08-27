@@ -1,5 +1,6 @@
 /* Image with caption */
 
+@import "defines.less";
 @import "numbered-images.less";
 
 .define-images() {
@@ -16,8 +17,9 @@
             padding: 5px;
             display: inline-block;
             vertical-align: middle;
-            border: 2pt solid #eee;
-            background-color: white;
+            border: 2pt solid @main-float-border-color;
+            border-radius: 4pt;
+            background-color: @main-float-background-color;
             max-width: 150%;
         }
 
