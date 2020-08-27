@@ -6,6 +6,7 @@ metadata:
 
 template: includes/Template.html
 css: css/main.css
+highlight-style: pygments
 
 html-math-method:
     method: mathjax
