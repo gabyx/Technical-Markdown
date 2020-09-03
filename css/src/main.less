@@ -13,8 +13,7 @@
 @import "sidenav.less";
 @import "scrollbar.less";
 @import "collapsable-list.less";
-
-@heading-color: #00acd1;
+@import "references.less";
 
 .define-title-style() {
     h1,
@@ -23,7 +22,7 @@
     h4,
     h5,
     h6 {
-        color: @heading-color;
+        color: @main-heading-color;
         font-family: @main-font-headers, "Fira Sans", "Helvetica", sans-serif;
         font-weight: bold;
     }
@@ -49,6 +48,7 @@
     .define-quotes();
     .define-blockquote();
     .define-tables();
+    .define-references();
 
     // custom styles applied
     // with pandoc attributing in 2.10
@@ -58,7 +58,6 @@
 }
 
 .define-toc-style() {
-
     .define-title-style();
     font-family: @main-font-text, "Fira Sans", "Helvetica", serif;
     font-size: 14pt;
@@ -81,7 +80,7 @@
     }
 
     a:hover {
-        color: @heading-color;
+        color: @main-heading-color;
     }
 
     .define-collapsable-list();

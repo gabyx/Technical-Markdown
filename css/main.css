@@ -749,6 +749,12 @@ html #main-markdown td :last-child {
 html #main-markdown tr:hover {
   background-color: #f5f5f5;
 }
+html #main-markdown #refs {
+  text-align: left;
+}
+html #main-markdown #refs p {
+  text-align: left;
+}
 html #main-markdown .centered {
   margin-left: auto;
   margin-right: auto;
@@ -1195,6 +1201,12 @@ html #main-markdown-numbered td :last-child {
 }
 html #main-markdown-numbered tr:hover {
   background-color: #f5f5f5;
+}
+html #main-markdown-numbered #refs {
+  text-align: left;
+}
+html #main-markdown-numbered #refs p {
+  text-align: left;
 }
 html #main-markdown-numbered .centered {
   margin-left: auto;
