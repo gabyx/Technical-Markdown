@@ -18,8 +18,8 @@
     - [pandoc-include-files](https://github.com/pandoc/lua-filters/tree/master/include-files) for file transclusion
 
 **Future Warning:**
-I am heading towards a `pandoc`-only solution on the `master` branch, because its more reliable and a better solution.
-Markdown Preview Enhanced is nice but sadly a bit a cumbersome to control blackbox and also a bit slow.
+The `master` branch is a `pandoc`-only solution, because its more reliable.
+Markdown Preview Enhanced is nice but sadly a bit a to much cumbersome to control blackbox and also a bit slow.
 This old solution is still available at commit `13856d37030483679`.
 
 
