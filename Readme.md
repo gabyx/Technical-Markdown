@@ -147,7 +147,7 @@ Uncomment the `tee.py` filters in [pandoc-filters.yaml](convert/pandoc/defaults/
 
 # Issues
 
-### Panflute
+### Panflute [done]
 Using pandoc `>=2.10` we have more types and AST changes in
 
 - [jgm/pandoc#1024](https://github.com/jgm/pandoc/issues/1024),
