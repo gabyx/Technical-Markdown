@@ -12,10 +12,10 @@
 
 - **[pandoc filters](https://pandoc.org/filters.html)** for different AST (abstract syntax tree) conversions:
 
-    - [2 own filters](https://github.com/gabyx/TechnicalMarkdown/tree/master/convert/pandoc/filters) with [panflute](https://github.com/sergiocorreia/panflute) [[doc](http://scorreia.com/software/panflute)]
-    - [pandoc-crosscite](https://github.com/jgm/pandoc-citeproc) [[doc](https://github.com/jgm/pandoc-citeproc/blob/master/man/pandoc-citeproc.1.md)] for citing
+    - [own filters](https://github.com/gabyx/TechnicalMarkdown/tree/master/convert/pandoc/filters) with [panflute](https://github.com/sergiocorreia/panflute) [[doc](http://scorreia.com/software/panflute)]
+    - [--crosscite](https://github.com/jgm/pandoc-citeproc) [[doc](https://github.com/jgm/pandoc-citeproc/blob/master/man/pandoc-citeproc.1.md)] for citing
     - [pandoc-crossref](https://github.com/lierdakil/pandoc-crossref) [[doc](http://lierdakil.github.io/pandoc-crossref)] for cross referencing
-    - [pandoc-include-files](https://github.com/pandoc/lua-filters/tree/master/include-files) for file transclusion
+    - [pandoc-include-files](https://github.com/pandoc/lua-filters/tree/master/include-files) [[doc](https://github.com/pandoc/lua-filters/tree/master/include-files/README.md)] for file transclusion
 
 **Future Warning:**
 The `master` branch is a `pandoc`-only solution, because its more reliable.
