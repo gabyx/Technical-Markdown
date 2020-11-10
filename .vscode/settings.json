@@ -63,5 +63,4 @@
     "python.linting.pycodestyleEnabled": false,
     "python.linting.pylamaEnabled": true,
     "python.linting.pylintEnabled": false,
-    "PandocCiter.DefaultBib": "literature/bibliography.bib",
 }

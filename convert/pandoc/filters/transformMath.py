@@ -4,10 +4,16 @@
 
     - ```math``` code blocks to raw inline latex.
     - remove `<div class="latex-math-define" />`
+
+    Does not work with a block `Para` and afterwards a block `Code`
+    since the `Code` should be merged into the `Para` to not
+    have a newline. If we need this filter this should be fixed.
+    So far we use `raw_tex`.
+
 """
 
 import sys
-from panflute import Para, RawInline, Div, CodeBlock, Element, Doc, Math, run_filter
+from panflute import Para, RawBlock, RawInline, Div, CodeBlock, Element, Doc, Math, run_filter
 from module.utils import log
 
 assert sys.version_info >= (3, 0)
@@ -28,7 +34,7 @@ def transformMath(elem: Element, doc: Doc):
 
         elif isinstance(elem, CodeBlock):
             if "math" in elem.classes:
-                return Para(RawInline((elem.text), format="tex"))
+                return RawBlock(elem.text, format="tex")
     else:
         # Wrap to display math
         if isinstance(elem, CodeBlock):

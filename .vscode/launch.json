@@ -11,8 +11,12 @@
             "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
             "args": [
                 "compile-markdown-tex",
-                "-p",
-                "${command:python.interpreterPath}"
+                "--python",
+                "${config:python.pythonPath}",
+                "--luaPath",
+                "${workspaceFolder}/convert/pandoc/filters",
+                "--pythonPath",
+                "${workspaceFolder}/convert/pandoc/filters"
             ],
             "cwd": "${workspaceRoot}/",
             "console": "internalConsole",
@@ -25,8 +29,12 @@
             "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
             "args": [
                 "compile-markdown-html",
-                "-p",
-                "${command:python.interpreterPath}"
+                "--python",
+                "${config:python.pythonPath}",
+                "--luaPath",
+                "${workspaceFolder}/convert/pandoc/filters",
+                "--pythonPath",
+                "${workspaceFolder}/convert/pandoc/filters"
             ],
             "cwd": "${workspaceRoot}/",
             "console": "internalConsole",
