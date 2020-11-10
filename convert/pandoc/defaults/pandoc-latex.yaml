@@ -2,7 +2,8 @@ from: markdown+markdown_in_html_blocks+link_attributes+native_divs+raw_tex+tex_m
 to: latex
 
 metadata:
-    include-format: markdown+markdown_in_html_blocks+link_attributes+tex_math_dollars
+    include-format: markdown+markdown_in_html_blocks+link_attributes+native_divs+raw_tex+tex_math_dollars
+
 
 variables:
     documentclass: scrreprt
@@ -33,6 +34,7 @@ variables:
     mainfont: Latin Modern Roman
     sansfont: Latin Modern Sans
     monofont: Latin Modern Mono
+    mathfont: Latin Modern Math
 
 number-sections: true
 

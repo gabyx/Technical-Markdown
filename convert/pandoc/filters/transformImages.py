@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """
-Pandoc filter to convert
-    - ```math``` code blocks to raw inline latex.
-    - remove `<div class="latex-math-define" />`
+Pandoc filter to convert image includes to latex commands
+    - `\imageWithCaption` or `\svgWithCaption`
 """
 
 import sys

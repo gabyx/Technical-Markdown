@@ -1,11 +1,11 @@
 ---
 title: "Technical Documents"
 bibliography: ["literature/bibliography.bib"]
-csl: "literature/apa.csl"
+csl: "literature/ieee-with-url.csl"
 crossrefYaml: "includes/pandoc-crossref.yaml"
 link-citations: true
 fontsize: 12pt
-lang: en-US
+lang: en-GB
 toc: true
 toc-depth: 2
 top-level-division: chapter

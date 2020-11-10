@@ -10,10 +10,17 @@
             "args": [
                 "run",
                 "build:html",
-                "-p",
-                "'${config:python.pythonPath}'"
+                "--python",
+                "'${config:python.pythonPath}'",
+                "--luaPath",
+                "${workspaceFolder}/convert/pandoc/filters",
+                "--pythonPath",
+                "${workspaceFolder}/convert/pandoc/filters"
             ],
-            "problemMatcher": []
+            "problemMatcher": [],
+            "presentation": {
+                "group": "converter"
+            }
         },
         {
             "label": "Start Markdown PDF TeX Conversion",
@@ -22,10 +29,17 @@
             "args": [
                 "run",
                 "build:pdf-tex",
-                "-p",
-                "'${config:python.pythonPath}'"
+                "--python",
+                "'${config:python.pythonPath}'",
+                "--luaPath",
+                "${workspaceFolder}/convert/pandoc/filters",
+                "--pythonPath",
+                "${workspaceFolder}/convert/pandoc/filters"
             ],
-            "problemMatcher": []
+            "problemMatcher": [],
+            "presentation": {
+                "group": "converter"
+            }
         },
         {
             "label": "Start Markdown PDF Chrome Conversion",
@@ -34,16 +48,26 @@
             "args": [
                 "run",
                 "build:pdf-chrome",
-                "-p",
-                "'${config:python.pythonPath}'"
+                "--python",
+                "'${config:python.pythonPath}'",
+                "--luaPath",
+                "${workspaceFolder}/convert/pandoc/filters/module-lua",
+                "--pythonPath",
+                "${workspaceFolder}/convert/pandoc/filters"
             ],
-            "problemMatcher": []
+            "problemMatcher": [],
+            "presentation": {
+                "group": "converter"
+            }
         },
         {
             "label": "Start Markdown HTML Browser Sync",
             "type": "shell",
             "command": "yarn run show",
-            "problemMatcher": []
+            "problemMatcher": [],
+            "presentation": {
+                "group": "converter"
+            }
         }
     ]
 }

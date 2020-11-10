@@ -21,14 +21,12 @@ async function parseArguments() {
     }
 
     let args = yargs
-        .option("p", {
-            alias: "pythonPath",
+        .option("python", {
             type: "string",
             describe: "The path to your python executable.",
             demandOption: true
         })
-        .coerce("pythonPath", function (p) {
-            console.log(p, typeof p);
+        .coerce("python", function (p) {
             if (!fs.existsSync(p)) {
                 m = `Python path does not exists: ${p}`;
                 console.error(m);
@@ -36,20 +34,46 @@ async function parseArguments() {
             }
             return path.normalize(p);
         })
-        .option("e", {
-            alias: "pandocPath",
+        .option("pandoc", {
             type: "string",
             describe: "The path to your pandoc executable.",
             demandOption: false
         })
-        .coerce("pandocPath", function (p) {
-            p.strip;
-            if (!fs.existsSync(p)) {
-                m = `Pandoc path does not exists: ${p}`;
-                console.error(m);
-                throw m;
-            }
-            return path.normalize(p);
+        .option("luaPath", {
+            type: "array",
+            describe: "The search paths directories which is added to the `LUA_PATH` env. variable.",
+            demandOption: false,
+            default: [],
+            array:true,
+        })
+        .array("luaPath")
+        .coerce("luaPath", function (p) {
+            p.forEach((el, i) => {
+                if (!fs.existsSync(el)) {
+                    m = `Lua search path does not exists: ${el}`;
+                    console.error(m);
+                }
+                p[i] = path.normalize(el);
+            });
+            return p;
+        })
+        .option("pythonPath", {
+            alias: "pythonPath",
+            type: "array",
+            describe: "The search paths directories which is added to the `PYTHONPATH` env. variable.",
+            default: [],
+            array:true,
+            demandOption: false
+        })
+        .coerce("pythonPath", function (p) {
+            p.forEach((el, i) => {
+                if (!fs.existsSync(el)) {
+                    m = `Python search path does not exists: ${el}`;
+                    console.error(m);
+                }
+                p[i] = path.normalize(el);
+            });
+            return p;
         }).argv;
 
     // Add python dir to path
@@ -57,23 +81,25 @@ async function parseArguments() {
 
     var pythonDir = null;
     var pythonExe = os.platform() == "win32" ? "python.exe" : "python";
-    if (args.pythonPath) {
-        pythonDir = path.dirname(args.pythonPath);
-        pythonExe = path.basename(args.pythonPath);
+    if (args.python) {
+        pythonDir = path.dirname(args.python);
+        pythonExe = path.basename(args.python);
         console.log(`Setting python path ${pythonDir}`);
         paths.push(pythonDir);
     }
 
     var pandocDir = null;
     var pandocExe = os.platform() == "win32" ? "pandoc.exe" : "pandoc";
-    if (args.pandocPath) {
-        pandocDir = path.dirname(args.pandocPath);
-        pandocExe = path.basename(args.pandocPath);
+    if (args.pandoc) {
+        pandocDir = path.dirname(args.pandoc);
+        pandocExe = path.basename(args.pandoc);
         console.log(`Setting pandoc path ${pandocDir}`);
         paths.push(pythonDir);
     }
 
-    paths.push(process.env.PATH);
+    if ("PATH" in process.env) {
+        paths.push(process.env.PATH);
+    }
     env.set({
         PATH: paths.join(path.delimiter)
     });
@@ -91,13 +117,40 @@ async function parseArguments() {
             if (dir && !p.includes(dir)) {
                 throw `Executable '${exe}' not found in path '${dir}'`;
             }
-            args[`${key}` + "Path"] = p;
+            args[`${key}`] = p;
             console.log(`Found '${key}' : '${p}'`);
         } else {
             console.error(`You need '${key}' in your path!`);
             console.errer(process.env.PATH);
             process.exit(1);
         }
+    });
+
+    // Add lua search paths to `LUA_PATH` env.
+    var luaPaths = [];
+    if ("LUA_PATH" in process.env) {
+        luaPaths.push(process.env.LUA_PATH);
+    }
+    args.luaPath.forEach((el, i) => {
+        luaPaths.push(`${el}/?`);
+        luaPaths.push(`${el}/?.lua`);
+    });
+    console.info(`Lua paths: ${luaPaths}`);
+    env.set({
+        LUA_PATH: luaPaths.join(";")
+    });
+
+    // Add python paths to `PYTHONPATH` env.
+    var pythonPaths = [];
+    if ("PYTHONPATH" in process.env) {
+        pythonPath.push(process.env.PYTHONPATH);
+    }
+    args.pythonPath.forEach((el) => {
+        pythonPaths.push(el);
+    });
+    console.info(`Python paths: ${pythonPaths}`);
+    env.set({
+        PYTHONPATH: pythonPaths.join(path.delimiter)
     });
 
     // Set as parsed
@@ -110,13 +163,13 @@ function getFileSizeMb(path) {
 }
 
 async function runPandoc(args) {
-    if (!parsedArgs || !parsedArgs["pandocPath"]) {
+    if (!parsedArgs || !parsedArgs["pandoc"]) {
         throw Error("Arguments not parsed!");
     }
 
     return new Promise((resolve, reject) => {
         try {
-            const program = spawn(parsedArgs["pandocPath"], args, {
+            const program = spawn(parsedArgs["pandoc"], args, {
                 cwd: process.cwd(),
                 stdio: ["ignore", "ignore", "inherit"]
             });
@@ -133,7 +186,7 @@ async function runPandoc(args) {
             });
         } catch (error) {
             return reject(
-                new Error(`Executable '${parsedArgs["pandocPath"]}' could not be started: '${error.toString()}'`)
+                new Error(`Executable '${parsedArgs["pandoc"]}' could not be started: '${error.toString()}'`)
             );
         }
     });
@@ -148,6 +201,7 @@ async function htmlExport(markdownFile, outFile) {
         "--defaults=pandoc-dirs.yaml",
         "--defaults=pandoc-html.yaml",
         "--defaults=pandoc-filters.yaml",
+        "--citeproc",
         "-o",
         outFile,
         markdownFile
@@ -162,6 +216,7 @@ async function latexExport(markdownFile, outFile) {
         "--defaults=pandoc-dirs.yaml",
         "--defaults=pandoc-latex.yaml",
         "--defaults=pandoc-filters.yaml",
+        "--citeproc",
         "-o",
         outFile,
         markdownFile
@@ -180,11 +235,13 @@ gulp.task("compile-less", async function () {
 
 /* Task to compile all markdown files */
 gulp.task("compile-markdown-html", async function () {
+    await parseArguments();
     await htmlExport(path.resolve("Content.md"), "Content.html");
 });
 
 /* Task to compile all markdown files */
 gulp.task("compile-markdown-tex", async function () {
+    await parseArguments();
     await latexExport(path.resolve("Content.md"), "Content.pdf");
 });
 

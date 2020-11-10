@@ -23,25 +23,91 @@ $endif$
 $if(papersize)$
   $papersize$paper,
 $endif$
+$if(beamer)$
+  ignorenonframetext,
+$if(handout)$
+  handout,
+$endif$
+$if(aspectratio)$
+  aspectratio=$aspectratio$,
+$endif$
+$endif$
 $for(classoption)$
   $classoption$$sep$,
 $endfor$
 ]{$documentclass$}
-
-
+% $if(beamer)$
+% $if(background-image)$
+% \usebackgroundtemplate{%
+%   \includegraphics[width=\paperwidth]{$background-image$}%
+% }
+% $endif$
+% \usepackage{pgfpages}
+% \setbeamertemplate{caption}[numbered]
+% \setbeamertemplate{caption label separator}{: }
+% \setbeamercolor{caption name}{fg=normal text.fg}
+% \beamertemplatenavigationsymbols$if(navigation)$$navigation$$else$empty$endif$
+% $for(beameroption)$
+% \setbeameroption{$beameroption$}
+% $endfor$
+% % Prevent slide breaks in the middle of a paragraph
+% \widowpenalties 1 10000
+% \raggedbottom
+% $if(section-titles)$
+% \setbeamertemplate{part page}{
+%   \centering
+%   \begin{beamercolorbox}[sep=16pt,center]{part title}
+%     \usebeamerfont{part title}\insertpart\par
+%   \end{beamercolorbox}
+% }
+% \setbeamertemplate{section page}{
+%   \centering
+%   \begin{beamercolorbox}[sep=12pt,center]{part title}
+%     \usebeamerfont{section title}\insertsection\par
+%   \end{beamercolorbox}
+% }
+% \setbeamertemplate{subsection page}{
+%   \centering
+%   \begin{beamercolorbox}[sep=8pt,center]{part title}
+%     \usebeamerfont{subsection title}\insertsubsection\par
+%   \end{beamercolorbox}
+% }
+% \AtBeginPart{
+%   \frame{\partpage}
+% }
+% \AtBeginSection{
+%   \ifbibliography
+%   \else
+%     \frame{\sectionpage}
+%   \fi
+% }
+% \AtBeginSubsection{
+%   \frame{\subsectionpage}
+% }
+% $endif$
+% $endif$
+% $if(beamerarticle)$
+% \usepackage{beamerarticle} % needs to be loaded first
+% $endif$
+% $if(fontfamily)$
+% \usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
+% $else$
+% \usepackage{lmodern}
+% $endif$
 $if(linestretch)$
 \usepackage{setspace}
 $endif$
-
-\usepackage{amssymb,amsmath}
+\usepackage{amsmath}
 \usepackage{ifxetex,ifluatex}
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[$if(fontenc)$$fontenc$$else$T1$endif$]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
+  \usepackage{amssymb}
 \else % if luatex or xetex
 $if(mathspec)$
   \ifxetex
+    \usepackage{amssymb}
     \usepackage{mathspec}
   \else
     \usepackage{unicode-math}
@@ -92,12 +158,45 @@ $if(CJKmainfont)$
   \fi
 $endif$
 \fi
+% $if(beamer)$
+% $if(theme)$
+% \usetheme[$for(themeoptions)$$themeoptions$$sep$,$endfor$]{$theme$}
+% $endif$
+% $if(colortheme)$
+% \usecolortheme{$colortheme$}
+% $endif$
+% $if(fonttheme)$
+% \usefonttheme{$fonttheme$}
+% $endif$
+% $if(mainfont)$
+% \usefonttheme{serif} % use mainfont rather than sansfont for slide text
+% $endif$
+% $if(innertheme)$
+% \useinnertheme{$innertheme$}
+% $endif$
+% $if(outertheme)$
+% \useoutertheme{$outertheme$}
+% $endif$
+% $endif$
 % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \IfFileExists{microtype.sty}{% use microtype if available
   \usepackage[$for(microtypeoptions)$$microtypeoptions$$sep$,$endfor$]{microtype}
   \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
+% $if(indent)$
+% $else$
+% \makeatletter
+% \@ifundefined{KOMAClassName}{% if non-KOMA class
+%   \IfFileExists{parskip.sty}{%
+%     \usepackage{parskip}
+%   }{% else
+%     \setlength{\parindent}{0pt}
+%     \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+% }{% if KOMA class
+%   \KOMAoptions{parskip=half}}
+% \makeatother
+% $endif$
 $if(verbatim-in-note)$
 \usepackage{fancyvrb}
 $endif$
@@ -135,8 +234,15 @@ $if(verbatim-in-note)$
 \VerbatimFootnotes % allow verbatim text in footnotes
 $endif$
 $if(geometry)$
+% $if(beamer)$
+% \geometry{$for(geometry)$$geometry$$sep$,$endfor$}
+% $else$
 \usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
+% $endif$
 $endif$
+% $if(beamer)$
+% \newif\ifbibliography
+% $endif$
 $if(listings)$
 \usepackage{listings}
 \newcommand{\passthrough}[1]{#1}
@@ -151,6 +257,14 @@ $highlighting-macros$
 $endif$
 $if(tables)$
 \usepackage{longtable,booktabs}
+\usepackage{calc} % for calculating minipage widths
+% $if(beamer)$
+% \usepackage{caption}
+% % Make caption package work with longtable
+% \makeatletter
+% \def\fnum@table{\tablename~\thetable}
+% \makeatother
+% $else$
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
 \makeatletter
@@ -159,6 +273,7 @@ $if(tables)$
 % Allow footnotes in longtable head/foot
 \IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
 \makesavenoteenv{longtable}
+% $endif$
 $endif$
 $if(graphics)$
 \usepackage{graphicx}
@@ -192,6 +307,8 @@ $if(numbersections)$
 $else$
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 $endif$
+% $if(beamer)$
+% $else$
 $if(block-headings)$
 % Make \paragraph and \subparagraph free-standing
 \ifx\paragraph\undefined\else
@@ -203,6 +320,7 @@ $if(block-headings)$
   \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
 \fi
 $endif$
+% $endif$
 $if(pagestyle)$
 \pagestyle{$pagestyle$}
 $endif$
@@ -213,9 +331,9 @@ $if(lang)$
 \ifxetex
   % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
   \usepackage{polyglossia}
-  \setmainlanguage[$polyglossia-lang.options$]{$polyglossia-lang.name$}
+  \setmainlanguage[$for(polyglossia-lang.options)$$polyglossia-lang.options$$sep$,$endfor$]{$polyglossia-lang.name$}
 $for(polyglossia-otherlangs)$
-  \setotherlanguage[$polyglossia-otherlangs.options$]{$polyglossia-otherlangs.name$}
+  \setotherlanguage[$for(polyglossia-otherlangs.options)$$polyglossia-otherlangs.options$$sep$,$endfor$]{$polyglossia-otherlangs.name$}
 $endfor$
 \else
   \usepackage[shorthands=off,$for(babel-otherlangs)$$babel-otherlangs$,$endfor$main=$babel-lang$]{babel}
@@ -224,6 +342,9 @@ $if(babel-newcommands)$
 $endif$
 \fi
 $endif$
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
 $if(dir)$
 \ifxetex
   % Load bidi as late as possible as it modifies e.g. graphicx
@@ -250,33 +371,65 @@ $endif$
 $if(csl-refs)$
 \newlength{\cslhangindent}
 \setlength{\cslhangindent}{1.5em}
-\newenvironment{cslreferences}%
-  {$if(csl-hanging-indent)$\setlength{\parindent}{0pt}%
-  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces$endif$}%
-  {\par}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[3] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1 \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces\fi
+  % set entry spacing
+  \ifnum #2 > 0
+  \setlength{\parskip}{#2\baselineskip}
+  \fi
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 $endif$
 
 $if(title)$
 \title{$title$$if(thanks)$\thanks{$thanks$}$endif$}
 $endif$
 $if(subtitle)$
+% $if(beamer)$
+% $else$
 \usepackage{etoolbox}
 \makeatletter
 \providecommand{\subtitle}[1]{% add subtitle to \maketitle
   \apptocmd{\@title}{\par {\large #1 \par}}{}{}
 }
 \makeatother
+% $endif$
 \subtitle{$subtitle$}
 $endif$
 \author{$for(author)$$author$$sep$ \and $endfor$}
 \date{$date$}
+% $if(beamer)$
+% $if(institute)$
+% \institute{$for(institute)$$institute$$sep$ \and $endfor$}
+% $endif$
+% $if(titlegraphic)$
+% \titlegraphic{\includegraphics{$titlegraphic$}}
+% $endif$
+% $if(logo)$
+% \logo{\includegraphics{$logo$}}
+% $endif$
+% $endif$
 
 \begin{document}
 $if(has-frontmatter)$
 \frontmatter
 $endif$
 $if(title)$
+% $if(beamer)$
+% \frame{\titlepage}
+% $else$
 \maketitle
+% $endif$
 $if(abstract)$
 \begin{abstract}
 $abstract$
@@ -335,11 +488,27 @@ $else$
 \renewcommand\refname{$biblio-title$}
 $endif$
 $endif$
-\bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
+% $if(beamer)$
+% \begin{frame}[allowframebreaks]{$biblio-title$}
+%   \bibliographytrue
+% $endif$
+  \bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
+% $if(beamer)$
+% \end{frame}
+% $endif$
+
 $endif$
 $endif$
 $if(biblatex)$
+% $if(beamer)$
+% \begin{frame}[allowframebreaks]{$biblio-title$}
+%   \bibliographytrue
+%   \printbibliography[heading=none]
+% \end{frame}
+% $else$
 \printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+% $endif$
+
 $endif$
 $for(include-after)$
 $include-after$
