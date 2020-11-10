@@ -37,7 +37,7 @@ yarn install
 
 ## Pandoc
 
-Install [pandoc](https://pandoc.org/installing.html) (>= 2.9.2.1)
+Install [pandoc](https://pandoc.org/installing.html) (>= 2.9.2.1, testet with 2.11.0.4)
 
 For **Linux** and **macOs**:
 
