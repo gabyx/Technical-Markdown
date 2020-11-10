@@ -95,3 +95,5 @@ protected:
     OutputSockets m_outputs;  //!< The output sockets.
 };
 ```
+
+Some inline code `int a; a += "asd"`
