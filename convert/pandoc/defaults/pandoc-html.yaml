@@ -1,8 +1,8 @@
-from: markdown+markdown_in_html_blocks+link_attributes+inline_code_attributes+backtick_code_blocks+fenced_code_attributes+tex_math_dollars
+from: markdown+markdown_in_html_blocks+link_attributes+inline_code_attributes+raw_attribute+backtick_code_blocks+fenced_code_attributes+tex_math_dollars
 to: html5
 
 metadata:
-    include-format: markdown+markdown_in_html_blocks+link_attributes+inline_code_attributes+backtick_code_blocks+fenced_code_attributes+tex_math_dollars
+    include-format: markdown+markdown_in_html_blocks+link_attributes+inline_code_attributes+raw_attribute+backtick_code_blocks+fenced_code_attributes+tex_math_dollars
 
 template: includes/Template.html
 css: css/main.css

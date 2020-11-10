@@ -13,7 +13,7 @@ numbersections: true
 secnumdepth: 3
 ---
 
-``` { .include format=html }
+``` { .include format=html include-if-format=html;html5}
 includes/Math.html
 ```
 

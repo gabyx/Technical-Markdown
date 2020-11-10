@@ -1,11 +1,9 @@
 filters:
-    - teeStart.py
+    # - teeStart.py
     - pandoc-include-files-set-format.lua
     # - tee.py
     - pandoc-include-files.lua
-    - tee.py
-    - transformMath.py
-    - tee.py
+    # - tee.py
     - pandoc-crossref
     # - tee.py
     - transformImages.py

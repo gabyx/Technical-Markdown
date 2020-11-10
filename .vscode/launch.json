@@ -12,7 +12,7 @@
             "args": [
                 "compile-markdown-tex",
                 "--python",
-                "${config:python.pythonPath}",
+                "${command:python.interpreterPath}",
                 "--luaPath",
                 "${workspaceFolder}/convert/pandoc/filters",
                 "--pythonPath",
@@ -30,7 +30,7 @@
             "args": [
                 "compile-markdown-html",
                 "--python",
-                "${config:python.pythonPath}",
+                "${command:python.interpreterPath}",
                 "--luaPath",
                 "${workspaceFolder}/convert/pandoc/filters",
                 "--pythonPath",
