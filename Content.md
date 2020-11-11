@@ -13,7 +13,7 @@ numbersections: true
 secnumdepth: 3
 ---
 
-``` { .include format=html include-if-format=html;html5}
+```{.include format=html include-if-format=html;html5}
 includes/Math.html
 ```
 
@@ -26,7 +26,7 @@ a fully automated conversion sequence with `yarn`, `gulp` and of course [`pandoc
 Read the [Readme.md](https://github.com/gabyx/TechnicalMarkdown/blob/master/Readme.md)
 for futher information.
 
-``` { .include }
+```{.include}
 chapters/KonvexeProbleme.md
 chapters/MarkdownSamples.md
 ```

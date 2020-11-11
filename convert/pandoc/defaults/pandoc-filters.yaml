@@ -7,6 +7,7 @@ filters:
     - pandoc-crossref
     # - tee.py
     - transformImages.py
+    - citeproc
     # - tee.py
     # Quote replacement is not needed.
     # - pandoc-quotes.lua
