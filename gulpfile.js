@@ -201,7 +201,6 @@ async function htmlExport(markdownFile, outFile) {
         "--defaults=pandoc-dirs.yaml",
         "--defaults=pandoc-html.yaml",
         "--defaults=pandoc-filters.yaml",
-        "--citeproc",
         "-o",
         outFile,
         markdownFile
@@ -216,7 +215,6 @@ async function latexExport(markdownFile, outFile) {
         "--defaults=pandoc-dirs.yaml",
         "--defaults=pandoc-latex.yaml",
         "--defaults=pandoc-filters.yaml",
-        "--citeproc",
         "-o",
         outFile,
         markdownFile
