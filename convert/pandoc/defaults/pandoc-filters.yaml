@@ -4,6 +4,8 @@ filters:
     # - tee.py
     - pandoc-include-files.lua
     # - tee.py
+    - pandoc-codeblock-var-replace.lua
+    # - tee.py
     - pandoc-crossref
     # - tee.py
     - transformImages.py
