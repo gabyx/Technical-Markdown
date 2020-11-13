@@ -813,7 +813,18 @@ Some inline code \texttt{int\ a;\ a\ +=\ "asd"}
 \hypertarget{html-table}{%
 \section{HTML Table}\label{html-table}}
 
-Cross refeference do not work here.
+\begin{itemize}
+\tightlist
+\item
+  Included html file as \texttt{html}.
+\item
+  Markdown citations/cross refeferences do not work inside.
+\item
+  HTML citations dont work.
+\item
+  Table caption is not parsed \texttt{table\_caption} not allowed as
+  extension.
+\end{itemize}
 
 \begin{longtable}[]{@{}llll@{}}
 \toprule
@@ -879,17 +890,35 @@ Properties\strut
 \bottomrule
 \end{longtable}
 
-Included latex file parsed in as \texttt{latex}:
+\hypertarget{latex-table}{%
+\section{Latex Table}\label{latex-table}}
+
+\begin{itemize}
+\tightlist
+\item
+  Included latex file as raw \texttt{latex}.
+\item
+  Latex citations do work inside.
+\end{itemize}
 
 \begin{longtable}[]{@{}llll@{}}
 \toprule
-Fruits & Vegetables & Constraints & Properties\tabularnewline
+\begin{minipage}[b]{0.22\columnwidth}\raggedright
+Fruits\strut
+\end{minipage} & \begin{minipage}[b]{0.22\columnwidth}\raggedright
+Vegetables\strut
+\end{minipage} & \begin{minipage}[b]{0.22\columnwidth}\raggedright
+Constraints\strut
+\end{minipage} & \begin{minipage}[b]{0.22\columnwidth}\raggedright
+Properties\strut
+\end{minipage}\tabularnewline
 \midrule
 \endhead
 \begin{minipage}[t]{0.22\columnwidth}\raggedright
 \textbf{First}\strut
 \end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
 \begin{enumerate}
+\tightlist
 \item
   Lorem ipsum.
 \item
@@ -897,6 +926,7 @@ Fruits & Vegetables & Constraints & Properties\tabularnewline
 \end{enumerate}\strut
 \end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
 \begin{description}
+\tightlist
 \item[Definition 1]
 \(\int_0^1{x^2} := ?\)
 \item[Definition 2]
@@ -909,6 +939,7 @@ This is \(x^2\)
 \textbf{Second}\strut
 \end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
 \begin{itemize}
+\tightlist
 \item
   Lorem ipsum.
 \item
@@ -916,6 +947,7 @@ This is \(x^2\)
 \end{itemize}\strut
 \end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
 \begin{enumerate}
+\tightlist
 \item
   Lorem sit.
 \item
@@ -923,6 +955,7 @@ This is \(x^2\)
 \end{enumerate}\strut
 \end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
 \begin{enumerate}
+\tightlist
 \item
   Aliquam eu risus.
 \item
@@ -933,9 +966,13 @@ This is \(x^2\)
 \end{longtable}
 
 \hypertarget{sec:multi-line-table}{%
-\section{Multiline Table}\label{sec:multi-line-table}}
+\section{Markdown Table}\label{sec:multi-line-table}}
 
-Cross reference do work here.
+\begin{itemize}
+\tightlist
+\item
+  Cross references do work here.
+\end{itemize}
 
 \begin{longtable}[]{@{}clrl@{}}
 \caption{Here's a multiline table without a header.}\tabularnewline
@@ -961,8 +998,6 @@ Here's another one.\strut
 \end{minipage}\tabularnewline
 \bottomrule
 \end{longtable}
-
-and another one
 
 \begin{longtable}[]{@{}lll@{}}
 \caption{Sample grid table.}\tabularnewline

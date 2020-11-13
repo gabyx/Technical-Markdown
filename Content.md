@@ -9,7 +9,6 @@ lang: en-GB
 toc: true
 toc-depth: 2
 top-level-division: chapter
-numbersections: true
 secnumdepth: 3
 ---
 

@@ -1,11 +1,11 @@
 filters:
-    # - teeStart.py
+    - teeStart.py
     - pandoc-include-files.lua
     # - tee.py
     - pandoc-codeblock-var-replace.lua
     # - tee.py
     - pandoc-block-filter-format.lua
-    # - tee.py
+    - tee.py
     - pandoc-crossref
     # - tee.py
     - transformImages.py

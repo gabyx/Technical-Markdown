@@ -2,24 +2,29 @@
 
 ## HTML Table
 
-Cross refeference do not work here.
-
-<!-- No format attribute needed since we allow HTML in markdown.
-     For latex we include another file. -->
+:::{include-if-format=latex;html;html5;json;native}
+- Included html file as `html`.
+- Markdown citations/cross refeferences do not work inside.
+- HTML citations dont work.
+- Table caption is not parsed `table_caption` not allowed as extension.
+:::
 ```{.include format=html+tex_math_dollars .var-replace include-if-format=latex;html;html5;json;native}
 chapters/tables/TableExample.html
 ```
 
-:::{include-if-format=latex}
-Included latex file parsed in as `latex`:
+:::{include-if-format=latex;json;native}
+## Latex Table
+- Included latex file as raw `latex`.
+- Latex citations do work inside.
 :::
-```{.include format=latex include-if-format=latex;json;native}
+
+```{.include format=latex raw=true include-if-format=latex;json;native}
 chapters/tables-tex/TableExample.tex
 ```
 
-## Multiline Table {#sec:multi-line-table}
+## Markdown Table {#sec:multi-line-table}
 
-Cross reference do work here.
+- Cross references do work here.
 ```{.include}
-chapters/tables/TableExample.md
+chapters/TableExample.md
 ```
