@@ -6,13 +6,74 @@
 -- pandoc's List type
 local List = require 'pandoc.List'
 
---- Get include auto mode
+-------------------------------------
+
+-- This is the codeblock-var-replace
+-- filter directly copied, since we
+-- cannot run Lua filters inside this filter
+-- https://github.com/jgm/pandoc/issues/6830
+-- We replace variables in include blocks.
+
+local sys = require 'pandoc.system'
+local utils = require 'pandoc.utils'
+local ut = require "module-lua.utils"
+
+-- Save env. variables
+local env = sys.environment()
+
+-- Save meta table and metadata
+local meta
+function save_meta (m)
+  meta = m
+end
+
+--- Replace variables in code blocks
+local function var_replace_codeblocks (cb)
+
+  --- Replace variable with values from environment
+  --- and meta data (stringifing).
+  local function replace(what, var)
+
+    if what == "env" then
+      return env[var]
+    elseif what == "meta" then
+      local v = meta[var]
+      if v then
+        return utils.stringify(v)
+      end
+    end
+    return nil
+  end
+
+  -- ignore code blocks which are not of class "var-replace".
+  if not cb.classes:includes 'var-replace' then
+    return
+  end
+
+  cb.text = cb.text:gsub("%${(%l+):([^}]+)}", replace)
+end
+
+
+-------------------------------------
+
+--- Get default settings
 local include_auto = false
+local default_format = nil
+local include_fail_if_read_error = false
+
 function get_vars (meta)
   if meta['include-auto'] then
     include_auto = true
   end
+
+  if meta['include-fail-if-read-error'] then
+    include_fail_if_read_error = true
+  end
+
+  -- If this is nil, markdown is used as a default format.
+  default_format = meta['include-format']
 end
+
 
 --- Keep last heading level found
 local last_heading_level = 0
@@ -40,7 +101,7 @@ end
 --- `exclude-if-format='formatA;formatB;...'
 --- `include-if-format='formatA;formatB;...`
 --- Default: true
-local function is_included(cb, file)
+local function is_included(cb)
   local include = true
   local exclude = false
 
@@ -78,8 +139,19 @@ function transclude (cb)
     return
   end
 
-  -- Markdown is used if this is nil.
+  -- replace vars
+  var_replace_codeblocks(cb)
+
+  -- Filter by includes and excludes
+  if not is_included(cb) then
+    return List{} -- remove block
+  end
+
   local format = cb.attributes['format']
+  if not format then
+    -- Markdown is used if this is nil.
+    format = default_format
+  end
 
   -- Attributes shift headings
   local shift_heading_level_by = 0
@@ -100,28 +172,26 @@ function transclude (cb)
   for line in cb.text:gmatch('[^\n]+') do
     if line:sub(1,2) ~= '//' then
 
-      -- Filter by includes and excludes
-      if not is_included(cb, line) then
-        io.stderr:write("Excluding: '" .. line .. "'\n")
-        goto skip
-      end
-
       -- Replace extension if specified
       line = replace_ext(cb, line)
-
       io.stderr:write("Including: '" .. line .. "'\n")
 
       local fh = io.open(line)
       if not fh then
         io.stderr:write("Cannot open file " .. line .. " | Skipping includes\n")
+        if include_fail_if_read_error then
+          error("Abort due to read failure")
+        end
       else
         local contents = pandoc.read(fh:read '*a', format).blocks
         last_heading_level = 0
+
         -- recursive transclusion
         contents = pandoc.walk_block(
           pandoc.Div(contents),
           { Header = update_last_level, CodeBlock = transclude }
           ).content
+
         --- reset to level before recursion
         last_heading_level = buffer_last_heading_level
         blocks:extend(shift_headings(contents, shift_heading_level_by))
@@ -135,6 +205,7 @@ function transclude (cb)
 end
 
 return {
+  { Meta = save_meta },
   { Meta = get_vars },
   { Header = update_last_level, CodeBlock = transclude }
 }

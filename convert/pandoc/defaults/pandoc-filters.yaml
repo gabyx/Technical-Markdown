@@ -1,10 +1,10 @@
 filters:
     # - teeStart.py
-    - pandoc-include-files-set-format.lua
-    # - tee.py
     - pandoc-include-files.lua
     # - tee.py
     - pandoc-codeblock-var-replace.lua
+    # - tee.py
+    - pandoc-block-filter-format.lua
     # - tee.py
     - pandoc-crossref
     # - tee.py

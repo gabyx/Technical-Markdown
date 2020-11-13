@@ -1,0 +1,8 @@
+from: markdown+markdown_in_html_blocks+link_attributes+inline_code_attributes+raw_attribute+backtick_code_blocks+fenced_code_attributes+tex_math_dollars+fenced_divs+inline_code_attributes
+
+# These custom variables all go into the AST!
+metadata:
+    include-format: markdown+markdown_in_html_blocks+link_attributes+inline_code_attributes+raw_attribute+backtick_code_blocks+fenced_code_attributes+tex_math_dollars+fenced_divs+inline_code_attributes
+
+    include-table-dir: "tables"
+    include-fail-if-read-error: true

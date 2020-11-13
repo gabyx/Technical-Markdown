@@ -14,9 +14,11 @@ local env = sys.environment()
 -- Save meta table and metadata
 local meta
 local metadata
+local vars
 function save_meta (m)
   meta = m
   metadata = m['metadata']
+  vars = m['variables']
 end
 
 --- Replace variable with values from environment
@@ -28,13 +30,6 @@ local function replace(what, var)
     local v = meta[var]
     if v then
       return utils.stringify(v)
-    end
-  elseif what == "metadata" then
-    if metadata then
-      local v = metadata[var]
-      if v then
-        return utils.stringify(v)
-      end
     end
   end
   return nil

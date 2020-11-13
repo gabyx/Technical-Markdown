@@ -146,12 +146,13 @@
     font-weight: 900;
     font-style : italic;
 }
-/**
-* Numerierte Headings
-*/
+/* General defines for the document */
 /* Image with caption */
 /**
 * numbered images
+*/
+/**
+* Numerierte Headings
 */
 /*  
     Custom header with company logo
@@ -159,7 +160,6 @@
     which can be placed at the top of the markdown.
 */
 /* Quotes for the language */
-/* General defines for the document */
 /* The side navigation menu */
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
 html #main-markdown {
@@ -687,6 +687,14 @@ html #main-markdown figure > figcaption {
 html #main-markdown .latex-math-define {
   display: none;
 }
+html #main-markdown dt {
+  font-style: italic;
+  font-weight: normal;
+}
+html #main-markdown dd {
+  display: block;
+  margin-inline-start: 2em;
+}
 html #main-markdown html[lang="en-US"] q {
   quotes: "“" "”" "‘" "’";
 }
@@ -1139,6 +1147,14 @@ html #main-markdown-numbered figure > figcaption {
 }
 html #main-markdown-numbered .latex-math-define {
   display: none;
+}
+html #main-markdown-numbered dt {
+  font-style: italic;
+  font-weight: normal;
+}
+html #main-markdown-numbered dd {
+  display: block;
+  margin-inline-start: 2em;
 }
 html #main-markdown-numbered html[lang="en-US"] q {
   quotes: "“" "”" "‘" "’";

@@ -1,19 +1,27 @@
 /** Globales Cyfex CSS für Markdown */
-@import "github.less";
 @import (inline) "fonts.less";
-@import "numbered-headings.less";
+@import "github.less";
+@import "defines.less";
 @import "images.less";
 @import "code.less";
+
+@import "numbered-headings.less";
 @import "header.less";
+
 @import "math.less";
+
 @import "quotes.less";
-@import "defines.less";
+@import "lists.less";
+
 @import "button.less";
+
 @import "table.less";
+@import "references.less";
+
 @import "sidenav.less";
 @import "scrollbar.less";
 @import "collapsable-list.less";
-@import "references.less";
+
 
 .define-title-style() {
     h1,
@@ -45,6 +53,7 @@
     .define-header();
     .define-images();
     .define-math();
+    .define-definition-list();
     .define-quotes();
     .define-blockquote();
     .define-tables();

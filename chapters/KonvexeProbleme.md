@@ -32,7 +32,7 @@ Wir können somit über die Metrik $d(\vvec{x},\vvec{y})$ die Länge zwischen zw
 Mit der Metrik, also unserem Lineal zum Messen von Distanzen, lässt sich nun die Projektion $\prox{C}(\vvec{p})$ eines Punktes $\vvec{p}$ mit minimaler Distanz auf eine konvexe Menge $\set{C}$ relativ leicht definieren zu
 `\begin{align}
 \prox{C}(\vvec{p}) :=  \underset{\vvec{x} \ \in \ \set{C}}{\argmin} \norm{\vvec{x} - \vvec{p}}_2.
-\end{align}`{=latex}`{=latex}
+\end{align}`{=latex}
 
 Das heisst $\prox{C}(\vvec{p})$ minimiert den Punkt $\vvec{x}$ in der Menge $\set{C}$ so, dass sein Abstand zu $\vvec{p}$ minimal ist.
 
@@ -43,7 +43,7 @@ Eines der **wichtigsten** Konzept der konvexen Analysis ist die des **Normalkege
 Ein Normalkegel $\ncone{C}$ auf ein konvexes Set $\set{C}$ im Punkt $\vvec{x} \in \set{C}$ ist definert als
 `\begin{align}
     \ncone{C}(\vvec{x}) := \left\{ \vvec{y} \ | \ \vvec{y}^\transp(\vvec{x}^* - \vvec{x}) \leq 0, \quad \forall \vvec{x}^* \in \set{C} \right\}
-\end{align}`{=latex}`{=latex}
+\end{align}`{=latex}
 
 Das ist nun ein wenig kryptisch, heisst jedoch nichts anderes als folgendes:
 Der Normalkegel $\ncone{C}(\vvec{x})$ besteht aus allen Vektoren (das wäre $\vvec{y}$) ausgehend von $\vvec{x}$ welche mit **allen** Vektoren welche vom Punkt $\vvec{x}$ in die Menge $\set{C}$ zeigen (das wäre $\vvec{x}^* - \vvec{x}$), einen **stumpfen** Winkel bilden (das wäre das Skalatprodukt mit $\leq 0$).

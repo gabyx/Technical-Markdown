@@ -99,7 +99,17 @@
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
-\setlength{\emergencystretch}{3em} % prevent overfull lines
+\usepackage{longtable,booktabs}
+\usepackage{calc} % for calculating minipage widths
+% % Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+% \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{3}
@@ -443,12 +453,18 @@
 \textbf{Author:} Gabriel Nützi \textbf{Reviewer:} Michael Baumann
 \textbf{Date:} 28.05.2020
 
+\hypertarget{intro}{%
+\chapter{Intro}\label{intro}}
+
 This is a setup demonstrating the power and use of markdown for
 technical documents by using a fully automated conversion sequence with
 \texttt{yarn}, \texttt{gulp} and of course
 \href{www.pandoc.org}{\texttt{pandoc}}. Read the
 \href{https://github.com/gabyx/TechnicalMarkdown/blob/master/Readme.md}{Readme.md}
 for futher information.
+
+\hypertarget{samples}{%
+\chapter{Samples}\label{samples}}
 
 \hypertarget{konvexe-probleme}{%
 \chapter{Konvexe Probleme}\label{konvexe-probleme}}
@@ -527,7 +543,7 @@ Mit der Metrik, also unserem Lineal zum Messen von Distanzen, lässt sich
 nun die Projektion \(\prox{C}(\vvec{p})\) eines Punktes \(\vvec{p}\) mit
 minimaler Distanz auf eine konvexe Menge \(\set{C}\) relativ leicht
 definieren zu
-\begin{align} \prox{C}(\vvec{p}) :=  \underset{\vvec{x} \ \in \ \set{C}}{\argmin} \norm{\vvec{x} - \vvec{p}}_2. \end{align}`\{=latex\}
+\begin{align} \prox{C}(\vvec{p}) :=  \underset{\vvec{x} \ \in \ \set{C}}{\argmin} \norm{\vvec{x} - \vvec{p}}_2. \end{align}
 
 Das heisst \(\prox{C}(\vvec{p})\) minimiert den Punkt \(\vvec{x}\) in
 der Menge \(\set{C}\) so, dass sein Abstand zu \(\vvec{p}\) minimal ist.
@@ -543,7 +559,7 @@ im Anschluss wie sich dieser Kegel visualisiert:
 
 Ein Normalkegel \(\ncone{C}\) auf ein konvexes Set \(\set{C}\) im Punkt
 \(\vvec{x} \in \set{C}\) ist definert als
-\begin{align}     \ncone{C}(\vvec{x}) := \left\{ \vvec{y} \ | \ \vvec{y}^\transp(\vvec{x}^* - \vvec{x}) \leq 0, \quad \forall \vvec{x}^* \in \set{C} \right\} \end{align}`\{=latex\}
+\begin{align}     \ncone{C}(\vvec{x}) := \left\{ \vvec{y} \ | \ \vvec{y}^\transp(\vvec{x}^* - \vvec{x}) \leq 0, \quad \forall \vvec{x}^* \in \set{C} \right\} \end{align}
 
 Das ist nun ein wenig kryptisch, heisst jedoch nichts anderes als
 folgendes: Der Normalkegel \(\ncone{C}(\vvec{x})\) besteht aus allen
@@ -690,11 +706,10 @@ welche man iterative lösen kann, was zum
 \textbf{Gradienten-Projektionsverfahren} führt (Gradient Projection
 Algorithm).
 
-\hypertarget{markdown-sample-code}{%
-\chapter{Markdown Sample Code}\label{markdown-sample-code}}
+\hypertarget{code-sample}{%
+\chapter{Code Sample}\label{code-sample}}
 
-\hypertarget{c---execution-graph-node}{%
-\section{C++ - Execution Graph Node}\label{c---execution-graph-node}}
+Some inline code \texttt{int\ a;\ a\ +=\ "asd"}
 
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
@@ -792,7 +807,215 @@ Algorithm).
 \end{Highlighting}
 \end{Shaded}
 
-Some inline code \texttt{int\ a;\ a\ +=\ "asd"}
+\hypertarget{tables}{%
+\chapter{Tables}\label{tables}}
+
+\hypertarget{html-table}{%
+\section{HTML Table}\label{html-table}}
+
+Cross refeference do not work here.
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule
+\begin{minipage}[b]{0.22\columnwidth}\raggedright
+Fruits\strut
+\end{minipage} & \begin{minipage}[b]{0.22\columnwidth}\raggedright
+Vegetables\strut
+\end{minipage} & \begin{minipage}[b]{0.22\columnwidth}\raggedright
+Constraints\strut
+\end{minipage} & \begin{minipage}[b]{0.22\columnwidth}\raggedright
+Properties\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.22\columnwidth}\raggedright
+\textbf{First}\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+\begin{enumerate}
+\tightlist
+\item
+  Lorem ipsum.
+\item
+  Aliquam tinc.
+\end{enumerate}\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+\begin{description}
+\tightlist
+\item[Definition 1]
+\(\int_0^1{x^2} := ?\)
+\item[Definition 2]
+\(x^2\) is a squared variable
+\end{description}\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.22\columnwidth}\raggedright
+\textbf{Second}\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+\begin{itemize}
+\tightlist
+\item
+  Lorem ipsum.
+\item
+  Mauris eu.
+\end{itemize}\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+\begin{enumerate}
+\tightlist
+\item
+  Lorem sit.
+\item
+  Dapibus.
+\end{enumerate}\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+\begin{enumerate}
+\tightlist
+\item
+  Aliquam risus.
+\item
+  Auctor neque.
+\end{enumerate}\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+Included latex file parsed in as \texttt{latex}:
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule
+Fruits & Vegetables & Constraints & Properties\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.22\columnwidth}\raggedright
+\textbf{First}\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+\begin{enumerate}
+\item
+  Lorem ipsum.
+\item
+  Aliquam tinc.
+\end{enumerate}\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+\begin{description}
+\item[Definition 1]
+\(\int_0^1{x^2} := ?\)
+\item[Definition 2]
+This is \(x^2\)
+\end{description}\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.22\columnwidth}\raggedright
+\textbf{Second}\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+\begin{itemize}
+\item
+  Lorem ipsum.
+\item
+  mauris eu risus.
+\end{itemize}\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+\begin{enumerate}
+\item
+  Lorem sit.
+\item
+  dapibus neque.
+\end{enumerate}\strut
+\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+\begin{enumerate}
+\item
+  Aliquam eu risus.
+\item
+  auctor neque.
+\end{enumerate}\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+\hypertarget{sec:multi-line-table}{%
+\section{Multiline Table}\label{sec:multi-line-table}}
+
+Cross reference do work here.
+
+\begin{longtable}[]{@{}clrl@{}}
+\caption{Here's a multiline table without a header.}\tabularnewline
+\toprule
+\endhead
+\begin{minipage}[t]{0.13\columnwidth}\centering
+First\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+row\strut
+\end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedleft
+12.0\strut
+\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\raggedright
+Example of a row that spans multiple lines.\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.13\columnwidth}\centering
+Second\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+row\strut
+\end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedleft
+5.0\strut
+\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\raggedright
+Here's another one.\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
+
+and another one
+
+\begin{longtable}[]{@{}lll@{}}
+\caption{Sample grid table.}\tabularnewline
+\toprule
+\begin{minipage}[b]{0.18\columnwidth}\raggedright
+Fruit\strut
+\end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\raggedright
+Price\strut
+\end{minipage} & \begin{minipage}[b]{0.24\columnwidth}\raggedright
+Advantages\strut
+\end{minipage}\tabularnewline
+\midrule
+\endfirsthead
+\toprule
+\begin{minipage}[b]{0.18\columnwidth}\raggedright
+Fruit\strut
+\end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\raggedright
+Price\strut
+\end{minipage} & \begin{minipage}[b]{0.24\columnwidth}\raggedright
+Advantages\strut
+\end{minipage}\tabularnewline
+\midrule
+\endhead
+\begin{minipage}[t]{0.18\columnwidth}\raggedright
+Bananas\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+\$1.34\strut
+\end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedright
+\begin{itemize}
+\tightlist
+\item
+  built-in wrapper
+\item
+  bright color
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\begin{minipage}[t]{0.18\columnwidth}\raggedright
+Oranges\strut
+\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+\$2.10\strut
+\end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedright
+\begin{itemize}
+\tightlist
+\item
+  cures scurvy
+\item
+  tasty
+\item
+  Link \cref{sec:multi-line-table}
+\end{itemize}\strut
+\end{minipage}\tabularnewline
+\bottomrule
+\end{longtable}
 
 \hypertarget{references}{%
 \chapter*{References}\label{references}}

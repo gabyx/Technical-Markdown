@@ -1,6 +1,5 @@
-# Markdown Sample Code
-
-## C++ - Execution Graph Node
+# Code Sample
+Some inline code `int a; a += "asd"`
 
 ```{.cpp .numberLines}
 class LogicNode
@@ -95,5 +94,3 @@ protected:
     OutputSockets m_outputs;  //!< The output sockets.
 };
 ```
-
-Some inline code `int a; a += "asd"`
