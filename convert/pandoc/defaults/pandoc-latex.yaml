@@ -31,6 +31,8 @@ variables:
     monofont: Latin Modern Mono
     mathfont: Latin Modern Math
 
+number-sections: true
+
 pdf-engine: latexmk
 pdf-engine-opt:
     - "-xelatex"

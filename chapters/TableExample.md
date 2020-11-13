@@ -4,12 +4,7 @@
 
   Second    row                       5.0 Here's another one.
 ----------- ------- --------------------- -------------------------
-
 : Here's a multiline table without a header.
-
-and another one
-
-: Sample grid table.
 
 +---------------+-------+--------------------+
 | Fruit         | Price | Advantages         |
@@ -21,3 +16,4 @@ and another one
 |               |       | - tasty
 |               |       | - Link [@sec:multi-line-table] |
 +---------------+-------+--------------------+
+: Sample grid table.

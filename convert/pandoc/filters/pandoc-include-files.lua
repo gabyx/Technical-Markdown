@@ -153,6 +153,10 @@ function transclude (cb)
     format = default_format
   end
 
+  -- Check if we include the file as raw inline
+  local raw = cb.attributes['raw']
+  raw = raw == "true" and true or false
+
   -- Attributes shift headings
   local shift_heading_level_by = 0
   local shift_input = cb.attributes['shift-heading-level-by']
@@ -174,7 +178,7 @@ function transclude (cb)
 
       -- Replace extension if specified
       line = replace_ext(cb, line)
-      io.stderr:write("Including: '" .. line .. "'\n")
+      io.stderr:write(string.format("Including: [format: %s, raw: %s]\n - '%s'\n", format, tostring(raw), line))
 
       local fh = io.open(line)
       if not fh then
@@ -183,19 +187,26 @@ function transclude (cb)
           error("Abort due to read failure")
         end
       else
-        local contents = pandoc.read(fh:read '*a', format).blocks
-        last_heading_level = 0
-
-        -- recursive transclusion
-        contents = pandoc.walk_block(
-          pandoc.Div(contents),
-          { Header = update_last_level, CodeBlock = transclude }
-          ).content
-
-        --- reset to level before recursion
-        last_heading_level = buffer_last_heading_level
-        blocks:extend(shift_headings(contents, shift_heading_level_by))
+        text = fh:read('*a')
         fh:close()
+
+        if raw then
+          -- Inlcude as raw inline element
+          blocks:extend({pandoc.RawBlock(format, text)})
+        else
+          -- Inlcude as parsed AST
+          local contents = pandoc.read(text, format).blocks
+          last_heading_level = 0
+          -- recursive transclusion
+          contents = pandoc.walk_block(
+            pandoc.Div(contents),
+            { Header = update_last_level, CodeBlock = transclude }
+            ).content
+
+          --- reset to level before recursion
+          last_heading_level = buffer_last_heading_level
+          blocks:extend(shift_headings(contents, shift_heading_level_by))
+        end
       end
 
       ::skip::

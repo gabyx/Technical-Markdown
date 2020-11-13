@@ -2,6 +2,8 @@
 
 ![](https://img.shields.io/badge/dependencies-pandoc%20%7C%20python3%20%7C%20node%20%7C%20vscode-green)
 
+## Quick Intro
+
 **This is a markdown setup demonstrating the power and use of markdown for technical documents:**
 
 - **fully automated conversion sequence** using [`yarn`](https://github.com/yarnpkg/yarn) + [`gulp`](https://github.com/gulpjs/gulp) + [`pandoc`](https://github.com/jgm/pandoc) such that exporting ([Content.md](https://raw.githubusercontent.com/gabyx/TechnicalMarkdown/master/Content.md)) is done in the background:
@@ -17,11 +19,40 @@
     - [pandoc-crossref](https://github.com/lierdakil/pandoc-crossref) [[doc](http://lierdakil.github.io/pandoc-crossref)] for cross referencing
     - [pandoc-include-files](https://github.com/pandoc/lua-filters/tree/master/include-files) [[doc](https://github.com/pandoc/lua-filters/tree/master/include-files/README.md)] for file transclusion
 
-**Future Warning:**
-The `master` branch is a `pandoc`-only solution, because its more reliable.
-Markdown Preview Enhanced is nice but sadly a bit a to much cumbersome to control blackbox and also a bit slow.
-This old solution is still available at commit `13856d37030483679`.
+- Full-fledged [VS Code](https://code.visualstudio.com/) setup to write and style your document in one of the best IDEs.
 
+# Rational
+
+[Pandoc](https://github.com/jgm/pandoc) is awesome and the founder John MacFarlane develops pandoc in a meticulous and principled style.
+The documentation is pretty flawless and the community including him in person is really helpful. That is why we rely heavily on pandoc.
+
+1. We target the output formats `html5` and `latex`, because
+
+    - HTML can be viewed in all browsers and web standards such as CSS3 etc.
+        have become a major advantage and enables ridiculuous dynamic, interactive styling.
+        Collapsable table of contents is just the beginning.
+    - LaTeX enables to produce high quality output PDF (`xelatex`).
+        Every proper book and distributed PDF is written and set in LaTeX.
+
+2. The orchestration around calling `pandoc` is basically only a file watcher [`gulp`](https://github.com/gulpjs/gulp)
+which calls `pandoc` on file changes. We want as little as possible different tools to achieve the above output formats.
+That also means we *do not want* to have lots of pre- and post-processing tasks aside from running `pandoc`.
+The main goal is, that users can write `markdown` as a **first-party solution** with some enhanced features enabled by `pandoc` itself.
+**Writting technical documents should become a breeze.**
+
+3. The common agreement in the industry about using M$ Office for writting technical
+   documentations as demonstrated here, is considered the most
+   complete and utter bullshit you can adhere to.
+   Certainly employees mostly must obey. The common argument is "people need to exchange
+   documents and work on it".
+   Because people need to focus on the utter shitty formatting and WISIWY workaround
+   experiences, a lot of money is spent which is never debated.
+
+   **It's about high time** to make turn around into a direction which will likely become the standard.
+   **Technical writters should really focus on the content they write and focuse on styling quirks and tricks.**
+
+4. Every technical document writter probably knows about source code management (`git`).
+   There you go with proper team work.
 
 # Dependencies
 
@@ -65,11 +96,12 @@ Install a recent `python3` (>= 3.6) and the following packages
 pip3 install -r .requirements
 ```
 
-To make the preview tab **work** make sure that you start VS Code with a variable environment
-`PATH` which contains the python executable **you want to use**
-(the best is to use a seperate `python venv`) since `pandoc`
-is called by the [extension](https://github.com/shd101wyy/vscode-markdown-preview-enhanced)
-inside the VS Code process. Example:
+The best way is to setup a python environment `python venv` since `pandoc`. The VS Code config `python.pythonPath` path needs to be set.
+
+The VS Code tasks get the `${config:python.pythonPath}`
+directly as an argument and modify the environement and `pandoc` will use the right python when launching the filters.
+
+You can also start VS Code like this to have the proper python enabled:
 
 ```bash
 # Activate your python env.
@@ -80,14 +112,7 @@ cd TechnicalMarkdown && code -n .
 
 You can also use the ignored [.envrc](.envrc) file with [direnv](https://github.com/direnv/direnv).
 
-The VS Code tasks **dont have this caveat**, since we inject the `${config:python.pythonPath}`
-directly and modify the environement.
-
 # Building and Viewing
-
-Normally the use of the [Markdown Preview Enhanced](https://github.com/shd101wyy/vscode-markdown-preview-enhanced)
-is for simple previewing.
-However, we use priorily **only** the pandoc pipeline for the conversion as it is the most powerful and most customizable and well testet tool for markdown conversion. All the conversion is done in the background continuously:
 
 Run the following tasks defined in [tasks.json](.vscode/tasks.json) from VS Code or use the following shell commands:
 

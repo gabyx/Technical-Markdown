@@ -12,6 +12,8 @@ include-in-header: ["includes/SideNav.js"]
 variables:
     include-before-partials: "includes/TemplateSidebar.html"
 
+number-sections: true
+
 standalone: true
 self-contained: false
 

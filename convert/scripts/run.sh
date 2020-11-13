@@ -22,5 +22,5 @@ pandoc "--fail-if-warnings" \
     Content.md
 
 if [ "$format" = "json" ]; then
-    prettier --write test.json
+    prettier --write test.json &>/dev/null
 fi
