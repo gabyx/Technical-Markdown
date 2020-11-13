@@ -24,7 +24,7 @@
 # Rational
 
 [Pandoc](https://github.com/jgm/pandoc) is awesome and the founder John MacFarlane develops pandoc in a meticulous and principled style.
-The documentation is pretty flawless and the community including him in person is really helpful. That is why we rely heavily on pandoc.
+The documentation is pretty flawless and the community including (including him) is really helpful. That is why we rely heavily on pandoc.
 
 1. We target the output formats `html5` and `latex`, because
 
@@ -48,8 +48,8 @@ The main goal is, that users can write `markdown` as a **first-party solution** 
    Because people need to focus on the utter shitty formatting and WISIWY workaround
    experiences, a lot of money is spent which is never debated.
 
-   **It's about high time** to make turn around into a direction which will likely become the standard.
-   **Technical writters should really focus on the content they write and focuse on styling quirks and tricks.**
+   **It's about high time** to turn around into a direction which will likely become the standard.
+   **Technical writters should really focus on the content they write and focus on styling quirks and tricks.**
 
 4. Every technical document writter probably knows about source code management (`git`).
    There you go with proper team work.
