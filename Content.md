@@ -21,14 +21,19 @@ includes/Math.html
 **Reviewer:** Michael Baumann<br>
 **Date:** 28.05.2020
 
+# Intro
+
 This is a setup demonstrating the power and use of markdown for technical documents by using
 a fully automated conversion sequence with `yarn`, `gulp` and of course [`pandoc`](www.pandoc.org).
 Read the [Readme.md](https://github.com/gabyx/TechnicalMarkdown/blob/master/Readme.md)
 for futher information.
 
+# Samples
+
 ```{.include}
 chapters/KonvexeProbleme.md
 chapters/MarkdownSamples.md
+chapters/TableSamples.md
 ```
 
 # References

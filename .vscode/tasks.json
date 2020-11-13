@@ -51,7 +51,7 @@
                 "--python",
                 "'${config:python.pythonPath}'",
                 "--luaPath",
-                "${workspaceFolder}/convert/pandoc/filters/module-lua",
+                "${workspaceFolder}/convert/pandoc/filters",
                 "--pythonPath",
                 "${workspaceFolder}/convert/pandoc/filters"
             ],

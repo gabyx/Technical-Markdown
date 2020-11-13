@@ -171,7 +171,7 @@ async function runPandoc(args) {
         try {
             const program = spawn(parsedArgs["pandoc"], args, {
                 cwd: process.cwd(),
-                stdio: ["ignore", "ignore", "inherit"]
+                stdio: ["ignore", "inherit", "inherit"]
             });
 
             program.on("close", (code) => {
@@ -199,6 +199,7 @@ async function htmlExport(markdownFile, outFile) {
         "--toc",
         "--data-dir=convert/pandoc",
         "--defaults=pandoc-dirs.yaml",
+        "--defaults=pandoc-general.yaml",
         "--defaults=pandoc-html.yaml",
         "--defaults=pandoc-filters.yaml",
         "-o",
@@ -213,6 +214,7 @@ async function latexExport(markdownFile, outFile) {
         "--fail-if-warnings",
         "--data-dir=convert/pandoc",
         "--defaults=pandoc-dirs.yaml",
+        "--defaults=pandoc-general.yaml",
         "--defaults=pandoc-latex.yaml",
         "--defaults=pandoc-filters.yaml",
         "-o",
@@ -253,7 +255,7 @@ gulp.task("transform-math", async function () {
         .pipe(gulp.dest("./"));
 });
 
-const exportTriggerFiles = ["**/*.md", "literature/**/*", "files/**/*", "includes/*", "**/*.yaml", "convert/**/*"];
+const exportTriggerFiles = ["**/*.md", "chapters/**/*.html", "chapters/**/*.tex", "literature/**/*", "files/**/*", "includes/*", "**/*.yaml", "convert/**/*"];
 const lessFiles = ["css/src/*", "css/fonts/*"];
 
 /* Task to watch all markdown files */
