@@ -38,7 +38,7 @@ pdf-engine-opt:
     - "-xelatex"
     - "-r"
     - ".latexmkrc"
-    - "-g"
+    - "-gg"
     - "-outdir=output-tex"
 
 template: includes/Template.tex
