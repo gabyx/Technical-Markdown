@@ -35,21 +35,21 @@ The documentation is pretty flawless and the community including (including him)
         Every proper book and distributed PDF is written and set in LaTeX.
 
 2. The orchestration around calling `pandoc` is basically only a file watcher [`gulp`](https://github.com/gulpjs/gulp)
-which calls `pandoc` on file changes. We want as little as possible different tools to achieve the above output formats.
-That also means we *do not want* to have lots of pre- and post-processing tasks aside from running `pandoc`.
-The main goal is, that users can write `markdown` as a **first-party solution** with some enhanced features enabled by `pandoc` itself.
-**Writting technical documents should become a breeze.**
+  which calls `pandoc` on file changes. We want as little as possible different tools to achieve the above output formats.
+  That also means we *do not want* to have lots of pre- and post-processing tasks aside from running `pandoc`.
+  The main goal is, that users can write `markdown` as a **first-party solution** with some enhanced features enabled by `pandoc` itself.
+  **Writting technical documents should become a breeze.**
 
 3. The common agreement in the industry about using M$ Office for writting technical
    documentations as demonstrated here, is considered the most
    complete and utter bullshit you can adhere to.
    Certainly employees mostly must obey. The common argument is "people need to exchange
    documents and work on it".
-   Because people need to focus on the utter shitty formatting and WISIWY workaround
-   experiences, a lot of money is spent which is never debated.
+   Because people need to focus on the utter shitty formatting and WISIWYG workaround
+   experiences, a lot of time and money is spent which gets never debated.
 
-   **It's about high time** to turn around into a direction which will likely become the standard.
-   **Technical writters should really focus on the content they write and focus on styling quirks and tricks.**
+   **It's about high time** to turn into a direction which will likely become the standard.
+   **Technical writters should really focus on the content they write and not focus on styling quirks and tricks.**
 
 4. Every technical document writter probably knows about source code management (`git`).
    There you go with proper team work.
