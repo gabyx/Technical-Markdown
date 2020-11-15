@@ -24,7 +24,7 @@
 # Rational
 
 [Pandoc](https://github.com/jgm/pandoc) is awesome and the founder John MacFarlane develops pandoc in a meticulous and principled style.
-The documentation is pretty flawless and the community including (including him) is really helpful. That is why we rely heavily on pandoc.
+The documentation is pretty flawless and the community (including him) is really helpful. That is why we rely heavily on pandoc.
 
 1. We target the output formats `html5` and `latex`, because
 
