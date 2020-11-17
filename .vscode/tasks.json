@@ -13,9 +13,9 @@
                 "--python",
                 "'${config:python.pythonPath}'",
                 "--luaPath",
-                "${workspaceFolder}/convert/pandoc/filters",
+                "'${workspaceFolder}'/convert/pandoc/filters",
                 "--pythonPath",
-                "${workspaceFolder}/convert/pandoc/filters"
+                "'${workspaceFolder}'/convert/pandoc/filters"
             ],
             "problemMatcher": [],
             "presentation": {
@@ -32,9 +32,9 @@
                 "--python",
                 "'${config:python.pythonPath}'",
                 "--luaPath",
-                "${workspaceFolder}/convert/pandoc/filters",
+                "'${workspaceFolder}'/convert/pandoc/filters",
                 "--pythonPath",
-                "${workspaceFolder}/convert/pandoc/filters"
+                "'${workspaceFolder}'/convert/pandoc/filters"
             ],
             "problemMatcher": [],
             "presentation": {
@@ -51,9 +51,9 @@
                 "--python",
                 "'${config:python.pythonPath}'",
                 "--luaPath",
-                "${workspaceFolder}/convert/pandoc/filters",
+                "'${workspaceFolder}'/convert/pandoc/filters",
                 "--pythonPath",
-                "${workspaceFolder}/convert/pandoc/filters"
+                "'${workspaceFolder}'/convert/pandoc/filters"
             ],
             "problemMatcher": [],
             "presentation": {
