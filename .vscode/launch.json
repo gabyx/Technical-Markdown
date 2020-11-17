@@ -8,15 +8,15 @@
             "name": "compile-markdown-tex",
             "type": "node",
             "request": "launch",
-            "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
+            "program": "'${workspaceRoot}'/node_modules/gulp/bin/gulp.js",
             "args": [
                 "compile-markdown-tex",
                 "--python",
-                "${command:python.interpreterPath}",
+                "'${config:python.pythonPath}'",
                 "--luaPath",
-                "${workspaceFolder}/convert/pandoc/filters",
+                "'${workspaceFolder}'/convert/pandoc/filters",
                 "--pythonPath",
-                "${workspaceFolder}/convert/pandoc/filters"
+                "'${workspaceFolder}'/convert/pandoc/filters"
             ],
             "cwd": "${workspaceRoot}/",
             "console": "internalConsole",
@@ -26,17 +26,17 @@
             "name": "compile-markdown-html",
             "type": "node",
             "request": "launch",
-            "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
+            "program": "'${workspaceRoot}'/node_modules/gulp/bin/gulp.js",
             "args": [
                 "compile-markdown-html",
                 "--python",
-                "${command:python.interpreterPath}",
+                "'${config:python.pythonPath}'",
                 "--luaPath",
-                "${workspaceFolder}/convert/pandoc/filters",
+                "'${workspaceFolder}'/convert/pandoc/filters",
                 "--pythonPath",
-                "${workspaceFolder}/convert/pandoc/filters"
+                "'${workspaceFolder}'/convert/pandoc/filters"
             ],
-            "cwd": "${workspaceRoot}/",
+            "cwd": "${workspaceRoot}",
             "console": "internalConsole",
             "sourceMaps": true,
         }
