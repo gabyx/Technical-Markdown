@@ -21,11 +21,13 @@ __pycache__
 *.synctex.gz
 *synctex(busy)
 *_latexindent*
+*.bak
+*.sav
 
+.DS_Store
 Test*
 
 filter-out
-svg-inkscape
 output-tex/*
 !output-tex/.gitkeep
 !output-tex/input.tex
@@ -33,3 +35,4 @@ output-tex/*
 
 .DS_Store
 .envrc
+~*.docx

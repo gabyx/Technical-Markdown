@@ -6,11 +6,18 @@ filters:
     # - tee.py
     - pandoc-block-filter-format.lua
     # - tee.py
+    - pandoc-unique-identifiers.lua
+    # - tee.py
     - pandoc-crossref
     # - tee.py
     - transformImages.py
+    # - tee.py
+    - transformEmoji.lua
+    # - tee.py
     - citeproc
+    # - tee.py
+    - setAbstract.lua
     # - tee.py
     # Quote replacement is not needed.
     # - pandoc-quotes.lua
-    # - tee .py
+    # - tee.py
