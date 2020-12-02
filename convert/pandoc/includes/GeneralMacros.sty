@@ -7,7 +7,7 @@
 \NewDocumentCommand\imageWithCaption{mmmo}{
 \begin{figure}[h]
     \centering
-    \includegraphics[#3]{#1}
+    \adjustbox{center}{\adjustbox{cfbox=white!90!black 2pt 0pt}{\includegraphics[#3]{#1}}}
     \caption{#2}
     \IfValueT{#4}{\label{#4}}
 \end{figure}
@@ -15,10 +15,25 @@
 
 % SVG with caption
 \NewDocumentCommand\svgWithCaption{mmmo}{
-\begin{figure}[h] 
+\begin{figure}[h]
     \centering
-    \includesvg[inkscapepath=svgsubdir,#3]{#1}
+    \adjustbox{center}{\adjustbox{cfbox=white!90!black 2pt 0pt}{\includesvg[inkscapearea=page,inkscapepath=svgsubdir,#3]{#1}}}
     \caption{#2}
     \IfValueT{#4}{\label{#4}}
 \end{figure}
+}
+
+\newfontfamily\DejaSans{DejaVu Sans}
+\NewDocumentCommand\emojiFont{m}{
+{\DejaSans #1}%
+}
+
+\NewDocumentCommand{\includePDF}{m O{1} m O{}}
+{%
+    \foreach \x in {#2,...,#3} {%
+        \begin{center}%
+        \makebox[\textwidth]{\includegraphics[page=\x, #4]{#1}}%
+        \end{center}%
+        \clearpage%
+    }
 }

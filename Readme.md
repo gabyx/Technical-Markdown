@@ -151,12 +151,19 @@ Run the following tasks defined in [tasks.json](.vscode/tasks.json) from VS Code
     5. [pandoc-citeproc](convert/pandoc/filters/pandoc-citeproc)
     6. [transformImages.py](convert/pandoc/filters/transformImages.py)
 
-    The latex output can be inspected in `output-tex/input.tex`.
+    The LaTeX output can be inspected in `output-tex/input.tex`.
 
 # Editing Styles
 
+## HTML
 You can edit the [main.less](css/src/main.less) file to change the look of the markdown.
 Edit the [main.less](css/src/main.less) file to see changes in the conversion from [Content.md](Content.md).
+
+## LaTeX
+The following templates are responsible for the LaTeX output:
+
+- [Template.tex](convert/pandoc/includes/Template.tex) : The main template.
+- [Header.tex](convert/pandoc/includes/Header.tex)  : The class, packages and styles defining the document, included by the main template with `include-in-header` in [pandoc-latex.yaml](convert/pandoc/defaults/pandoc-latex.yaml)
 
 # Debugging
 
@@ -165,14 +172,14 @@ There is a debug configuration in [launch.json](.vscode/launch.json) for both th
 ## Pandoc Filters
 
 Pandoc filters are harder to debug. There is an included unix-like [tee.py](convert/pandoc/filters/tee.py) filter
-which can be put anywhere into the filter chain as needed, to see the output in `pandoc/filter-out`
+which can be put anywhere into the filter chain as needed, to see the AST JSON output in the folder `pandoc/filter-out`
 (see [dev.py](convert/pandoc/filters/module/dev.py) for adjustments). The filter [teeStart.py](convert/pandoc/filters/teeStart.py)
 first clears all output before doing the same as [tee.py](convert/pandoc/filters/tee.py).
 Uncomment the `tee.py` filters in [pandoc-filters.yaml](convert/pandoc/defaults/pandoc-filters.yaml).
 
 # Issues
 
-### Panflute [done]
+## Panflute [done]
 Using pandoc `>=2.10` we have more types and AST changes in
 
 - [jgm/pandoc#1024](https://github.com/jgm/pandoc/issues/1024),
@@ -189,6 +196,9 @@ So far *relative* paths are not yet supported in `pandoc-indluce-files.lua` filt
 
 - [Issue](https://github.com/pandoc/lua-filters/issues/102) : ![Status](https://img.shields.io/badge/dynamic/json?color=%23FF0000&label=Status&query=%24.state&url=https%3A%2F%2Fapi.github.com%2Frepos%2Fpandoc%2Flua-filters%2Fissues%2F102)
 
+## Table Issues
+
+- Wrong format for `latex`: [Issue](https://github.com/jgm/pandoc/issues/6883) : ![Status](https://img.shields.io/badge/dynamic/json?color=%23FF0000&label=Status&query=%24.state&url=https%3A%2F%2Fapi.github.com%2Frepos%2Fjgm%2Fpandoc%2Fissues%2F6883) -> Update to next version.
 
 # Todo
 
