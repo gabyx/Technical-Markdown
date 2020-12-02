@@ -21,7 +21,6 @@
         "all": "npm-run-all -p build show",
         "build:html": "gulp build-html",
         "build:pdf-tex": "gulp build-pdf-tex",
-        "build:pdf-chrome": "gulp build-pdf-crhome",
         "lint": "pylama",
         "format:all": "yapf -i --recursive .",
         "show": "gulp show-markdown"

@@ -123,20 +123,16 @@ Run the following tasks defined in [tasks.json](.vscode/tasks.json) from VS Code
     yarn show
     ```
 
-- **Start Markdown HTML Conversion**: Runs the markdown conversion with
-  [MPE](https://github.com/shd101wyy/mume) continuously while monitoring changes to markdown `.md` files:
+- **Start Markdown HTML Conversion**: Runs the markdown conversion with Pandoc
+  (`html`) continuously while monitoring changes to input files:
 
     ```shell
     yarn build:html
     ```
 
-- **Start Markdown Chrome Conversion**: Runs the markdown conversion with Chrome continuously while monitoring input files:
+    See below for the filters applied.
 
-    ```shell
-    yarn build:pdf-chrome
-    ```
-
-- **Start Markdown Pandoc Conversion**: Runs the markdown conversion with Pandoc
+- **Start Markdown PDF TeX Conversion**: Runs the markdown conversion with Pandoc
   (`latexmk` and `xelatex`) continuously while monitoring input files:
 
     ```shell
@@ -203,5 +199,6 @@ So far *relative* paths are not yet supported in `pandoc-indluce-files.lua` filt
 
 # Todo
 
-- Add CI
-- Add tests
+- Add CI.
+- Add tests.
+- Add prince conversion to PDF.
