@@ -1,4 +1,5 @@
-# [Markdown Setup for Technical Documents](https://github.com/gabyx/TechnicalMarkdown)
+# [TechnicalMarkdown](https://github.com/gabyx/TechnicalMarkdown)
+### A markdown setup for technical documents, reports, theses & papers.
 
 ![](https://img.shields.io/badge/dependencies-pandoc%20%7C%20python3%20%7C%20node%20%7C%20vscode-green)
 
