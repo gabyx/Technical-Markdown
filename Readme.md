@@ -139,15 +139,7 @@ Run the following tasks defined in [tasks.json](.vscode/tasks.json) from VS Code
     yarn build:pdf-tex
     ```
 
-    The conversion with pandoc applies the following filters (see [defaults](convert/pandoc/defaults/pandoc-filters.yaml)):
-
-    1. [pandoc-include-files-set-format.lua](convert/pandoc/filters/pandoc-include-files-set-format.lua)
-    2. [pandoc-include-files.lua](convert/pandoc/filters/pandoc-include-files.lua)
-    3. [transformMath.py](convert/pandoc/filters/transformMath.py)
-    4. [pandoc-crossref](convert/pandoc/filters/pandoc-crossref)
-    5. [pandoc-citeproc](convert/pandoc/filters/pandoc-citeproc)
-    6. [transformImages.py](convert/pandoc/filters/transformImages.py)
-
+    The conversion with pandoc applies the following filters in [defaults](convert/pandoc/defaults/pandoc-filters.yaml).
     The LaTeX output can be inspected in `output-tex/input.tex`.
 
 # Editing Styles
