@@ -5,7 +5,7 @@ subtitle: "Demonstrating the Power of Markdown with Pandoc"
 author:
     - "Gabriel Nützi"
     - "The Community"
-date: 2. Dezember 2020
+date: 2. December 2020
 location: Zürich, Switzerland
 bibliography: ["literature/bibliography.bib"]
 csl: "literature/ieee-with-url.csl"
