@@ -16,7 +16,7 @@ local List = require 'pandoc.List'
 
 local sys = require 'pandoc.system'
 local utils = require 'pandoc.utils'
-local ut = require "module-lua.utils"
+-- local ut = require "module-lua.utils"
 
 -- Save env. variables
 local env = sys.environment()

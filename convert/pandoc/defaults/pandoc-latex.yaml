@@ -4,10 +4,12 @@ variables:
     documentclass: scrreprt
 
     classoption:
-        - a4paper
+        - paper=a4
         - twoside
-        - titlepage
+        - titlepage=true
         - openright
+        - abstract=on
+        - toc=listofnumbered
         - numbers=noenddot
         - chapterprefix=true
         - headings=optiontohead
@@ -18,7 +20,7 @@ variables:
         - linktoc=all
         - hidelinks
 
-    linkcolor: DarkGray
+    linkcolor: DarkBlue
     filecolor: DarkBlue
     citecolor: DarkBlue
     urlcolor: MediumBlue

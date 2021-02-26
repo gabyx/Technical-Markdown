@@ -13,8 +13,9 @@ chapters/tables/TableExample.html
 ```
 
 :::{include-if-format=latex;json;native}
-## Latex Table
+## \LaTeX\ Table
 - Included latex file as raw `latex`.
+- Converted from `.html` by `convert-tables.py` and `table.json`.
 - Latex citations do work inside.
 :::
 
@@ -24,6 +25,7 @@ chapters/tables-tex/TableExample.tex
 
 ## Markdown Table {#sec:multi-line-table}
 
+- Included markdown files.
 - Cross references do work here.
 ```{.include}
 chapters/TableExample.md

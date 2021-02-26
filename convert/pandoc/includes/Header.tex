@@ -7,21 +7,10 @@
 \edef\input@path{{convert/pandoc/includes/}{pandoc/}{./}\input@path}% prepend
 \makeatother
 
-% English ============================================
-\usepackage{microtype}
-\input{hyphenex/ushyphex.tex}
-
 % Calculations =======================================
+\usepackage{etoolbox}
 \usepackage{calc}
-
-% Some booleans ======================================
-\usepackage{ifthen}
-\newboolean{printVersion}
-\setboolean{printVersion}{true}
-
-
-%% Numerals ==========================================
-\usepackage{nth}
+% ====================================================
 
 %% Geometry ==========================================
 \newlength{\innermargin}
@@ -37,15 +26,20 @@
             inner=\innermargin,
             twoside
             ]{geometry}
-\usepackage[final]{pdfpages}
+% ====================================================
 
-%% Grafics ==========================================
+%% Grafics ===========================================
 \usepackage{graphicx}
-\usepackage[export]{adjustbox}
 \usepackage{tikz}
+\usepackage[export]{adjustbox}
+\usepackage[final]{pdfpages}
 \usepackage{wrapfig}
-\usepackage[absolute]{textpos}
+\usepackage[section]{placeins} % float barrier at
+                               % each section
+% ====================================================
 
+
+%% Caption ===========================================
 \usepackage[%
     format=plain,%
     justification=justified,%
@@ -64,13 +58,9 @@
     belowskip=-5pt%
 }
 
-%% Caption ===========================================
 \usepackage[]{subcaption}
 \captionsetup[figure]{style=mycaption}
-
-%\usepackage[]{overpic}
-%\usepackage{lpic}
-%\usepackage{rotating}
+% ====================================================
 
 %% Header/Footer =====================================
 \usepackage[automark,headsepline]{scrlayer-scrpage}
@@ -93,44 +83,36 @@
 
 %% Tables ============================================
 \usepackage{array}
-%\usepackage{ctable}
-\usepackage{multirow}
-\usepackage{tabularx}
-\usepackage{booktabs}
 \usepackage{longtable}
-\usepackage{supertabular}
-\usepackage{ltxtable}
+\usepackage{booktabs}
 \usepackage{collcell}
 \usepackage{makecell}
-\usepackage{colortbl}
-\usepackage{xcolor}
-% ====================================================
-
-%% Use Links & Refs ==================================
-\ifthenelse{\boolean{printVersion}}{
-    \colorlet{myurlcolor}{gray!50!black}%
-    \colorlet{mylinkcolor}{gray!50!black}%
-    \colorlet{mycitecolor}{gray!50!black}%
-    \colorlet{myanchorcolor}{gray!50!black}%
-    \colorlet{mybackrefcolor}{gray!10!black}%
-}{%
-    \colorlet{myurlcolor}{blue!50!black}%
-    \colorlet{mylinkcolor}{blue!50!black}%
-    \colorlet{mycitecolor}{blue!50!black}%
-    \colorlet{myanchorcolor}{blue!50!black}%
-    \colorlet{mybackrefcolor}{green!35!black}%
+\usepackage{footnotehyper}
+\usepackage{tablefootnote}
+\usepackage{enumitem}
+\AtBeginEnvironment{longtable}{%
+\setlist[itemize]{nosep=0pt,
+                 leftmargin=*,
+                 label=\textbullet,
+                 after=\end{minipage},
+                 before=\begin{minipage}[t]{\linewidth}
+}
 }
 
-% Loaded from pandoc
-% \usepackage[hidelinks,
-% colorlinks = true,
-% linkcolor = black,
-% urlcolor  = myurlcolor,
-% citecolor = black,
-% anchorcolor = black]{hyperref}
+% Define default table spacing...
+\usepackage{cellspace}
+\setlength{\cellspacetoplimit}{0.2\baselineskip}
+\setlength{\cellspacebottomlimit}{0.2\baselineskip}
+% ====================================================
 
 %% Quotes =============================================
 \usepackage[font=itshape,vskip=5pt]{quoting}
+
+%% Todo Notes =========================================
+% \usepackage[textsize=tiny,disable]{todonotes}
+% \newcommand{\disscomment}[1]{%
+%     \todo[color=black!40]{#1}%
+% }%
 
 %% Glossary ==========================================
 % \usepackage[hyperfirst=true]{glossaries}
@@ -146,20 +128,7 @@
 \input{Math.sty}
 % ====================================================
 
-%% Todo Notes =========================================
-% \usepackage[textsize=tiny,disable]{todonotes}
-% \newcommand{\disscomment}[1]{%
-%     \todo[color=black!40]{#1}%
-% }%
-
-%% Fonts  =============================================
-% \usepackage[no-math]{fontspec}
-
-% Hypenate tt text
-\usepackage[htt]{hyphenat}
-
-%% Title & Headings ==================================
-% Change Part Heading
+%% Custom Part Heading ===============================
 \addtokomafont{part}{\Huge\selectfont\rmfamily\bfseries}
 \addtokomafont{partprefix}{\Large\rmfamily\bfseries}
 %\newcommand*\partcolor{\color{blue!50}}% Part is coloured blue
@@ -172,30 +141,20 @@
 \renewcommand*\partheadendvskip{%
     \vspace{\baselineskip}%
     \partquotenote%
-    %{\hrulefill\par\nobreak}%
     \vfil\newpage%
     \if@twoside%
         \if@openright%
         \null%
         \thispagestyle{plain}%
-        %<<<<<<<<<<<<<<<<<<<<
         \vspace*{\fill}%
-        %\begin{quote}%
         \partnote%
-        %\end{quote}%
         \vspace*{\fill}%
-        %<<<<<<<<<<<<<<<<<<<<
-        %\newpage%
         \fi%
     \else%
          \thispagestyle{plain}%
-         %<<<<<<<<<<<<<<<<<<<<
          \vspace*{\fill}%
-         %\begin{quote}%
          \partnote%
-         %\end{quote}%
          \vspace*{\fill}%
-         %<<<<<<<<<<<<<<<<<<<<
          \newpage%
     \fi%
     \if@tempswa%
@@ -206,15 +165,10 @@
 
 \newcommand\partnote{}
 \newcommand\partquotenote{}
-\renewcommand\partformat{\hfill\color{lightgray}\partname~\fontsize{85}{70}\selectfont\thepart\if@altsecnumformat.\fi}
+\renewcommand\partformat{\hfill\color{lightgray}\partname~\fontsize{60}{60}\selectfont\thepart\if@altsecnumformat.\fi}
+%=====================================================
 
-% Change Chapter Heading
-\ifthenelse{\boolean{printVersion}}{
-    \colorlet{mychaptercolor}{white!55!black}%
-}{%
-    \colorlet{mychaptercolor}{lightgray}%
-}
-
+%% Custom Chapter Heading ============================
 \renewcommand*\chapterheadstartvskip{\vspace*{.02\textheight}}
 \renewcommand*\chapterheadendvskip{%
     \noindent{\setlength{\parskip}{0pt}\hrulefill\par}%
@@ -225,9 +179,10 @@
     \vspace{4ex}%
     }
 \addtokomafont{disposition}{\normalfont\bfseries}
-\addtokomafont{chapterprefix}{\Large\bfseries\color{mychaptercolor}}
+\addtokomafont{chapterprefix}{\Large\bfseries\color{lightgray}}
+%=====================================================
 
-% Part Quotes
+%% Part Quotes =======================================
 \setkomafont{dictumtext}{\itshape\small}
 \setkomafont{dictumauthor}{\normalfont}
 \renewcommand*\dictumwidth{0.9\linewidth}
@@ -236,15 +191,35 @@
 \renewcommand*\dictumrule{
     %\vskip-1ex\hrulefill\par}
 }
+%=====================================================
 
+%% Heading fonts =====================================
 \setkomafont{chapter}{\huge\rmfamily}
 \addtokomafont{section}{\rmfamily}
 \addtokomafont{subsection}{\rmfamily}
 \addtokomafont{subsubsection}{\rmfamily}
-
 %=====================================================
 
-% % TOC ================================================
+%% Heading spacing ===================================
+% \RedeclareSectionCommand[
+%   runin=false,
+%   afterindent=false,
+%   beforeskip=1.0\baselineskip,
+%   afterskip=0.3\baselineskip]{section}
+% \RedeclareSectionCommand[
+%   runin=false,
+%   afterindent=false,
+%   beforeskip=0.5\baselineskip,
+%   afterskip=0.0\baselineskip]{subsection}
+% \RedeclareSectionCommand[
+%   runin=false,
+%   afterindent=false,
+%   beforeskip=0.5\baselineskip,
+%   afterskip=0.0\baselineskip]{subsubsection}
+%=====================================================
+
+%% Table of Content ==================================
+\usepackage{titling}
 % \usepackage{titletoc}
 % \newcommand{\setupTOC}[2]{%
 %     \titlecontents{#1}
@@ -255,16 +230,9 @@
 %     {\hfill\contentspage}
 % }
 % \setupTOC{chapter}{\chaptername}
-% %=====================================================
+% =====================================================
 
-% Tocless Command ====================================
-\newcommand{\nocontentsline}[3]{}
-\newcommand{\tocless}[2]{\bgroup\let\addcontentsline=\nocontentsline#1{#2}\egroup}
-
-% Make some floats adjustments =======================
-% make floatbarrier at each section
-\usepackage[section]{placeins}
-
+% Layout Placing Settings ==============================
 % \setcounter{topnumber}{2}
 % \setcounter{bottomnumber}{2}
 % \setcounter{totalnumber}{3}     % 2 may work better
@@ -278,17 +246,17 @@
 
 % Allow display break
 %\allowdisplaybreaks[3]
-%=====================================================
+%=======================================================
 
-% Clever Refs
-\usepackage{cleveref} % load it after thmtools (there is some problem)
+% Tocless Command ======================================
+\newcommand{\nocontentsline}[3]{}
+\newcommand{\tocless}[2]{\bgroup\let\addcontentsline=\nocontentsline#1{#2}\egroup}
+
+% Clever Refs ==========================================
+\usepackage[capitalise]{cleveref} % load it after thmtools (there is some problem)
 \crefname{appsec}{appendix}{appendices}
+%=======================================================
 
-% Bibliography
-%\input{literature/bibliography.tex}
-
+% General Settings
 \KOMAoptions{cleardoublepage=empty}
-
-% Indentation
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{1.8mm}
+\raggedbottom
