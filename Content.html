@@ -5,6 +5,8 @@
     <meta charset="utf-8" />
     <meta name="generator" content="pandoc" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="Gabriel Nützi" />
+        <meta name="author" content="The Community" />
                 <title>Technical Documents</title>
     <style>
         code{white-space: pre-wrap;}
@@ -207,50 +209,68 @@
         <nav id="TOC" role="doc-toc">
                         <ul>
                         <li><a href="#intro"><span class="toc-section-number">1</span> Intro</a></li>
-                        <li><a href="#samples"><span class="toc-section-number">2</span> Samples</a></li>
-                        <li><a href="#konvexe-probleme"><span class="toc-section-number">3</span> Konvexe Probleme</a>
+                        <li><a href="#samples"><span class="toc-section-number">2</span> Samples</a>
                         <ul>
-                        <li><a href="#konvexe-menge"><span class="toc-section-number">3.1</span> Konvexe Menge</a></li>
-                        <li><a href="#proximaler-punkt"><span class="toc-section-number">3.2</span> Proximaler Punkt</a></li>
-                        <li><a href="#normalkegel"><span class="toc-section-number">3.3</span> Normalkegel</a></li>
-                        <li><a href="#zusammenhang-von-normalkegel-und-proximaler-punkt"><span class="toc-section-number">3.4</span> Zusammenhang von Normalkegel und Proximaler Punkt</a></li>
-                        <li><a href="#zusammenhang-von-normalkegel-und-konvexer-optimierung"><span class="toc-section-number">3.5</span> Zusammenhang von Normalkegel und Konvexer Optimierung</a></li>
+                        <li><a href="#konvexe-probleme"><span class="toc-section-number">2.1</span> Konvexe Probleme</a>
+                        <ul>
+                        <li><a href="#konvexe-menge"><span class="toc-section-number">2.1.1</span> Konvexe Menge</a></li>
+                        <li><a href="#proximaler-punkt"><span class="toc-section-number">2.1.2</span> Proximaler Punkt</a></li>
+                        <li><a href="#normalkegel"><span class="toc-section-number">2.1.3</span> Normalkegel</a></li>
+                        <li><a href="#zusammenhang-von-normalkegel-und-proximaler-punkt"><span class="toc-section-number">2.1.4</span> Zusammenhang von Normalkegel und Proximaler Punkt</a></li>
+                        <li><a href="#zusammenhang-von-normalkegel-und-konvexer-optimierung"><span class="toc-section-number">2.1.5</span> Zusammenhang von Normalkegel und Konvexer Optimierung</a></li>
                         </ul></li>
-                        <li><a href="#code-sample"><span class="toc-section-number">4</span> Code Sample</a></li>
-                        <li><a href="#tables"><span class="toc-section-number">5</span> Tables</a>
+                        <li><a href="#code-sample"><span class="toc-section-number">2.2</span> Code Sample</a></li>
+                        <li><a href="#tables"><span class="toc-section-number">2.3</span> Tables</a>
                         <ul>
-                        <li><a href="#html-table"><span class="toc-section-number">5.1</span> HTML Table</a></li>
-                        <li><a href="#sec:multi-line-table"><span class="toc-section-number">5.2</span> Markdown Table</a></li>
+                        <li><a href="#html-table"><span class="toc-section-number">2.3.1</span> HTML Table</a></li>
+                        <li><a href="#sec:multi-line-table"><span class="toc-section-number">2.3.2</span> Markdown Table</a></li>
+                        </ul></li>
                         </ul></li>
                         <li><a href="#references">References</a></li>
                         </ul>
         </nav>
     </div>
     </div><div id="main-markdown">
-<header id="title-block-header">
-    <h1 class="title">Technical Documents</h1>
-            </header>
-<div class="latex-math-define">
+<header>
+    <div class="title-block">
+        <h1 class="title">Technical Documents</h1>
+                <h3 class="subtitle">Demonstrating the Power of Markdown with Pandoc</h4>
+                <p class="author">
+            <strong>Authors: </strong>Gabriel Nützi, The Community
+        </p>
+                <p class="date">
+            <strong>Date: </strong>2. Dezember 2020
+        </p>
+                        <p class="location">
+            <strong>Location: </strong>Zürich, Switzerland
+        </p>
+            </div>
+    <div class="title-logo">
+        <img src="files/Logo.svg">
+    </div>
+</header><div class="latex-math-define">
 $$ \newcommand{\vvec}[1]{\mathbf{#1}} \newcommand{\mat}[1]{\mathbf{#1}} \newcommand{\cs}[1]{\mathrm{#1}} \newcommand{\rp}[1]{{_\cs{#1}}} \newcommand{\csT}[2]{\mat{A}_{\mathrm{#1#2}}} \newcommand{\genT}[2]{\mat{T}_{\mathrm{#1#2}}} \newcommand{\affcsT}[2]{\mat{H}_{\mathrm{#1#2}}} \newcommand{\affcsTdx}[2]{\mat{H}_{\mathrm{#1#2}}^{\transp}} \newcommand{\basevec}[2]{\vvec{e}_{\mathrm{#1}}^{\cs{#2}}} \newcommand{\homArr}[1]{\left[\begin{array}{c}#1 \\ 1 \end{array}\right]} \newcommand{\homArrTr}[1]{\left[\begin{array}{c}#1 &amp;&amp; 1 \end{array}\right]} \newcommand{\homMat}[2]{\left[\begin{array}{cc}#1 &amp; #2 \\ \vvec{0} &amp; 1 \end{array}\right]} \newcommand{\arr}[2]{\left[\begin{array}{#1}#2\end{array}\right]} \newcommand{\transp}{\top} \newcommand{\rot}[2]{\mat{R}_\mathrm{#1#2}} \newcommand{\norm}[1]{\|#1\|} \newcommand{\mdet}[1]{\det(#1)} \newcommand{\set}[1]{\mathcal{#1}} \newcommand{\prox}[1]{\mathbf{prox}_{\set{C}}} \DeclareMathOperator*{\argmin}{argmin} \newcommand{\ncone}[1]{\mathcal{N}_{\set{#1}}} \newcommand{\indf}[1]{I_{\set{#1}}} $$
 </div>
-<p><strong>Author:</strong> Gabriel Nützi<br> <strong>Reviewer:</strong> Michael Baumann<br> <strong>Date:</strong> 28.05.2020</p>
+<div class="abstract">
+<p>This is a setup demonstrating the power and use of markdown for technical documents by using a fully automated conversion sequence with <code>yarn</code>, <code>gulp</code> and of course <a href="www.pandoc.org"><code>pandoc</code></a>.</p>
+</div>
 <h1 data-number="1" id="intro"><span class="header-section-number">1</span> Intro</h1>
-<p>This is a setup demonstrating the power and use of markdown for technical documents by using a fully automated conversion sequence with <code>yarn</code>, <code>gulp</code> and of course <a href="www.pandoc.org"><code>pandoc</code></a>. Read the <a href="https://github.com/gabyx/TechnicalMarkdown/blob/master/Readme.md">Readme.md</a> for futher information.</p>
+<p>Read the <a href="https://github.com/gabyx/TechnicalMarkdown/blob/master/Readme.md">Readme.md</a> for futher information.</p>
 <h1 data-number="2" id="samples"><span class="header-section-number">2</span> Samples</h1>
-<h1 data-number="3" id="konvexe-probleme"><span class="header-section-number">3</span> Konvexe Probleme</h1>
+<h2 data-number="2.1" id="konvexe-probleme"><span class="header-section-number">2.1</span> Konvexe Probleme</h2>
 <p>In diesem Abschnitt geht es darum ein besseres Verständnis zu geben über Algorithmen und Konzepte welche zum Beispiel bei der <span class="math inline">\(2\)</span>d-/<span class="math inline">\(3\)</span>d-Kollisionsdetektion oder in Optimierungs-Algorithmen genutzt werden. Die Erklärungen sind eine stärkere und vereinfachte Zusammenfassung aus <span class="citation" data-cites="nuetzig_thesis_2016"><a href="#ref-nuetzig_thesis_2016" role="doc-biblioref">[1, Ch. 6]</a></span>. Dieses Kapitel möchte nicht mathematisch abschliessend sein, sondern lediglich (nach der Ansicht des Autors) ein paar wichtige Grundkonzepte vermitteln, welche einen wunderbaren Einstieg in dieses Thema geben. Die erwähnten Konzepte sind in der generellsten Form der konvexen Analysis zu finden und können sehr wohl als die wichtigsten Standbeine verinnerlicht werden. Auf Beweise wird bewusst verzichtet. Es wird versucht die mathematischen Definitionen anschaulich zu erklären.</p>
 <p>Das Vorhandensein eines <em>konvexen</em> Optimierungsproblems oder auch einer <em>konvexen Menge</em> beim Lösen eines Problems in <span class="math inline">\(3\)</span>D, oder auch mehr Dimensionen, erlaubt es, auf eine Fülle von mathematisch sehr etablierten Definitionen und Konzepte aus der <em>konvexen Analysis</em> zurückzugreifen. Diese schon fast 50-jährige Theorie ist sehr fundiert und ein abgeschlossenes Untergebiet in der Mathematik.</p>
 <p>Die <em>konvexe Analysis</em> ist ein Grenzgebiet von <em>Geometrie</em>, <em>Analysis</em> und <em>Funktionalanalysis</em>, das sich mit den Eigenschaften <strong>konvexer Mengen</strong> und <strong>konvexer Funktionen</strong> befaßt und Anwendungen sowohl in der reinen Mathematik besitzt (von Existenzsätzen in der Theorie der Differential- und Integralgleichungen bis zum Gitterpunktsatz von Minkowski in der Zahlentheorie) als auch in Bereichen wie der mathematischen Ökonomie und den Ingenieurswissenschaften, wo man es oft mit Optimierungs- und Gleichgewichtsproblemen zu tun hat. Als einschlägige Referenz auf diesem Gebiet sei hier mal das Standardwerk <span class="citation" data-cites="rockafellar_convex_2015"><a href="#ref-rockafellar_convex_2015" role="doc-biblioref">[2]</a></span> gegeben.</p>
-<h2 data-number="3.1" id="konvexe-menge"><span class="header-section-number">3.1</span> Konvexe Menge</h2>
+<h3 data-number="2.1.1" id="konvexe-menge"><span class="header-section-number">2.1.1</span> Konvexe Menge</h3>
 <p>Eine Menge <span class="math inline">\(\set{C} \subseteq V\)</span>, also ein Teilmenge eines Vektorraums <span class="math inline">\(V\)</span>, wird <strong>konvex</strong> genannt, falls und nur falls <span class="math display">\[\begin{align} \lambda \vvec{a} + (1-\lambda) \vvec{b} \in \set{C} \quad \forall \vvec{a},\vvec{b} \in \set{C}, \ \lambda \in [0,1] \ . \end{align}\]</span> gilt.</p>
 <p>Das heisst alle Punkte auf einer geraden Linie zwischen zwei beliebigen Punkten aus der Menge <span class="math inline">\(\set{C}\)</span> müssen <strong>auch</strong> in dieser Menge liegen damit es <strong>konvex</strong> ist. Stellt man sich eine Banane vor oder eine Oberfläche eines <span class="math inline">\(3\)</span>d-Würfels, dann erfüllen diese Mengen das Kriterium nicht. Ein ausgefülltes <span class="math inline">\(2\)</span>d-Rechteck , ein gefüllter <span class="math inline">\(3\)</span>d-Würfel oder eine gefüllte Kugel jedoch schon. Eine <strong>konvexe</strong> Menge ist eine Teilmenge eines Vektorraums. Ein Beispiel ist der euklidische Raum <span class="math inline">\(\mathbb{E}^3\)</span> in <span class="math inline">\(3\)</span>D.</p>
 <p>Man interessiert sich nun zum Beispiel für die Projektion eines Punktes <span class="math inline">\(\vvec{x}\)</span> auf ein konvexe Menge <span class="math inline">\(\set{C}\)</span>. Die Projektion sollte so sein, dass der Abstand zwischen dem Punkt <span class="math inline">\(\vvec{x}\)</span> und dem projezierten Punkt <span class="math inline">\(\vvec{y} \in \set{C}\)</span> <strong>minimal</strong> ist.</p>
 <p>Der Abstand wird über eine Metrik <span class="math inline">\(d(\vvec{x},\vvec{y}) \geq 0\)</span> definiert - die <em>Distanzfunktion</em>. Der euklidische Vektorraum <span class="math inline">\(\mathbb{E}^3\)</span> ist ein Vektorraum mit einer Metrik und ist daher ein <em>metrischer Raum</em>. Das Standard-Skalarprodukt <span class="math inline">\(\vvec{x}^\transp \vvec{y}\)</span> im euklidischen Raum <span class="math inline">\(\mathbb{E}^3\)</span> induziert direkt die Standardnorm <span class="math inline">\(\norm{\vvec{x}}_2 := \sqrt{\vvec{x}^\transp \vvec{x}} \geq 0\)</span>. Diese wiederum induziert direkt die Metrik <span class="math display">\[\begin{align} d(\vvec{x},\vvec{y}) := \norm{\vvec{x} - \vvec{y}}_2. \end{align}\]</span></p>
 <p>Wir können somit über die Metrik <span class="math inline">\(d(\vvec{x},\vvec{y})\)</span> die Länge zwischen zwei Vektoren <span class="math inline">\(\vvec{x},\vvec{y} \in \mathbb{E}^3\)</span> berechnen.</p>
-<h2 data-number="3.2" id="proximaler-punkt"><span class="header-section-number">3.2</span> Proximaler Punkt</h2>
+<h3 data-number="2.1.2" id="proximaler-punkt"><span class="header-section-number">2.1.2</span> Proximaler Punkt</h3>
 <p>Mit der Metrik, also unserem Lineal zum Messen von Distanzen, lässt sich nun die Projektion <span class="math inline">\(\prox{C}(\vvec{p})\)</span> eines Punktes <span class="math inline">\(\vvec{p}\)</span> mit minimaler Distanz auf eine konvexe Menge <span class="math inline">\(\set{C}\)</span> relativ leicht definieren zu <span class="math display">\[\begin{align} \prox{C}(\vvec{p}) :=  \underset{\vvec{x} \ \in \ \set{C}}{\argmin} \norm{\vvec{x} - \vvec{p}}_2. \end{align}\]</span></p>
 <p>Das heisst <span class="math inline">\(\prox{C}(\vvec{p})\)</span> minimiert den Punkt <span class="math inline">\(\vvec{x}\)</span> in der Menge <span class="math inline">\(\set{C}\)</span> so, dass sein Abstand zu <span class="math inline">\(\vvec{p}\)</span> minimal ist.</p>
-<h2 data-number="3.3" id="normalkegel"><span class="header-section-number">3.3</span> Normalkegel</h2>
+<h3 data-number="2.1.3" id="normalkegel"><span class="header-section-number">2.1.3</span> Normalkegel</h3>
 <p>Eines der <strong>wichtigsten</strong> Konzept der konvexen Analysis ist die des <strong>Normalkegels</strong>. Wie der Name schon sagt, handelt es sich um einen Kegel welcher durch Normalenvektoren auf der Oberfläche einer konvexen Menge aufgespannt wird. Wir geben hier direkt die Definition und sehen im Anschluss wie sich dieser Kegel visualisiert:</p>
 <p>Ein Normalkegel <span class="math inline">\(\ncone{C}\)</span> auf ein konvexes Set <span class="math inline">\(\set{C}\)</span> im Punkt <span class="math inline">\(\vvec{x} \in \set{C}\)</span> ist definert als <span class="math display">\[\begin{align}     \ncone{C}(\vvec{x}) := \left\{ \vvec{y} \ | \ \vvec{y}^\transp(\vvec{x}^* - \vvec{x}) \leq 0, \quad \forall \vvec{x}^* \in \set{C} \right\} \end{align}\]</span></p>
 <p>Das ist nun ein wenig kryptisch, heisst jedoch nichts anderes als folgendes: Der Normalkegel <span class="math inline">\(\ncone{C}(\vvec{x})\)</span> besteht aus allen Vektoren (das wäre <span class="math inline">\(\vvec{y}\)</span>) ausgehend von <span class="math inline">\(\vvec{x}\)</span> welche mit <strong>allen</strong> Vektoren welche vom Punkt <span class="math inline">\(\vvec{x}\)</span> in die Menge <span class="math inline">\(\set{C}\)</span> zeigen (das wäre <span class="math inline">\(\vvec{x}^* - \vvec{x}\)</span>), einen <strong>stumpfen</strong> Winkel bilden (das wäre das Skalatprodukt mit <span class="math inline">\(\leq 0\)</span>). Der Ursprung der Menge <span class="math inline">\(\ncone{C}(\vvec{x})\)</span> ist im Punkt <span class="math inline">\(\vvec{x}\)</span>.</p>
@@ -258,7 +278,7 @@ $$ \newcommand{\vvec}[1]{\mathbf{#1}} \newcommand{\mat}[1]{\mathbf{#1}} \newcomm
 <figure>
 <img src="files/NormalKegel.svg" id="fig:normalcone" style="min-width:10cm" alt="Figure 1: Normalkegel an die Punkte \vvec{x}, \vvec{y} und \vvec{z}. Der Normalkegel an einen innerhalb der Menge \set{C} liegenden Punkt \vvec{z} degeneriert zum \vvec{0}-Vektor. Der Vektor \vvec{v} ist in der Menge des Normalkegels an \vvec{x}." /><figcaption aria-hidden="true">Figure 1: Normalkegel an die Punkte <span class="math inline">\(\vvec{x}\)</span>, <span class="math inline">\(\vvec{y}\)</span> und <span class="math inline">\(\vvec{z}\)</span>. Der Normalkegel an einen innerhalb der Menge <span class="math inline">\(\set{C}\)</span> liegenden Punkt <span class="math inline">\(\vvec{z}\)</span> degeneriert zum <span class="math inline">\(\vvec{0}\)</span>-Vektor. Der Vektor <span class="math inline">\(\vvec{v}\)</span> ist in der Menge des Normalkegels an <span class="math inline">\(\vvec{x}\)</span>.</figcaption>
 </figure>
-<h2 data-number="3.4" id="zusammenhang-von-normalkegel-und-proximaler-punkt"><span class="header-section-number">3.4</span> Zusammenhang von Normalkegel und Proximaler Punkt</h2>
+<h3 data-number="2.1.4" id="zusammenhang-von-normalkegel-und-proximaler-punkt"><span class="header-section-number">2.1.4</span> Zusammenhang von Normalkegel und Proximaler Punkt</h3>
 <p>Man fragt sich natürlich nun: <em>Was bringen uns diese mathematische Definitionen?</em></p>
 <p>Es stellt sich heraus, dass es einen Zusammenhang gibt zwischen <span class="math inline">\(\prox{C}\)</span> und <span class="math inline">\(\ncone{C}\)</span> welcher extremst nützlich ist und heute im Feld der konvexen Optimierung, beim Machine-Learning, in der Starrkörper-Mechanik (Starrkörper-Simulationen und Physics-Engines in Games) oder auch in der Kollisionsdetektion (GJK Algorithmus) durch projektive Iterationen direkte Anwendung findet.</p>
 <p>Der Zusammenhang ist wie folgt: <span class="math display">\[\begin{align} \vvec{y} \in \ncone{C}(\vvec{x}) \quad \Leftrightarrow \quad \vvec{x} = \prox{C}(\vvec{x} + \vvec{y}) \label{eq:prox-to-ncone} \end{align}\]</span></p>
@@ -270,7 +290,7 @@ $$ \newcommand{\vvec}[1]{\mathbf{#1}} \newcommand{\mat}[1]{\mathbf{#1}} \newcomm
 <img src="files/NormalKegelDreieck.svg" id="fig:normalconetri" style="min-width:10cm" alt="Figure 2: Normalkegel an die Punkte \vvec{a}, \vvec{b} und \vvec{c} eines Dreiecks." /><figcaption aria-hidden="true">Figure 2: Normalkegel an die Punkte <span class="math inline">\(\vvec{a}\)</span>, <span class="math inline">\(\vvec{b}\)</span> und <span class="math inline">\(\vvec{c}\)</span> eines Dreiecks.</figcaption>
 </figure>
 <p>Das heisst es gibt genau 3 nicht triviale Normalkegel und 3 einfachere Normalkegel (bestehend lediglich aus den Normalen auf die Seitenflächen). Eine Projektionsfunktion auf ein Dreieck muss diese 6 Bereiche beachten und ist so auch optimal und richtig implementiert.</p>
-<h2 data-number="3.5" id="zusammenhang-von-normalkegel-und-konvexer-optimierung"><span class="header-section-number">3.5</span> Zusammenhang von Normalkegel und Konvexer Optimierung</h2>
+<h3 data-number="2.1.5" id="zusammenhang-von-normalkegel-und-konvexer-optimierung"><span class="header-section-number">2.1.5</span> Zusammenhang von Normalkegel und Konvexer Optimierung</h3>
 <p>Um hier mathematisch nicht in einen Exzess zu geraten, wird hier nur eine abgespeckte Erklärung gegeben. Für mehr Informationen sei auf <span class="citation" data-cites="nuetzig_thesis_2016"><a href="#ref-nuetzig_thesis_2016" role="doc-biblioref">[1, Ch. 6]</a></span> verwiesen und die darin enthaltenen Referenzen.</p>
 <p>Betrachte man folgendes allgemeine restriktierte <strong>konvexe</strong> Optimierungsproblem: <span class="math display">\[\begin{align} \vvec{x}^* = \underset{\vvec{x} \ \in \ \set{C}}{\argmin} f(\vvec{x}), \label{eq:convexproblem} \end{align}\]</span> wobei die Funktion <span class="math inline">\(f(\vvec{x}) \in \mathbb{R}\)</span> <strong>strikt konvex</strong> und <strong>differenzierbar</strong> (man stelle sich den oberen Teil eines Weinglases vor, wobei <span class="math inline">\(\vvec{x} \in \mathbb{R}^2\)</span>) ist und die minimierenden Punkte <span class="math inline">\(\vvec{x}\)</span> auf eine <strong>konvexe</strong> Menge <span class="math inline">\(\set{C}\)</span> restriktiert sind. Der minimierende Punkt ist hier mit <span class="math inline">\(\vvec{x}^*\)</span> bezeichnet. Es gibt nur <strong>einen</strong> solchen globalen minimierenden Punkt</p>
 <p>Dann kann man das Problem in ein freies <strong>konvexes</strong> Programm umschreiben indem man die Einschränkung <span class="math inline">\(\vvec{x} \in \set{C}\)</span> mit einer Bestrafungsfunktion <span class="math inline">\(\indf{C}(\vvec{x})\)</span> ersetzt <span class="math display">\[\begin{align} \vvec{x}^* = \underset{\vvec{x}}{\argmin} f(\vvec{x}) + \indf{C}(\vvec{x}). \end{align}\]</span></p>
@@ -285,7 +305,7 @@ $$ \newcommand{\vvec}[1]{\mathbf{#1}} \newcommand{\mat}[1]{\mathbf{#1}} \newcomm
 <img src="files/ConvexOptimizationProblem.svg" id="fig:convex-opt-prob" style="min-width:100%" alt="Figure 3: Konvexes Optimierungs Problem innerhalb der Menge \set{C} auf einer 2d-Funktion f(\vvec{x}) \in \mathbb{R}. Der negative Gradient liegt im Optimum \vvec{x}^* genau innerhalb des Normalkegels an \vvec{x}^*." /><figcaption aria-hidden="true">Figure 3: Konvexes Optimierungs Problem innerhalb der Menge <span class="math inline">\(\set{C}\)</span> auf einer <span class="math inline">\(2\)</span>d-Funktion <span class="math inline">\(f(\vvec{x}) \in \mathbb{R}\)</span>. Der negative Gradient liegt im Optimum <span class="math inline">\(\vvec{x}^*\)</span> genau innerhalb des Normalkegels an <span class="math inline">\(\vvec{x}^*\)</span>.</figcaption>
 </figure>
 <p>Mit der Beziehung zwischen <strong>proximalem Punkt</strong> und <strong>Normalkegel</strong> <span class="math inline">\(\eqref{eq:prox-to-ncone}\)</span> kriegen wir daraus direkt eine <strong>implizite Projektionsgleichung</strong> für den optimalen Punkt <span class="math inline">\(\vvec{x}^*\)</span>: <span class="math display">\[\begin{align} -\frac{df}{d\vvec{x}}(\vvec{x}^*) \in \ncone{C}(\vvec{x}^*) \quad \Leftrightarrow \quad \vvec{x}^* = \prox{C}(\vvec{x}^* - \frac{df}{d\vvec{x}}(\vvec{x}^*)), \end{align}\]</span> welche man iterative lösen kann, was zum <strong>Gradienten-Projektionsverfahren</strong> führt (Gradient Projection Algorithm).</p>
-<h1 data-number="4" id="code-sample"><span class="header-section-number">4</span> Code Sample</h1>
+<h2 data-number="2.2" id="code-sample"><span class="header-section-number">2.2</span> Code Sample</h2>
 <p>Some inline code <code>int a; a += "asd"</code></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource cpp numberLines"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">class</span> LogicNode</span>
 <span id="cb1-2"><a href="#cb1-2"></a>{</span>
@@ -378,8 +398,8 @@ $$ \newcommand{\vvec}[1]{\mathbf{#1}} \newcommand{\mat}[1]{\mathbf{#1}} \newcomm
 <span id="cb1-89"><a href="#cb1-89"></a>    InputSockets <span class="va">m_inputs</span>;    <span class="co">//!&lt; The input sockets.</span></span>
 <span id="cb1-90"><a href="#cb1-90"></a>    OutputSockets <span class="va">m_outputs</span>;  <span class="co">//!&lt; The output sockets.</span></span>
 <span id="cb1-91"><a href="#cb1-91"></a>};</span></code></pre></div>
-<h1 data-number="5" id="tables"><span class="header-section-number">5</span> Tables</h1>
-<h2 data-number="5.1" id="html-table"><span class="header-section-number">5.1</span> HTML Table</h2>
+<h2 data-number="2.3" id="tables"><span class="header-section-number">2.3</span> Tables</h2>
+<h3 data-number="2.3.1" id="html-table"><span class="header-section-number">2.3.1</span> HTML Table</h3>
 <div>
 <ul>
 <li>Included html file as <code>html</code>.</li>
@@ -437,8 +457,9 @@ $$ \newcommand{\vvec}[1]{\mathbf{#1}} \newcommand{\mat}[1]{\mathbf{#1}} \newcomm
 </tr>
 </tbody>
 </table>
-<h2 data-number="5.2" id="sec:multi-line-table"><span class="header-section-number">5.2</span> Markdown Table</h2>
+<h3 data-number="2.3.2" id="sec:multi-line-table"><span class="header-section-number">2.3.2</span> Markdown Table</h3>
 <ul>
+<li>Included markdown files.</li>
 <li>Cross references do work here.</li>
 </ul>
 <table style="width:85%;">
@@ -493,7 +514,7 @@ $$ \newcommand{\vvec}[1]{\mathbf{#1}} \newcommand{\mat}[1]{\mathbf{#1}} \newcomm
 <td><ul>
 <li>cures scurvy</li>
 <li>tasty</li>
-<li>Link chap. <a href="#sec:multi-line-table">5.2</a></li>
+<li>Link chap. <a href="#sec:multi-line-table">2.3.2</a></li>
 </ul></td>
 </tr>
 </tbody>

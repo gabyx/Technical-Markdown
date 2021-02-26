@@ -44,7 +44,7 @@ async function parseArguments() {
             describe: "The search paths directories which is added to the `LUA_PATH` env. variable.",
             demandOption: false,
             default: [],
-            array:true,
+            array: true
         })
         .array("luaPath")
         .coerce("luaPath", function (p) {
@@ -62,7 +62,7 @@ async function parseArguments() {
             type: "array",
             describe: "The search paths directories which is added to the `PYTHONPATH` env. variable.",
             default: [],
-            array:true,
+            array: true,
             demandOption: false
         })
         .coerce("pythonPath", function (p) {
@@ -192,6 +192,30 @@ async function runPandoc(args) {
     });
 }
 
+async function runScript(interpreter, args) {
+    return new Promise((resolve, reject) => {
+        try {
+            const program = spawn(interpreter, args, {
+                cwd: process.cwd(),
+                stdio: ["ignore", "inherit", "inherit"]
+            });
+
+            program.on("close", (code) => {
+                if (code > 0) {
+                    return reject(new Error(`Script failed: ${code}`));
+                } else {
+                    console.log(
+                        " ======================== \n" + " =  Script successful!  = \n" + " ======================== "
+                    );
+                    return resolve();
+                }
+            });
+        } catch (error) {
+            return reject(new Error(`Executable 'bash' could not be started: '${error.toString()}'`));
+        }
+    });
+}
+
 async function htmlExport(markdownFile, outFile) {
     await runPandoc([
         "--fail-if-warnings",
@@ -239,6 +263,17 @@ gulp.task("compile-markdown-html", async function () {
     await htmlExport(path.resolve("Content.md"), "Content.html");
 });
 
+/* Task to convert all tables */
+gulp.task("convert-tables", async function () {
+    await parseArguments();
+    await runScript(parsedArgs.python, [
+        path.resolve("convert/scripts/convert-tables.py"),
+        "--config",
+        path.resolve("convert/scripts/tables.json"),
+        "--parallel"
+    ]);
+});
+
 /* Task to compile all markdown files */
 gulp.task("compile-markdown-tex", async function () {
     await parseArguments();
@@ -255,7 +290,18 @@ gulp.task("transform-math", async function () {
         .pipe(gulp.dest("./"));
 });
 
-const exportTriggerFiles = ["**/*.md", "chapters/**/*.html", "chapters/**/*.tex", "literature/**/*", "files/**/*", "includes/*", "**/*.yaml", "convert/**/*"];
+const exportTriggerFiles = [
+    "**/Content.md",
+    "chapters/**/*.html",
+    "chapters/**/*.tex",
+    "!chapters/tables-tex/**/*",
+    "chapters/**/*.md",
+    "literature/**/*",
+    "files/**/*",
+    "includes/*",
+    "**/*.yaml",
+    "convert/**/*"
+];
 const lessFiles = ["css/src/*", "css/fonts/*"];
 
 /* Task to watch all markdown files */
@@ -268,7 +314,10 @@ gulp.task("watch-markdown-html", async function () {
 
 /* Task to watch all markdown files */
 gulp.task("watch-markdown-latex", async function () {
-    gulp.watch(exportTriggerFiles, gulp.series(["parse-args", "transform-math", "compile-markdown-tex"]));
+    gulp.watch(
+        exportTriggerFiles,
+        gulp.series(["parse-args", gulp.parallel(["transform-math", "convert-tables"]), "compile-markdown-tex"])
+    );
 });
 
 /* Task when running `gulp` from terminal */

@@ -6,17 +6,18 @@
 \documentclass[
   12pt,
   british,
-  a4paper,
+  paper=a4,
   twoside,
-  titlepage,
+  titlepage=true,
   openright,
+  abstract=on,
+  toc=listofnumbered,
   numbers=noenddot,
   chapterprefix=true,
   headings=optiontohead,
   svgnames,
   dvipsnames]{scrreprt}
-% % % % \usepackage{lmodern}
-% \usepackage{amsmath}
+\usepackage{amsmath}
 \usepackage{ifxetex,ifluatex}
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
@@ -32,36 +33,36 @@
   \setmonofont[]{Latin Modern Mono}
   \setmathfont[]{Latin Modern Math}
 \fi
-% % Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \IfFileExists{microtype.sty}{% use microtype if available
   \usepackage[]{microtype}
   \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-% % \makeatletter
-% \@ifundefined{KOMAClassName}{% if non-KOMA class
-%   \IfFileExists{parskip.sty}{%
-%     \usepackage{parskip}
-%   }{% else
-%     \setlength{\parindent}{0pt}
-%     \setlength{\parskip}{6pt plus 2pt minus 1pt}}
-% }{% if KOMA class
-%   \KOMAoptions{parskip=half}}
-% \makeatother
-% \usepackage{xcolor}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
   pdftitle={Technical Documents},
+  pdfauthor={Gabriel Nützi; The Community},
   pdflang={en-GB},
   colorlinks=true,
-  linkcolor=DarkGray,
+  linkcolor=DarkBlue,
   filecolor=DarkBlue,
   citecolor=DarkBlue,
   urlcolor=MediumBlue,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
-% \usepackage{color}
+\usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
 \newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
@@ -101,7 +102,7 @@
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs}
 \usepackage{calc} % for calculating minipage widths
-% % Correct order of tables after \paragraph or \subparagraph
+% Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
 \makeatletter
 \patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
@@ -109,11 +110,11 @@
 % Allow footnotes in longtable head/foot
 \IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
 \makesavenoteenv{longtable}
-% \setlength{\emergencystretch}{3em} % prevent overfull lines
+\setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{3}
-% % 
+
 \makeatletter
 \providecommand*{\input@path}{}
 % For latex-workshop only
@@ -122,21 +123,10 @@
 \edef\input@path{{convert/pandoc/includes/}{pandoc/}{./}\input@path}% prepend
 \makeatother
 
-% English ============================================
-\usepackage{microtype}
-\input{hyphenex/ushyphex.tex}
-
 % Calculations =======================================
+\usepackage{etoolbox}
 \usepackage{calc}
-
-% Some booleans ======================================
-\usepackage{ifthen}
-\newboolean{printVersion}
-\setboolean{printVersion}{true}
-
-
-%% Numerals ==========================================
-\usepackage{nth}
+% ====================================================
 
 %% Geometry ==========================================
 \newlength{\innermargin}
@@ -152,15 +142,20 @@
             inner=\innermargin,
             twoside
             ]{geometry}
-\usepackage[final]{pdfpages}
+% ====================================================
 
-%% Grafics ==========================================
+%% Grafics ===========================================
 \usepackage{graphicx}
-\usepackage[export]{adjustbox}
 \usepackage{tikz}
+\usepackage[export]{adjustbox}
+\usepackage[final]{pdfpages}
 \usepackage{wrapfig}
-\usepackage[absolute]{textpos}
+\usepackage[section]{placeins} % float barrier at
+                               % each section
+% ====================================================
 
+
+%% Caption ===========================================
 \usepackage[%
     format=plain,%
     justification=justified,%
@@ -179,13 +174,9 @@
     belowskip=-5pt%
 }
 
-%% Caption ===========================================
 \usepackage[]{subcaption}
 \captionsetup[figure]{style=mycaption}
-
-%\usepackage[]{overpic}
-%\usepackage{lpic}
-%\usepackage{rotating}
+% ====================================================
 
 %% Header/Footer =====================================
 \usepackage[automark,headsepline]{scrlayer-scrpage}
@@ -208,44 +199,36 @@
 
 %% Tables ============================================
 \usepackage{array}
-%\usepackage{ctable}
-\usepackage{multirow}
-\usepackage{tabularx}
-\usepackage{booktabs}
 \usepackage{longtable}
-\usepackage{supertabular}
-\usepackage{ltxtable}
+\usepackage{booktabs}
 \usepackage{collcell}
 \usepackage{makecell}
-\usepackage{colortbl}
-\usepackage{xcolor}
-% ====================================================
-
-%% Use Links & Refs ==================================
-\ifthenelse{\boolean{printVersion}}{
-    \colorlet{myurlcolor}{gray!50!black}%
-    \colorlet{mylinkcolor}{gray!50!black}%
-    \colorlet{mycitecolor}{gray!50!black}%
-    \colorlet{myanchorcolor}{gray!50!black}%
-    \colorlet{mybackrefcolor}{gray!10!black}%
-}{%
-    \colorlet{myurlcolor}{blue!50!black}%
-    \colorlet{mylinkcolor}{blue!50!black}%
-    \colorlet{mycitecolor}{blue!50!black}%
-    \colorlet{myanchorcolor}{blue!50!black}%
-    \colorlet{mybackrefcolor}{green!35!black}%
+\usepackage{footnotehyper}
+\usepackage{tablefootnote}
+\usepackage{enumitem}
+\AtBeginEnvironment{longtable}{%
+\setlist[itemize]{nosep=0pt,
+                 leftmargin=*,
+                 label=\textbullet,
+                 after=\end{minipage},
+                 before=\begin{minipage}[t]{\linewidth}
+}
 }
 
-% Loaded from pandoc
-% \usepackage[hidelinks,
-% colorlinks = true,
-% linkcolor = black,
-% urlcolor  = myurlcolor,
-% citecolor = black,
-% anchorcolor = black]{hyperref}
+% Define default table spacing...
+\usepackage{cellspace}
+\setlength{\cellspacetoplimit}{0.2\baselineskip}
+\setlength{\cellspacebottomlimit}{0.2\baselineskip}
+% ====================================================
 
 %% Quotes =============================================
 \usepackage[font=itshape,vskip=5pt]{quoting}
+
+%% Todo Notes =========================================
+% \usepackage[textsize=tiny,disable]{todonotes}
+% \newcommand{\disscomment}[1]{%
+%     \todo[color=black!40]{#1}%
+% }%
 
 %% Glossary ==========================================
 % \usepackage[hyperfirst=true]{glossaries}
@@ -261,20 +244,7 @@
 \input{Math.sty}
 % ====================================================
 
-%% Todo Notes =========================================
-% \usepackage[textsize=tiny,disable]{todonotes}
-% \newcommand{\disscomment}[1]{%
-%     \todo[color=black!40]{#1}%
-% }%
-
-%% Fonts  =============================================
-% \usepackage[no-math]{fontspec}
-
-% Hypenate tt text
-\usepackage[htt]{hyphenat}
-
-%% Title & Headings ==================================
-% Change Part Heading
+%% Custom Part Heading ===============================
 \addtokomafont{part}{\Huge\selectfont\rmfamily\bfseries}
 \addtokomafont{partprefix}{\Large\rmfamily\bfseries}
 %\newcommand*\partcolor{\color{blue!50}}% Part is coloured blue
@@ -287,30 +257,20 @@
 \renewcommand*\partheadendvskip{%
     \vspace{\baselineskip}%
     \partquotenote%
-    %{\hrulefill\par\nobreak}%
     \vfil\newpage%
     \if@twoside%
         \if@openright%
         \null%
         \thispagestyle{plain}%
-        %<<<<<<<<<<<<<<<<<<<<
         \vspace*{\fill}%
-        %\begin{quote}%
         \partnote%
-        %\end{quote}%
         \vspace*{\fill}%
-        %<<<<<<<<<<<<<<<<<<<<
-        %\newpage%
         \fi%
     \else%
          \thispagestyle{plain}%
-         %<<<<<<<<<<<<<<<<<<<<
          \vspace*{\fill}%
-         %\begin{quote}%
          \partnote%
-         %\end{quote}%
          \vspace*{\fill}%
-         %<<<<<<<<<<<<<<<<<<<<
          \newpage%
     \fi%
     \if@tempswa%
@@ -321,15 +281,10 @@
 
 \newcommand\partnote{}
 \newcommand\partquotenote{}
-\renewcommand\partformat{\hfill\color{lightgray}\partname~\fontsize{85}{70}\selectfont\thepart\if@altsecnumformat.\fi}
+\renewcommand\partformat{\hfill\color{lightgray}\partname~\fontsize{60}{60}\selectfont\thepart\if@altsecnumformat.\fi}
+%=====================================================
 
-% Change Chapter Heading
-\ifthenelse{\boolean{printVersion}}{
-    \colorlet{mychaptercolor}{white!55!black}%
-}{%
-    \colorlet{mychaptercolor}{lightgray}%
-}
-
+%% Custom Chapter Heading ============================
 \renewcommand*\chapterheadstartvskip{\vspace*{.02\textheight}}
 \renewcommand*\chapterheadendvskip{%
     \noindent{\setlength{\parskip}{0pt}\hrulefill\par}%
@@ -340,9 +295,10 @@
     \vspace{4ex}%
     }
 \addtokomafont{disposition}{\normalfont\bfseries}
-\addtokomafont{chapterprefix}{\Large\bfseries\color{mychaptercolor}}
+\addtokomafont{chapterprefix}{\Large\bfseries\color{lightgray}}
+%=====================================================
 
-% Part Quotes
+%% Part Quotes =======================================
 \setkomafont{dictumtext}{\itshape\small}
 \setkomafont{dictumauthor}{\normalfont}
 \renewcommand*\dictumwidth{0.9\linewidth}
@@ -351,15 +307,35 @@
 \renewcommand*\dictumrule{
     %\vskip-1ex\hrulefill\par}
 }
+%=====================================================
 
+%% Heading fonts =====================================
 \setkomafont{chapter}{\huge\rmfamily}
 \addtokomafont{section}{\rmfamily}
 \addtokomafont{subsection}{\rmfamily}
 \addtokomafont{subsubsection}{\rmfamily}
-
 %=====================================================
 
-% % TOC ================================================
+%% Heading spacing ===================================
+% \RedeclareSectionCommand[
+%   runin=false,
+%   afterindent=false,
+%   beforeskip=1.0\baselineskip,
+%   afterskip=0.3\baselineskip]{section}
+% \RedeclareSectionCommand[
+%   runin=false,
+%   afterindent=false,
+%   beforeskip=0.5\baselineskip,
+%   afterskip=0.0\baselineskip]{subsection}
+% \RedeclareSectionCommand[
+%   runin=false,
+%   afterindent=false,
+%   beforeskip=0.5\baselineskip,
+%   afterskip=0.0\baselineskip]{subsubsection}
+%=====================================================
+
+%% Table of Content ==================================
+\usepackage{titling}
 % \usepackage{titletoc}
 % \newcommand{\setupTOC}[2]{%
 %     \titlecontents{#1}
@@ -370,16 +346,9 @@
 %     {\hfill\contentspage}
 % }
 % \setupTOC{chapter}{\chaptername}
-% %=====================================================
+% =====================================================
 
-% Tocless Command ====================================
-\newcommand{\nocontentsline}[3]{}
-\newcommand{\tocless}[2]{\bgroup\let\addcontentsline=\nocontentsline#1{#2}\egroup}
-
-% Make some floats adjustments =======================
-% make floatbarrier at each section
-\usepackage[section]{placeins}
-
+% Layout Placing Settings ==============================
 % \setcounter{topnumber}{2}
 % \setcounter{bottomnumber}{2}
 % \setcounter{totalnumber}{3}     % 2 may work better
@@ -393,20 +362,20 @@
 
 % Allow display break
 %\allowdisplaybreaks[3]
-%=====================================================
+%=======================================================
 
-% Clever Refs
-\usepackage{cleveref} % load it after thmtools (there is some problem)
+% Tocless Command ======================================
+\newcommand{\nocontentsline}[3]{}
+\newcommand{\tocless}[2]{\bgroup\let\addcontentsline=\nocontentsline#1{#2}\egroup}
+
+% Clever Refs ==========================================
+\usepackage[capitalise]{cleveref} % load it after thmtools (there is some problem)
 \crefname{appsec}{appendix}{appendices}
+%=======================================================
 
-% Bibliography
-%\input{literature/bibliography.tex}
-
+% General Settings
 \KOMAoptions{cleardoublepage=empty}
-
-% Indentation
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{1.8mm}
+\raggedbottom
 \ifxetex
   % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
   \usepackage{polyglossia}
@@ -421,7 +390,7 @@
 \setlength{\cslhangindent}{1.5em}
 \newlength{\csllabelwidth}
 \setlength{\csllabelwidth}{3em}
-\newenvironment{CSLReferences}[3] % #1 hanging-ident, #2 entry spacing
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
  {% don't indent paragraphs
   \setlength{\parindent}{0pt}
   % turn on hanging indent if param 1 is 1
@@ -435,31 +404,62 @@
 \usepackage{calc}
 \newcommand{\CSLBlock}[1]{#1\hfill\break}
 \newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
-\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
 \title{Technical Documents}
-\author{}
-\date{}
-% 
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Demonstrating the Power of Markdown with Pandoc}
+\author{Gabriel Nützi \and The Community}
+\date{2. Dezember 2020}
+
 \begin{document}
-% \maketitle
-% 
+\begin{titlepage}
+\makeatletter
+\begin{center}
+\includesvg[inkscapearea=page,inkscapepath=svgsubdir,width=0.5\textwidth]{files/Logo.svg}
+\end{center}
+\vspace{1cm}
+\begin{center}
+\Huge \textbf{\@title}
+\end{center}
+\begin{center}
+\LARGE Demonstrating the Power of Markdown with Pandoc
+\end{center}
+\vspace{1cm}
+\begin{center}
+\textbf{Gabriel Nützi} \\ \& \\ \textbf{The Community}
+\end{center}
+\begin{center}
+\@date
+\end{center}
+\begin{center}
+\vfill
+Zürich, Switzerland
+\vspace{1cm}
+\end{center}
+\makeatother
+\end{titlepage}\begin{abstract}
+This is a setup demonstrating the power and use of markdown for
+technical documents by using a fully automated conversion sequence with
+\texttt{yarn}, \texttt{gulp} and of course
+\href{www.pandoc.org}{\texttt{pandoc}}.
+\end{abstract}
+
 {
 \hypersetup{linkcolor=Black}
 \setcounter{tocdepth}{2}
 \tableofcontents
 }
-\textbf{Author:} Gabriel Nützi \textbf{Reviewer:} Michael Baumann
-\textbf{Date:} 28.05.2020
-
 \hypertarget{intro}{%
 \chapter{Intro}\label{intro}}
 
-This is a setup demonstrating the power and use of markdown for
-technical documents by using a fully automated conversion sequence with
-\texttt{yarn}, \texttt{gulp} and of course
-\href{www.pandoc.org}{\texttt{pandoc}}. Read the
+Read the
 \href{https://github.com/gabyx/TechnicalMarkdown/blob/master/Readme.md}{Readme.md}
 for futher information.
 
@@ -467,7 +467,7 @@ for futher information.
 \chapter{Samples}\label{samples}}
 
 \hypertarget{konvexe-probleme}{%
-\chapter{Konvexe Probleme}\label{konvexe-probleme}}
+\section{Konvexe Probleme}\label{konvexe-probleme}}
 
 In diesem Abschnitt geht es darum ein besseres Verständnis zu geben über
 Algorithmen und Konzepte welche zum Beispiel bei der
@@ -502,7 +502,7 @@ Gebiet sei hier mal das Standardwerk
 \protect\hyperlink{ref-rockafellar_convex_2015}{{[}2{]}} gegeben.
 
 \hypertarget{konvexe-menge}{%
-\section{Konvexe Menge}\label{konvexe-menge}}
+\subsection{Konvexe Menge}\label{konvexe-menge}}
 
 Eine Menge \(\set{C} \subseteq V\), also ein Teilmenge eines Vektorraums
 \(V\), wird \textbf{konvex} genannt, falls und nur falls
@@ -537,7 +537,7 @@ Wir können somit über die Metrik \(d(\vvec{x},\vvec{y})\) die Länge
 zwischen zwei Vektoren \(\vvec{x},\vvec{y} \in \mathbb{E}^3\) berechnen.
 
 \hypertarget{proximaler-punkt}{%
-\section{Proximaler Punkt}\label{proximaler-punkt}}
+\subsection{Proximaler Punkt}\label{proximaler-punkt}}
 
 Mit der Metrik, also unserem Lineal zum Messen von Distanzen, lässt sich
 nun die Projektion \(\prox{C}(\vvec{p})\) eines Punktes \(\vvec{p}\) mit
@@ -549,7 +549,7 @@ Das heisst \(\prox{C}(\vvec{p})\) minimiert den Punkt \(\vvec{x}\) in
 der Menge \(\set{C}\) so, dass sein Abstand zu \(\vvec{p}\) minimal ist.
 
 \hypertarget{normalkegel}{%
-\section{Normalkegel}\label{normalkegel}}
+\subsection{Normalkegel}\label{normalkegel}}
 
 Eines der \textbf{wichtigsten} Konzept der konvexen Analysis ist die des
 \textbf{Normalkegels}. Wie der Name schon sagt, handelt es sich um einen
@@ -580,7 +580,7 @@ zum \(\vvec{0}\)-Vektor. Der Vektor \(\vvec{v}\) ist in der Menge des
 Normalkegels an \(\vvec{x}\).}{}[fig:normalcone]
 
 \hypertarget{zusammenhang-von-normalkegel-und-proximaler-punkt}{%
-\section{Zusammenhang von Normalkegel und Proximaler
+\subsection{Zusammenhang von Normalkegel und Proximaler
 Punkt}\label{zusammenhang-von-normalkegel-und-proximaler-punkt}}
 
 Man fragt sich natürlich nun: \emph{Was bringen uns diese mathematische
@@ -625,7 +625,7 @@ Seitenflächen). Eine Projektionsfunktion auf ein Dreieck muss diese 6
 Bereiche beachten und ist so auch optimal und richtig implementiert.
 
 \hypertarget{zusammenhang-von-normalkegel-und-konvexer-optimierung}{%
-\section{Zusammenhang von Normalkegel und Konvexer
+\subsection{Zusammenhang von Normalkegel und Konvexer
 Optimierung}\label{zusammenhang-von-normalkegel-und-konvexer-optimierung}}
 
 Um hier mathematisch nicht in einen Exzess zu geraten, wird hier nur
@@ -707,7 +707,7 @@ welche man iterative lösen kann, was zum
 Algorithm).
 
 \hypertarget{code-sample}{%
-\chapter{Code Sample}\label{code-sample}}
+\section{Code Sample}\label{code-sample}}
 
 Some inline code \texttt{int\ a;\ a\ +=\ "asd"}
 
@@ -808,10 +808,10 @@ Some inline code \texttt{int\ a;\ a\ +=\ "asd"}
 \end{Shaded}
 
 \hypertarget{tables}{%
-\chapter{Tables}\label{tables}}
+\section{Tables}\label{tables}}
 
 \hypertarget{html-table}{%
-\section{HTML Table}\label{html-table}}
+\subsection{HTML Table}\label{html-table}}
 
 \begin{itemize}
 \tightlist
@@ -828,20 +828,24 @@ Some inline code \texttt{int\ a;\ a\ +=\ "asd"}
 
 \begin{longtable}[]{@{}llll@{}}
 \toprule
-\begin{minipage}[b]{0.22\columnwidth}\raggedright
+\begin{minipage}[b]{(\columnwidth - 3\tabcolsep) * \real{0.25}}\raggedright
 Fruits\strut
-\end{minipage} & \begin{minipage}[b]{0.22\columnwidth}\raggedright
+\end{minipage} &
+\begin{minipage}[b]{(\columnwidth - 3\tabcolsep) * \real{0.25}}\raggedright
 Vegetables\strut
-\end{minipage} & \begin{minipage}[b]{0.22\columnwidth}\raggedright
+\end{minipage} &
+\begin{minipage}[b]{(\columnwidth - 3\tabcolsep) * \real{0.25}}\raggedright
 Constraints\strut
-\end{minipage} & \begin{minipage}[b]{0.22\columnwidth}\raggedright
+\end{minipage} &
+\begin{minipage}[b]{(\columnwidth - 3\tabcolsep) * \real{0.25}}\raggedright
 Properties\strut
 \end{minipage}\tabularnewline
 \midrule
 \endhead
-\begin{minipage}[t]{0.22\columnwidth}\raggedright
+\begin{minipage}[t]{(\columnwidth - 3\tabcolsep) * \real{0.25}}\raggedright
 \textbf{First}\strut
-\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+\end{minipage} &
+\begin{minipage}[t]{(\columnwidth - 3\tabcolsep) * \real{0.25}}\raggedright
 \begin{enumerate}
 \tightlist
 \item
@@ -849,7 +853,8 @@ Properties\strut
 \item
   Aliquam tinc.
 \end{enumerate}\strut
-\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+\end{minipage} &
+\begin{minipage}[t]{(\columnwidth - 3\tabcolsep) * \real{0.25}}\raggedright
 \begin{description}
 \tightlist
 \item[Definition 1]
@@ -857,12 +862,14 @@ Properties\strut
 \item[Definition 2]
 \(x^2\) is a squared variable
 \end{description}\strut
-\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+\end{minipage} &
+\begin{minipage}[t]{(\columnwidth - 3\tabcolsep) * \real{0.25}}\raggedright
 \strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.22\columnwidth}\raggedright
+\begin{minipage}[t]{(\columnwidth - 3\tabcolsep) * \real{0.25}}\raggedright
 \textbf{Second}\strut
-\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+\end{minipage} &
+\begin{minipage}[t]{(\columnwidth - 3\tabcolsep) * \real{0.25}}\raggedright
 \begin{itemize}
 \tightlist
 \item
@@ -870,7 +877,8 @@ Properties\strut
 \item
   Mauris eu.
 \end{itemize}\strut
-\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+\end{minipage} &
+\begin{minipage}[t]{(\columnwidth - 3\tabcolsep) * \real{0.25}}\raggedright
 \begin{enumerate}
 \tightlist
 \item
@@ -878,7 +886,8 @@ Properties\strut
 \item
   Dapibus.
 \end{enumerate}\strut
-\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+\end{minipage} &
+\begin{minipage}[t]{(\columnwidth - 3\tabcolsep) * \real{0.25}}\raggedright
 \begin{enumerate}
 \tightlist
 \item
@@ -890,33 +899,34 @@ Properties\strut
 \bottomrule
 \end{longtable}
 
-\hypertarget{latex-table}{%
-\section{Latex Table}\label{latex-table}}
+\hypertarget{table}{%
+\subsection{\texorpdfstring{\LaTeX~Table}{~Table}}\label{table}}
 
 \begin{itemize}
 \tightlist
 \item
   Included latex file as raw \texttt{latex}.
 \item
+  Converted from \texttt{.html} by \texttt{convert-tables.py} and
+  \texttt{table.json}.
+\item
   Latex citations do work inside.
 \end{itemize}
 
-\begin{longtable}[]{@{}llll@{}}
+\begin{longtable}[]{@{}>{\raggedright}p{(\columnwidth-6\tabcolsep) * \real{0.237}}>{\raggedright}p{(\columnwidth-6\tabcolsep) * \real{0.237}}>{\raggedright}p{(\columnwidth-6\tabcolsep) * \real{0.237}}>{\raggedright}p{(\columnwidth-6\tabcolsep) * \real{0.237}}@{}}
 \toprule
-\begin{minipage}[b]{0.22\columnwidth}\raggedright
 Fruits\strut
-\end{minipage} & \begin{minipage}[b]{0.22\columnwidth}\raggedright
+ &
 Vegetables\strut
-\end{minipage} & \begin{minipage}[b]{0.22\columnwidth}\raggedright
+ &
 Constraints\strut
-\end{minipage} & \begin{minipage}[b]{0.22\columnwidth}\raggedright
+ &
 Properties\strut
-\end{minipage}\tabularnewline
+\tabularnewline
 \midrule
 \endhead
-\begin{minipage}[t]{0.22\columnwidth}\raggedright
 \textbf{First}\strut
-\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+ &
 \begin{enumerate}
 \tightlist
 \item
@@ -924,52 +934,53 @@ Properties\strut
 \item
   Aliquam tinc.
 \end{enumerate}\strut
-\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+ &
 \begin{description}
 \tightlist
 \item[Definition 1]
 \(\int_0^1{x^2} := ?\)
 \item[Definition 2]
-This is \(x^2\)
+\(x^2\) is a squared variable
 \end{description}\strut
-\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+ &
 \strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{0.22\columnwidth}\raggedright
+\tabularnewline
 \textbf{Second}\strut
-\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+ &
 \begin{itemize}
 \tightlist
 \item
   Lorem ipsum.
 \item
-  mauris eu risus.
-\end{itemize}\strut
-\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+  Mauris eu.
+\end{itemize}
+ &
 \begin{enumerate}
 \tightlist
 \item
   Lorem sit.
 \item
-  dapibus neque.
+  Dapibus.
 \end{enumerate}\strut
-\end{minipage} & \begin{minipage}[t]{0.22\columnwidth}\raggedright
+ &
 \begin{enumerate}
 \tightlist
 \item
-  Aliquam eu risus.
+  Aliquam risus.
 \item
-  auctor neque.
+  Auctor neque.
 \end{enumerate}\strut
-\end{minipage}\tabularnewline
+\tabularnewline
 \bottomrule
 \end{longtable}
 
 \hypertarget{sec:multi-line-table}{%
-\section{Markdown Table}\label{sec:multi-line-table}}
+\subsection{Markdown Table}\label{sec:multi-line-table}}
 
 \begin{itemize}
 \tightlist
+\item
+  Included markdown files.
 \item
   Cross references do work here.
 \end{itemize}
@@ -978,22 +989,28 @@ This is \(x^2\)
 \caption{Here's a multiline table without a header.}\tabularnewline
 \toprule
 \endhead
-\begin{minipage}[t]{0.13\columnwidth}\centering
+\begin{minipage}[t]{(\columnwidth - 3\tabcolsep) * \real{0.15}}\centering
 First\strut
-\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+\end{minipage} &
+\begin{minipage}[t]{(\columnwidth - 3\tabcolsep) * \real{0.10}}\raggedright
 row\strut
-\end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedleft
+\end{minipage} &
+\begin{minipage}[t]{(\columnwidth - 3\tabcolsep) * \real{0.28}}\raggedleft
 12.0\strut
-\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\raggedright
+\end{minipage} &
+\begin{minipage}[t]{(\columnwidth - 3\tabcolsep) * \real{0.32}}\raggedright
 Example of a row that spans multiple lines.\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.13\columnwidth}\centering
+\begin{minipage}[t]{(\columnwidth - 3\tabcolsep) * \real{0.15}}\centering
 Second\strut
-\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+\end{minipage} &
+\begin{minipage}[t]{(\columnwidth - 3\tabcolsep) * \real{0.10}}\raggedright
 row\strut
-\end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedleft
+\end{minipage} &
+\begin{minipage}[t]{(\columnwidth - 3\tabcolsep) * \real{0.28}}\raggedleft
 5.0\strut
-\end{minipage} & \begin{minipage}[t]{0.29\columnwidth}\raggedright
+\end{minipage} &
+\begin{minipage}[t]{(\columnwidth - 3\tabcolsep) * \real{0.32}}\raggedright
 Here's another one.\strut
 \end{minipage}\tabularnewline
 \bottomrule
@@ -1002,30 +1019,36 @@ Here's another one.\strut
 \begin{longtable}[]{@{}lll@{}}
 \caption{Sample grid table.}\tabularnewline
 \toprule
-\begin{minipage}[b]{0.18\columnwidth}\raggedright
+\begin{minipage}[b]{(\columnwidth - 2\tabcolsep) * \real{0.20}}\raggedright
 Fruit\strut
-\end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\raggedright
+\end{minipage} &
+\begin{minipage}[b]{(\columnwidth - 2\tabcolsep) * \real{0.10}}\raggedright
 Price\strut
-\end{minipage} & \begin{minipage}[b]{0.24\columnwidth}\raggedright
+\end{minipage} &
+\begin{minipage}[b]{(\columnwidth - 2\tabcolsep) * \real{0.26}}\raggedright
 Advantages\strut
 \end{minipage}\tabularnewline
 \midrule
 \endfirsthead
 \toprule
-\begin{minipage}[b]{0.18\columnwidth}\raggedright
+\begin{minipage}[b]{(\columnwidth - 2\tabcolsep) * \real{0.20}}\raggedright
 Fruit\strut
-\end{minipage} & \begin{minipage}[b]{0.09\columnwidth}\raggedright
+\end{minipage} &
+\begin{minipage}[b]{(\columnwidth - 2\tabcolsep) * \real{0.10}}\raggedright
 Price\strut
-\end{minipage} & \begin{minipage}[b]{0.24\columnwidth}\raggedright
+\end{minipage} &
+\begin{minipage}[b]{(\columnwidth - 2\tabcolsep) * \real{0.26}}\raggedright
 Advantages\strut
 \end{minipage}\tabularnewline
 \midrule
 \endhead
-\begin{minipage}[t]{0.18\columnwidth}\raggedright
+\begin{minipage}[t]{(\columnwidth - 2\tabcolsep) * \real{0.20}}\raggedright
 Bananas\strut
-\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+\end{minipage} &
+\begin{minipage}[t]{(\columnwidth - 2\tabcolsep) * \real{0.10}}\raggedright
 \$1.34\strut
-\end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedright
+\end{minipage} &
+\begin{minipage}[t]{(\columnwidth - 2\tabcolsep) * \real{0.26}}\raggedright
 \begin{itemize}
 \tightlist
 \item
@@ -1034,11 +1057,13 @@ Bananas\strut
   bright color
 \end{itemize}\strut
 \end{minipage}\tabularnewline
-\begin{minipage}[t]{0.18\columnwidth}\raggedright
+\begin{minipage}[t]{(\columnwidth - 2\tabcolsep) * \real{0.20}}\raggedright
 Oranges\strut
-\end{minipage} & \begin{minipage}[t]{0.09\columnwidth}\raggedright
+\end{minipage} &
+\begin{minipage}[t]{(\columnwidth - 2\tabcolsep) * \real{0.10}}\raggedright
 \$2.10\strut
-\end{minipage} & \begin{minipage}[t]{0.24\columnwidth}\raggedright
+\end{minipage} &
+\begin{minipage}[t]{(\columnwidth - 2\tabcolsep) * \real{0.26}}\raggedright
 \begin{itemize}
 \tightlist
 \item
