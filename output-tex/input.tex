@@ -416,7 +416,7 @@
 \makeatother
 \subtitle{Demonstrating the Power of Markdown with Pandoc}
 \author{Gabriel Nützi \and The Community}
-\date{2. Dezember 2020}
+\date{2. December 2020}
 
 \begin{document}
 \begin{titlepage}
@@ -714,96 +714,96 @@ Some inline code \texttt{int\ a;\ a\ +=\ "asd"}
 \begin{Shaded}
 \begin{Highlighting}[numbers=left,,]
 \KeywordTok{class}\NormalTok{ LogicNode}
-\NormalTok{\{}
-\KeywordTok{public}\NormalTok{:}
-\NormalTok{    EG\_DEFINE\_TYPES();}
+\OperatorTok{\{}
+\KeywordTok{public}\OperatorTok{:}
+\NormalTok{    EG\_DEFINE\_TYPES}\OperatorTok{();}
 
-    \KeywordTok{using}\NormalTok{ InputSockets  = }\BuiltInTok{std::}\NormalTok{vector\textless{}LogicSocketInputBase*\textgreater{};}
-    \KeywordTok{using}\NormalTok{ OutputSockets = }\BuiltInTok{std::}\NormalTok{vector\textless{}LogicSocketOutputBase*\textgreater{};}
+    \KeywordTok{using}\NormalTok{ InputSockets  }\OperatorTok{=} \BuiltInTok{std::}\NormalTok{vector}\OperatorTok{\textless{}}\NormalTok{LogicSocketInputBase}\OperatorTok{*\textgreater{};}
+    \KeywordTok{using}\NormalTok{ OutputSockets }\OperatorTok{=} \BuiltInTok{std::}\NormalTok{vector}\OperatorTok{\textless{}}\NormalTok{LogicSocketOutputBase}\OperatorTok{*\textgreater{};}
 
-\KeywordTok{public}\NormalTok{:}
+\KeywordTok{public}\OperatorTok{:}
     \CommentTok{//! The basic constructor of a node.}
-\NormalTok{    LogicNode(NodeId id = nodeIdInvalid)}
-\NormalTok{        : }\VariableTok{m\_id}\NormalTok{(id)}
-\NormalTok{    \{\}}
+\NormalTok{    LogicNode}\OperatorTok{(}\NormalTok{NodeId id }\OperatorTok{=}\NormalTok{ nodeIdInvalid}\OperatorTok{)}
+        \OperatorTok{:} \VariableTok{m\_id}\OperatorTok{(}\NormalTok{id}\OperatorTok{)}
+    \OperatorTok{\{\}}
 
-\NormalTok{    LogicNode(}\AttributeTok{const}\NormalTok{ LogicNode\&) = }\ControlFlowTok{default}\NormalTok{;}
-\NormalTok{    LogicNode(LogicNode\&\&)      = }\ControlFlowTok{default}\NormalTok{;}
+\NormalTok{    LogicNode}\OperatorTok{(}\AttributeTok{const}\NormalTok{ LogicNode}\OperatorTok{\&)} \OperatorTok{=} \ControlFlowTok{default}\OperatorTok{;}
+\NormalTok{    LogicNode}\OperatorTok{(}\NormalTok{LogicNode}\OperatorTok{\&\&)}      \OperatorTok{=} \ControlFlowTok{default}\OperatorTok{;}
 
-    \KeywordTok{virtual}\NormalTok{ \textasciitilde{}LogicNode() = }\ControlFlowTok{default}\NormalTok{;}
+    \KeywordTok{virtual} \OperatorTok{\textasciitilde{}}\NormalTok{LogicNode}\OperatorTok{()} \OperatorTok{=} \ControlFlowTok{default}\OperatorTok{;}
 
     \CommentTok{//! The init function.}
-    \KeywordTok{virtual} \DataTypeTok{void}\NormalTok{ init() = }\DecValTok{0}\NormalTok{;}
+    \KeywordTok{virtual} \DataTypeTok{void}\NormalTok{ init}\OperatorTok{()} \OperatorTok{=} \DecValTok{0}\OperatorTok{;}
 
     \CommentTok{//! The reset function.}
-    \KeywordTok{virtual} \DataTypeTok{void}\NormalTok{ reset() = }\DecValTok{0}\NormalTok{;}
+    \KeywordTok{virtual} \DataTypeTok{void}\NormalTok{ reset}\OperatorTok{()} \OperatorTok{=} \DecValTok{0}\OperatorTok{;}
 
     \CommentTok{//! The main compute function of this execution node.}
-    \KeywordTok{virtual} \DataTypeTok{void}\NormalTok{ compute() = }\DecValTok{0}\NormalTok{;}
+    \KeywordTok{virtual} \DataTypeTok{void}\NormalTok{ compute}\OperatorTok{()} \OperatorTok{=} \DecValTok{0}\OperatorTok{;}
 
-\KeywordTok{public}\NormalTok{:}
-\NormalTok{    NodeId id() }\AttributeTok{const}\NormalTok{ \{ }\ControlFlowTok{return} \VariableTok{m\_id}\NormalTok{; \}}
-    \DataTypeTok{void}\NormalTok{ setId(NodeId id) \{ }\VariableTok{m\_id}\NormalTok{ = id; \}}
+\KeywordTok{public}\OperatorTok{:}
+\NormalTok{    NodeId id}\OperatorTok{()} \AttributeTok{const} \OperatorTok{\{} \ControlFlowTok{return} \VariableTok{m\_id}\OperatorTok{;} \OperatorTok{\}}
+    \DataTypeTok{void}\NormalTok{ setId}\OperatorTok{(}\NormalTok{NodeId id}\OperatorTok{)} \OperatorTok{\{} \VariableTok{m\_id} \OperatorTok{=}\NormalTok{ id}\OperatorTok{;} \OperatorTok{\}}
 
-\KeywordTok{protected}\NormalTok{:}
+\KeywordTok{protected}\OperatorTok{:}
     \CommentTok{//! Registers input sockets for this node.}
-    \KeywordTok{template}\NormalTok{\textless{}}\KeywordTok{typename}\NormalTok{... Sockets\textgreater{}}
-    \DataTypeTok{void}\NormalTok{ registerInputs(}\BuiltInTok{std::}\NormalTok{tuple\textless{}Sockets...\textgreater{}\& sockets)}
-\NormalTok{    \{}
-        \VariableTok{m\_inputs}\NormalTok{ = tupleUtil::toPointers\textless{}}
-\NormalTok{            [](}\KeywordTok{auto}\NormalTok{*... p) \{ }\ControlFlowTok{return}\NormalTok{ InputSockets\{p...\}; \}\textgreater{}(sockets);}
-\NormalTok{    \}}
+    \KeywordTok{template}\OperatorTok{\textless{}}\KeywordTok{typename}\OperatorTok{...}\NormalTok{ Sockets}\OperatorTok{\textgreater{}}
+    \DataTypeTok{void}\NormalTok{ registerInputs}\OperatorTok{(}\BuiltInTok{std::}\NormalTok{tuple}\OperatorTok{\textless{}}\NormalTok{Sockets}\OperatorTok{...\textgreater{}\&}\NormalTok{ sockets}\OperatorTok{)}
+    \OperatorTok{\{}
+        \VariableTok{m\_inputs} \OperatorTok{=}\NormalTok{ tupleUtil}\OperatorTok{::}\NormalTok{toPointers}\OperatorTok{\textless{}}
+            \OperatorTok{[](}\KeywordTok{auto}\OperatorTok{*...}\NormalTok{ p}\OperatorTok{)} \OperatorTok{\{} \ControlFlowTok{return}\NormalTok{ InputSockets}\OperatorTok{\{}\NormalTok{p}\OperatorTok{...\};} \OperatorTok{\}\textgreater{}(}\NormalTok{sockets}\OperatorTok{);}
+    \OperatorTok{\}}
 
     \CommentTok{//! Registers output sockets for this node.}
-    \KeywordTok{template}\NormalTok{\textless{}}\KeywordTok{typename}\NormalTok{... Sockets\textgreater{}}
-    \DataTypeTok{void}\NormalTok{ registerOutputs(}\BuiltInTok{std::}\NormalTok{tuple\textless{}Sockets...\textgreater{}\& sockets)}
-\NormalTok{    \{}
-        \VariableTok{m\_outputs}\NormalTok{ = tupleUtil::toPointers\textless{}}
-\NormalTok{            [](}\KeywordTok{auto}\NormalTok{*... p) \{ }\ControlFlowTok{return}\NormalTok{ OutputSockets\{p...\}; \}\textgreater{}(sockets);}
-\NormalTok{    \}}
+    \KeywordTok{template}\OperatorTok{\textless{}}\KeywordTok{typename}\OperatorTok{...}\NormalTok{ Sockets}\OperatorTok{\textgreater{}}
+    \DataTypeTok{void}\NormalTok{ registerOutputs}\OperatorTok{(}\BuiltInTok{std::}\NormalTok{tuple}\OperatorTok{\textless{}}\NormalTok{Sockets}\OperatorTok{...\textgreater{}\&}\NormalTok{ sockets}\OperatorTok{)}
+    \OperatorTok{\{}
+        \VariableTok{m\_outputs} \OperatorTok{=}\NormalTok{ tupleUtil}\OperatorTok{::}\NormalTok{toPointers}\OperatorTok{\textless{}}
+            \OperatorTok{[](}\KeywordTok{auto}\OperatorTok{*...}\NormalTok{ p}\OperatorTok{)} \OperatorTok{\{} \ControlFlowTok{return}\NormalTok{ OutputSockets}\OperatorTok{\{}\NormalTok{p}\OperatorTok{...\};} \OperatorTok{\}\textgreater{}(}\NormalTok{sockets}\OperatorTok{);}
+    \OperatorTok{\}}
 
-\KeywordTok{public}\NormalTok{:}
+\KeywordTok{public}\OperatorTok{:}
     \CommentTok{//! Get the list of input sockets.}
-    \AttributeTok{const}\NormalTok{ InputSockets\& getInputs() }\AttributeTok{const}\NormalTok{ \{ }\ControlFlowTok{return} \VariableTok{m\_inputs}\NormalTok{; \}}
-\NormalTok{    InputSockets\& getInputs() \{ }\ControlFlowTok{return} \VariableTok{m\_inputs}\NormalTok{; \}}
+    \AttributeTok{const}\NormalTok{ InputSockets}\OperatorTok{\&}\NormalTok{ getInputs}\OperatorTok{()} \AttributeTok{const} \OperatorTok{\{} \ControlFlowTok{return} \VariableTok{m\_inputs}\OperatorTok{;} \OperatorTok{\}}
+\NormalTok{    InputSockets}\OperatorTok{\&}\NormalTok{ getInputs}\OperatorTok{()} \OperatorTok{\{} \ControlFlowTok{return} \VariableTok{m\_inputs}\OperatorTok{;} \OperatorTok{\}}
 
     \CommentTok{//! Get the list of output sockets.}
-    \AttributeTok{const}\NormalTok{ OutputSockets\& getOutputs() }\AttributeTok{const}\NormalTok{ \{ }\ControlFlowTok{return} \VariableTok{m\_outputs}\NormalTok{; \}}
-\NormalTok{    OutputSockets\& getOutputs() \{ }\ControlFlowTok{return} \VariableTok{m\_outputs}\NormalTok{; \}}
+    \AttributeTok{const}\NormalTok{ OutputSockets}\OperatorTok{\&}\NormalTok{ getOutputs}\OperatorTok{()} \AttributeTok{const} \OperatorTok{\{} \ControlFlowTok{return} \VariableTok{m\_outputs}\OperatorTok{;} \OperatorTok{\}}
+\NormalTok{    OutputSockets}\OperatorTok{\&}\NormalTok{ getOutputs}\OperatorTok{()} \OperatorTok{\{} \ControlFlowTok{return} \VariableTok{m\_outputs}\OperatorTok{;} \OperatorTok{\}}
 
     \CommentTok{//! Get the input socket at index \textasciigrave{}index\textasciigrave{}.}
-    \AttributeTok{const}\NormalTok{ LogicSocketInputBase* input(SocketIndex index) }\AttributeTok{const}
-\NormalTok{    \{}
-\NormalTok{        EG\_THROW\_IF(index \textgreater{}= }\VariableTok{m\_inputs}\NormalTok{.size(), }\StringTok{"Wrong index"}\NormalTok{);}
-        \ControlFlowTok{return} \VariableTok{m\_inputs}\NormalTok{[index];}
-\NormalTok{    \}}
+    \AttributeTok{const}\NormalTok{ LogicSocketInputBase}\OperatorTok{*}\NormalTok{ input}\OperatorTok{(}\NormalTok{SocketIndex index}\OperatorTok{)} \AttributeTok{const}
+    \OperatorTok{\{}
+\NormalTok{        EG\_THROW\_IF}\OperatorTok{(}\NormalTok{index }\OperatorTok{\textgreater{}=} \VariableTok{m\_inputs}\OperatorTok{.}\NormalTok{size}\OperatorTok{(),} \StringTok{"Wrong index"}\OperatorTok{);}
+        \ControlFlowTok{return} \VariableTok{m\_inputs}\OperatorTok{[}\NormalTok{index}\OperatorTok{];}
+    \OperatorTok{\}}
 
     \CommentTok{//! Get the input socket at index \textasciigrave{}index\textasciigrave{}.}
-\NormalTok{    LogicSocketInputBase* input(SocketIndex index)}
-\NormalTok{    \{}
-\NormalTok{        EG\_THROW\_IF(index \textgreater{}= }\VariableTok{m\_inputs}\NormalTok{.size(), }\StringTok{"Wrong index"}\NormalTok{);}
-        \ControlFlowTok{return} \VariableTok{m\_inputs}\NormalTok{[index];}
-\NormalTok{    \}}
+\NormalTok{    LogicSocketInputBase}\OperatorTok{*}\NormalTok{ input}\OperatorTok{(}\NormalTok{SocketIndex index}\OperatorTok{)}
+    \OperatorTok{\{}
+\NormalTok{        EG\_THROW\_IF}\OperatorTok{(}\NormalTok{index }\OperatorTok{\textgreater{}=} \VariableTok{m\_inputs}\OperatorTok{.}\NormalTok{size}\OperatorTok{(),} \StringTok{"Wrong index"}\OperatorTok{);}
+        \ControlFlowTok{return} \VariableTok{m\_inputs}\OperatorTok{[}\NormalTok{index}\OperatorTok{];}
+    \OperatorTok{\}}
 
     \CommentTok{//! Get the output socket at index \textasciigrave{}index\textasciigrave{}.}
-    \AttributeTok{const}\NormalTok{ LogicSocketOutputBase* output(SocketIndex index) }\AttributeTok{const}
-\NormalTok{    \{}
-\NormalTok{        EG\_THROW\_IF(index \textgreater{}= }\VariableTok{m\_outputs}\NormalTok{.size(), }\StringTok{"Wrong index"}\NormalTok{);}
-        \ControlFlowTok{return} \VariableTok{m\_outputs}\NormalTok{[index];}
-\NormalTok{    \}}
+    \AttributeTok{const}\NormalTok{ LogicSocketOutputBase}\OperatorTok{*}\NormalTok{ output}\OperatorTok{(}\NormalTok{SocketIndex index}\OperatorTok{)} \AttributeTok{const}
+    \OperatorTok{\{}
+\NormalTok{        EG\_THROW\_IF}\OperatorTok{(}\NormalTok{index }\OperatorTok{\textgreater{}=} \VariableTok{m\_outputs}\OperatorTok{.}\NormalTok{size}\OperatorTok{(),} \StringTok{"Wrong index"}\OperatorTok{);}
+        \ControlFlowTok{return} \VariableTok{m\_outputs}\OperatorTok{[}\NormalTok{index}\OperatorTok{];}
+    \OperatorTok{\}}
 
     \CommentTok{//! Get the output socket at index \textasciigrave{}index\textasciigrave{}.}
-\NormalTok{    LogicSocketOutputBase* output(SocketIndex index)}
-\NormalTok{    \{}
-\NormalTok{        EG\_THROW\_IF(index \textgreater{}= }\VariableTok{m\_outputs}\NormalTok{.size(), }\StringTok{"Wrong index"}\NormalTok{);}
-        \ControlFlowTok{return} \VariableTok{m\_outputs}\NormalTok{[index];}
-\NormalTok{    \}}
+\NormalTok{    LogicSocketOutputBase}\OperatorTok{*}\NormalTok{ output}\OperatorTok{(}\NormalTok{SocketIndex index}\OperatorTok{)}
+    \OperatorTok{\{}
+\NormalTok{        EG\_THROW\_IF}\OperatorTok{(}\NormalTok{index }\OperatorTok{\textgreater{}=} \VariableTok{m\_outputs}\OperatorTok{.}\NormalTok{size}\OperatorTok{(),} \StringTok{"Wrong index"}\OperatorTok{);}
+        \ControlFlowTok{return} \VariableTok{m\_outputs}\OperatorTok{[}\NormalTok{index}\OperatorTok{];}
+    \OperatorTok{\}}
 
-\KeywordTok{protected}\NormalTok{:}
-\NormalTok{    NodeId }\VariableTok{m\_id}\NormalTok{;              }\CommentTok{//!\textless{} The id of the node.}
-\NormalTok{    InputSockets }\VariableTok{m\_inputs}\NormalTok{;    }\CommentTok{//!\textless{} The input sockets.}
-\NormalTok{    OutputSockets }\VariableTok{m\_outputs}\NormalTok{;  }\CommentTok{//!\textless{} The output sockets.}
-\NormalTok{\};}
+\KeywordTok{protected}\OperatorTok{:}
+\NormalTok{    NodeId }\VariableTok{m\_id}\OperatorTok{;}              \CommentTok{//!\textless{} The id of the node.}
+\NormalTok{    InputSockets }\VariableTok{m\_inputs}\OperatorTok{;}    \CommentTok{//!\textless{} The input sockets.}
+\NormalTok{    OutputSockets }\VariableTok{m\_outputs}\OperatorTok{;}  \CommentTok{//!\textless{} The output sockets.}
+\OperatorTok{\};}
 \end{Highlighting}
 \end{Shaded}
 
@@ -826,76 +826,62 @@ Some inline code \texttt{int\ a;\ a\ +=\ "asd"}
   extension.
 \end{itemize}
 
-\begin{longtable}[]{@{}llll@{}}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.15}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.20}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.35}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.30}}@{}}
+\caption{Table by included \texttt{.html} file.}\tabularnewline
 \toprule
-\begin{minipage}[b]{(\columnwidth - 3\tabcolsep) * \real{0.25}}\raggedright
-Fruits\strut
-\end{minipage} &
-\begin{minipage}[b]{(\columnwidth - 3\tabcolsep) * \real{0.25}}\raggedright
-Vegetables\strut
-\end{minipage} &
-\begin{minipage}[b]{(\columnwidth - 3\tabcolsep) * \real{0.25}}\raggedright
-Constraints\strut
-\end{minipage} &
-\begin{minipage}[b]{(\columnwidth - 3\tabcolsep) * \real{0.25}}\raggedright
-Properties\strut
-\end{minipage}\tabularnewline
+Fruits & Vegetables & Constraints & Properties \\
+\midrule
+\endfirsthead
+\toprule
+Fruits & Vegetables & Constraints & Properties \\
 \midrule
 \endhead
-\begin{minipage}[t]{(\columnwidth - 3\tabcolsep) * \real{0.25}}\raggedright
-\textbf{First}\strut
-\end{minipage} &
-\begin{minipage}[t]{(\columnwidth - 3\tabcolsep) * \real{0.25}}\raggedright
+\textbf{First} & \begin{minipage}[t]{\linewidth}\raggedright
 \begin{enumerate}
 \tightlist
 \item
   Lorem ipsum.
 \item
   Aliquam tinc.
-\end{enumerate}\strut
-\end{minipage} &
-\begin{minipage}[t]{(\columnwidth - 3\tabcolsep) * \real{0.25}}\raggedright
+\end{enumerate}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
 \begin{description}
 \tightlist
 \item[Definition 1]
 \(\int_0^1{x^2} := ?\)
 \item[Definition 2]
 \(x^2\) is a squared variable
-\end{description}\strut
-\end{minipage} &
-\begin{minipage}[t]{(\columnwidth - 3\tabcolsep) * \real{0.25}}\raggedright
-\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{(\columnwidth - 3\tabcolsep) * \real{0.25}}\raggedright
-\textbf{Second}\strut
-\end{minipage} &
-\begin{minipage}[t]{(\columnwidth - 3\tabcolsep) * \real{0.25}}\raggedright
+\end{description}
+\end{minipage} & \\
+\textbf{Second} & \begin{minipage}[t]{\linewidth}\raggedright
 \begin{itemize}
 \tightlist
 \item
   Lorem ipsum.
 \item
   Mauris eu.
-\end{itemize}\strut
-\end{minipage} &
-\begin{minipage}[t]{(\columnwidth - 3\tabcolsep) * \real{0.25}}\raggedright
+\end{itemize}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
 \begin{enumerate}
 \tightlist
 \item
   Lorem sit.
 \item
   Dapibus.
-\end{enumerate}\strut
-\end{minipage} &
-\begin{minipage}[t]{(\columnwidth - 3\tabcolsep) * \real{0.25}}\raggedright
+\end{enumerate}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
 \begin{enumerate}
 \tightlist
 \item
   Aliquam risus.
 \item
   Auctor neque.
-\end{enumerate}\strut
-\end{minipage}\tabularnewline
+\end{enumerate}
+\end{minipage} \\
 \bottomrule
 \end{longtable}
 
@@ -913,40 +899,38 @@ Properties\strut
   Latex citations do work inside.
 \end{itemize}
 
-\begin{longtable}[]{@{}>{\raggedright}p{(\columnwidth-6\tabcolsep) * \real{0.237}}>{\raggedright}p{(\columnwidth-6\tabcolsep) * \real{0.237}}>{\raggedright}p{(\columnwidth-6\tabcolsep) * \real{0.237}}>{\raggedright}p{(\columnwidth-6\tabcolsep) * \real{0.237}}@{}}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.15}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.20}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.35}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.30}}@{}}
+\caption{Table by included \texttt{.html} file.}\tabularnewline
 \toprule
-Fruits\strut
- &
-Vegetables\strut
- &
-Constraints\strut
- &
-Properties\strut
-\tabularnewline
+Fruits & Vegetables & Constraints & Properties \\
+\midrule
+\endfirsthead
+\toprule
+Fruits & Vegetables & Constraints & Properties \\
 \midrule
 \endhead
-\textbf{First}\strut
- &
+\textbf{First} & \begin{minipage}[t]{\linewidth}\raggedright
 \begin{enumerate}
 \tightlist
 \item
   Lorem ipsum.
 \item
   Aliquam tinc.
-\end{enumerate}\strut
- &
+\end{enumerate}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
 \begin{description}
 \tightlist
 \item[Definition 1]
 \(\int_0^1{x^2} := ?\)
 \item[Definition 2]
 \(x^2\) is a squared variable
-\end{description}\strut
- &
-\strut
-\tabularnewline
-\textbf{Second}\strut
- &
+\end{description}
+\end{minipage} & \\
+\textbf{Second} & \begin{minipage}[t]{\linewidth}\raggedright
 \begin{itemize}
 \tightlist
 \item
@@ -954,23 +938,23 @@ Properties\strut
 \item
   Mauris eu.
 \end{itemize}
- &
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
 \begin{enumerate}
 \tightlist
 \item
   Lorem sit.
 \item
   Dapibus.
-\end{enumerate}\strut
- &
+\end{enumerate}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
 \begin{enumerate}
 \tightlist
 \item
   Aliquam risus.
 \item
   Auctor neque.
-\end{enumerate}\strut
-\tabularnewline
+\end{enumerate}
+\end{minipage} \\
 \bottomrule
 \end{longtable}
 
@@ -985,85 +969,42 @@ Properties\strut
   Cross references do work here.
 \end{itemize}
 
-\begin{longtable}[]{@{}clrl@{}}
-\caption{Here's a multiline table without a header.}\tabularnewline
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.15}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.10}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.28}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.32}}@{}}
+\caption{Here’s a multiline table without a header.}\tabularnewline
 \toprule
 \endhead
-\begin{minipage}[t]{(\columnwidth - 3\tabcolsep) * \real{0.15}}\centering
-First\strut
-\end{minipage} &
-\begin{minipage}[t]{(\columnwidth - 3\tabcolsep) * \real{0.10}}\raggedright
-row\strut
-\end{minipage} &
-\begin{minipage}[t]{(\columnwidth - 3\tabcolsep) * \real{0.28}}\raggedleft
-12.0\strut
-\end{minipage} &
-\begin{minipage}[t]{(\columnwidth - 3\tabcolsep) * \real{0.32}}\raggedright
-Example of a row that spans multiple lines.\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{(\columnwidth - 3\tabcolsep) * \real{0.15}}\centering
-Second\strut
-\end{minipage} &
-\begin{minipage}[t]{(\columnwidth - 3\tabcolsep) * \real{0.10}}\raggedright
-row\strut
-\end{minipage} &
-\begin{minipage}[t]{(\columnwidth - 3\tabcolsep) * \real{0.28}}\raggedleft
-5.0\strut
-\end{minipage} &
-\begin{minipage}[t]{(\columnwidth - 3\tabcolsep) * \real{0.32}}\raggedright
-Here's another one.\strut
-\end{minipage}\tabularnewline
+First & row & 12.0 & Example of a row that spans multiple lines. \\
+Second & row & 5.0 & Here’s another one. \\
 \bottomrule
 \end{longtable}
 
-\begin{longtable}[]{@{}lll@{}}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.20}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.10}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.26}}@{}}
 \caption{Sample grid table.}\tabularnewline
 \toprule
-\begin{minipage}[b]{(\columnwidth - 2\tabcolsep) * \real{0.20}}\raggedright
-Fruit\strut
-\end{minipage} &
-\begin{minipage}[b]{(\columnwidth - 2\tabcolsep) * \real{0.10}}\raggedright
-Price\strut
-\end{minipage} &
-\begin{minipage}[b]{(\columnwidth - 2\tabcolsep) * \real{0.26}}\raggedright
-Advantages\strut
-\end{minipage}\tabularnewline
+Fruit & Price & Advantages \\
 \midrule
 \endfirsthead
 \toprule
-\begin{minipage}[b]{(\columnwidth - 2\tabcolsep) * \real{0.20}}\raggedright
-Fruit\strut
-\end{minipage} &
-\begin{minipage}[b]{(\columnwidth - 2\tabcolsep) * \real{0.10}}\raggedright
-Price\strut
-\end{minipage} &
-\begin{minipage}[b]{(\columnwidth - 2\tabcolsep) * \real{0.26}}\raggedright
-Advantages\strut
-\end{minipage}\tabularnewline
+Fruit & Price & Advantages \\
 \midrule
 \endhead
-\begin{minipage}[t]{(\columnwidth - 2\tabcolsep) * \real{0.20}}\raggedright
-Bananas\strut
-\end{minipage} &
-\begin{minipage}[t]{(\columnwidth - 2\tabcolsep) * \real{0.10}}\raggedright
-\$1.34\strut
-\end{minipage} &
-\begin{minipage}[t]{(\columnwidth - 2\tabcolsep) * \real{0.26}}\raggedright
+Bananas & \$1.34 & \begin{minipage}[t]{\linewidth}\raggedright
 \begin{itemize}
 \tightlist
 \item
   built-in wrapper
 \item
   bright color
-\end{itemize}\strut
-\end{minipage}\tabularnewline
-\begin{minipage}[t]{(\columnwidth - 2\tabcolsep) * \real{0.20}}\raggedright
-Oranges\strut
-\end{minipage} &
-\begin{minipage}[t]{(\columnwidth - 2\tabcolsep) * \real{0.10}}\raggedright
-\$2.10\strut
-\end{minipage} &
-\begin{minipage}[t]{(\columnwidth - 2\tabcolsep) * \real{0.26}}\raggedright
+\end{itemize}
+\end{minipage} \\
+Oranges & \$2.10 & \begin{minipage}[t]{\linewidth}\raggedright
 \begin{itemize}
 \tightlist
 \item
@@ -1072,8 +1013,8 @@ Oranges\strut
   tasty
 \item
   Link \cref{sec:multi-line-table}
-\end{itemize}\strut
-\end{minipage}\tabularnewline
+\end{itemize}
+\end{minipage} \\
 \bottomrule
 \end{longtable}
 
@@ -1083,13 +1024,13 @@ Oranges\strut
 
 \hypertarget{refs}{}
 \begin{CSLReferences}{0}{0}
-\leavevmode\hypertarget{ref-nuetzig_thesis_2016}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-nuetzig_thesis_2016}{}}%
 \CSLLeftMargin{{[}1{]} }
-\CSLRightInline{G. Nützi, {`Non-smooth granular rigid body dynamics with
-applications to chute flows,'} PhD thesis, ETH Zurich; ETH Zürich,
+\CSLRightInline{G. Nützi, {‘Non-smooth granular rigid body dynamics with
+applications to chute flows,’} PhD thesis, ETH Zurich; ETH Zürich,
 Zürich, 2016. }
 
-\leavevmode\hypertarget{ref-rockafellar_convex_2015}{}%
+\leavevmode\vadjust pre{\hypertarget{ref-rockafellar_convex_2015}{}}%
 \CSLLeftMargin{{[}2{]} }
 \CSLRightInline{R. T. Rockafellar, \emph{Convex analysis}. Princeton:
 Princeton University Press, 2015 {[}Online{]}. Available:
