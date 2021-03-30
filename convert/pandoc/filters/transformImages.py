@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 """
-Pandoc filter to convert image includes to latex commands
-    - `\imageWithCaption` or `\svgWithCaption` or `\includePDF`
+Pandoc filter to convert image includes to latex commands:
+    - `\\imageWithCaption` or `\\svgWithCaption` (for `.svg` extensions)
+    - or `\\includePDF` (if class attribute `includepdf`)
+      `pages=s-e` defines which pages to include.
+      The start and end page `s,e` can be omitted to include from the beginning
+      or up to the last page.
 """
 
 import sys
