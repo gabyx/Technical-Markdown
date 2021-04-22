@@ -46,7 +46,7 @@ The documentation is pretty flawless and the community (including him) is really
    complete and utter bullshit you can adhere to.
    Certainly employees mostly must obey. The common argument is "people need to exchange
    documents and work on it".
-   Because people need to focus on the utter shitty formatting and WISIWYG workaround
+   Because people need to focus on the utter shitty formatting and WYSIWYG workaround
    experiences, a lot of time and money is spent which gets never debated.
 
    **It's about high time** to turn into a direction which will likely become the standard.

@@ -1,37 +1,35 @@
-\begin{longtable}[]{@{}>{\raggedright}p{(\columnwidth-6\tabcolsep) * \real{0.237}}>{\raggedright}p{(\columnwidth-6\tabcolsep) * \real{0.237}}>{\raggedright}p{(\columnwidth-6\tabcolsep) * \real{0.237}}>{\raggedright}p{(\columnwidth-6\tabcolsep) * \real{0.237}}@{}}
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.15}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.20}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.35}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.30}}@{}}
+\caption{Table by included \texttt{.html} file.}\tabularnewline
 \toprule
-Fruits\strut
- &
-Vegetables\strut
- &
-Constraints\strut
- &
-Properties\strut
-\tabularnewline
+Fruits & Vegetables & Constraints & Properties \\
+\midrule
+\endfirsthead
+\toprule
+Fruits & Vegetables & Constraints & Properties \\
 \midrule
 \endhead
-\textbf{First}\strut
- &
+\textbf{First} & \begin{minipage}[t]{\linewidth}\raggedright
 \begin{enumerate}
 \tightlist
 \item
   Lorem ipsum.
 \item
   Aliquam tinc.
-\end{enumerate}\strut
- &
+\end{enumerate}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
 \begin{description}
 \tightlist
 \item[Definition 1]
 \(\int_0^1{x^2} := ?\)
 \item[Definition 2]
 \(x^2\) is a squared variable
-\end{description}\strut
- &
-\strut
-\tabularnewline
-\textbf{Second}\strut
- &
+\end{description}
+\end{minipage} & \\
+\textbf{Second} & \begin{minipage}[t]{\linewidth}\raggedright
 \begin{itemize}
 \tightlist
 \item
@@ -39,22 +37,22 @@ Properties\strut
 \item
   Mauris eu.
 \end{itemize}
- &
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
 \begin{enumerate}
 \tightlist
 \item
   Lorem sit.
 \item
   Dapibus.
-\end{enumerate}\strut
- &
+\end{enumerate}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
 \begin{enumerate}
 \tightlist
 \item
   Aliquam risus.
 \item
   Auctor neque.
-\end{enumerate}\strut
-\tabularnewline
+\end{enumerate}
+\end{minipage} \\
 \bottomrule
 \end{longtable}
