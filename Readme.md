@@ -9,20 +9,20 @@
 
 - **fully automated conversion sequence** using [`yarn`](https://github.com/yarnpkg/yarn) + [`gulp`](https://github.com/gulpjs/gulp) + [`pandoc`](https://github.com/jgm/pandoc) such that exporting ([Content.md](https://raw.githubusercontent.com/gabyx/TechnicalMarkdown/master/Content.md)) is done in the background:
 
-    - **export to PDF** with `pandoc` to `xelatex` using `latexmk` [See Output](Content.pdf)
-    - **export to HTML** with `pandoc` to `html` [See Output](https://gabyx.github.io/TechnicalMarkdown/Content.html)
-    - [todo] **export to PDF** with `pandoc` to `html` then to `chrome` with `pupeteer`
+  - **export to PDF** with `pandoc` to `xelatex` using `latexmk` [See Output](Content.pdf)
+  - **export to HTML** with `pandoc` to `html` [See Output](https://gabyx.github.io/TechnicalMarkdown/Content.html)
+  - [todo] **export to PDF** with `pandoc` to `html` then to `chrome` with `pupeteer`
 
 - **[pandoc filters](https://pandoc.org/filters.html)** for different AST (abstract syntax tree) conversions:
 
-    - [own filters](https://github.com/gabyx/TechnicalMarkdown/tree/master/convert/pandoc/filters) with [panflute](https://github.com/sergiocorreia/panflute) [[doc](http://scorreia.com/software/panflute)]
-    - [--crosscite](https://github.com/jgm/pandoc-citeproc) [[doc](https://github.com/jgm/pandoc-citeproc/blob/master/man/pandoc-citeproc.1.md)] for citing
-    - [pandoc-crossref](https://github.com/lierdakil/pandoc-crossref) [[doc](http://lierdakil.github.io/pandoc-crossref)] for cross referencing
-    - [pandoc-include-files](https://github.com/pandoc/lua-filters/tree/master/include-files) [[doc](https://github.com/pandoc/lua-filters/tree/master/include-files/README.md)] for file transclusion
+  - [own filters](https://github.com/gabyx/TechnicalMarkdown/tree/master/convert/pandoc/filters) with [panflute](https://github.com/sergiocorreia/panflute) [[doc](http://scorreia.com/software/panflute)]
+  - [--crosscite](https://github.com/jgm/pandoc-citeproc) [[doc](https://github.com/jgm/pandoc-citeproc/blob/master/man/pandoc-citeproc.1.md)] for citing
+  - [pandoc-crossref](https://github.com/lierdakil/pandoc-crossref) [[doc](http://lierdakil.github.io/pandoc-crossref)] for cross referencing
+  - [pandoc-include-files](https://github.com/pandoc/lua-filters/tree/master/include-files) [[doc](https://github.com/pandoc/lua-filters/tree/master/include-files/README.md)] for file transclusion
 
 - Full-fledged [VS Code](https://code.visualstudio.com/) setup to write and style your document in one of the best IDEs.
 
-# Rational
+## Rational
 
 [Pandoc](https://github.com/jgm/pandoc) is awesome and the founder John MacFarlane develops pandoc in a meticulous and principled style.
 The documentation is pretty flawless and the community (including him) is really helpful. That is why we rely heavily on pandoc.
@@ -55,9 +55,9 @@ The documentation is pretty flawless and the community (including him) is really
 4. Every technical document writter probably knows about source code management (`git`).
    There you go with proper team work.
 
-# Dependencies
+## Dependencies
 
-## Node
+### Node
 
 Install all **local** Node.js dependencies with [yarn](https://classic.yarnpkg.com/en/docs/install):
 
@@ -67,7 +67,7 @@ cd TechnicalMarkdown
 yarn install
 ```
 
-## Pandoc
+### Pandoc
 
 Install [pandoc](https://pandoc.org/installing.html) (>= 2.9.2.1, testet with 2.11.0.4)
 
@@ -89,7 +89,7 @@ git clone https://github.com/gabyx/chocolatey-packages.git@patch-1 temp
 cd temp && choco install ./pandoc-crossref/pandoc-crossref.nuspec
 ```
 
-## Python
+### Python
 
 Install a recent `python3` (>= 3.6) and the following packages
 
@@ -113,7 +113,7 @@ cd TechnicalMarkdown && code -n .
 
 You can also use the ignored [.envrc](.envrc) file with [direnv](https://github.com/direnv/direnv).
 
-# Building and Viewing
+## Building and Viewing
 
 Run the following tasks defined in [tasks.json](.vscode/tasks.json) from VS Code or use the following shell commands:
 
@@ -142,23 +142,25 @@ Run the following tasks defined in [tasks.json](.vscode/tasks.json) from VS Code
     The conversion with pandoc applies the following filters in [defaults](convert/pandoc/defaults/pandoc-filters.yaml).
     The LaTeX output can be inspected in `output-tex/input.tex`.
 
-# Editing Styles
+## Editing Styles
 
 ## HTML
+
 You can edit the [main.less](css/src/main.less) file to change the look of the markdown.
 Edit the [main.less](css/src/main.less) file to see changes in the conversion from [Content.md](Content.md).
 
-## LaTeX
+### LaTeX
+
 The following templates are responsible for the LaTeX output:
 
 - [Template.tex](convert/pandoc/includes/Template.tex) : The main template.
 - [Header.tex](convert/pandoc/includes/Header.tex)  : The class, packages and styles defining the document, included by the main template with `include-in-header` in [pandoc-latex.yaml](convert/pandoc/defaults/pandoc-latex.yaml)
 
-# Debugging
+## Debugging
 
 There is a debug configuration in [launch.json](.vscode/launch.json) for both the HTML and the PDF export.
 
-## Pandoc Filters
+### Pandoc Filters
 
 Pandoc filters are harder to debug. There is an included unix-like [tee.py](convert/pandoc/filters/tee.py) filter
 which can be put anywhere into the filter chain as needed, to see the AST JSON output in the folder `pandoc/filter-out`
@@ -166,9 +168,10 @@ which can be put anywhere into the filter chain as needed, to see the AST JSON o
 first clears all output before doing the same as [tee.py](convert/pandoc/filters/tee.py).
 Uncomment the `tee.py` filters in [pandoc-filters.yaml](convert/pandoc/defaults/pandoc-filters.yaml).
 
-# Issues
+## Issues
 
-## Panflute [done]
+### Panflute [done]
+
 Using pandoc `>=2.10` we have more types and AST changes in
 
 - [jgm/pandoc#1024](https://github.com/jgm/pandoc/issues/1024),
@@ -179,17 +182,17 @@ meaning that also the python library `panflute` needs to be supporting this:
 
 - [Issue](https://github.com/sergiocorreia/panflute/issues/142) : ![](https://img.shields.io/badge/dynamic/json?color=%23FF0000&label=Status&query=%24.state&url=https%3A%2F%2Fapi.github.com%2Frepos%2Fsergiocorreia%2Fpanflute%2Fissues%2F142)
 
+### Transclude: Relative file paths
 
-## Transclude: Relative file paths
 So far *relative* paths are not yet supported in `pandoc-indluce-files.lua` filter.
 
 - [Issue](https://github.com/pandoc/lua-filters/issues/102) : ![Status](https://img.shields.io/badge/dynamic/json?color=%23FF0000&label=Status&query=%24.state&url=https%3A%2F%2Fapi.github.com%2Frepos%2Fpandoc%2Flua-filters%2Fissues%2F102)
 
-## Table Issues
+### Table Issues
 
 - Wrong format for `latex`: [Issue](https://github.com/jgm/pandoc/issues/6883) : ![Status](https://img.shields.io/badge/dynamic/json?color=%23FF0000&label=Status&query=%24.state&url=https%3A%2F%2Fapi.github.com%2Frepos%2Fjgm%2Fpandoc%2Fissues%2F6883) -> Update to next version.
 
-# Todo
+## Todo
 
 - Add CI.
 - Add tests.
