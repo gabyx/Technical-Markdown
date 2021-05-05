@@ -123,7 +123,7 @@ Run the following tasks defined in [tasks.json](.vscode/tasks.json) from VS Code
     yarn show
     ```
 
-- **Start Markdown HTML Conversion**: Runs the markdown conversion with Pandoc
+- **Start Markdown HTML Conversion**: Runs the markdown conversion to HTML with Pandoc
   (`html`) continuously while monitoring changes to input files:
 
     ```shell
@@ -132,7 +132,7 @@ Run the following tasks defined in [tasks.json](.vscode/tasks.json) from VS Code
 
     See below for the filters applied.
 
-- **Start Markdown PDF TeX Conversion**: Runs the markdown conversion with Pandoc
+- **Start Markdown PDF TeX Conversion**: Runs the markdown conversion to PDF with Pandoc
   (`latexmk` and `xelatex`) continuously while monitoring input files:
 
     ```shell
@@ -142,9 +142,19 @@ Run the following tasks defined in [tasks.json](.vscode/tasks.json) from VS Code
     The conversion with pandoc applies the following filters in [defaults](convert/pandoc/defaults/pandoc-filters.yaml).
     The LaTeX output can be inspected in `output-tex/input.tex`.
 
+- **Start Markdown Jira Conversion**: Runs the markdown conversion to Jira with Pandoc
+  continuously while monitoring input files:
+
+    ```shell
+    yarn build:jira
+    ```
+
+    The conversion with pandoc applies the following filters in [defaults](convert/pandoc/defaults/pandoc-filters.yaml).
+    The Jira output can be inspected in `Content.jira`.
+
 ## Editing Styles
 
-## HTML
+### HTML
 
 You can edit the [main.less](css/src/main.less) file to change the look of the markdown.
 Edit the [main.less](css/src/main.less) file to see changes in the conversion from [Content.md](Content.md).
