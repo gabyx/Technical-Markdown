@@ -233,6 +233,24 @@ async function htmlExport(markdownFile, outFile) {
     console.log(`Outfile: '${outFile}' :: ${getFileSizeMb(outFile)} mb`);
 }
 
+async function jiraExport(markdownFile, outFile) {
+    await runPandoc([
+        "--fail-if-warnings",
+        "--verbose",
+        "--toc",
+        "--data-dir=convert/pandoc",
+        "--defaults=pandoc-dirs.yaml",
+        "--defaults=pandoc-general.yaml",
+        "--defaults=pandoc-jira.yaml",
+        "--defaults=pandoc-filters.yaml",
+        "-o",
+        outFile,
+        markdownFile
+    ]);
+    console.log(`Outfile: '${outFile}' :: ${getFileSizeMb(outFile)} mb`);
+}
+
+
 async function latexExport(markdownFile, outFile) {
     await runPandoc([
         "--fail-if-warnings",
@@ -262,6 +280,13 @@ gulp.task("compile-markdown-html", async function () {
     await parseArguments();
     await htmlExport(path.resolve("Content.md"), "Content.html");
 });
+
+/* Task to compile all markdown files */
+gulp.task("compile-markdown-jira", async function () {
+    await parseArguments();
+    await jiraExport(path.resolve("Content.md"), "Content.jira");
+});
+
 
 /* Task to convert all tables */
 gulp.task("convert-tables", async function () {
@@ -311,8 +336,12 @@ gulp.task("watch-markdown-html", async function () {
         gulp.series(["parse-args", "compile-less", "compile-markdown-html"])
     );
 });
-
-/* Task to watch all markdown files */
+gulp.task("watch-markdown-jira", async function () {
+    gulp.watch(
+        [...exportTriggerFiles, ...lessFiles],
+        gulp.series(["parse-args", "compile-less", "compile-markdown-jira"])
+    );
+});
 gulp.task("watch-markdown-latex", async function () {
     gulp.watch(
         exportTriggerFiles,
@@ -322,6 +351,9 @@ gulp.task("watch-markdown-latex", async function () {
 
 /* Task when running `gulp` from terminal */
 gulp.task("build-html", gulp.parallel(["watch-markdown-html"]));
+
+/* Task when running `gulp` from terminal */
+gulp.task("build-jira", gulp.parallel(["watch-markdown-jira"]));
 
 /* Task when running `gulp` from terminal */
 gulp.task("build-pdf-tex", gulp.parallel(["watch-markdown-latex"]));
