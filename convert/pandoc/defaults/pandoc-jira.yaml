@@ -1,0 +1,11 @@
+to: jira
+
+number-sections: true
+
+standalone: true
+self-contained: false
+
+cite-method: citeproc
+
+eol: lf
+log-file: pandoc-jira.log

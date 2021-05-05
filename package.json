@@ -20,6 +20,7 @@
         "bootstrap": "yarn cache clean; rm yarn.lock; yarn install",
         "all": "npm-run-all -p build show",
         "build:html": "gulp build-html",
+        "build:jira": "gulp build-jira",
         "build:pdf-tex": "gulp build-pdf-tex",
         "lint": "pylama",
         "format:all": "yapf -i --recursive .",
