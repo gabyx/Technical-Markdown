@@ -61,6 +61,25 @@
             }
         },
         {
+            "label": "Start Markdown Jira Conversion",
+            "type": "shell",
+            "command": "yarn",
+            "args": [
+                "run",
+                "build:jira",
+                "--python",
+                "'${config:python.pythonPath}'",
+                "--luaPath",
+                "'${workspaceFolder}'/convert/pandoc/filters",
+                "--pythonPath",
+                "'${workspaceFolder}'/convert/pandoc/filters"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "group": "converter"
+            }
+        },
+        {
             "label": "Start Markdown HTML Browser Sync",
             "type": "shell",
             "command": "yarn run show",
