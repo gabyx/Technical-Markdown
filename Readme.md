@@ -1,5 +1,5 @@
-# [TechnicalMarkdown](https://github.com/gabyx/TechnicalMarkdown)
-### A markdown setup for technical documents, reports, theses & papers.
+# TechnicalMarkdown
+### A [markdown setup for technical documents](https://github.com/gabyx/TechnicalMarkdown), reports, theses & papers.
 
 ![](https://img.shields.io/badge/dependencies-pandoc%20%7C%20python3%20%7C%20node%20%7C%20vscode-green)
 
@@ -7,7 +7,7 @@
 
 **This is a markdown setup demonstrating the power and use of markdown for technical documents:**
 
-- **fully automated conversion sequence** using [`yarn`](https://github.com/yarnpkg/yarn) + [`gulp`](https://github.com/gulpjs/gulp) + [`pandoc`](https://github.com/jgm/pandoc) such that exporting ([Content.md](https://raw.githubusercontent.com/gabyx/TechnicalMarkdown/master/Content.md)) is done in the background:
+- **fully automated conversion sequence** using [`yarn`](https://github.com/yarnpkg/yarn) + [`gradle`](https://gradle.org) + [`pandoc`](https://github.com/jgm/pandoc) such that exporting ([Content.md](https://raw.githubusercontent.com/gabyx/TechnicalMarkdown/master/Content.md)) is done in the background:
 
   - **export to PDF** with `pandoc` to `xelatex` using `latexmk` [See Output](Content.pdf)
   - **export to HTML** with `pandoc` to `html` [See Output](https://gabyx.github.io/TechnicalMarkdown/Content.html)
@@ -35,7 +35,7 @@ The documentation is pretty flawless and the community (including him) is really
     - LaTeX enables to produce high quality output PDF (`xelatex`).
         Every proper book and distributed PDF is written and set in LaTeX.
 
-2. The orchestration around calling `pandoc` is basically only a file watcher [`gulp`](https://github.com/gulpjs/gulp)
+2. The orchestration around calling `pandoc` is basically only a file watcher [`gradle`](https://gradle.org)
   which calls `pandoc` on file changes. We want as little as possible different tools to achieve the above output formats.
   That also means we *do not want* to have lots of pre- and post-processing tasks aside from running `pandoc`.
   The main goal is, that users can write `markdown` as a **first-party solution** with some enhanced features enabled by `pandoc` itself.
@@ -117,47 +117,53 @@ You can also use the ignored [.envrc](.envrc) file with [direnv](https://github.
 
 Run the following tasks defined in [tasks.json](.vscode/tasks.json) from VS Code or use the following shell commands:
 
-- **Start Markdown Browser Sync**: Serves the HTML for preview in a browser with autoreload.
+- **Show HTML Output**: Serves the HTML for preview in a browser with autoreload:
 
     ```shell
-    yarn show
+    ./gradlew -t view-html
     ```
 
-- **Start Markdown HTML Conversion**: Runs the markdown conversion to HTML with Pandoc
-  (`html`) continuously while monitoring changes to input files:
+- **Convert Markdown -> HTML**: Runs the markdown conversion with Pandoc
+  (`html`) continuously:
 
     ```shell
-    yarn build:html
+    ./gradlew -t build-html
     ```
 
-    See below for the filters applied.
+    - The conversion with pandoc applies the following filters in
+      [defaults](convert/pandoc/defaults/pandoc-filters.yaml).
+    - The HTML output can be inspected in `Content.html`.
 
-- **Start Markdown PDF TeX Conversion**: Runs the markdown conversion to PDF with Pandoc
-  (`latexmk` and `xelatex`) continuously while monitoring input files:
+- **Convert Markdown -> PDF**: Runs the markdown conversion with Pandoc
+  (`latexmk` and `xelatex`) continuously:
 
     ```shell
-    yarn build:pdf-tex
+    ./gradlew -t build-pdf-tex
     ```
 
-    The conversion with pandoc applies the following filters in [defaults](convert/pandoc/defaults/pandoc-filters.yaml).
-    The LaTeX output can be inspected in `output-tex/input.tex`.
+    - The conversion with pandoc applies the following filters in
+      [defaults](convert/pandoc/defaults/pandoc-filters.yaml).
+    - The PDF output can be inspected in `Content.pdf`.
+    - The LaTeX output can be inspected in `build/output-tex/input.tex`.
 
-- **Start Markdown Jira Conversion**: Runs the markdown conversion to Jira with Pandoc
-  continuously while monitoring input files:
+- **Convert Markdown -> Jira**: Runs the markdown conversion to Jira (experimental) with Pandoc
+  continuously:
 
     ```shell
-    yarn build:jira
+    ./gradlew -t build-jira
     ```
 
-    The conversion with pandoc applies the following filters in [defaults](convert/pandoc/defaults/pandoc-filters.yaml).
-    The Jira output can be inspected in `Content.jira`.
+    - The conversion with pandoc applies the following filters in
+      [defaults](convert/pandoc/defaults/pandoc-filters.yaml).
+    - The Jira output can be inspected in `Content.jira`.
 
 ## Editing Styles
 
 ### HTML
 
-You can edit the [main.less](css/src/main.less) file to change the look of the markdown.
-Edit the [main.less](css/src/main.less) file to see changes in the conversion from [Content.md](Content.md).
+## HTML
+You can edit the [main.less](convert/css/src/main.less) file to change the look of the markdown.
+Edit the [main.less](convert/css/src/main.less) file to see changes in the conversion from [Content.md](Content.md).
 
 ### LaTeX
 
@@ -173,7 +179,7 @@ There is a debug configuration in [launch.json](.vscode/launch.json) for both th
 ### Pandoc Filters
 
 Pandoc filters are harder to debug. There is an included unix-like [tee.py](convert/pandoc/filters/tee.py) filter
-which can be put anywhere into the filter chain as needed, to see the AST JSON output in the folder `pandoc/filter-out`
+which can be put anywhere into the filter chain as needed, to see the AST JSON output in the folder `build/pandoc-filter-out`
 (see [dev.py](convert/pandoc/filters/module/dev.py) for adjustments). The filter [teeStart.py](convert/pandoc/filters/teeStart.py)
 first clears all output before doing the same as [tee.py](convert/pandoc/filters/tee.py).
 Uncomment the `tee.py` filters in [pandoc-filters.yaml](convert/pandoc/defaults/pandoc-filters.yaml).

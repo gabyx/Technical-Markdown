@@ -17,7 +17,7 @@
 \NewDocumentCommand\svgWithCaption{mmmo}{
 \begin{figure}[h]
     \centering
-    \adjustbox{center}{\adjustbox{cfbox=white!90!black 2pt 0pt}{\includesvg[inkscapearea=page,inkscapepath=svgsubdir,#3]{#1}}}
+    \adjustbox{center}{\adjustbox{cfbox=white!90!black 2pt 0pt}{\includesvg[inkscapearea=page,#3]{#1}}}
     \caption{#2}
     \IfValueT{#4}{\label{#4}}
 \end{figure}
