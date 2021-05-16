@@ -35,7 +35,7 @@ includes/Math.html
 
 :::{.abstract}
 This is a setup demonstrating the power and use of markdown for technical documents by using
-a fully automated conversion sequence with `yarn`, `gulp` and of course [`pandoc`](www.pandoc.org).
+a fully automated conversion sequence with [`gradle`](https://gradle.org) and of course [`pandoc`](https://pandoc.org).
 :::
 
 # Intro

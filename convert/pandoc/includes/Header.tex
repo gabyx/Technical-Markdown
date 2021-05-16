@@ -1,9 +1,6 @@
-
+% Set include paths
 \makeatletter
 \providecommand*{\input@path}{}
-% For latex-workshop only
-\edef\input@path{{../convert/pandoc/includes/}{../pandoc/}{./../}\input@path}%
-% Normal paths
 \edef\input@path{{convert/pandoc/includes/}{pandoc/}{./}\input@path}% prepend
 \makeatother
 
@@ -36,6 +33,8 @@
 \usepackage{wrapfig}
 \usepackage[section]{placeins} % float barrier at
                                % each section
+\usepackage{svg}
+\svgsetup{extractpath=files/generated/svg-extract, inkscapepath=files/generated/svg-inkscape}
 % ====================================================
 
 

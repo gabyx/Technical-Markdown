@@ -79,7 +79,7 @@ def getExtension(format):
     elif "markdown" in format:
         return ".md"
     else:
-        raise ValueError("Wrong format {0}".format(ext))
+        raise ValueError("Wrong format {0}".format(format))
 
 
 def setLatexSpacing(output, spacing):
