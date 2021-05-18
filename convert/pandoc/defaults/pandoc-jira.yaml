@@ -8,4 +8,4 @@ self-contained: false
 cite-method: citeproc
 
 eol: lf
-log-file: pandoc-jira.log
+log-file: build/pandoc-jira.log
