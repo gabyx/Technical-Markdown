@@ -22,6 +22,16 @@
 
 - Full-fledged [VS Code](https://code.visualstudio.com/) setup to write and style your document in one of the best IDEs.
 
+## Quick-Start
+
+Execute the following in a shell:
+
+```shell
+./gradlew -t build-html
+```
+
+This will build the HTML output from its [markdown main file](Content.md).
+
 ## Rational
 
 [Pandoc](https://github.com/jgm/pandoc) is awesome and the founder John MacFarlane develops pandoc in a meticulous and principled style.
@@ -57,15 +67,9 @@ The documentation is pretty flawless and the community (including him) is really
 
 ## Dependencies
 
-### Node
+### Gradle
 
-Install all **local** Node.js dependencies with [yarn](https://classic.yarnpkg.com/en/docs/install):
-
-```shell
-git clone https://github.com/gabyx/TechnicalMarkdown.git
-cd TechnicalMarkdown
-yarn install
-```
+You should not need to install Gradle, since everything is setup by the checked-in `gradlew` Gradle wrapper.
 
 ### Pandoc
 
@@ -102,7 +106,7 @@ The best way is to setup a python environment `python venv` since `pandoc`. The 
 The VS Code tasks get the `${config:python.pythonPath}`
 directly as an argument and modify the environement and `pandoc` will use the right python when launching the filters.
 
-You can also start VS Code like this to have the proper python enabled:
+You can also start VS Code like this to have the proper `python` enabled:
 
 ```bash
 # Activate your python env.
