@@ -164,8 +164,6 @@ Run the following tasks defined in [tasks.json](.vscode/tasks.json) from VS Code
 ## Editing Styles
 
 ### HTML
-
-## HTML
 You can edit the [main.less](convert/css/src/main.less) file to change the look of the markdown.
 Edit the [main.less](convert/css/src/main.less) file to see changes in the conversion from [Content.md](Content.md).
 
