@@ -7,7 +7,7 @@
 
 **This is a markdown setup demonstrating the power and use of markdown for technical documents:**
 
-- **fully automated conversion sequence** using [`yarn`](https://github.com/yarnpkg/yarn) + [`gradle`](https://gradle.org) + [`pandoc`](https://github.com/jgm/pandoc) such that exporting ([Content.md](https://raw.githubusercontent.com/gabyx/TechnicalMarkdown/master/Content.md)) is done in the background:
+- **fully automated conversion sequence** using [`gradle`](https://gradle.org) + [`pandoc`](https://github.com/jgm/pandoc) such that exporting ([Content.md](https://raw.githubusercontent.com/gabyx/TechnicalMarkdown/master/Content.md)) is done in the background:
 
   - **export to PDF** with `pandoc` to `xelatex` using `latexmk` [See Output](Content.pdf)
   - **export to HTML** with `pandoc` to `html` [See Output](https://gabyx.github.io/TechnicalMarkdown/Content.html)
