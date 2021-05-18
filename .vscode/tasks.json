@@ -4,85 +4,54 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Start Markdown HTML Conversion",
+            "label": "Convert Markdown -> HTML",
             "type": "shell",
-            "command": "yarn",
-            "args": [
-                "run",
-                "build:html",
-                "--python",
-                "'${config:python.pythonPath}'",
-                "--luaPath",
-                "'${workspaceFolder}'/convert/pandoc/filters",
-                "--pythonPath",
-                "'${workspaceFolder}'/convert/pandoc/filters"
-            ],
+            "command": "${workspaceFolder}/gradlew",
+            "args": ["-t", "build-html", "-Ppython=${config:python.pythonPath}"],
             "problemMatcher": [],
             "presentation": {
                 "group": "converter"
             }
         },
         {
-            "label": "Start Markdown PDF TeX Conversion",
+            "label": "Convert Markdown -> PDF [TeX]",
             "type": "shell",
-            "command": "yarn",
-            "args": [
-                "run",
-                "build:pdf-tex",
-                "--python",
-                "'${config:python.pythonPath}'",
-                "--luaPath",
-                "'${workspaceFolder}'/convert/pandoc/filters",
-                "--pythonPath",
-                "'${workspaceFolder}'/convert/pandoc/filters"
-            ],
+            "command": "${workspaceFolder}/gradlew",
+            "args": ["-t", "build-pdf-tex", "-Ppython=${config:python.pythonPath}"],
             "problemMatcher": [],
             "presentation": {
                 "group": "converter"
             }
         },
         {
-            "label": "Start Markdown PDF Chrome Conversion",
+            "label": "Convert Markdown -> Jira",
             "type": "shell",
-            "command": "yarn",
-            "args": [
-                "run",
-                "build:pdf-chrome",
-                "--python",
-                "'${config:python.pythonPath}'",
-                "--luaPath",
-                "'${workspaceFolder}'/convert/pandoc/filters",
-                "--pythonPath",
-                "'${workspaceFolder}'/convert/pandoc/filters"
-            ],
+            "command": "${workspaceFolder}/gradlew",
+            "args": ["-t", "build-jira", "-Ppython=${config:python.pythonPath}"],
             "problemMatcher": [],
             "presentation": {
                 "group": "converter"
             }
         },
+        // {
+        //     "label": "Convert Markdown -> PDF [chrome]",
+        //     "type": "shell",
+        //     "command": "${workspaceFolder}/gradlew",
+        //     "args": [
+        //         "-t",
+        //         "build-pdf-chrome",
+        //         "-Ppython=${config:python.pythonPath}",
+        //     ],
+        //     "problemMatcher": [],
+        //     "presentation": {
+        //         "group": "converter"
+        //     }
+        // },
         {
-            "label": "Start Markdown Jira Conversion",
+            "label": "Show HTML Output",
             "type": "shell",
-            "command": "yarn",
-            "args": [
-                "run",
-                "build:jira",
-                "--python",
-                "'${config:python.pythonPath}'",
-                "--luaPath",
-                "'${workspaceFolder}'/convert/pandoc/filters",
-                "--pythonPath",
-                "'${workspaceFolder}'/convert/pandoc/filters"
-            ],
-            "problemMatcher": [],
-            "presentation": {
-                "group": "converter"
-            }
-        },
-        {
-            "label": "Start Markdown HTML Browser Sync",
-            "type": "shell",
-            "command": "yarn run show",
+            "command": "${workspaceFolder}/gradlew",
+            "args": ["-t", "view-html", "-Ppython=${config:python.pythonPath}"],
             "problemMatcher": [],
             "presentation": {
                 "group": "converter"

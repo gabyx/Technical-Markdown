@@ -1,39 +1,16 @@
+.DS_Store
+.gradle
+build
+
 *.bak
 *.sav
-node_modules
 __pycache__
 *.pyc
 
-*.pdf
-*.log
-*.swp
-*.aux
-*.bcf
-*.log
-*.out
-*.xml
-*.bbl
-*.blg
-*.fls
-*_latexmk
-*.xdv
-*.toc
-*.synctex.gz
-*synctex(busy)
-*_latexindent*
-*.bak
-*.sav
-
-.DS_Store
 Test*
 
-filter-out
-output-tex/*
-!output-tex/.gitkeep
-!output-tex/input.tex
 !Content.pdf
-!Content.jira
+!Content.html
+Content.jira
 
-.DS_Store
 .envrc
-~*.docx
