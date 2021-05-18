@@ -1,10 +1,11 @@
 {
     "recommendations": [
-        "ms-python.python"
-        "shd101wyy.markdown-preview-enhanced",
+        "ms-python.python",
         "esbenp.prettier-vscode",
         "monofon.pandoc-format",
         "davidanson.vscode-markdownlint",
-        "notZaki.pandocciter"
+        "notZaki.pandocciter",
+        "naco-siren.gradle-language",
+        "richardwillis.vscode-gradle"
     ]
 }

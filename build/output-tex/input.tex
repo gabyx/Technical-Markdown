@@ -114,12 +114,9 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{3}
-
+% Set include paths
 \makeatletter
 \providecommand*{\input@path}{}
-% For latex-workshop only
-\edef\input@path{{../convert/pandoc/includes/}{../pandoc/}{./../}\input@path}%
-% Normal paths
 \edef\input@path{{convert/pandoc/includes/}{pandoc/}{./}\input@path}% prepend
 \makeatother
 
@@ -152,6 +149,8 @@
 \usepackage{wrapfig}
 \usepackage[section]{placeins} % float barrier at
                                % each section
+\usepackage{svg}
+\svgsetup{extractpath=files/generated/svg-extract, inkscapepath=files/generated/svg-inkscape}
 % ====================================================
 
 
@@ -422,7 +421,7 @@
 \begin{titlepage}
 \makeatletter
 \begin{center}
-\includesvg[inkscapearea=page,inkscapepath=svgsubdir,width=0.5\textwidth]{files/Logo.svg}
+\includesvg[inkscapearea=page,width=0.5\textwidth]{files/Logo.svg}
 \end{center}
 \vspace{1cm}
 \begin{center}
@@ -447,8 +446,8 @@ Zürich, Switzerland
 \end{titlepage}\begin{abstract}
 This is a setup demonstrating the power and use of markdown for
 technical documents by using a fully automated conversion sequence with
-\texttt{yarn}, \texttt{gulp} and of course
-\href{www.pandoc.org}{\texttt{pandoc}}.
+\href{https://gradle.org}{\texttt{gradle}} and of course
+\href{https://pandoc.org}{\texttt{pandoc}}.
 \end{abstract}
 
 {
@@ -852,7 +851,7 @@ Fruits & Vegetables & Constraints & Properties \\
 \begin{description}
 \tightlist
 \item[Definition 1]
-\(\int_0^1{x^2} := ?\)
+\(\int_0^1{x^2} := \frac{1}{3}\)
 \item[Definition 2]
 \(x^2\) is a squared variable
 \end{description}
@@ -925,7 +924,7 @@ Fruits & Vegetables & Constraints & Properties \\
 \begin{description}
 \tightlist
 \item[Definition 1]
-\(\int_0^1{x^2} := ?\)
+\(\int_0^1{x^2} := \frac{1}{3}\)
 \item[Definition 2]
 \(x^2\) is a squared variable
 \end{description}
