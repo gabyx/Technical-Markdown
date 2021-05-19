@@ -69,6 +69,12 @@ The documentation is pretty flawless and the community (including him) is really
 
 ### Gradle
 
+For the Gradle build tool you need a working [Java runtime](https://java.com). On Linux and macOS you can do:
+
+```shell
+brew install java
+```
+
 You should not need to install Gradle, since everything is setup by the checked-in `gradlew` Gradle wrapper.
 
 ### Pandoc
