@@ -14,6 +14,7 @@
         "**/node_modules": true,
         "**/.DS_Store": true,
     },
+    "files.trimTrailingWhitespace": false,
     "latex-workshop.latex.autoBuild.run": "never",
     "latex-workshop.latex.recipes": [
         {
@@ -45,6 +46,7 @@
     "python.linting.pylamaEnabled": true,
     "python.linting.pylintEnabled": false,
     "editor.tabSize": 4,
+    "files.encoding": "utf8",
     "spellright.language": [
         "de"
     ],

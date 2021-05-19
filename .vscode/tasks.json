@@ -4,7 +4,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "Convert Markdown -> HTML",
+            "label": "🛠️ Convert Markdown ⇉ HTML",
             "type": "shell",
             "command": "${workspaceFolder}/gradlew",
             "args": ["-t", "build-html", "-Ppython=${config:python.pythonPath}"],
@@ -14,7 +14,7 @@
             }
         },
         {
-            "label": "Convert Markdown -> PDF [TeX]",
+            "label": "🛠️ Convert Markdown ⇉ PDF",
             "type": "shell",
             "command": "${workspaceFolder}/gradlew",
             "args": ["-t", "build-pdf-tex", "-Ppython=${config:python.pythonPath}"],
@@ -24,7 +24,7 @@
             }
         },
         {
-            "label": "Convert Markdown -> Jira",
+            "label": "🛠️ Convert Markdown ⇉ Jira",
             "type": "shell",
             "command": "${workspaceFolder}/gradlew",
             "args": ["-t", "build-jira", "-Ppython=${config:python.pythonPath}"],
@@ -34,7 +34,7 @@
             }
         },
         // {
-        //     "label": "Convert Markdown -> PDF [chrome]",
+        //     "label": "Convert Markdown ⇉ PDF [chrome]",
         //     "type": "shell",
         //     "command": "${workspaceFolder}/gradlew",
         //     "args": [
@@ -48,10 +48,26 @@
         //     }
         // },
         {
-            "label": "Show HTML Output",
+            "label": "📄 View HTML",
             "type": "shell",
             "command": "${workspaceFolder}/gradlew",
             "args": ["-t", "view-html", "-Ppython=${config:python.pythonPath}"],
+            "problemMatcher": [],
+            "presentation": {
+                "group": "converter"
+            }
+        },
+        {
+            "label": "🛠️ Convert Markdown ⇉ HTML, PDF  + 📄 View HTML",
+            "dependsOn": ["🛠️ Convert Markdown ⇉ HTML", "🛠️ Convert Markdown ⇉ PDF", "📄 Show HTML Output"],
+            "problemMatcher": [],
+            "presentation": {
+                "group": "converter"
+            }
+        },
+        {
+            "label": "🛠️ Convert Markdown ⇉ HTML + 📄 View HTML",
+            "dependsOn": ["🛠️ Convert Markdown ⇉ HTML", "🛠️ Show HTML Output"],
             "problemMatcher": [],
             "presentation": {
                 "group": "converter"
