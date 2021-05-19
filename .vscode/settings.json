@@ -46,7 +46,6 @@
     "python.linting.pylamaEnabled": true,
     "python.linting.pylintEnabled": false,
     "editor.tabSize": 4,
-    "files.encoding": "utf8",
     "spellright.language": [
         "de"
     ],
