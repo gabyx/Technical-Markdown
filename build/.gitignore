@@ -1,0 +1,4 @@
+*
+!.gitignore
+!output-tex
+!output-tex/input.tex
