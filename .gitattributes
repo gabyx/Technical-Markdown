@@ -32,3 +32,6 @@
 *.[Mm][Pp][Aa] filter=lfs diff=lfs merge=lfs -text
 *.[Ww][Mm][Aa] filter=lfs diff=lfs merge=lfs -text
 *.[Oo][Oo][Gg] filter=lfs diff=lfs merge=lfs -text
+
+*.[Ww][Oo][Ff][Ff]2? filter=lfs diff=lfs merge=lfs -text
+*.[Tt][Ff][Ff] filter=lfs diff=lfs merge=lfs -text
