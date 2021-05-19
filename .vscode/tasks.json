@@ -67,7 +67,7 @@
         },
         {
             "label": "🛠️ Convert Markdown ⇉ HTML + 📄 View HTML",
-            "dependsOn": ["🛠️ Convert Markdown ⇉ HTML", "🛠️ Show HTML Output"],
+            "dependsOn": ["🛠️ Convert Markdown ⇉ HTML", "📄 View HTML"],
             "problemMatcher": [],
             "presentation": {
                 "group": "converter"
