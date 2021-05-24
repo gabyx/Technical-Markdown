@@ -46,9 +46,9 @@ for futher information.
 # Samples
 
 ```{.include}
-chapters/KonvexeProbleme.md
-chapters/MarkdownSamples.md
-chapters/TableSamples.md
+${env:ROOT_DIR}/chapters/KonvexeProbleme.md
+${env:ROOT_DIR}/chapters/MarkdownSamples.md
+${env:ROOT_DIR}/chapters/TableSamples.md
 ```
 
 # References

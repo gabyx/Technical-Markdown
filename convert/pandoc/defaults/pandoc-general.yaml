@@ -6,3 +6,4 @@ metadata:
     include-auto: true
     include-table-dir: "tables"
     include-fail-if-read-error: true
+    include-paths-relative-to-cwd: true

@@ -8,8 +8,9 @@
 - HTML citations dont work.
 - Table caption is not parsed `table_caption` not allowed as extension.
 :::
-```{.include format=html+tex_math_dollars .var-replace include-if-format=latex;html;html5;json;native}
-chapters/tables/TableExample.html
+
+```{.include format=html+tex_math_dollars include-if-format=latex;html;html5;json;native .relative-to-current}
+tables/TableExample.html
 ```
 
 :::{include-if-format=latex;json;native}
@@ -19,14 +20,15 @@ chapters/tables/TableExample.html
 - Latex citations do work inside.
 :::
 
-```{.include format=latex raw=true include-if-format=latex;json;native}
-chapters/tables-tex/TableExample.tex
+```{.include format=latex raw=true include-if-format=latex;json;native .relative-to-current}
+tables-tex/TableExample.tex
 ```
 
 ## Markdown Table {#sec:multi-line-table}
 
 - Included markdown files.
 - Cross references do work here.
-```{.include}
-chapters/TableExample.md
+
+```{.include .relative-to-current}
+TableExample.md
 ```
