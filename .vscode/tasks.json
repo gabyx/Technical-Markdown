@@ -59,7 +59,7 @@
         },
         {
             "label": "🛠️ Convert Markdown ⇉ HTML, PDF  + 📄 View HTML",
-            "dependsOn": ["🛠️ Convert Markdown ⇉ HTML", "🛠️ Convert Markdown ⇉ PDF", "📄 Show HTML Output"],
+            "dependsOn": ["🛠️ Convert Markdown ⇉ HTML", "🛠️ Convert Markdown ⇉ PDF", "📄 View HTML"],
             "problemMatcher": [],
             "presentation": {
                 "group": "converter"

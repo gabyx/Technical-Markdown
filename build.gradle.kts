@@ -124,6 +124,7 @@ fun createPandocSettings(): PandocSettings {
         var env = globalEnv.toMutableMap()
         env.addExecutableDirToPath(pandocExe)
         env.addExecutableDirToPath(pythonExe)
+        env["ROOT_DIR"] = "${project.rootDir}"
         env["PYTHON_PATH"] = env.getOrDefault("PYTHON_PATH", "") + pathSep + pythonPaths.joinToString(separator = pathSep)
         env["LUA_PATH"] = env.getOrDefault("LUA_PATH", "") + pathSep + luaPaths.flatMap({v -> listOf("$v/?", "$v/?.lua") }).joinToString(separator=";")
 
