@@ -2,7 +2,7 @@
 \PassOptionsToPackage{unicode$for(hyperrefoptions)$,$hyperrefoptions$$endfor$}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 $if(colorlinks)$
-\PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
 $endif$
 $if(dir)$
 $if(latex-dir-rtl)$
@@ -36,6 +36,35 @@ $for(classoption)$
   $classoption$$sep$,
 $endfor$
 ]{$documentclass$}
+$if(title)$
+\title{$title$$if(thanks)$\thanks{$thanks$}$endif$}
+$endif$
+$if(subtitle)$
+$if(beamer)$
+$else$
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+$endif$
+\subtitle{$subtitle$}
+$endif$
+\author{$for(author)$$author$$sep$ \and $endfor$}
+\date{$date$}
+$if(beamer)$
+$if(institute)$
+\institute{$for(institute)$$institute$$sep$ \and $endfor$}
+$endif$
+$if(titlegraphic)$
+\titlegraphic{\includegraphics{$titlegraphic$}}
+$endif$
+$if(logo)$
+\logo{\includegraphics{$logo$}}
+$endif$
+$endif$
+
 $-- $if(beamer)$
 $-- $if(background-image)$
 $-- \usebackgroundtemplate{%
@@ -89,25 +118,23 @@ $-- $endif$
 $-- $if(beamerarticle)$
 $-- \usepackage{beamerarticle} % needs to be loaded first
 $-- $endif$
-$-- $if(fontfamily)$
-$-- \usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
-$-- $else$
-$-- \usepackage{lmodern}
-$-- $endif$
+\usepackage{amsmath,amssymb}
+$if(fontfamily)$
+\usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
+$else$
+\usepackage{lmodern}
+$endif$
 $if(linestretch)$
 \usepackage{setspace}
 $endif$
-\usepackage{amsmath}
-\usepackage{ifxetex,ifluatex}
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+\usepackage{iftex}
+\ifPDFTeX
   \usepackage[$if(fontenc)$$fontenc$$else$T1$endif$]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
-  \usepackage{amssymb}
 \else % if luatex or xetex
 $if(mathspec)$
-  \ifxetex
-    \usepackage{amssymb}
+  \ifXeTeX
     \usepackage{mathspec}
   \else
     \usepackage{unicode-math}
@@ -131,7 +158,7 @@ $for(fontfamilies)$
 $endfor$
 $if(mathfont)$
 $if(mathspec)$
-  \ifxetex
+  \ifXeTeX
     \setmathfont(Digits,Latin,Greek)[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
   \else
     \setmathfont[$for(mathfontoptions)$$mathfontoptions$$sep$,$endfor$]{$mathfont$}
@@ -141,23 +168,42 @@ $else$
 $endif$
 $endif$
 $if(CJKmainfont)$
-  \ifxetex
+  \ifXeTeX
     \usepackage{xeCJK}
     \setCJKmainfont[$for(CJKoptions)$$CJKoptions$$sep$,$endfor$]{$CJKmainfont$}
   \fi
 $endif$
 $if(luatexjapresetoptions)$
-  \ifluatex
+  \ifLuaTeX
     \usepackage[$for(luatexjapresetoptions)$$luatexjapresetoptions$$sep$,$endfor$]{luatexja-preset}
   \fi
 $endif$
 $if(CJKmainfont)$
-  \ifluatex
+  \ifLuaTeX
     \usepackage[$for(luatexjafontspecoptions)$$luatexjafontspecoptions$$sep$,$endfor$]{luatexja-fontspec}
     \setmainjfont[$for(CJKoptions)$$CJKoptions$$sep$,$endfor$]{$CJKmainfont$}
   \fi
 $endif$
 \fi
+$if(zero-width-non-joiner)$
+%% Support for zero-width non-joiner characters.
+\makeatletter
+\def\zerowidthnonjoiner{%
+  % Prevent ligatures and adjust kerning, but still support hyphenating.
+  \texorpdfstring{%
+    \textormath{\nobreak\discretionary{-}{}{\kern.03em}%
+      \ifvmode\else\nobreak\hskip\z@skip\fi}{}%
+  }{}%
+}
+\makeatother
+\ifPDFTeX
+  \DeclareUnicodeCharacter{200C}{\zerowidthnonjoiner}
+\else
+  \catcode`^^^^200c=\active
+  \protected\def ^^^^200c{\zerowidthnonjoiner}
+\fi
+%% End of ZWNJ support
+$endif$
 $-- $if(beamer)$
 $-- $if(theme)$
 $-- \usetheme[$for(themeoptions)$$themeoptions$$sep$,$endfor$]{$theme$}
@@ -178,7 +224,7 @@ $-- $if(outertheme)$
 $-- \useoutertheme{$outertheme$}
 $-- $endif$
 $-- $endif$
-$-- Use upquote if available, for straight quotes in verbatim environments
+% Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \IfFileExists{microtype.sty}{% use microtype if available
   \usepackage[$for(microtypeoptions)$$microtypeoptions$$sep$,$endfor$]{microtype}
@@ -221,10 +267,10 @@ $if(keywords)$
 $endif$
 $if(colorlinks)$
   colorlinks=true,
-  linkcolor=$if(linkcolor)$$linkcolor$$else$Maroon$endif$,
-  filecolor=$if(filecolor)$$filecolor$$else$Maroon$endif$,
-  citecolor=$if(citecolor)$$citecolor$$else$Blue$endif$,
-  urlcolor=$if(urlcolor)$$urlcolor$$else$Blue$endif$,
+  linkcolor={$if(linkcolor)$$linkcolor$$else$Maroon$endif$},
+  filecolor={$if(filecolor)$$filecolor$$else$Maroon$endif$},
+  citecolor={$if(citecolor)$$citecolor$$else$Blue$endif$},
+  urlcolor={$if(urlcolor)$$urlcolor$$else$Blue$endif$},
 $else$
   hidelinks,
 $endif$
@@ -256,7 +302,10 @@ $if(highlighting-macros)$
 $highlighting-macros$
 $endif$
 $if(tables)$
-\usepackage{longtable,booktabs}
+\usepackage{longtable,booktabs,array}
+$if(multirow)$
+\usepackage{multirow}
+$endif$
 \usepackage{calc} % for calculating minipage widths
 $-- $if(beamer)$
 $-- \usepackage{caption}
@@ -324,11 +373,36 @@ $endif$
 $if(pagestyle)$
 \pagestyle{$pagestyle$}
 $endif$
+$if(csl-refs)$
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+$endif$
 $for(header-includes)$
 $header-includes$
 $endfor$
 $if(lang)$
-\ifxetex
+\ifXeTeX
   % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
   \usepackage{polyglossia}
   \setmainlanguage[$for(polyglossia-lang.options)$$polyglossia-lang.options$$sep$,$endfor$]{$polyglossia-lang.name$}
@@ -336,21 +410,24 @@ $for(polyglossia-otherlangs)$
   \setotherlanguage[$for(polyglossia-otherlangs.options)$$polyglossia-otherlangs.options$$sep$,$endfor$]{$polyglossia-otherlangs.name$}
 $endfor$
 \else
-  \usepackage[shorthands=off,$for(babel-otherlangs)$$babel-otherlangs$,$endfor$main=$babel-lang$]{babel}
+  \usepackage[$for(babel-otherlangs)$$babel-otherlangs$,$endfor$main=$babel-lang$]{babel}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
 $if(babel-newcommands)$
   $babel-newcommands$
 $endif$
 \fi
 $endif$
-\ifluatex
+\ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
 $if(dir)$
-\ifxetex
+\ifXeTeX
   % Load bidi as late as possible as it modifies e.g. graphicx
   \usepackage{bidi}
 \fi
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+\ifPDFTeX
   \TeXXeTstate=1
   \newcommand{\RL}[1]{\beginR #1\endR}
   \newcommand{\LR}[1]{\beginL #1\endL}
@@ -368,68 +445,23 @@ $for(bibliography)$
 \addbibresource{$bibliography$}
 $endfor$
 $endif$
-$if(csl-refs)$
-\newlength{\cslhangindent}
-\setlength{\cslhangindent}{1.5em}
-\newlength{\csllabelwidth}
-\setlength{\csllabelwidth}{3em}
-\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
- {% don't indent paragraphs
-  \setlength{\parindent}{0pt}
-  % turn on hanging indent if param 1 is 1
-  \ifodd #1 \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces\fi
-  % set entry spacing
-  \ifnum #2 > 0
-  \setlength{\parskip}{#2\baselineskip}
-  \fi
- }%
- {}
-\usepackage{calc}
-\newcommand{\CSLBlock}[1]{#1\hfill\break}
-\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
-\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
-\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+$if(nocite-ids)$
+\nocite{$for(nocite-ids)$$it$$sep$, $endfor$}
 $endif$
-
-$if(title)$
-\title{$title$$if(thanks)$\thanks{$thanks$}$endif$}
+$if(csquotes)$
+\usepackage{csquotes}
 $endif$
-$if(subtitle)$
-$-- $if(beamer)$
-$-- $else$
-\usepackage{etoolbox}
-\makeatletter
-\providecommand{\subtitle}[1]{% add subtitle to \maketitle
-  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
-}
-\makeatother
-$-- $endif$
-\subtitle{$subtitle$}
-$endif$
-\author{$for(author)$$author$$sep$ \and $endfor$}
-\date{$date$}
-$-- $if(beamer)$
-$-- $if(institute)$
-$-- \institute{$for(institute)$$institute$$sep$ \and $endfor$}
-$-- $endif$
-$-- $if(titlegraphic)$
-$-- \titlegraphic{\includegraphics{$titlegraphic$}}
-$-- $endif$
-$-- $if(logo)$
-$-- \logo{\includegraphics{$logo$}}
-$-- $endif$
-$-- $endif$
 
 \begin{document}
 $if(has-frontmatter)$
 \frontmatter
 $endif$
 $if(title)$
-$-- $if(beamer)$
-$-- \frame{\titlepage}
-$-- $else$
-${ Title.tex() }
-$-- $endif$
+$if(beamer)$
+\frame{\titlepage}
+$else$
+\maketitle
+$endif$
 $if(abstract)$
 \begin{abstract}
 $abstract$
@@ -462,11 +494,11 @@ $endif$
 }
 $endif$
 $endif$
-$if(lot)$
-\listoftables
-$endif$
 $if(lof)$
 \listoffigures
+$endif$
+$if(lot)$
+\listoftables
 $endif$
 $if(linestretch)$
 \setstretch{$linestretch$}
@@ -488,26 +520,26 @@ $else$
 \renewcommand\refname{$biblio-title$}
 $endif$
 $endif$
-$-- $if(beamer)$
-$-- \begin{frame}[allowframebreaks]{$biblio-title$}
-$--   \bibliographytrue
-$-- $endif$
+$if(beamer)$
+\begin{frame}[allowframebreaks]{$biblio-title$}
+  \bibliographytrue
+$endif$
   \bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
-$-- $if(beamer)$
-$-- \end{frame}
-$-- $endif$
+$if(beamer)$
+\end{frame}
+$endif$
 
 $endif$
 $endif$
 $if(biblatex)$
-$-- $if(beamer)$
-$-- \begin{frame}[allowframebreaks]{$biblio-title$}
-$--   \bibliographytrue
-$--   \printbibliography[heading=none]
-$-- \end{frame}
-$-- $else$
+$if(beamer)$
+\begin{frame}[allowframebreaks]{$biblio-title$}
+  \bibliographytrue
+  \printbibliography[heading=none]
+\end{frame}
+$else$
 \printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
-$-- $endif$
+$endif$
 
 $endif$
 $for(include-after)$

@@ -7,9 +7,10 @@
             "label": "🛠️ Convert Markdown ⇉ HTML",
             "type": "shell",
             "command": "${workspaceFolder}/gradlew",
-            "args": ["-t", "build-html", "-Ppython=${config:python.pythonPath}"],
+            "args": ["-t", "build-html", "-Ppython=${config:python.pythonPath}", "--warning-mode", "all"],
             "problemMatcher": [],
             "presentation": {
+                "panel": "dedicated",
                 "group": "converter"
             }
         },
@@ -17,9 +18,10 @@
             "label": "🛠️ Convert Markdown ⇉ PDF",
             "type": "shell",
             "command": "${workspaceFolder}/gradlew",
-            "args": ["-t", "build-pdf-tex", "-Ppython=${config:python.pythonPath}"],
+            "args": ["-t", "build-pdf-tex", "-Ppython=${config:python.pythonPath}", "--warning-mode", "all"],
             "problemMatcher": [],
             "presentation": {
+                "panel": "dedicated",
                 "group": "converter"
             }
         },
@@ -27,9 +29,10 @@
             "label": "🛠️ Convert Markdown ⇉ Jira",
             "type": "shell",
             "command": "${workspaceFolder}/gradlew",
-            "args": ["-t", "build-jira", "-Ppython=${config:python.pythonPath}"],
+            "args": ["-t", "build-jira", "-Ppython=${config:python.pythonPath}", "--warning-mode", "all"],
             "problemMatcher": [],
             "presentation": {
+                "panel": "dedicated",
                 "group": "converter"
             }
         },
@@ -51,15 +54,27 @@
             "label": "📄 View HTML",
             "type": "shell",
             "command": "${workspaceFolder}/gradlew",
-            "args": ["-t", "view-html", "-Ppython=${config:python.pythonPath}"],
+            "args": ["-t", "view-html", "-Ppython=${config:python.pythonPath}", "--warning-mode", "all"],
             "problemMatcher": [],
             "presentation": {
                 "group": "converter"
             }
         },
         {
+            "label": "🛠️ Convert Markdown ⇉ HTML, PDF",
+            "type": "shell",
+            "command": "${workspaceFolder}/gradlew",
+            "args": ["-parallel", "-t", "build-html", "build-pdf", "-Ppython=${config:python.pythonPath}", "--warning-mode", "all"],
+            "problemMatcher": [],
+            "isBackground": true,
+            "presentation": {
+                "panel": "dedicated",
+                "group": "converter"
+            }
+        },
+        {
             "label": "🛠️ Convert Markdown ⇉ HTML, PDF  + 📄 View HTML",
-            "dependsOn": ["🛠️ Convert Markdown ⇉ HTML", "🛠️ Convert Markdown ⇉ PDF", "📄 View HTML"],
+            "dependsOn": ["🛠️ Convert Markdown ⇉ HTML, PDF", "📄 View HTML"],
             "problemMatcher": [],
             "presentation": {
                 "group": "converter"
@@ -67,6 +82,7 @@
         },
         {
             "label": "🛠️ Convert Markdown ⇉ HTML + 📄 View HTML",
+            "type": "shell",
             "dependsOn": ["🛠️ Convert Markdown ⇉ HTML", "📄 View HTML"],
             "problemMatcher": [],
             "presentation": {
