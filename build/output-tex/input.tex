@@ -1,7 +1,7 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode,linktoc=all,hidelinks}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
-\PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
 %
 \documentclass[
   12pt,
@@ -17,13 +17,24 @@
   headings=optiontohead,
   svgnames,
   dvipsnames]{scrreprt}
-\usepackage{amsmath}
-\usepackage{ifxetex,ifluatex}
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+\title{Technical Documents}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Demonstrating the Power of Markdown with Pandoc}
+\author{Gabriel Nützi \and The Community}
+\date{2. December 2020}
+
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
-  \usepackage{amssymb}
 \else % if luatex or xetex
   \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
@@ -33,6 +44,7 @@
   \setmonofont[]{Latin Modern Mono}
   \setmathfont[]{Latin Modern Math}
 \fi
+% Use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \IfFileExists{microtype.sty}{% use microtype if available
   \usepackage[]{microtype}
@@ -56,10 +68,10 @@
   pdfauthor={Gabriel Nützi; The Community},
   pdflang={en-GB},
   colorlinks=true,
-  linkcolor=DarkBlue,
-  filecolor=DarkBlue,
-  citecolor=DarkBlue,
-  urlcolor=MediumBlue,
+  linkcolor={DarkBlue},
+  filecolor={DarkBlue},
+  citecolor={DarkBlue},
+  urlcolor={MediumBlue},
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
 \usepackage{color}
@@ -100,7 +112,7 @@
 \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
-\usepackage{longtable,booktabs}
+\usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
@@ -114,6 +126,29 @@
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{3}
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newlength{\cslentryspacingunit} % times entry-spacing
+\setlength{\cslentryspacingunit}{\parskip}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1
+  \let\oldpar\par
+  \def\par{\hangindent=\cslhangindent\oldpar}
+  \fi
+  % set entry spacing
+  \setlength{\parskip}{#2\cslentryspacingunit}
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 % Set include paths
 \makeatletter
 \providecommand*{\input@path}{}
@@ -375,75 +410,22 @@
 % General Settings
 \KOMAoptions{cleardoublepage=empty}
 \raggedbottom
-\ifxetex
+\ifXeTeX
   % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
   \usepackage{polyglossia}
   \setmainlanguage[variant=british]{english}
 \else
-  \usepackage[shorthands=off,main=british]{babel}
+  \usepackage[main=british]{babel}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
 \fi
-\ifluatex
+\ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
-\newlength{\cslhangindent}
-\setlength{\cslhangindent}{1.5em}
-\newlength{\csllabelwidth}
-\setlength{\csllabelwidth}{3em}
-\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
- {% don't indent paragraphs
-  \setlength{\parindent}{0pt}
-  % turn on hanging indent if param 1 is 1
-  \ifodd #1 \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces\fi
-  % set entry spacing
-  \ifnum #2 > 0
-  \setlength{\parskip}{#2\baselineskip}
-  \fi
- }%
- {}
-\usepackage{calc}
-\newcommand{\CSLBlock}[1]{#1\hfill\break}
-\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
-\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
-\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
-
-\title{Technical Documents}
-\usepackage{etoolbox}
-\makeatletter
-\providecommand{\subtitle}[1]{% add subtitle to \maketitle
-  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
-}
-\makeatother
-\subtitle{Demonstrating the Power of Markdown with Pandoc}
-\author{Gabriel Nützi \and The Community}
-\date{2. December 2020}
 
 \begin{document}
-\begin{titlepage}
-\makeatletter
-\begin{center}
-\includesvg[inkscapearea=page,width=0.5\textwidth]{files/Logo.svg}
-\end{center}
-\vspace{1cm}
-\begin{center}
-\Huge \textbf{\@title}
-\end{center}
-\begin{center}
-\LARGE Demonstrating the Power of Markdown with Pandoc
-\end{center}
-\vspace{1cm}
-\begin{center}
-\textbf{Gabriel Nützi} \\ \& \\ \textbf{The Community}
-\end{center}
-\begin{center}
-\@date
-\end{center}
-\begin{center}
-\vfill
-Zürich, Switzerland
-\vspace{1cm}
-\end{center}
-\makeatother
-\end{titlepage}
+\maketitle
 \begin{abstract}
 This is a setup demonstrating the power and use of markdown for
 technical documents by using a fully automated conversion sequence with
@@ -1027,7 +1009,7 @@ Oranges & \$2.10 & \begin{minipage}[t]{\linewidth}\raggedright
 \leavevmode\vadjust pre{\hypertarget{ref-nuetzig_thesis_2016}{}}%
 \CSLLeftMargin{{[}1{]} }
 \CSLRightInline{G. Nützi, {‘Non-smooth granular rigid body dynamics with
-applications to chute flows,’} PhD thesis, ETH Zurich; ETH Zürich,
+applications to chute flows’}, PhD thesis, ETH Zurich; ETH Zürich,
 Zürich, 2016. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-rockafellar_convex_2015}{}}%
