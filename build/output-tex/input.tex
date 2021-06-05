@@ -425,7 +425,32 @@
 \fi
 
 \begin{document}
-\maketitle
+\begin{titlepage}
+\makeatletter
+\begin{center}
+\includesvg[inkscapearea=page,width=0.5\textwidth]{files/Logo.svg}
+\end{center}
+\vspace{1cm}
+\begin{center}
+\Huge \textbf{\@title}
+\end{center}
+\begin{center}
+\LARGE Demonstrating the Power of Markdown with Pandoc
+\end{center}
+\vspace{1cm}
+\begin{center}
+\textbf{Gabriel Nützi} \\ \& \\ \textbf{The Community}
+\end{center}
+\begin{center}
+\@date
+\end{center}
+\begin{center}
+\vfill
+Zürich, Switzerland
+\vspace{1cm}
+\end{center}
+\makeatother
+\end{titlepage}
 \begin{abstract}
 This is a setup demonstrating the power and use of markdown for
 technical documents by using a fully automated conversion sequence with
