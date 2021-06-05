@@ -457,11 +457,11 @@ $if(has-frontmatter)$
 \frontmatter
 $endif$
 $if(title)$
-$if(beamer)$
-\frame{\titlepage}
-$else$
-\maketitle
-$endif$
+$-- $if(beamer)$
+$-- \frame{\titlepage}
+$-- $else$
+${ Title.tex() }
+$-- $endif$
 $if(abstract)$
 \begin{abstract}
 $abstract$
@@ -520,26 +520,26 @@ $else$
 \renewcommand\refname{$biblio-title$}
 $endif$
 $endif$
-$if(beamer)$
-\begin{frame}[allowframebreaks]{$biblio-title$}
-  \bibliographytrue
-$endif$
+$-- $if(beamer)$
+$-- \begin{frame}[allowframebreaks]{$biblio-title$}
+$--   \bibliographytrue
+$-- $endif$
   \bibliography{$for(bibliography)$$bibliography$$sep$,$endfor$}
-$if(beamer)$
-\end{frame}
-$endif$
+$-- $if(beamer)$
+$-- \end{frame}
+$-- $endif$
 
 $endif$
 $endif$
 $if(biblatex)$
-$if(beamer)$
-\begin{frame}[allowframebreaks]{$biblio-title$}
-  \bibliographytrue
-  \printbibliography[heading=none]
-\end{frame}
-$else$
+$-- $if(beamer)$
+$-- \begin{frame}[allowframebreaks]{$biblio-title$}
+$--   \bibliographytrue
+$--   \printbibliography[heading=none]
+$-- \end{frame}
+$-- $else$
 \printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
-$endif$
+$-- $endif$
 
 $endif$
 $for(include-after)$
