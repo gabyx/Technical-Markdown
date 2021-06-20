@@ -13,3 +13,4 @@ Test*
 Content.jira
 
 .envrc
+node_modules

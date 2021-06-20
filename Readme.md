@@ -77,6 +77,15 @@ brew install java
 
 You should not need to install Gradle, since everything is setup by the checked-in `gradlew` Gradle wrapper.
 
+### Yarn
+
+You should not need to install ``yarn`` since everything is handled by the dependent Gradle task `installFrontend`. If you experience problems with having the node modules not correctly setup, use
+
+```
+cd tools
+../build/yarn/bin/yarn install --modules-path build/node_modules
+```
+
 ### Pandoc
 
 Install [pandoc](https://pandoc.org/installing.html) (>= 2.9.2.1, tested with 2.11.0.4)
@@ -84,19 +93,13 @@ Install [pandoc](https://pandoc.org/installing.html) (>= 2.9.2.1, tested with 2.
 For **Linux** and **macOs**:
 
 ```shell
-export HOMEBREW_NO_INSTALL_CLEANUP=1
-cd Homebrew/Library/Taps/homebrew/homebrew-core &&
-    git checkout 36b6c2d8cd71580a4fd3055375f87a8c52cd5846~20 && # installs 2.9.2.1
-    HOMEBREW_NO_AUTO_UPDATE=1 brew install pandoc pandoc-citeproc pandoc-crossref &&
-    brew install pandoc pandoc-citeproc pandoc-crossref # installs 2.10.1
+brew install pandoc pandoc-crossref
 ```
 
 For **Windows**:
 
 ```shell
 choco install pandoc
-git clone https://github.com/gabyx/chocolatey-packages.git@patch-1 temp
-cd temp && choco install ./pandoc-crossref/pandoc-crossref.nuspec
 ```
 
 ### Python
@@ -104,7 +107,7 @@ cd temp && choco install ./pandoc-crossref/pandoc-crossref.nuspec
 Install a recent `python3` (>= 3.6) and the following packages:
 
 ```shell
-pip3 install -r .requirements
+pip3 install -r tools/.requirements
 ```
 
 The best way is to setup a python environment `python venv` since `pandoc`. The VS Code config `python.pythonPath` path needs to be set.
