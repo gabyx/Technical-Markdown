@@ -224,3 +224,11 @@ So far *relative* paths are not yet supported in `pandoc-indluce-files.lua` filt
 - Add CI.
 - Add tests.
 - Add prince conversion to PDF.
+
+## Support & Donation
+
+When you use Githooks and you would like to say thank you for its development and its future maintenance:
+I am happy to receive any donation:
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6S6BJL4GSMSG4)
+
