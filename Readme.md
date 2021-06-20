@@ -9,7 +9,7 @@
 
 - **fully automated conversion sequence** using [`gradle`](https://gradle.org) + [`pandoc`](https://github.com/jgm/pandoc) such that exporting ([Content.md](https://raw.githubusercontent.com/gabyx/TechnicalMarkdown/master/Content.md)) is done in the background:
 
-  - **export to PDF** with `pandoc` to `xelatex` using `latexmk` [See Output](Content.pdf)
+  - **export to PDF** with `pandoc` to `xelatex` using `latexmk` [See Output](https://github.com/gabyx/TechnicalMarkdown/blob/main/Content.pdf)
   - **export to HTML** with `pandoc` to `html` [See Output](https://gabyx.github.io/TechnicalMarkdown/Content.html)
   - [todo] **export to PDF** with `pandoc` to `html` then to `chrome` with `pupeteer`
 
