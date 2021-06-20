@@ -79,7 +79,7 @@ You should not need to install Gradle, since everything is setup by the checked-
 
 ### Pandoc
 
-Install [pandoc](https://pandoc.org/installing.html) (>= 2.9.2.1, testet with 2.11.0.4)
+Install [pandoc](https://pandoc.org/installing.html) (>= 2.9.2.1, tested with 2.11.0.4)
 
 For **Linux** and **macOs**:
 
@@ -91,7 +91,7 @@ cd Homebrew/Library/Taps/homebrew/homebrew-core &&
     brew install pandoc pandoc-citeproc pandoc-crossref # installs 2.10.1
 ```
 
-For **Windows**
+For **Windows**:
 
 ```shell
 choco install pandoc
@@ -101,7 +101,7 @@ cd temp && choco install ./pandoc-crossref/pandoc-crossref.nuspec
 
 ### Python
 
-Install a recent `python3` (>= 3.6) and the following packages
+Install a recent `python3` (>= 3.6) and the following packages:
 
 ```shell
 pip3 install -r .requirements
