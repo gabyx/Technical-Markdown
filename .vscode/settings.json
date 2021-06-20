@@ -1,18 +1,15 @@
 {
     "editor.formatOnPaste": true,
     "editor.formatOnType": true,
-    "search.exclude": {
-        "**/node_modules": true,
-    },
+    "editor.tabSize": 4,
     "files.autoGuessEncoding": false,
     "files.encoding": "utf8",
     "files.exclude": {
-        "**/.git": true,
-        "**/.svn": true,
-        "**/.hg": true,
-        "**/CVS": true,
-        "**/node_modules": true,
         "**/.DS_Store": true,
+        "**/.git": true,
+        "**/.hg": true,
+        "**/.svn": true,
+        "**/CVS": true
     },
     "files.trimTrailingWhitespace": false,
     "latex-workshop.latex.autoBuild.run": "never",
@@ -28,31 +25,39 @@
         {
             "args": [
                 "-r",
-                "../.latexmkrc",
+                "../tools/.latexmkrc",
                 "-xelatex",
                 "-cd-",
                 "%DOC%"
             ],
             "command": "latexmk",
+            "cwd": "",
             "env": {},
-            "cwd":"",
             "name": "latexmk"
         }
     ],
+    "PandocCiter.DefaultBib": "literature/bibliography.bib",
+    "prettier.configPath": "tools/.prettierrc",
     "python.formatting.provider": "yapf",
+    "python.formatting.yapfArgs": [
+        "--style",
+        "tools/.style.yapf"
+    ],
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": false,
     "python.linting.pycodestyleEnabled": false,
     "python.linting.pylamaEnabled": true,
     "python.linting.pylintEnabled": false,
-    "editor.tabSize": 4,
-    "spellright.language": [
-        "de"
-    ],
+    "search.exclude": {
+        "**/node_modules": true
+    },
     "spellright.documentTypes": [
         "latex",
         "plaintext",
         "markdown"
     ],
-    "PandocCiter.DefaultBib": "literature/bibliography.bib",
+    "spellright.language": [
+        "de"
+    ],
+    "vscode-lua-format.configPath": "tools/.lua-format"
 }

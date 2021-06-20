@@ -6,6 +6,8 @@
         "davidanson.vscode-markdownlint",
         "notZaki.pandocciter",
         "naco-siren.gradle-language",
-        "richardwillis.vscode-gradle"
+        "richardwillis.vscode-gradle",
+        "koihik.vscode-lua-format",
+        "mathiasfrohlich.kotlin",
     ]
 }

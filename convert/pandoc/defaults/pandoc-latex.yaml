@@ -39,7 +39,7 @@ pdf-engine: latexmk
 pdf-engine-opt:
     - "-xelatex"
     - "-r"
-    - ".latexmkrc"
+    - "tools/.latexmkrc"
     - "-gg"
     - "-outdir=build/output-tex"
 

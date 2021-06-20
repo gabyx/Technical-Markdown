@@ -8,7 +8,6 @@ plugins {
 @Suppress("unchecked_cast", "nothing_to_inline")
 inline fun <T> uncheckedCast(target: Any?): T = target as T
 
-
 apply(plugin = "java")
 apply(from = "gradle/runCommand.gradle.kts")
 val checkCmd = project.extensions.getByName("checkCommand")
@@ -22,6 +21,8 @@ frontend {
     nodeInstallDirectory.set(file("${project.buildDir}/node"))
     yarnEnabled.set(true)
     yarnVersion.set("1.22.10")
+    packageJsonDirectory.set(file("${project.rootDir}/tools"))
+    installScript.set("install --modules-folder='${project.buildDir}/node_modules'")
     yarnInstallDirectory.set(file("${project.buildDir}/yarn"))
 }
 
