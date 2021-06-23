@@ -56,7 +56,6 @@ The documentation is pretty flawless and the community (including him) is really
    complete and utter bullshit you can adhere to.
    Certainly employees mostly must obey. The common argument is "people need to exchange
    documents and work on it".
-   Because people need to focus on the utter shitty formatting and WYSIWYG workaround
    experiences, a lot of time and money is spent which gets never debated.
 
    **It's about high time** to turn into a direction which will likely become the standard.
@@ -183,10 +182,6 @@ The following templates are responsible for the LaTeX output:
 - [Template.tex](convert/pandoc/includes/Template.tex) : The main template.
 - [Header.tex](convert/pandoc/includes/Header.tex)  : The class, packages and styles defining the document, included by the main template with `include-in-header` in [pandoc-latex.yaml](convert/pandoc/defaults/pandoc-latex.yaml)
 
-## Debugging
-
-There is a debug configuration in [launch.json](.vscode/launch.json) for both the HTML and the PDF export.
-
 ### Pandoc Filters
 
 Pandoc filters are harder to debug. There is an included unix-like [tee.py](convert/pandoc/filters/tee.py) filter
@@ -209,13 +204,13 @@ meaning that also the python library `panflute` needs to be supporting this:
 
 - [Issue](https://github.com/sergiocorreia/panflute/issues/142) : ![](https://img.shields.io/badge/dynamic/json?color=%23FF0000&label=Status&query=%24.state&url=https%3A%2F%2Fapi.github.com%2Frepos%2Fsergiocorreia%2Fpanflute%2Fissues%2F142)
 
-### Transclude: Relative file paths
+### Transclude: Relative file paths [done]
 
 So far *relative* paths are not yet supported in `pandoc-indluce-files.lua` filter.
 
 - [Issue](https://github.com/pandoc/lua-filters/issues/102) : ![Status](https://img.shields.io/badge/dynamic/json?color=%23FF0000&label=Status&query=%24.state&url=https%3A%2F%2Fapi.github.com%2Frepos%2Fpandoc%2Flua-filters%2Fissues%2F102)
 
-### Table Issues
+### Table Issues [done]
 
 - Wrong format for `latex`: [Issue](https://github.com/jgm/pandoc/issues/6883) : ![Status](https://img.shields.io/badge/dynamic/json?color=%23FF0000&label=Status&query=%24.state&url=https%3A%2F%2Fapi.github.com%2Frepos%2Fjgm%2Fpandoc%2Fissues%2F6883) -> Update to next version.
 
