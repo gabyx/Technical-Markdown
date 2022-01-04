@@ -1,4 +1,5 @@
 {
+    "PandocCiter.DefaultBib": "literature/bibliography.bib",
     "editor.formatOnPaste": true,
     "editor.formatOnType": true,
     "editor.tabSize": 4,
@@ -36,8 +37,8 @@
             "name": "latexmk"
         }
     ],
-    "PandocCiter.DefaultBib": "literature/bibliography.bib",
     "prettier.configPath": "tools/.prettierrc",
+    "python.defaultInterpreterPath": "${workspaceFolder}/.venv",
     "python.formatting.provider": "yapf",
     "python.formatting.yapfArgs": [
         "--style",
@@ -48,6 +49,7 @@
     "python.linting.pycodestyleEnabled": false,
     "python.linting.pylamaEnabled": true,
     "python.linting.pylintEnabled": false,
+    "python.terminal.activateEnvironment": true,
     "search.exclude": {
         "**/node_modules": true
     },
