@@ -5,7 +5,6 @@
 %
 \documentclass[
   12pt,
-  british,
   paper=a4,
   twoside,
   titlepage=true,
@@ -17,17 +16,6 @@
   headings=optiontohead,
   svgnames,
   dvipsnames]{scrreprt}
-\title{Technical Documents}
-\usepackage{etoolbox}
-\makeatletter
-\providecommand{\subtitle}[1]{% add subtitle to \maketitle
-  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
-}
-\makeatother
-\subtitle{Demonstrating the Power of Markdown with Pandoc}
-\author{Gabriel Nützi \and The Community}
-\date{2. December 2020}
-
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
 \usepackage{iftex}
@@ -149,6 +137,15 @@
 \newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
+\else
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{british}
+% get rid of language-specific shorthands (see #6817):
+\let\LanguageShortHands\languageshorthands
+\def\languageshorthands#1{}
 % Set include paths
 \makeatletter
 \providecommand*{\input@path}{}
@@ -410,20 +407,20 @@
 % General Settings
 \KOMAoptions{cleardoublepage=empty}
 \raggedbottom
-\ifXeTeX
-  % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
-  \usepackage{polyglossia}
-  \setmainlanguage[variant=british]{english}
-\else
-  \usepackage[main=british]{babel}
-% get rid of language-specific shorthands (see #6817):
-\let\LanguageShortHands\languageshorthands
-\def\languageshorthands#1{}
-\fi
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
 
+\title{Technical Documents}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{Demonstrating the Power of Markdown with Pandoc}
+\author{Gabriel Nützi \and The Community}
+\date{2. December 2020}
 \begin{document}
 \begin{titlepage}
 \makeatletter
@@ -834,10 +831,10 @@ Some inline code \texttt{int\ a;\ a\ +=\ "asd"}
 \end{itemize}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.15}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.20}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.35}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.30}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3000}}@{}}
 \caption{Table by included \texttt{.html} file.}\tabularnewline
 \toprule
 \begin{minipage}[b]{\linewidth}\raggedright
@@ -1009,10 +1006,10 @@ Properties
 \end{itemize}
 
 \begin{longtable}[]{@{}
-  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.15}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.10}}
-  >{\raggedleft\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.28}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.32}}@{}}
+  >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1500}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1000}}
+  >{\raggedleft\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2750}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3250}}@{}}
 \caption{Here’s a multiline table without a header.}\tabularnewline
 \toprule
 \endhead
@@ -1022,9 +1019,9 @@ Second & row & 5.0 & Here’s another one. \\
 \end{longtable}
 
 \begin{longtable}[]{@{}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.20}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.10}}
-  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.26}}@{}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.1000}}
+  >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2625}}@{}}
 \caption{Sample grid table.}\tabularnewline
 \toprule
 \begin{minipage}[b]{\linewidth}\raggedright
@@ -1077,9 +1074,10 @@ Oranges & \$2.10 & \begin{minipage}[t]{\linewidth}\raggedright
 \begin{CSLReferences}{0}{0}
 \leavevmode\vadjust pre{\hypertarget{ref-nuetzig_thesis_2016}{}}%
 \CSLLeftMargin{{[}1{]} }
-\CSLRightInline{G. Nützi, {‘Non-smooth granular rigid body dynamics with
-applications to chute flows’}, PhD thesis, ETH Zurich; ETH Zürich,
-Zürich, 2016. }
+\CSLRightInline{G. Nützi,
+{‘\href{https://doi.org/10.3929/ethz-a-010662262}{Non-smooth granular
+rigid body dynamics with applications to chute flows}’}, PhD thesis, ETH
+Zurich; ETH Zürich, Zürich, 2016. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-rockafellar_convex_2015}{}}%
 \CSLLeftMargin{{[}2{]} }
