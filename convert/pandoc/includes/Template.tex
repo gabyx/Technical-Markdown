@@ -4,11 +4,6 @@
 $if(colorlinks)$
 \PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
 $endif$
-$if(dir)$
-$if(latex-dir-rtl)$
-\PassOptionsToPackage{RTLdocument}{bidi}
-$endif$
-$endif$
 $if(CJKmainfont)$
 \PassOptionsToPackage{space}{xeCJK}
 $endif$
@@ -16,9 +11,6 @@ $endif$
 \documentclass[
 $if(fontsize)$
   $fontsize$,
-$endif$
-$if(lang)$
-  $babel-lang$,
 $endif$
 $if(papersize)$
   $papersize$paper,
@@ -36,35 +28,6 @@ $for(classoption)$
   $classoption$$sep$,
 $endfor$
 ]{$documentclass$}
-$if(title)$
-\title{$title$$if(thanks)$\thanks{$thanks$}$endif$}
-$endif$
-$if(subtitle)$
-$if(beamer)$
-$else$
-\usepackage{etoolbox}
-\makeatletter
-\providecommand{\subtitle}[1]{% add subtitle to \maketitle
-  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
-}
-\makeatother
-$endif$
-\subtitle{$subtitle$}
-$endif$
-\author{$for(author)$$author$$sep$ \and $endfor$}
-\date{$date$}
-$if(beamer)$
-$if(institute)$
-\institute{$for(institute)$$institute$$sep$ \and $endfor$}
-$endif$
-$if(titlegraphic)$
-\titlegraphic{\includegraphics{$titlegraphic$}}
-$endif$
-$if(logo)$
-\logo{\includegraphics{$logo$}}
-$endif$
-$endif$
-
 $-- $if(beamer)$
 $-- $if(background-image)$
 $-- \usebackgroundtemplate{%
@@ -344,6 +307,7 @@ $if(links-as-notes)$
 \DeclareRobustCommand{\href}[2]{#2\footnote{\url{#1}}}
 $endif$
 $if(strikeout)$
+$-- also used for underline
 \usepackage[normalem]{ulem}
 % Avoid problems with \sout in headers with hyperref
 \pdfstringdefDisableCommands{\renewcommand{\sout}{}}
@@ -398,35 +362,27 @@ $if(csl-refs)$
 \newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
 \newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 $endif$
-$for(header-includes)$
-$header-includes$
-$endfor$
 $if(lang)$
-\ifXeTeX
-  % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
-  \usepackage{polyglossia}
-  \setmainlanguage[$for(polyglossia-lang.options)$$polyglossia-lang.options$$sep$,$endfor$]{$polyglossia-lang.name$}
-$for(polyglossia-otherlangs)$
-  \setotherlanguage[$for(polyglossia-otherlangs.options)$$polyglossia-otherlangs.options$$sep$,$endfor$]{$polyglossia-otherlangs.name$}
-$endfor$
+\ifLuaTeX
+\usepackage[bidi=basic]{babel}
 \else
-  \usepackage[$for(babel-otherlangs)$$babel-otherlangs$,$endfor$main=$babel-lang$]{babel}
+\usepackage[bidi=default]{babel}
+\fi
+\babelprovide[main,import]{$babel-lang$}
+$for(babel-otherlangs)$
+\babelprovide[import]{$babel-otherlangs$}
+$endfor$
 % get rid of language-specific shorthands (see #6817):
 \let\LanguageShortHands\languageshorthands
 \def\languageshorthands#1{}
-$if(babel-newcommands)$
-  $babel-newcommands$
 $endif$
-\fi
-$endif$
+$for(header-includes)$
+$header-includes$
+$endfor$
 \ifLuaTeX
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
 $if(dir)$
-\ifXeTeX
-  % Load bidi as late as possible as it modifies e.g. graphicx
-  \usepackage{bidi}
-\fi
 \ifPDFTeX
   \TeXXeTstate=1
   \newcommand{\RL}[1]{\beginR #1\endR}
@@ -452,6 +408,34 @@ $if(csquotes)$
 \usepackage{csquotes}
 $endif$
 
+$if(title)$
+\title{$title$$if(thanks)$\thanks{$thanks$}$endif$}
+$endif$
+$if(subtitle)$
+$-- $if(beamer)$
+$-- $else$
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+$-- $endif$
+\subtitle{$subtitle$}
+$endif$
+\author{$for(author)$$author$$sep$ \and $endfor$}
+\date{$date$}
+$-- $if(beamer)$
+$-- $if(institute)$
+$-- \institute{$for(institute)$$institute$$sep$ \and $endfor$}
+$-- $endif$
+$-- $if(titlegraphic)$
+$-- \titlegraphic{\includegraphics{$titlegraphic$}}
+$-- $endif$
+$-- $if(logo)$
+$-- \logo{\includegraphics{$logo$}}
+$-- $endif$
+$-- $endif$
 \begin{document}
 $if(has-frontmatter)$
 \frontmatter

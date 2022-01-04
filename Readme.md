@@ -87,7 +87,7 @@ cd tools
 
 ### Pandoc
 
-Install [pandoc](https://pandoc.org/installing.html) (>= 2.9.2.1, tested with 2.11.0.4)
+Install [pandoc](https://pandoc.org/installing.html) (>= 2.9.2.1, tested with 2.16.2)
 
 For **Linux** and **macOs**:
 
@@ -201,7 +201,7 @@ meaning that also the python library `panflute` needs to be supporting this:
 
 ### Transclude: Relative file paths [done]
 
-So far *relative* paths are not yet supported in `pandoc-indluce-files.lua` filter.
+So far *relative* paths are not yet supported in `pandoc-include-files.lua` filter.
 
 - [Issue](https://github.com/pandoc/lua-filters/issues/102) : ![Status](https://img.shields.io/badge/dynamic/json?color=%23FF0000&label=Status&query=%24.state&url=https%3A%2F%2Fapi.github.com%2Frepos%2Fpandoc%2Flua-filters%2Fissues%2F102)
 
