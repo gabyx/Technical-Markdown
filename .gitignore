@@ -12,5 +12,6 @@ Test*
 !Content.html
 Content.jira
 
+.venv
 .envrc
 node_modules

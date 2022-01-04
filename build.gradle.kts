@@ -98,7 +98,7 @@ val defineEnvironment by tasks.register<Task>("defineEnvironment") {
     outputs.upToDateWhen({true})
 
     doLast({
-
+        
         pythonPaths.forEach {
             if(!it.exists()) {
                 throw RuntimeException(
@@ -117,10 +117,10 @@ val defineEnvironment by tasks.register<Task>("defineEnvironment") {
         checkCmd(arrayOf(pythonExe, "--version"), null)
         checkPandocInstall(pandocExe)
 
-        logger.quiet("Pandoc Exe: $pandocExe")
-        logger.quiet("Python Exe: $pythonExe")
-        logger.quiet("Python Path: ${pythonPaths.contentToString()}")
-        logger.quiet("Lua Path: ${luaPaths.contentToString()}")
+        logger.info("Pandoc Exe: $pandocExe")
+        logger.info("Python Exe: $pythonExe")
+        logger.info("Python Path: ${pythonPaths.contentToString()}")
+        logger.info("Lua Path: ${luaPaths.contentToString()}")
 
     })
 }
@@ -131,20 +131,21 @@ val compileLess by tasks.register<Exec>("compileLess") {
     description = "Compile Less"
     dependsOn(initBuild, defineEnvironment)
 
-    val lessFile = fileTree("${project.rootDir}/convert/css/src/"){ include("main.less") }.getFiles().elementAt(0)
+    val lessMainFile = fileTree("${project.rootDir}/convert/css/src/"){ include("main.less") }.getFiles().elementAt(0)
+    val lessFiles = fileTree("${project.rootDir}/convert/css/src/"){ include("*.less") }.getFiles()
     val cssFile = file("${project.rootDir}/convert/css/main.css")
 
-    inputs.files(lessFile)
+    inputs.files(lessMainFile, lessFiles)
     outputs.file(cssFile)
 
     val lessCompiler =  file("$binDir/lessc")
 
     doFirst({
-        println("Executing Less Compilation: '$lessFile' -> '$cssFile'")
+        println("Executing Less Compilation: '$lessMainFile' -> '$cssFile'")
     })
 
     executable(lessCompiler)
-    args("--include-path=convert/css/src", lessFile, cssFile)
+    args("--include-path=convert/css/src", lessMainFile, cssFile)
 
     workingDir(project.rootDir)
 }
@@ -161,8 +162,9 @@ data class PandocSettings(
 
 fun createPandocSettings(): PandocSettings {
         var env = globalEnv.toMutableMap()
-        env.addExecutableDirToPath(pandocExe)
-        env.addExecutableDirToPath(pythonExe)
+        logger.quiet("First PATH: '${env["PATH"]}")
+        //env.addExecutableDirToPath(pythonExe)
+        //env.addExecutableDirToPath(pandocExe)
         env["ROOT_DIR"] = "${project.rootDir}"
         env["PYTHON_PATH"] = env.getOrDefault("PYTHON_PATH", "") + pathSep + pythonPaths.joinToString(separator = pathSep)
         env["LUA_PATH"] = env.getOrDefault("LUA_PATH", "") + pathSep + luaPaths.flatMap({v -> listOf("$v/?", "$v/?.lua") }).joinToString(separator=";")
@@ -193,6 +195,8 @@ abstract class PandocTask @Inject constructor() : Exec() {
     @get:InputDirectory
     abstract val assetFiles: Property<FileTree>
     @get:InputDirectory
+    abstract val literatureFiles: Property<FileTree>
+    @get:InputDirectory
     abstract val convertFiles: Property<FileTree>
 
     @get:OutputFile
@@ -218,12 +222,13 @@ abstract class PandocTask @Inject constructor() : Exec() {
         additionalArgs.convention(arrayOf())
         markdownFiles.convention(project.fileTree("${project.rootDir}/chapters/"){include("**/*.md", "**/*.html")})
         assetFiles.convention(project.fileTree("${project.rootDir}/files/"){ include("**/*") })
+        literatureFiles.convention(project.fileTree("${project.rootDir}/literature/"){ include("**/*") })
         convertFiles.convention(project.fileTree("${project.rootDir}/convert/"){ 
             include("pandoc/**/*")
             include("scripts/**/*")
         })
 
-        inputs.files(inputFile, markdownFiles, assetFiles, convertFiles)
+        inputs.files(inputFile, markdownFiles, assetFiles, convertFiles, literatureFiles)
         outputs.file(outputFile)
 
         executable(settings.pandocExe)

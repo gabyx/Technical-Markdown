@@ -103,25 +103,20 @@ choco install pandoc
 
 ### Python
 
-Install a recent `python3` (>= 3.6) and the following packages:
+Install a recent `python3` (>= 3.9) and the following packages.
+
+Setup a python environment in `.venv` with
+`python -m venv --system-site-packages ./.venv` and install the packages:
 
 ```shell
+python -m venv --system-site-packages .venv # or simply symlink to an existing one.
+source .venv/bin/activate
 pip3 install -r tools/.requirements
 ```
 
-The best way is to setup a python environment `python venv` since `pandoc`. The VS Code config `python.pythonPath` path needs to be set.
-
-The VS Code tasks get the `${config:python.pythonPath}`
-directly as an argument and modify the environement and `pandoc` will use the right python when launching the filters.
-
-You can also start VS Code like this to have the proper `python` enabled:
-
-```bash
-# Activate your python env.
-source ~/.env/myPython3.8Env/activate
-# Start code
-cd TechnicalMarkdown && code -n .
-```
+The VS Code tasks pass the config `${config:python.pythonEnv}` 
+directly as an argument to `gradlew` (if not set `python` is the default). The tasks are run in a shell where `./.venv/bin/activate` has been called. 
+Then, `pandoc` will use the correct python when launching the filters.
 
 You can also use the ignored [.envrc](.envrc) file with [direnv](https://github.com/direnv/direnv).
 

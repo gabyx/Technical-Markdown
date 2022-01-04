@@ -1,10 +1,13 @@
 @import "defines.less";
 
 .define-code() {
-
-    code{
+    code {
         font-family: Fira Code;
         font-size: 11pt;
+        padding-left: 3pt;
+        padding-right: 3pt;
+        border-radius: 3pt;
+        background-color: @main-float-background-color;
     }
 
     div.sourceCode {
@@ -14,7 +17,13 @@
         border-color: @main-float-border-color;
         border-width: 1.5pt;
         margin: 0.5ex;
-        border-radius: 4pt;
+        border-radius: 5pt;
+
+        code {
+            padding-left: 0pt;
+            padding-right: 0pt;
+            background-color: transparent
+        }
     }
 
     pre.numberSource {
