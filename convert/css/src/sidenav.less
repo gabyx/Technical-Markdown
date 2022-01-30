@@ -21,6 +21,19 @@
             padding-top: 0.5ex;
             padding-bottom: 0;
             font-size: 26pt;
+
+            // For icons.
+            a {
+                text-decoration: none;
+                color: #818181;
+                transition: 0.3s;
+            }
+
+            a:hover {
+                color: #f1f1f1;
+                background-color: #dddddd65;
+            }
+
         }
 
         #nav-content {
@@ -41,16 +54,7 @@
             }
         }
 
-        a {
-            text-decoration: none;
-            color: #818181;
-            transition: 0.3s;
-        }
-
-        a:hover {
-            color: #f1f1f1;
-        }
-
+      
         .close-btn {
             margin-left: 1ex;
         }
@@ -64,7 +68,7 @@
     #sidenav-btn {
         position: fixed;
         top: 10px;
-        right: 10px;
+        left: 10px;
         padding: 1em;
         width: auto !important;
     }

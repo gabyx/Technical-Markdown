@@ -8,11 +8,14 @@
         if (m.offsetLeft - expandWidth < 0) {
             m.style.marginLeft = `${expandWidth + 40}px`
         }
+    
+        document.getElementById("nav-content-inline").style.display = "none";
     }
 
     function closeSideNav() {
         document.getElementById("side-nav").style.width = "0";
         document.getElementById("main-markdown").style.marginLeft = null;
+        document.getElementById("nav-content-inline").style.display = "initial";
     }
 
     var EXPAND_ALL = "⊞";
@@ -44,22 +47,34 @@
     };
 
     var onLoad = function () {
-        var treeListItems = document.querySelectorAll('nav ul a');
+        var treeListItems = document.querySelectorAll('nav ul li');
         for (var i = 0; i < treeListItems.length; i++) {
+
+            var isLeaf = treeListItems[i].getElementsByTagName('ul').length == 0;
+            if (isLeaf) {
+                treeListItems[i].classList.add("leaf")
+                continue;
+            }
+
             // click handler
-            treeListItems[i].addEventListener('click', function (e) {
-                var parent = e.target.parentElement;
-                var classList = parent.classList;
-                if (classList.contains("open")) { // close the element and its children
-                    classList.remove('open');
-                    var openChildrenList = parent.querySelectorAll(':scope .open');
-                    for (var j = 0; j < openChildrenList.length; j++) {
-                        openChildrenList[j].classList.remove('open');
+            treeListItems[i].addEventListener('click',
+                function (e) {
+                    var target = e.target;
+
+                    var classList = target.classList;
+                    if (classList.contains("open")) { // close the element and its children
+                        classList.remove('open');
+                        var openChildrenList = target.querySelectorAll(':scope li.open');
+                        for (var j = 0; j < openChildrenList.length; j++) {
+                            openChildrenList[j].classList.remove('open');
+                        }
+                    } else { // open the element
+                        classList.add('open');
                     }
-                } else { // open the element
-                    classList.add('open');
+
+                    e.stopPropagation();
                 }
-            });
+            );
         }
     }
 
