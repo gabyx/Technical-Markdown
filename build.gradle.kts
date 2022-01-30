@@ -162,7 +162,7 @@ data class PandocSettings(
 
 fun createPandocSettings(): PandocSettings {
         var env = globalEnv.toMutableMap()
-        logger.quiet("First PATH: '${env["PATH"]}")
+        //logger.quiet("First PATH: '${env["PATH"]}")
         //env.addExecutableDirToPath(pythonExe)
         //env.addExecutableDirToPath(pandocExe)
         env["ROOT_DIR"] = "${project.rootDir}"
@@ -226,6 +226,7 @@ abstract class PandocTask @Inject constructor() : Exec() {
         convertFiles.convention(project.fileTree("${project.rootDir}/convert/"){ 
             include("pandoc/**/*")
             include("scripts/**/*")
+            include("css/**/*.css")
         })
 
         inputs.files(inputFile, markdownFiles, assetFiles, convertFiles, literatureFiles)
