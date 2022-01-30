@@ -15,15 +15,5 @@
         };
         var P = "#main-markdown"
         anchors.add(`${P} h1:not(.no-anchor),${P} h2:not(.no-anchor),${P} h3:not(.no-anchor),${P} h4:not(.no-anchor),${P} h5:not(.no-anchor),${P} h6:not(.no-anchor)`);
-
-        /*var c = window.location.hash
-        if(c) {
-            var e = document.getElementById(c);
-            if(e != null) {
-                console.log("scroll")
-                e.scrollIntoView();
-            }
-        }*/
-        
     });
 </script>
