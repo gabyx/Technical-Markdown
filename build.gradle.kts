@@ -162,7 +162,6 @@ data class PandocSettings(
 
 fun createPandocSettings(): PandocSettings {
         var env = globalEnv.toMutableMap()
-        //logger.quiet("First PATH: '${env["PATH"]}")
         //env.addExecutableDirToPath(pythonExe)
         //env.addExecutableDirToPath(pandocExe)
         env["ROOT_DIR"] = "${project.rootDir}"

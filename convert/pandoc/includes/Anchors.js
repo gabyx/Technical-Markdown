@@ -1,7 +1,7 @@
 <script src="https://cdn.jsdelivr.net/npm/anchor-js/anchor.min.js"></script>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function(event) {
+    document.addEventListener('DOMContentLoaded', function (event) {
         var P = "#main-markdown > header"
         var noAnchorHeaders = document.querySelectorAll(`${P} h1, ${P} h2, ${P} h3, ${P} h4, ${P} h5, ${P} h6`)
         for (var k = 0; k < noAnchorHeaders.length; k++) {
