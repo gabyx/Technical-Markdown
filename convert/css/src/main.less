@@ -73,8 +73,8 @@ html {
         .define-links();
 
         #nav-content > #TOC {
-            .define-toc-style(@main-heading-color, @main-heading-color);
-            .define-collapsable-list(140%);
+            .define-toc-style(@main-heading-color, 1.2*@main-font-size);
+            .define-collapsable-list(18pt, @topShift:2.5pt);
             padding-left: 3ex;
             padding-right: 2ex;
             padding-bottom: 3em;
@@ -86,7 +86,7 @@ html {
         margin: auto;
 
         #nav-content-inline > #TOC {
-            .define-toc-style(@main-heading-color, @main-link-color);
+            .define-toc-style(@main-heading-color, @main-font-size);
         }
 
         .define-markdown-style();

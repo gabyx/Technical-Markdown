@@ -51,7 +51,7 @@ Der Ursprung der Menge $\ncone{C}(\vvec{x})$ ist im Punkt $\vvec{x}$.
 
 Die Abbildung [-@fig:normalcone] visualisiert für eine konvexe Menge $\set{C}$ die verschiedenen Normalkegel.
 
-![Normalkegel an die Punkte $\vvec{x}$, $\vvec{y}$ und $\vvec{z}$. Der Normalkegel an einen innerhalb der Menge $\set{C}$ liegenden Punkt $\vvec{z}$ degeneriert zum $\vvec{0}$-Vektor. Der Vektor $\vvec{v}$ ist in der Menge des Normalkegels an $\vvec{x}$.](files/NormalKegel.svg){#fig:normalcone style="min-width:10cm"}
+![Normalkegel an die Punkte $\vvec{x}$, $\vvec{y}$ und $\vvec{z}$. Der Normalkegel an einen innerhalb der Menge $\set{C}$ liegenden Punkt $\vvec{z}$ degeneriert zum $\vvec{0}$-Vektor. Der Vektor $\vvec{v}$ ist in der Menge des Normalkegels an $\vvec{x}$.](files/NormalKegel.svg){#fig:normalcone style="width:100%;max-width:7cm"}
 
 ## Zusammenhang von Normalkegel und Proximaler Punkt
 
@@ -82,7 +82,7 @@ umschreiben. Aus dem erkennen wir, dass der Ursprung des Normalkegels, worin ein
 
 Müssten wir nun eine Projektionsfunktion auf ein $2$d-Dreieck herleiten, würden wir folgendes Bild malen:
 
-![Normalkegel an die Punkte $\vvec{a}$, $\vvec{b}$ und $\vvec{c}$ eines Dreiecks.](files/NormalKegelDreieck.svg){#fig:normalconetri style="min-width:10cm"}
+![Normalkegel an die Punkte $\vvec{a}$, $\vvec{b}$ und $\vvec{c}$ eines Dreiecks.](files/NormalKegelDreieck.svg){#fig:normalconetri style="width:100%;max-width:7cm"}
 
 Das heisst es gibt genau 3 nicht triviale Normalkegel und 3 einfachere Normalkegel (bestehend lediglich aus den Normalen auf die Seitenflächen). Eine Projektionsfunktion auf ein Dreieck muss diese 6 Bereiche beachten und ist so auch optimal und richtig implementiert.
 
@@ -131,7 +131,7 @@ Da man zeigen kann, dass das Subdifferential, also die mengenwertige Ableitung, 
 
 Das bringt uns nicht viel mehr ausser einer visuellen Erkenntnis durch folgende Visualisierung:
 
-![Konvexes Optimierungs Problem innerhalb der Menge $\set{C}$ auf einer $2$d-Funktion $f(\vvec{x}) \in \mathbb{R}$. Der negative Gradient liegt im Optimum $\vvec{x}^*$ genau innerhalb des Normalkegels an $\vvec{x}^*$.](files/ConvexOptimizationProblem.svg){#fig:convex-opt-prob style="min-width:100%"}
+![Konvexes Optimierungs Problem innerhalb der Menge $\set{C}$ auf einer $2$d-Funktion $f(\vvec{x}) \in \mathbb{R}$. Der negative Gradient liegt im Optimum $\vvec{x}^*$ genau innerhalb des Normalkegels an $\vvec{x}^*$.](files/ConvexOptimizationProblem.svg){#fig:convex-opt-prob style="width:100%;max-width:100%"}
 
 Mit der Beziehung zwischen **proximalem Punkt** und **Normalkegel** $\eqref{eq:prox-to-ncone}$ kriegen wir daraus direkt eine **implizite Projektionsgleichung** für den optimalen Punkt $\vvec{x}^*$:
 `\begin{align}

@@ -280,7 +280,8 @@ html #main a.anchorjs-link:hover {
   background-color: #ffffff00;
 }
 html #main #nav-content > #TOC {
-  font-size: 14pt;
+  font-size: 14.4pt;
+  line-height: 14.4pt;
   padding-left: 3ex;
   padding-right: 2ex;
   padding-bottom: 3em;
@@ -294,6 +295,12 @@ html #main #nav-content > #TOC h6 {
   color: #00acd1;
   font-family: 'Museo Sans', "Fira Sans", "Helvetica", sans-serif;
   font-weight: bold;
+}
+html #main #nav-content > #TOC ul li ul li a {
+  font-size: 12.96pt;
+}
+html #main #nav-content > #TOC ul li ul li ul li a {
+  font-size: 11.52pt;
 }
 html #main #nav-content > #TOC ul {
   padding-inline-start: 2ex;
@@ -325,13 +332,12 @@ html #main #nav-content > #TOC ul li a {
 }
 html #main #nav-content > #TOC ul li:before {
   /* the expand/collapse symbols before each item */
-  height: 1em;
-  font-size: 0.8em;
   display: block;
   position: absolute;
   left: -1.2em;
+  top: 2.5pt;
   content: "▸";
-  font-size: 140%;
+  font-size: 18pt;
   font-weight: bold;
 }
 html #main #nav-content > #TOC ul li.open:before {
@@ -346,7 +352,8 @@ html #main-markdown {
   /* base style */
 }
 html #main-markdown #nav-content-inline > #TOC {
-  font-size: 14pt;
+  font-size: 12pt;
+  line-height: 12pt;
 }
 html #main-markdown #nav-content-inline > #TOC h1,
 html #main-markdown #nav-content-inline > #TOC h2,
@@ -357,6 +364,12 @@ html #main-markdown #nav-content-inline > #TOC h6 {
   color: #00acd1;
   font-family: 'Museo Sans', "Fira Sans", "Helvetica", sans-serif;
   font-weight: bold;
+}
+html #main-markdown #nav-content-inline > #TOC ul li ul li a {
+  font-size: 10.8pt;
+}
+html #main-markdown #nav-content-inline > #TOC ul li ul li ul li a {
+  font-size: 9.6pt;
 }
 html #main-markdown #nav-content-inline > #TOC ul {
   padding-inline-start: 2ex;
@@ -733,7 +746,7 @@ html #main-markdown figure {
 }
 html #main-markdown figure > img {
   padding: 5px;
-  display: inline-block;
+  display: inline-flex;
   vertical-align: middle;
   border: 2pt solid #e9e9e9;
   border-radius: 4pt;
@@ -1228,7 +1241,7 @@ html #main-markdown-numbered figure {
 }
 html #main-markdown-numbered figure > img {
   padding: 5px;
-  display: inline-block;
+  display: inline-flex;
   vertical-align: middle;
   border: 2pt solid #e9e9e9;
   border-radius: 4pt;
