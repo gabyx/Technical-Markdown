@@ -1,4 +1,4 @@
-.define-collapsable-list(@toggleSize: 100%, @openChar: "▾", @closeChar: "▸") {
+.define-collapsable-list(@toggleSize: 100%, @openChar: "▾", @closeChar: "▸", @topShift: 0.2em) {
     ul li {
         list-style-type: none;
         position: relative;
@@ -15,12 +15,10 @@
     }
     ul li:before {
         /* the expand/collapse symbols before each item */
-        height: 1em;
-        font-size: 0.8em;
         display: block;
         position: absolute;
         left: -1.2em;
-        //top: 0.3em;
+        top: @topShift;
         content: @closeChar;
         font-size: @toggleSize;
         font-weight: bold;

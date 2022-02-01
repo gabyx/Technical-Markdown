@@ -9,8 +9,8 @@
         }
 
         anchors.options = {
-            placement: 'left',
-            visible: 'always',
+            placement: 'right',
+            visible: 'never',
             icon: '§'
         };
         var P = "#main-markdown"

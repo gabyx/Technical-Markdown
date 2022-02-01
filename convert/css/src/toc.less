@@ -2,7 +2,16 @@
 
 .define-toc-style(@color: @main-heading-color, @fontSize: @main-font-size) {
     .define-title-style();
-    font-size: 14pt;
+    font-size: @fontSize;
+    line-height: @fontSize;
+
+    ul li ul li a {
+        font-size: 0.9 * @fontSize;
+    }
+
+    ul li ul li ul li a {
+        font-size: 0.8 * @fontSize;
+    }
 
     ul {
         padding-inline-start: 2ex;
