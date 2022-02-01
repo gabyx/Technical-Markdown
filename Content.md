@@ -17,7 +17,7 @@ lang: en-GB
 abstract: This is a setup demonstrating the power and use 
   of markdown for technical documents by using 
   a fully automated conversion sequence with 
-  [`gradle`](https://gradle.org) and of course [`pandoc`](https://pandoc.org)."
+  [`gradle`](https://gradle.org) and of course [`pandoc`](https://pandoc.org).
 abstract-title: Abstract
 toc: true
 toc-depth: 2
