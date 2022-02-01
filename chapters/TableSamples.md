@@ -7,22 +7,23 @@
 - Markdown citations/cross refeferences do not work inside.
 - HTML citations dont work.
 - Table caption is not parsed `table_caption` not allowed as extension.
-:::
 
-```{.include format=html+tex_math_dollars include-if-format=latex;html;html5;json;native .relative-to-current}
+```{.include format=html+tex_math_dollars .relative-to-current}
 tables/TableExample.html
 ```
+:::
 
 :::{include-if-format=latex;json;native}
 ## \LaTeX\ Table
 - Included latex file as raw `latex`.
 - Converted from `.html` by `convert-tables.py` and `table.json`.
 - Latex citations do work inside.
-:::
 
 ```{.include format=latex raw=true include-if-format=latex;json;native .relative-to-current}
 tables-tex/TableExample.tex
 ```
+:::
+
 
 ## Markdown Table {#sec:multi-line-table}
 

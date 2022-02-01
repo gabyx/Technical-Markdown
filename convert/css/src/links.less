@@ -1,0 +1,27 @@
+@import "defines.less";
+
+.define-links() {
+    a {
+        color: @main-link-color;
+        text-decoration: none;
+        text-decoration-skip-ink: none;
+        &:hover {
+            text-decoration: underline solid @main-link-color;
+            color: @main-link-color;
+            background-color: @main-link-background-color;
+            border-radius: 4pt;
+        }
+    }
+
+    a.anchorjs-link {
+        font-family: Fira Sans;
+        background-color: none;
+        color: #d1d1d1;
+
+        &:hover {
+            text-decoration: underline solid @main-link-color;
+            color: @main-link-color;
+            background-color: #ffffff00;
+        }
+    }
+}

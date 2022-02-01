@@ -154,8 +154,6 @@
 /**
 * Numerierte Headings
 */
-/* The title block format */
-/* The abstract block format */
 /* Quotes for the language */
 /* The side navigation menu */
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
@@ -177,6 +175,7 @@ html::-webkit-scrollbar-thumb {
   background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.44, #7a99d9), color-stop(0.72, #497dbd), color-stop(0.86, #1c3a94));
 }
 html #main {
+  font-family: 'Museo', "Fira Sans", "Helvetica", serif;
   /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 }
 html #main .button {
@@ -214,6 +213,15 @@ html #main .sidenav #nav-menu {
   padding-bottom: 0;
   font-size: 26pt;
 }
+html #main .sidenav #nav-menu a {
+  text-decoration: none;
+  color: #818181;
+  transition: 0.3s;
+}
+html #main .sidenav #nav-menu a:hover {
+  color: #f1f1f1;
+  background-color: #dddddd65;
+}
 html #main .sidenav #nav-content {
   overflow-y: scroll;
   height: 100%;
@@ -228,14 +236,6 @@ html #main .sidenav #nav-content::-webkit-scrollbar {
 html #main .sidenav #nav-content::-webkit-scrollbar-thumb {
   background-color: #d4d4d4;
 }
-html #main .sidenav a {
-  text-decoration: none;
-  color: #818181;
-  transition: 0.3s;
-}
-html #main .sidenav a:hover {
-  color: #f1f1f1;
-}
 html #main .sidenav .close-btn {
   margin-left: 1ex;
 }
@@ -246,7 +246,7 @@ html #main .sidenav .expand-btn {
 html #main #sidenav-btn {
   position: fixed;
   top: 10px;
-  right: 10px;
+  left: 10px;
   padding: 1em;
   width: auto !important;
 }
@@ -258,79 +258,119 @@ html #main #sidenav-btn {
     font-size: 18px;
   }
 }
-html #main #TOC {
-  font-family: 'Museo', "Fira Sans", "Helvetica", serif;
+html #main a {
+  color: #034575;
+  text-decoration: none;
+  text-decoration-skip-ink: none;
+}
+html #main a:hover {
+  text-decoration: underline solid #034575;
+  color: #034575;
+  background-color: #ebebeb50;
+  border-radius: 4pt;
+}
+html #main a.anchorjs-link {
+  font-family: Fira Sans;
+  background-color: none;
+  color: #d1d1d1;
+}
+html #main a.anchorjs-link:hover {
+  text-decoration: underline solid #034575;
+  color: #034575;
+  background-color: #ffffff00;
+}
+html #main #nav-content > #TOC {
   font-size: 14pt;
   padding-left: 3ex;
-  padding-right: 1ex;
+  padding-right: 2ex;
   padding-bottom: 3em;
 }
-html #main #TOC h1,
-html #main #TOC h2,
-html #main #TOC h3,
-html #main #TOC h4,
-html #main #TOC h5,
-html #main #TOC h6 {
+html #main #nav-content > #TOC h1,
+html #main #nav-content > #TOC h2,
+html #main #nav-content > #TOC h3,
+html #main #nav-content > #TOC h4,
+html #main #nav-content > #TOC h5,
+html #main #nav-content > #TOC h6 {
   color: #00acd1;
   font-family: 'Museo Sans', "Fira Sans", "Helvetica", sans-serif;
   font-weight: bold;
 }
-html #main #TOC ul {
+html #main #nav-content > #TOC ul {
   padding-inline-start: 2ex;
   list-style-type: none;
 }
-html #main #TOC a {
+html #main #nav-content > #TOC li {
+  color: #00acd1;
+}
+html #main #nav-content > #TOC a {
+  color: #00acd1;
   padding-top: 0.5ex;
   padding-bottom: 0.5ex;
-  text-decoration: none;
-  color: #acacac;
   display: block;
   transition: 0.3s;
 }
-html #main #TOC a:hover {
-  color: #00acd1;
-}
-html #main #TOC ul li {
+html #main #nav-content > #TOC ul li {
   list-style-type: none;
   position: relative;
 }
-html #main #TOC ul li ul {
+html #main #nav-content > #TOC ul li ul {
   display: none;
   padding-left: 15px;
 }
-html #main #TOC ul li.open > ul {
+html #main #nav-content > #TOC ul li.open > ul {
   display: block;
 }
-html #main #TOC ul li a {
+html #main #nav-content > #TOC ul li a {
   text-decoration: none;
 }
-html #main #TOC ul li a:before {
+html #main #nav-content > #TOC ul li:before {
   /* the expand/collapse symbols before each item */
   height: 1em;
   font-size: 0.8em;
   display: block;
   position: absolute;
   left: -1.2em;
-  top: 0.3em;
-}
-html #main #TOC ul li > a:not(:last-child):before {
   content: "▸";
+  font-size: 140%;
   font-weight: bold;
 }
-html #main #TOC ul li.open > a:not(:last-child):before {
+html #main #nav-content > #TOC ul li.open:before {
   content: "▾";
-  font-weight: normal;
 }
-html #main #TOC ul li.open > a:last-child:before {
+html #main #nav-content > #TOC ul li.leaf:before {
   content: "";
-  font-weight: bold;
 }
 html #main-markdown {
   max-width: 18cm;
   margin: auto;
   /* base style */
-  /* cyfex variants */
-  font-family: 'Museo', "Fira Sans", "Helvetica", serif;
+}
+html #main-markdown #nav-content-inline > #TOC {
+  font-size: 14pt;
+}
+html #main-markdown #nav-content-inline > #TOC h1,
+html #main-markdown #nav-content-inline > #TOC h2,
+html #main-markdown #nav-content-inline > #TOC h3,
+html #main-markdown #nav-content-inline > #TOC h4,
+html #main-markdown #nav-content-inline > #TOC h5,
+html #main-markdown #nav-content-inline > #TOC h6 {
+  color: #00acd1;
+  font-family: 'Museo Sans', "Fira Sans", "Helvetica", sans-serif;
+  font-weight: bold;
+}
+html #main-markdown #nav-content-inline > #TOC ul {
+  padding-inline-start: 2ex;
+  list-style-type: none;
+}
+html #main-markdown #nav-content-inline > #TOC li {
+  color: #00acd1;
+}
+html #main-markdown #nav-content-inline > #TOC a {
+  color: #00acd1;
+  padding-top: 0.5ex;
+  padding-bottom: 0.5ex;
+  display: block;
+  transition: 0.3s;
 }
 html #main-markdown body {
   font-family: 'Museo', "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
@@ -654,6 +694,7 @@ html #main-markdown header {
   justify-content: space-between;
   align-items: flex-start;
   align-content: center;
+  margin-bottom: 32pt;
 }
 html #main-markdown header .title-block {
   display: flex;
@@ -678,6 +719,9 @@ html #main-markdown header .title-logo img {
 }
 html #main-markdown .abstract {
   font-style: italic;
+}
+html #main-markdown .abstract-title {
+  font-weight: bold;
 }
 html #main-markdown figure {
   text-align: center;
@@ -821,8 +865,6 @@ html #main-markdown-numbered {
   max-width: 18cm;
   margin: auto;
   /* base style */
-  /* cyfex variants */
-  font-family: 'Museo', "Fira Sans", "Helvetica", serif;
   counter-reset: h1Counter imgCounter;
 }
 html #main-markdown-numbered body {
@@ -1147,6 +1189,7 @@ html #main-markdown-numbered header {
   justify-content: space-between;
   align-items: flex-start;
   align-content: center;
+  margin-bottom: 32pt;
 }
 html #main-markdown-numbered header .title-block {
   display: flex;
@@ -1171,6 +1214,9 @@ html #main-markdown-numbered header .title-logo img {
 }
 html #main-markdown-numbered .abstract {
   font-style: italic;
+}
+html #main-markdown-numbered .abstract-title {
+  font-weight: bold;
 }
 html #main-markdown-numbered figure {
   text-align: center;

@@ -1,0 +1,23 @@
+@import "defines.less";
+
+.define-toc-style(@color: @main-heading-color, @fontSize: @main-font-size) {
+    .define-title-style();
+    font-size: 14pt;
+
+    ul {
+        padding-inline-start: 2ex;
+        list-style-type: none;
+    }
+
+    li {
+        color: @color;
+    }
+
+    a {
+        color: @color;
+        padding-top: 0.5ex;
+        padding-bottom: 0.5ex;
+        display: block;
+        transition: 0.3s;
+    }
+}

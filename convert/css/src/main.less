@@ -1,28 +1,24 @@
 /** Globales Cyfex CSS für Markdown */
 @import (inline) "fonts.less";
-@import "github.less";
-@import "defines.less";
-@import "images.less";
-@import "code.less";
 
-@import "numbered-headings.less";
-@import "header.less";
 @import "abstract.less";
-
-@import "math.less";
-
-@import "quotes.less";
-@import "lists.less";
-
 @import "button.less";
-
-@import "table.less";
-@import "references.less";
-
-@import "sidenav.less";
-@import "scrollbar.less";
+@import "code.less";
 @import "collapsable-list.less";
-
+@import "defines.less";
+@import "github.less";
+@import "header.less";
+@import "images.less";
+@import "links.less";
+@import "lists.less";
+@import "math.less";
+@import "numbered-headings.less";
+@import "quotes.less";
+@import "references.less";
+@import "scrollbar.less";
+@import "sidenav.less";
+@import "table.less";
+@import "toc.less";
 
 .define-title-style() {
     h1,
@@ -42,9 +38,6 @@
     .github(#1d1d1d, #fdf6e3, #08c, @main-font-text, @main-font-size, @main-line-height);
 
     .define-title-style();
-
-    /* cyfex variants */
-    font-family: @main-font-text, "Fira Sans", "Helvetica", serif;
 
     p {
         text-align: justify;
@@ -68,50 +61,33 @@
     .define-code();
 }
 
-.define-toc-style() {
-    .define-title-style();
-    font-family: @main-font-text, "Fira Sans", "Helvetica", serif;
-    font-size: 14pt;
-
-    padding-left: 3ex;
-    padding-right: 1ex;
-    padding-bottom: 3em;
-
-    ul {
-        padding-inline-start: 2ex;
-        list-style-type: none;
-    }
-    a {
-        padding-top: 0.5ex;
-        padding-bottom: 0.5ex;
-        text-decoration: none;
-        color: #acacac;
-        display: block;
-        transition: 0.3s;
-    }
-
-    a:hover {
-        color: @main-heading-color;
-    }
-
-    .define-collapsable-list();
-}
-
 html {
     .define-scrollbar();
-    #main {
-        .define-button();
+    
+    #main {        
+        font-family: @main-font-text, "Fira Sans", "Helvetica", serif;
 
+        .define-button();
         .define-sidenav();
 
-        #TOC {
-            .define-toc-style();
+        .define-links();
+
+        #nav-content > #TOC {
+            .define-toc-style(@main-heading-color, @main-heading-color);
+            .define-collapsable-list(140%);
+            padding-left: 3ex;
+            padding-right: 2ex;
+            padding-bottom: 3em;
         }
     }
 
     #main-markdown {
         max-width: 21cm - 2 * 1.5cm;
         margin: auto;
+
+        #nav-content-inline > #TOC {
+            .define-toc-style(@main-heading-color, @main-link-color);
+        }
 
         .define-markdown-style();
     }

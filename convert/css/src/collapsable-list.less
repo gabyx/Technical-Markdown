@@ -1,4 +1,4 @@
-.define-collapsable-list() {
+.define-collapsable-list(@toggleSize: 100%, @openChar: "▾", @closeChar: "▸") {
     ul li {
         list-style-type: none;
         position: relative;
@@ -13,26 +13,24 @@
     ul li a {
         text-decoration: none;
     }
-    ul li a:before {
+    ul li:before {
         /* the expand/collapse symbols before each item */
         height: 1em;
         font-size: 0.8em;
         display: block;
         position: absolute;
         left: -1.2em;
-        top: 0.30em;
+        //top: 0.3em;
+        content: @closeChar;
+        font-size: @toggleSize;
+        font-weight: bold;
     }
 
-    ul li > a:not(:last-child):before {
-        content: "▸";
-        font-weight: bold;
+    ul li.open:before {
+        content: @openChar;
     }
-    ul li.open > a:not(:last-child):before {
-        content: "▾";
-        font-weight: normal;
-    }
-    ul li.open > a:last-child:before {
-        content: "";
-        font-weight: bold;
+
+    ul li.leaf:before {
+        content: ""
     }
 }

@@ -122,6 +122,41 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
 <![endif]-->
         <script>
+        // If we have a hash we disable history scrolling restoration and
+        // really scroll into view.
+        var c = window.location.hash;
+        if (c.length != 0) {
+            history.scrollRestoration = "manual"
+        }
+
+        document.addEventListener('DOMContentLoaded', function(event) {
+            var c = window.location.hash;
+            var e = document.getElementById(c.replace("#", ""));
+            if (e != null) {
+                e.scrollIntoView();
+            }
+        });
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/anchor-js/anchor.min.js"></script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function (event) {
+                var P = "#main-markdown > header"
+                var noAnchorHeaders = document.querySelectorAll(`${P} h1, ${P} h2, ${P} h3, ${P} h4, ${P} h5, ${P} h6`)
+                for (var k = 0; k < noAnchorHeaders.length; k++) {
+                    noAnchorHeaders[k].classList.add("no-anchor")
+                }
+
+                anchors.options = {
+                    placement: 'left',
+                    visible: 'always',
+                    icon: '§'
+                };
+                var P = "#main-markdown"
+                anchors.add(`${P} h1:not(.no-anchor),${P} h2:not(.no-anchor),${P} h3:not(.no-anchor),${P} h4:not(.no-anchor),${P} h5:not(.no-anchor),${P} h6:not(.no-anchor)`);
+            });
+        </script>
+        <script>
             function openSideNav() {
                 expandWidth = 300;
                 var sidnav = document.getElementById("side-nav");
@@ -131,11 +166,14 @@
                 if (m.offsetLeft - expandWidth < 0) {
                     m.style.marginLeft = `${expandWidth + 40}px`
                 }
+            
+                document.getElementById("nav-content-inline").style.display = "none";
             }
 
             function closeSideNav() {
                 document.getElementById("side-nav").style.width = "0";
                 document.getElementById("main-markdown").style.marginLeft = null;
+                document.getElementById("nav-content-inline").style.display = "initial";
             }
 
             var EXPAND_ALL = "⊞";
@@ -167,22 +205,34 @@
             };
 
             var onLoad = function () {
-                var treeListItems = document.querySelectorAll('nav ul a');
+                var treeListItems = document.querySelectorAll('nav ul li');
                 for (var i = 0; i < treeListItems.length; i++) {
+
+                    var isLeaf = treeListItems[i].getElementsByTagName('ul').length == 0;
+                    if (isLeaf) {
+                        treeListItems[i].classList.add("leaf")
+                        continue;
+                    }
+
                     // click handler
-                    treeListItems[i].addEventListener('click', function (e) {
-                        var parent = e.target.parentElement;
-                        var classList = parent.classList;
-                        if (classList.contains("open")) { // close the element and its children
-                            classList.remove('open');
-                            var openChildrenList = parent.querySelectorAll(':scope .open');
-                            for (var j = 0; j < openChildrenList.length; j++) {
-                                openChildrenList[j].classList.remove('open');
+                    treeListItems[i].addEventListener('click',
+                        function (e) {
+                            var target = e.target;
+
+                            var classList = target.classList;
+                            if (classList.contains("open")) { // close the element and its children
+                                classList.remove('open');
+                                var openChildrenList = target.querySelectorAll(':scope li.open');
+                                for (var j = 0; j < openChildrenList.length; j++) {
+                                    openChildrenList[j].classList.remove('open');
+                                }
+                            } else { // open the element
+                                classList.add('open');
                             }
-                        } else { // open the element
-                            classList.add('open');
+
+                            e.stopPropagation();
                         }
-                    });
+                    );
                 }
             }
 
@@ -203,7 +253,7 @@
 
 <div id="side-nav" class="sidenav">
     <div id="nav-menu">
-        <a class="expand-btn" id="expand" href="javascript:void(0)" onClick="toggleExpandCollapse()">⊞</a>
+        <a class="expand-btn" id="expand" href="javascript:void(0)" onClick="toggleExpandCollapse()" style="baseline-shift:-10%">⊞</a>
         <a class="close-btn" href="javascript:void(0)" onclick="closeSideNav()">&times;</a>
     </div>
         <div id="nav-content">
@@ -249,11 +299,37 @@
     <div class="title-logo">
         <img src="files/Logo.svg">
     </div>
-</header><div class="latex-math-define">
-$$ \newcommand{\vvec}[1]{\mathbf{#1}} \newcommand{\mat}[1]{\mathbf{#1}} \newcommand{\cs}[1]{\mathrm{#1}} \newcommand{\rp}[1]{{_\cs{#1}}} \newcommand{\csT}[2]{\mat{A}_{\mathrm{#1#2}}} \newcommand{\genT}[2]{\mat{T}_{\mathrm{#1#2}}} \newcommand{\affcsT}[2]{\mat{H}_{\mathrm{#1#2}}} \newcommand{\affcsTdx}[2]{\mat{H}_{\mathrm{#1#2}}^{\transp}} \newcommand{\basevec}[2]{\vvec{e}_{\mathrm{#1}}^{\cs{#2}}} \newcommand{\homArr}[1]{\left[\begin{array}{c}#1 \\ 1 \end{array}\right]} \newcommand{\homArrTr}[1]{\left[\begin{array}{c}#1 &amp;&amp; 1 \end{array}\right]} \newcommand{\homMat}[2]{\left[\begin{array}{cc}#1 &amp; #2 \\ \vvec{0} &amp; 1 \end{array}\right]} \newcommand{\arr}[2]{\left[\begin{array}{#1}#2\end{array}\right]} \newcommand{\transp}{\top} \newcommand{\rot}[2]{\mat{R}_\mathrm{#1#2}} \newcommand{\norm}[1]{\|#1\|} \newcommand{\mdet}[1]{\det(#1)} \newcommand{\set}[1]{\mathcal{#1}} \newcommand{\prox}[1]{\mathbf{prox}_{\set{C}}} \DeclareMathOperator*{\argmin}{argmin} \newcommand{\ncone}[1]{\mathcal{N}_{\set{#1}}} \newcommand{\indf}[1]{I_{\set{#1}}} $$
+</header><div class="abstract">
+<div class="abstract-title">Abstract</div>
+This is a setup demonstrating the power and use of markdown for technical documents by using a fully automated conversion sequence with <a href="https://gradle.org"><code>gradle</code></a> and of course <a href="https://pandoc.org"><code>pandoc</code></a>.
 </div>
-<div class="abstract">
-<p>This is a setup demonstrating the power and use of markdown for technical documents by using a fully automated conversion sequence with <a href="https://gradle.org"><code>gradle</code></a> and of course <a href="https://pandoc.org"><code>pandoc</code></a>.</p>
+<div id="nav-content-inline">
+    <nav id="TOC">
+                <ul>
+                <li><a href="#intro"><span class="toc-section-number">1</span> Intro</a></li>
+                <li><a href="#samples"><span class="toc-section-number">2</span> Samples</a>
+                <ul>
+                <li><a href="#konvexe-probleme"><span class="toc-section-number">2.1</span> Konvexe Probleme</a>
+                <ul>
+                <li><a href="#konvexe-menge"><span class="toc-section-number">2.1.1</span> Konvexe Menge</a></li>
+                <li><a href="#proximaler-punkt"><span class="toc-section-number">2.1.2</span> Proximaler Punkt</a></li>
+                <li><a href="#normalkegel"><span class="toc-section-number">2.1.3</span> Normalkegel</a></li>
+                <li><a href="#zusammenhang-von-normalkegel-und-proximaler-punkt"><span class="toc-section-number">2.1.4</span> Zusammenhang von Normalkegel und Proximaler Punkt</a></li>
+                <li><a href="#zusammenhang-von-normalkegel-und-konvexer-optimierung"><span class="toc-section-number">2.1.5</span> Zusammenhang von Normalkegel und Konvexer Optimierung</a></li>
+                </ul></li>
+                <li><a href="#code-sample"><span class="toc-section-number">2.2</span> Code Sample</a></li>
+                <li><a href="#tables"><span class="toc-section-number">2.3</span> Tables</a>
+                <ul>
+                <li><a href="#html-table"><span class="toc-section-number">2.3.1</span> HTML Table</a></li>
+                <li><a href="#sec:multi-line-table"><span class="toc-section-number">2.3.2</span> Markdown Table</a></li>
+                </ul></li>
+                </ul></li>
+                <li><a href="#references">References</a></li>
+                </ul>
+    </nav>
+</div>
+<div class="latex-math-define">
+$$ \newcommand{\vvec}[1]{\mathbf{#1}} \newcommand{\mat}[1]{\mathbf{#1}} \newcommand{\cs}[1]{\mathrm{#1}} \newcommand{\rp}[1]{{_\cs{#1}}} \newcommand{\csT}[2]{\mat{A}_{\mathrm{#1#2}}} \newcommand{\genT}[2]{\mat{T}_{\mathrm{#1#2}}} \newcommand{\affcsT}[2]{\mat{H}_{\mathrm{#1#2}}} \newcommand{\affcsTdx}[2]{\mat{H}_{\mathrm{#1#2}}^{\transp}} \newcommand{\basevec}[2]{\vvec{e}_{\mathrm{#1}}^{\cs{#2}}} \newcommand{\homArr}[1]{\left[\begin{array}{c}#1 \\ 1 \end{array}\right]} \newcommand{\homArrTr}[1]{\left[\begin{array}{c}#1 &amp;&amp; 1 \end{array}\right]} \newcommand{\homMat}[2]{\left[\begin{array}{cc}#1 &amp; #2 \\ \vvec{0} &amp; 1 \end{array}\right]} \newcommand{\arr}[2]{\left[\begin{array}{#1}#2\end{array}\right]} \newcommand{\transp}{\top} \newcommand{\rot}[2]{\mat{R}_\mathrm{#1#2}} \newcommand{\norm}[1]{\|#1\|} \newcommand{\mdet}[1]{\det(#1)} \newcommand{\set}[1]{\mathcal{#1}} \newcommand{\prox}[1]{\mathbf{prox}_{\set{C}}} \DeclareMathOperator*{\argmin}{argmin} \newcommand{\ncone}[1]{\mathcal{N}_{\set{#1}}} \newcommand{\indf}[1]{I_{\set{#1}}} $$
 </div>
 <h1 data-number="1" id="intro"><span class="header-section-number">1</span> Intro</h1>
 <p>Read the <a href="https://github.com/gabyx/TechnicalMarkdown/blob/master/Readme.md">Readme.md</a> for futher information.</p>
@@ -408,7 +484,6 @@ $$ \newcommand{\vvec}[1]{\mathbf{#1}} \newcommand{\mat}[1]{\mathbf{#1}} \newcomm
 <li>HTML citations dont work.</li>
 <li>Table caption is not parsed <code>table_caption</code> not allowed as extension.</li>
 </ul>
-</div>
 <table style="width: 100%">
 <caption>Table by included <code>.html</code> file.</caption>
 <colgroup>
@@ -459,6 +534,7 @@ $$ \newcommand{\vvec}[1]{\mathbf{#1}} \newcommand{\mat}[1]{\mathbf{#1}} \newcomm
 </tr>
 </tbody>
 </table>
+</div>
 <h3 data-number="2.3.2" id="sec:multi-line-table"><span class="header-section-number">2.3.2</span> Markdown Table</h3>
 <ul>
 <li>Included markdown files.</li>
