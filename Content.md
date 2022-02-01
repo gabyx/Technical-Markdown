@@ -14,7 +14,11 @@ link-citations: true
 
 fontsize: 12pt
 lang: en-GB
-
+abstract: This is a setup demonstrating the power and use 
+  of markdown for technical documents by using 
+  a fully automated conversion sequence with 
+  [`gradle`](https://gradle.org) and of course [`pandoc`](https://pandoc.org).
+abstract-title: Abstract
 toc: true
 toc-depth: 2
 top-level-division: chapter
@@ -32,11 +36,6 @@ Note: This is a Div block which get discarded because of the `{include-if-format
 ```{.include format=html include-if-format=html;html5}
 includes/Math.html
 ```
-
-:::{.abstract}
-This is a setup demonstrating the power and use of markdown for technical documents by using
-a fully automated conversion sequence with [`gradle`](https://gradle.org) and of course [`pandoc`](https://pandoc.org).
-:::
 
 # Intro
 

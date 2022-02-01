@@ -46,7 +46,20 @@ $if(title)$
 ${ Title.html() }
 $endif$
 $if(abstract)$
-<div class="abstract">$abstract$</div>
+<div class="abstract">
+<div class="abstract-title">$abstract-title$</div>
+$abstract$
+</div>
+$endif$
+$if(toc)$
+<div id="nav-content-inline">
+    <nav id="$idprefix$TOC">
+        $if(toc-title)$
+        <h2 id="$idprefix$toc-title">$toc-title$</h2>
+        $endif$
+        $table-of-contents$
+    </nav>
+</div>
 $endif$
 $body$
 </div>
