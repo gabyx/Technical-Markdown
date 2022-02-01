@@ -37,10 +37,6 @@ Note: This is a Div block which get discarded because of the `{include-if-format
 includes/Math.html
 ```
 
-:::{.abstract}
-
-:::
-
 # Intro
 
 Read the [Readme.md](https://github.com/gabyx/TechnicalMarkdown/blob/master/Readme.md)
