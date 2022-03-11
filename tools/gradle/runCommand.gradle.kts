@@ -8,13 +8,15 @@ var checkCommand = { cmd: Array<String>, workingDir: File? ->
             .start()
 
     val exitCode = process.waitFor()
-    val stdout = String(process.getInputStream().readAllBytes())
+    
     val stderr = String(process.getErrorStream().readAllBytes())
-
+    val stdout = String(process.getInputStream().readAllBytes())
     if (exitCode != 0){
         throw RuntimeException(
         "Command '$cmd' failed!\n\tOutput: '${stdout}'\n\tError: '${stderr}'")
     }
+
+    stdout
 }
 
 project.extensions.add("checkCommand", checkCommand)

@@ -105,15 +105,16 @@ The following directories are important for the content of the output:
 
 The following directories are important for the styling of the output:
 
-- [`convert`](convert) : The main directory containing pandoc
-  [`convert/defaults`](convert/defaults), CSS styling in [`convert/css`] for
-  HTML output, pandoc filters [`convert/filters`](convert/filters), pandoc
-  templates [`convert/includes`](convert/includes) and scripts
-  [`convert/scripts`](convert/scripts).
-- [`filters`](convert/filters) : Pandoc filters modifying the abstract syntax
-  tree from `pandoc`.
-- [`scripts`](convert/scripts) : Some workaround scripts for converting tables
-  based on a config file.
+- [`convert`](convert) : The main directory containing pandoc related output
+  configs:
+  - [`convert/defaults`](convert/defaults) : `pandoc` defaults .
+  - [`convert/includes`](convert/includes) : `pandoc` templates in for HTML and
+    PDF output settings.
+  - [`convert/css`](convert/css) CSS styling for HTML output.
+  - [`convert/filters`](convert/filters) : `pandoc` filters in for modifying
+    `pandoc`s abstract syntax tree.
+  - [`convert/scripts`](convert/scripts) : Some workaround scripts for
+    converting tables based on a config file in
 
 ## Dependencies
 

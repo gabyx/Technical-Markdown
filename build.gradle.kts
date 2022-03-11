@@ -10,28 +10,28 @@ apply(plugin = "java")
 val globalEnv = System.getenv()
 val pathSep = System.getProperty("path.separator")
 
-fun getConvertFolder() : File {
-     // If pandoc data dir is defined, take it.
-    var d = globalEnv.getOrDefault("TECHMD_CONVERT_DIR", "")
+fun getEnvDirOrRelative(envVar: String, relDir: String) : File {
+    var d = globalEnv.getOrDefault(envVar, "")
     if (d == "") {
-        d = "${project.rootDir}/convert"
+        d = "${project.rootDir}/${relDir}"
     }
 
     var f = file(d)
     if (!f.exists()){
          throw RuntimeException(
-            "Convert directory '${convertDir}' does not exist.")
+            "Convert directory '${f}' does not exist relative.")
     }
     return f
 }
 
 project.buildDir = file("${project.rootDir}/build")
-val convertDir = getConvertFolder()
+val convertDir = getEnvDirOrRelative("TECHMD_CONVERT_DIR", "convert")
+val toolsDir = getEnvDirOrRelative("TECHMD_TOOLS_DIR", "tools")
 
 // Import all functions
 @Suppress("unchecked_cast", "nothing_to_inline")
 inline fun <T> uncheckedCast(target: Any?): T = target as T
-apply(from = "gradle/runCommand.gradle.kts")
+apply(from = "${toolsDir}/gradle/runCommand.gradle.kts")
 val checkCmd = project.extensions.getByName("checkCommand")
                 as (Array<String>, String?) -> Void
 
@@ -41,7 +41,7 @@ frontend {
     nodeInstallDirectory.set(file("${project.buildDir}/node"))
     yarnEnabled.set(true)
     yarnVersion.set("1.22.17")
-    packageJsonDirectory.set(file("${project.rootDir}/tools"))
+    packageJsonDirectory.set(file("${toolsDir}"))
     installScript.set("install '--modules-folder=${project.buildDir}/node_modules'")
     yarnInstallDirectory.set(file("${project.buildDir}/yarn"))
 }
@@ -89,6 +89,7 @@ fun checkPandocInstall(pandocExe: File){
         var m = Regex("""pandoc\s*(.*)""").find(version)
         if(m != null) {
             var v = Version.parse(m.groupValues[1])
+            println("Pandoc version: ${v}")
             if(v.compareTo(pandocVersionMin) >= 0){
                 pandocAvailable = true
             }
