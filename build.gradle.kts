@@ -5,15 +5,35 @@ plugins {
   id("org.siouan.frontend-jdk11") version "5.1.0"
 }
 
+apply(plugin = "java")
+
+val globalEnv = System.getenv()
+val pathSep = System.getProperty("path.separator")
+
+fun getConvertFolder() : File {
+     // If pandoc data dir is defined, take it.
+    var d = globalEnv.getOrDefault("TECHMD_CONVERT_DIR", "")
+    if (d == "") {
+        d = "${project.rootDir}/convert"
+    }
+
+    var f = file(d)
+    if (!f.exists()){
+         throw RuntimeException(
+            "Convert directory '${convertDir}' does not exist.")
+    }
+    return f
+}
+
+project.buildDir = file("${project.rootDir}/build")
+val convertDir = getConvertFolder()
+
+// Import all functions
 @Suppress("unchecked_cast", "nothing_to_inline")
 inline fun <T> uncheckedCast(target: Any?): T = target as T
-
-apply(plugin = "java")
 apply(from = "gradle/runCommand.gradle.kts")
 val checkCmd = project.extensions.getByName("checkCommand")
                 as (Array<String>, String?) -> Void
-
-project.buildDir = file("${project.rootDir}/build")
 
 // Node/Yarn frontend
 frontend {
@@ -31,21 +51,19 @@ tasks.named("installFrontend") {
     outputs.upToDateWhen({true})
 }
 
-val globalEnv = System.getenv()
-val pathSep = System.getProperty("path.separator")
 val binDir = file("${project.buildDir}/node_modules/.bin")
 
 val pandocVersionMin = Version.parse("2.14")
-val pandocExe: String = project.properties.getOrDefault("pandoc", "pandoc") as String
-val pythonExe: String = project.properties.getOrDefault("python", "python") as String
+val pandocExe = File(project.properties.getOrDefault("pandoc", "pandoc") as String)
+val pythonExe = File(project.properties.getOrDefault("python", "python") as String)
 
-val pythonPaths : Array<File> = arrayOf(file("${project.rootDir}/convert/pandoc/filters"))
-val luaPaths : Array<File> = arrayOf(file("${project.rootDir}/convert/pandoc/filters"))
+val pythonPaths : Array<File> = arrayOf(file("${convertDir}/filters"))
+val luaPaths : Array<File> = arrayOf(file("${convertDir}/filters"))
 
 val mainFileMarkdown = file("${project.rootDir}/Content.md")
-val outputFileHTML = file("${project.rootDir}/Content.html")
-val outputFileJira = file("${project.rootDir}/Content.jira")
-val outputFilePDF = file("${project.rootDir}/Content.pdf")
+val outputFileHTML = file("${project.buildDir}/Content.html")
+val outputFileJira = file("${project.buildDir}/Content.jira")
+val outputFilePDF = file("${project.buildDir}/Content.pdf")
 
 fun  MutableMap<String, String>.addExecutableDirToPath(exe: String) {
     if(exe.contains("/") || exe.contains("\\")) {
@@ -63,9 +81,9 @@ fun List<String>.runCommand(
 }.getOrNull()
 
 
-fun checkPandocInstall(pandocExe: String){
+fun checkPandocInstall(pandocExe: File){
     var pandocAvailable = false
-    var version : String? = listOf<String>(pandocExe, "--version").runCommand()
+    var version : String? = listOf<String>(pandocExe.getPath(), "--version").runCommand()
 
     if(version != null){ 
         var m = Regex("""pandoc\s*(.*)""").find(version)
@@ -114,7 +132,7 @@ val defineEnvironment by tasks.register<Task>("defineEnvironment") {
         }
 
         logger.quiet("Checking executables ...")
-        checkCmd(arrayOf(pythonExe, "--version"), null)
+        checkCmd(arrayOf(pythonExe.getPath(), "--version"), null)
         checkPandocInstall(pandocExe)
 
         logger.info("Pandoc Exe: $pandocExe")
@@ -131,9 +149,9 @@ val compileLess by tasks.register<Exec>("compileLess") {
     description = "Compile Less"
     dependsOn(initBuild, defineEnvironment)
 
-    val lessMainFile = fileTree("${project.rootDir}/convert/css/src/"){ include("main.less") }.getFiles().elementAt(0)
-    val lessFiles = fileTree("${project.rootDir}/convert/css/src/"){ include("*.less") }.getFiles()
-    val cssFile = file("${project.rootDir}/convert/css/main.css")
+    val lessMainFile = fileTree("${convertDir}/css/src/"){ include("main.less") }.getFiles().elementAt(0)
+    val lessFiles = fileTree("${convertDir}/css/src/"){ include("*.less") }.getFiles()
+    val cssFile = file("${convertDir}/css/main.css")
 
     inputs.files(lessMainFile, lessFiles)
     outputs.file(cssFile)
@@ -155,7 +173,8 @@ fun getFileSizeMb(file: File) : Long {
 }
 
 data class PandocSettings(
-    val pandocExe: String,
+    val pandocExe: File,
+    val dataDir: File,
     val workingDir: File,
     val env: Map<String, String>)
 
@@ -164,11 +183,11 @@ fun createPandocSettings(): PandocSettings {
         var env = globalEnv.toMutableMap()
         //env.addExecutableDirToPath(pythonExe)
         //env.addExecutableDirToPath(pandocExe)
-        env["ROOT_DIR"] = "${project.rootDir}"
+        env["TECHMD_ROOT_DIR"] = "${project.rootDir}"
         env["PYTHON_PATH"] = env.getOrDefault("PYTHON_PATH", "") + pathSep + pythonPaths.joinToString(separator = pathSep)
         env["LUA_PATH"] = env.getOrDefault("LUA_PATH", "") + pathSep + luaPaths.flatMap({v -> listOf("$v/?", "$v/?.lua") }).joinToString(separator=";")
 
-        return PandocSettings(pandocExe, project.rootDir, env)
+        return PandocSettings(pandocExe, convertDir, project.rootDir, env)
 }
 
 val pandocSettings = createPandocSettings()
@@ -201,11 +220,14 @@ abstract class PandocTask @Inject constructor() : Exec() {
     @get:OutputFile
     abstract val outputFile: Property<File>
 
-    fun makePandocArgs(exportType: String, verbose: Boolean, failIfWarning: Boolean = true) : Array<String> {
+    fun makePandocArgs(exportType: String, 
+                       verbose: Boolean, 
+                       failIfWarning: Boolean = true, 
+                       dataDir: File) : Array<String> {
     return arrayOf(
             if(failIfWarning) "--fail-if-warnings" else null,
             if(verbose) "--verbose" else null,
-            "--data-dir=convert/pandoc",
+            "--data-dir=${dataDir.getPath()}",
             "--defaults=pandoc-dirs.yaml",
             "--defaults=pandoc-general.yaml",
             "--defaults=pandoc-$exportType.yaml",
@@ -222,18 +244,14 @@ abstract class PandocTask @Inject constructor() : Exec() {
         markdownFiles.convention(project.fileTree("${project.rootDir}/chapters/"){include("**/*.md", "**/*.html")})
         assetFiles.convention(project.fileTree("${project.rootDir}/files/"){ include("**/*") })
         literatureFiles.convention(project.fileTree("${project.rootDir}/literature/"){ include("**/*") })
-        convertFiles.convention(project.fileTree("${project.rootDir}/convert/"){ 
-            include("pandoc/**/*")
-            include("scripts/**/*")
-            include("css/**/*.css")
-        })
+        convertFiles.convention(project.fileTree("${settings.dataDir}"){ include("**/*") })
 
         inputs.files(inputFile, markdownFiles, assetFiles, convertFiles, literatureFiles)
         outputs.file(outputFile)
 
         executable(settings.pandocExe)
 
-        args(*makePandocArgs(exportType.get(), verbose.get(), failIfWarning.get()))
+        args(*makePandocArgs(exportType.get(), verbose.get(), failIfWarning.get(), settings.dataDir))
         if(additionalArgs.isPresent()){
             args(*additionalArgs.get())
         }
@@ -273,9 +291,9 @@ val convertTables = tasks.create<Exec>("convert-tables") {
     outputs.files(fileTree("${project.rootDir}/chapters/tables-tex"){include("**/*.tex")})
 
     executable(pythonExe)
-    args(file("${project.rootDir}/convert/scripts/convert-tables.py"),
+    args(file("${convertDir}/scripts/convert-tables.py"),
          "--config",
-         file("${project.rootDir}/convert/scripts/tables.json"),
+         file("${convertDir}/scripts/tables.json"),
          "--parallel")
 
     environment(pandocSettings.env)

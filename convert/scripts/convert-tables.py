@@ -16,13 +16,13 @@ repoDir = subprocess.check_output(["git", "rev-parse", "--show-toplevel"], encod
 # Settings general defaults
 pandocGeneralDefaults = os.path.join(
     repoDir,
-    "convert/pandoc/defaults/pandoc-general.yaml",
+    "convert/defaults/pandoc-general.yaml",
 )
 with open(pandocGeneralDefaults, "r") as f:
     pandocGeneralDefaults = yaml.load(f, Loader=yaml.FullLoader)
 
 # Setting important env. variables
-filters = os.path.join(repoDir, "convert/pandoc/filters")
+filters = os.path.join(repoDir, "convert/filters")
 s = os.environ.get("LUA_PATH")
 os.environ["LUA_PATH"] = "{0}/?;{0}/?.lua;{1}".format(filters, s if s else "")
 s = os.environ.get("PYTHONPATH")

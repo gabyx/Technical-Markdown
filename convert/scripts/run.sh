@@ -5,7 +5,7 @@ format="$1"
 
 repoDir=$(git rev-parse --show-toplevel)
 
-filters="$repoDir/convert/pandoc/filters"
+filters="$repoDir/convert/filters"
 export LUA_PATH="$filters/?;$filters/?.lua;$LUA_PATH"
 export PYTHONPATH="$filters"
 
