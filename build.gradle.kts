@@ -37,12 +37,12 @@ val checkCmd = project.extensions.getByName("checkCommand")
 
 // Node/Yarn frontend
 frontend {
-    nodeVersion.set("10.19.0")
+    nodeVersion.set("17.7.1")
     nodeInstallDirectory.set(file("${project.buildDir}/node"))
     yarnEnabled.set(true)
-    yarnVersion.set("1.22.10")
+    yarnVersion.set("1.22.17")
     packageJsonDirectory.set(file("${project.rootDir}/tools"))
-    installScript.set("install --modules-folder='${project.buildDir}/node_modules'")
+    installScript.set("install '--modules-folder=${project.buildDir}/node_modules'")
     yarnInstallDirectory.set(file("${project.buildDir}/yarn"))
 }
 
