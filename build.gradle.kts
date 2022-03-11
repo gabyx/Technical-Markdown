@@ -4,7 +4,6 @@ plugins {
   //id "com.liferay.yarn" version "7.2.6"
   id("org.siouan.frontend-jdk11") version "5.1.0"
 }
-
 apply(plugin = "java")
 
 val globalEnv = System.getenv()
@@ -34,6 +33,16 @@ inline fun <T> uncheckedCast(target: Any?): T = target as T
 apply(from = "${toolsDir}/gradle/runCommand.gradle.kts")
 val checkCmd = project.extensions.getByName("checkCommand")
                 as (Array<String>, String?) -> Void
+
+// RunCommand function.
+fun List<String>.runCommand(
+    workingDir: File = File(".")
+): String? = runCatching {
+    ProcessBuilder(this)
+        .directory(workingDir)
+        .start().also { it.waitFor() }
+        .inputStream.bufferedReader().readText()
+}.getOrNull()
 
 // Node/Yarn frontend
 frontend {
@@ -70,16 +79,6 @@ fun  MutableMap<String, String>.addExecutableDirToPath(exe: String) {
         this["PATH"] = file(exe).getParent() + if(this["PATH"] != null ) pathSep + this["PATH"] else ""
     }
 }
-
-fun List<String>.runCommand(
-    workingDir: File = File(".")
-): String? = runCatching {
-    ProcessBuilder(this)
-        .directory(workingDir)
-        .start().also { it.waitFor() }
-        .inputStream.bufferedReader().readText()
-}.getOrNull()
-
 
 fun checkPandocInstall(pandocExe: File){
     var pandocAvailable = false
