@@ -3,16 +3,16 @@
 format="$1"
 [ -z "$format" ] && format="json"
 
-repoDir=$(git rev-parse --show-toplevel)
+rootDir=$(git rev-parse --show-toplevel)
 
-filters="$repoDir/convert/filters"
+filters="$rootDir/convert/filters"
 export LUA_PATH="$filters/?;$filters/?.lua;$LUA_PATH"
 export PYTHONPATH="$filters"
 
 pandoc "--fail-if-warnings" \
     "--verbose" \
     "--toc" \
-    "--data-dir=convert/pandoc" \
+    "--data-dir=convert" \
     "--defaults=pandoc-dirs.yaml" \
     "--defaults=pandoc-general.yaml" \
     "--defaults=pandoc-html.yaml" \

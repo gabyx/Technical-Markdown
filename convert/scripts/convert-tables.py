@@ -10,23 +10,21 @@ import subprocess
 import yaml
 from concurrent.futures import ProcessPoolExecutor
 
-# Setting root dir
-repoDir = subprocess.check_output(["git", "rev-parse", "--show-toplevel"], encoding="utf-8").strip()
 
-# Settings general defaults
-pandocGeneralDefaults = os.path.join(
-    repoDir,
-    "convert/defaults/pandoc-general.yaml",
-)
-with open(pandocGeneralDefaults, "r") as f:
-    pandocGeneralDefaults = yaml.load(f, Loader=yaml.FullLoader)
+def loadPandocDefault(dataDir: str):
+    # Settings general defaults
+    pandocGeneralDefaults = os.path.join(dataDir, "defaults/pandoc-general.yaml")
+    with open(pandocGeneralDefaults, "r") as f:
+        return yaml.load(f, Loader=yaml.FullLoader)
 
-# Setting important env. variables
-filters = os.path.join(repoDir, "convert/filters")
-s = os.environ.get("LUA_PATH")
-os.environ["LUA_PATH"] = "{0}/?;{0}/?.lua;{1}".format(filters, s if s else "")
-s = os.environ.get("PYTHONPATH")
-os.environ["PYTHONPATH"] = "{0}:{1}".format(filters, s if s else "")
+
+def setEnvironment(dataDir: str):
+    # Setting important env. variables
+    filters = os.path.join(dataDir, "filters")
+    s = os.environ.get("LUA_PATH")
+    os.environ["LUA_PATH"] = "{0}/?;{0}/?.lua;{1}".format(filters, s if s else "")
+    s = os.environ.get("PYTHONPATH")
+    os.environ["PYTHONPATH"] = "{0}:{1}".format(filters, s if s else "")
 
 
 def replaceColumnType(match):
@@ -51,13 +49,13 @@ defaultTableRegexes = {
 
 
 def getStretchRegexes(spacing):
-    return [(  # Set spacing for inbetween tabularnewline
+    return [(  # Set spacing for in between tabularnewline
         re.compile(r"\\tabularnewline"),
         r"\\tabularnewline\\addlinespace[{0}]".format(spacing),
     )]
 
 
-def getFormat(file):
+def getFormat(file, pandocDefaults):
     ext = os.path.splitext(file)[1]
 
     if ext == ".html":
@@ -65,7 +63,7 @@ def getFormat(file):
     elif ext == ".tex":
         return "latex"
     elif ext == ".md":
-        return pandocGeneralDefaults["from"]
+        return pandocDefaults["from"]
     else:
         raise ValueError("Wrong format {0}".format(ext))
 
@@ -110,16 +108,16 @@ def getColumnSizes(output, scaleToOne=False, scaleToFullMargin=0, columnRatios=N
 
     # Extract all widths
     part = output[0:end]
-    r = re.compile(r"\\begin\{minipage\}(?:\[.*\])?\{.*\\real\{(\d+(?:\.\d+)?)\}\}(\\.*)")
+    r = re.compile(r">\{(.*)\}.*p\{.*\\real\{(\d+(?:\.\d+)?)\}\}")
 
     for m in r.finditer(part):
-        w = float(m.group(1))
+        w = float(m.group(2))
         widths.append(w)
 
-        formats.append(m.group(2))
+        formats.append(m.group(1))
 
     if len(widths) == 0:
-        raise ValueError("Regex failed")
+        raise ValueError(f"Regex failed {r.pattern}")
 
     # Overwrite by new column ratios
     if columnRatios:
@@ -141,28 +139,7 @@ def getColumnSizes(output, scaleToOne=False, scaleToFullMargin=0, columnRatios=N
 
 
 def setColumnFormat(output, widths, formats):
-    if not widths:
-        return output
-
-    reg = re.compile(r"(\\begin\{longtable\}\[\])\{.*\}")
-
-    nSeps = 2 * (len(widths) - 1)
-
-    def getWidth(w):
-        return r"p{" + r"(\columnwidth-{1}\tabcolsep) * \real{{{0:0.3f}}}".format(w, nSeps) + r"}"
-
-    # Build column
-    columns = [(r">{" + f + r"}" + getWidth(w)) for f, w in zip(formats, widths)]
-
-    form = r"@{}" + "".join(columns) + "@{}"
-
-    print("Replacing format with:\n'{0}'".format(form))
-
-    def repl(m):
-        return m.group(1) + "{" + form + r"}"
-
-    output = reg.sub(repl, output)
-
+    
     # Remove all minipages
     reg = re.compile(r"\\end\{minipage\}")
     output = reg.sub(r"", output)
@@ -177,6 +154,7 @@ def deleteEmptyLines(output):
 
 
 def postProcessLatexTables(config, output):
+    print("Post-process latex tables ...")
     r = re.compile(r"\\begin\{longtable\}.*?\\end\{longtable\}", re.DOTALL)
 
     def postProcessLatexTable(match):
@@ -184,11 +162,12 @@ def postProcessLatexTables(config, output):
 
         # Count column sized
         widths, formats = getColumnSizes(table, config.get("scaleColumnsToFull", False),
-                                         config.get("scaleColumnsToFullMargin", 0.0), config.get("columnRatios", None))
+                                         config.get("scaleColumnsToFullMargin", 0.0),
+                                         config.get("columnRatios", None))
 
         table = setColumnFormat(table, widths, formats)
 
-        # Stetch cell rows in latex output
+        # Stretch cell rows in latex output
         spacing = config.get("rowSpacing")
         if spacing:
             print("Apply spacing ...")
@@ -199,15 +178,15 @@ def postProcessLatexTables(config, output):
     return r.sub(postProcessLatexTable, output)
 
 
-def convertTable(file, config):
+def convertTable(file, config, rootDir, dataDir, pandocDefaults):
 
-    fromFormat = config["from"] if "from" in config else getFormat(file)
+    fromFormat = config["from"] if "from" in config else getFormat(file, pandocDefaults)
     toFormat = config["to"]
     toExt = getExtension(toFormat)
 
     # Make output file
     baseName, ext = os.path.splitext(os.path.split(file)[1])
-    outputDir = config["outputDir"].format(repoDir=repoDir, ext=toExt[1:])
+    outputDir = config["outputDir"].format(rootDir=rootDir, ext=toExt[1:])
     outFile = os.path.join(outputDir, baseName + toExt)
 
     # Run pandoc
@@ -218,7 +197,7 @@ def convertTable(file, config):
         "pandoc",
         "--fail-if-warnings",
         "--verbose",
-        "--data-dir=convert/pandoc",
+        f"--data-dir={dataDir}",
         "--defaults=pandoc-dirs.yaml",
         "--defaults=pandoc-table.yaml",
         "--defaults=pandoc-filters.yaml",
@@ -228,8 +207,8 @@ def convertTable(file, config):
         "-t",
         toFormat,
         file,
-    ],
-                                     encoding="utf-8")
+    ], encoding="utf-8")
+
     # Pre save...
     with open(outFile, "w") as o:
         o.write(output)
@@ -248,7 +227,7 @@ def convertTable(file, config):
         o.write(output)
 
 
-def convertTables(config):
+def convertTables(config, rootDir, dataDir, pandocDefaults):
 
     globs = config["globs"]
     if isinstance(globs, str):
@@ -258,33 +237,45 @@ def convertTables(config):
     files = []
     for g in globs:
 
-        # Replace 'repoDir'
-        g = g.format(repoDir=repoDir)
+        # Replace 'rootDir'
+        g = g.format(rootDir=rootDir)
         # Get files
         files += glob.glob(g, recursive=True)
 
     for f in files:
-        convertTable(f, config)
+        convertTable(f, config, rootDir, dataDir, pandocDefaults)
 
 
-def run(configs, parallel=False):
+def run(configs, rootDir, dataDir, parallel=False):
+
+    setEnvironment(dataDir)
+    pandocDefaults = loadPandocDefault(dataDir)
 
     if parallel:
         with ProcessPoolExecutor() as executor:
-            executor.map(convertTables, configs)
+            executor.map(lambda x: convertTables(x, rootDir, dataDir, pandocDefaults), configs)
     else:
         for c in configs:
-            convertTables(c)
+            convertTables(c, rootDir, dataDir, pandocDefaults)
 
 
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument(
+        '--data-dir',
+        required=True,
+        help="Pandoc data directory."
+    )
+    parser.add_argument(
+        '--root-dir',
+        required=True,
+        help="The repository with the source."
+    )
+    parser.add_argument(
         '--config',
-        required=False,
-        default=os.path.join(repoDir, "convert/scripts/tables.json"),
-        help='Config file with tables',
+        required=True,
+        help='Config file with tables to convert.',
     )
 
     parser.add_argument(
@@ -298,4 +289,4 @@ if __name__ == "__main__":
     with open(args.config, "r") as f:
         config = json.load(f)
 
-    run(config, parallel=args.parallel)
+    run(config, dataDir=args.data_dir, rootDir=args.root_dir, parallel=False)

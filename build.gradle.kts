@@ -163,7 +163,7 @@ val compileLess by tasks.register<Exec>("compileLess") {
     })
 
     executable(lessCompiler)
-    args("--include-path=convert/css/src", lessMainFile, cssFile)
+    args("--include-path=${convertDir}/css/src", lessMainFile, cssFile)
 
     workingDir(project.rootDir)
 }
@@ -283,17 +283,21 @@ abstract class PandocTask @Inject constructor() : Exec() {
 
 val convertTables = tasks.create<Exec>("convert-tables") {
     group = "TechnicalMarkdown"
-    description = "Converte Tables"
+    description = "Convert Tables"
     dependsOn(initBuild, defineEnvironment)
 
-    inputs.files("convert/scripts/convert-tables.py",
+    inputs.files("${convertDir}/scripts/convert-tables.py",
                  fileTree("${project.rootDir}/chapters/tables"){include("**/*.html")})
     outputs.files(fileTree("${project.rootDir}/chapters/tables-tex"){include("**/*.tex")})
 
     executable(pythonExe)
     args(file("${convertDir}/scripts/convert-tables.py"),
+         "--root-dir",
+         "${project.rootDir}",
+         "--data-dir", 
+         "${convertDir}",
          "--config",
-         file("${convertDir}/scripts/tables.json"),
+        "${project.rootDir}/includes/convert-tables.json",
          "--parallel")
 
     environment(pandocSettings.env)
@@ -360,7 +364,7 @@ val viewHTML = tasks.register<Exec>("view-html") {
         executable(browserSync)
         args("start",
              "--server",
-             "--config", file("${project.rootDir}/gradle/browser-sync-config.js"),
+             "--config", file("${project.rootDir}/tools/gradle/browser-sync-config.js"),
              "--files", outputFileHTML,
              "--files", "**/*.css",
              "--index", outputFileHTML.getName())

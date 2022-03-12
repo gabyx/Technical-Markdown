@@ -1,7 +1,7 @@
 to: html5
 
 template: includes/Template.html
-css: convert/css/main.css
+css: css/main.css
 highlight-style: tango
 
 html-math-method:
