@@ -151,7 +151,7 @@ val compileLess by tasks.register<Exec>("compileLess") {
 
     val lessMainFile = fileTree("${convertDir}/css/src/"){ include("main.less") }.getFiles().elementAt(0)
     val lessFiles = fileTree("${convertDir}/css/src/"){ include("*.less") }.getFiles()
-    val cssFile = file("${convertDir}/css/main.css")
+    val cssFile = file("${project.buildDir}/css/main.css")
 
     inputs.files(lessMainFile, lessFiles)
     outputs.file(cssFile)
@@ -166,6 +166,11 @@ val compileLess by tasks.register<Exec>("compileLess") {
     args("--include-path=${convertDir}/css/src", lessMainFile, cssFile)
 
     workingDir(project.rootDir)
+}
+
+val copyAssets by tasks.register<Copy>("copyAssets") {
+    from("${project.rootDir}/files")
+    into("${project.buildDir}/files")
 }
 
 fun getFileSizeMb(file: File) : Long {
@@ -324,7 +329,7 @@ val transformMath = project.task<Copy>("transform-math") {
 }
 
 val buildHTML = tasks.register<PandocTask>("build-html") {
-    dependsOn(initBuild, defineEnvironment, convertTables, compileLess)
+    dependsOn(initBuild, defineEnvironment, convertTables, compileLess, copyAssets)
     inputFile.set(mainFileMarkdown)
     exportType.set("html")
     verbose.set(true)
@@ -367,6 +372,7 @@ val viewHTML = tasks.register<Exec>("view-html") {
              "--config", file("${project.rootDir}/tools/gradle/browser-sync-config.js"),
              "--files", outputFileHTML,
              "--files", "**/*.css",
+             "--startPath", "build",
              "--index", outputFileHTML.getName())
 
         workingDir(project.rootDir)
