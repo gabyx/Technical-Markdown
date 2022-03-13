@@ -26,6 +26,8 @@ ENV TECHMD_COMMIT_SHA="$TECHMD_COMMIT_SHA"
 RUN apk add  --update-cache --repository http://dl-3.alpinelinux.org/alpine/edge/main \
     bash \
     curl \
+    tree \
+    file \
     grep \
     sed \
     findutils \
@@ -84,7 +86,10 @@ RUN chmod +x $TECHMD_SETUP_DIR/setup-build-tools.sh && \
     $TECHMD_SETUP_DIR/setup-build-tools.sh "$TECHMD_OS_DIST"
 
 COPY --chown=$USER_NAME:$USER_NAME tools/docker/setup/setup-runtime.sh $TECHMD_SETUP_DIR/
-RUN chmod +x $TECHMD_SETUP_DIR/setup-runtime.sh
+COPY --chown=$USER_NAME:$USER_NAME tools/docker/setup/setup-runtime-githooks.sh $TECHMD_SETUP_DIR/
+
+RUN chmod +x $TECHMD_SETUP_DIR/setup-runtime.sh \
+    $TECHMD_SETUP_DIR/setup-runtime-githooks.sh
 
 ENTRYPOINT [ "/container-setup/setup-runtime.sh" ]
 CMD [ "zsh" ]
@@ -96,7 +101,7 @@ ARG TECHMD_SETUP_DIR
 ARG USER_NAME
 
 ENV TECHMD_CONTAINER_NAME="Technical-Markdown"
-COPY --chown=$USER_NAME:$USER_NAME tools ~/technical-markdown/tools
+COPY --chown=$USER_NAME:$USER_NAME tools /home/$USER_NAME/technical-markdown/tools
 ENV TECHMD_TOOLS_DIR="/home/$USER_NAME/technical-markdown/tools"
 ENV TECHMD_CONVERT_DIR="/home/$USER_NAME/technical-markdown/tools/convert"
 WORKDIR "/workspace"

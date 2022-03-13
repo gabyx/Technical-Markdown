@@ -15,7 +15,7 @@ set -e
 set -o pipefail
 
 function setup() {
-    local cacheFile="$CONTAINER_SETUP_DIR/.setup-runtime-done"
+    local cacheFile="$TECHMD_SETUP_DIR/.setup-runtime-done"
 
     if [ -f "$cacheFile" ]; then
         printInfo "Setup runtime already done." \
@@ -58,23 +58,19 @@ function setup() {
     fi
 
     # Synchronize git identity from host config
-    gitConfigHost="$CONTAINER_SETUP_DIR/.gitconfig-host"
+    gitConfigHost="$TECHMD_SETUP_DIR/.gitconfig-host"
     if [ -f "$gitConfigHost" ]; then
         printInfo "Synchronizing Git user/email from '.gitconfig-host'."
         hostName=$(git config -f "$gitConfigHost" user.name)
         hostEmail=$(git config -f "$gitConfigHost" user.email)
 
-        # shellcheck disable=SC2154,SC2008
-        "$CONTAINER_SETUP_DIR/setup-credentials.sh" \
-            --git-user-name "$hostName" \
-            --git-user-email "$hostEmail" \
-            --non-interactive ||
-            die "Credential setup failed."
+        git config --global user.name "$hostName"
+        git config --global user.email "$hostEmail"
     fi
 
     # Timezone setup.
     if [ -n "${TIME_ZONE:-}" ]; then
-        "$CONTAINER_SETUP_DIR/setup-time-zone.sh" \
+        "$TECHMD_SETUP_DIR/setup-time-zone.sh" \
             "--non-interactive" \
             --time-zone "$TIME_ZONE" || die "Could not setup timezone."
     fi
@@ -85,6 +81,6 @@ function setup() {
     return 0
 }
 
-setup 2>&1 | tee "$CONTAINER_SETUP_DIR/.setup-runtime.log"
+setup 2>&1 | tee "$TECHMD_SETUP_DIR/.setup-runtime.log"
 
 exec "$@"

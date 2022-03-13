@@ -28,10 +28,10 @@ val convertDir = getEnvDirOrRelative("TECHMD_CONVERT_DIR", "tools/convert")
 val toolsDir = getEnvDirOrRelative("TECHMD_TOOLS_DIR", "tools")
 
 if (!toolsDir.exists()) {
-    raise RuntimeException("Tools dir 'tools' not available.")
+    throw RuntimeException("Tools dir 'tools' not available.")
 }
 if (!convertDir.exists()) {
-    raise RuntimeException("Convert dir 'tools/convert' not available.")
+    throw RuntimeException("Convert dir 'tools/convert' not available.")
 }
 
 // Import all functions

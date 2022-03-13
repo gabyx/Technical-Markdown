@@ -20,7 +20,7 @@ function setupGithooks() {
     gitRoot=$(git rev-parse --show-toplevel 2>/dev/null || true)
     if [ -n "$gitRoot" ]; then
 
-        local cacheFile="$CONTAINER_SETUP_DIR/.setup-runtime-githooks-done"
+        local cacheFile="$TECHMD_SETUP_DIR/.setup-runtime-githooks-done"
         if [ -f "$cacheFile" ]; then
             printInfo "Setup Githooks already done." \
                 "Existing file '$cacheFile'."
@@ -43,4 +43,4 @@ function setupGithooks() {
     return 0
 }
 
-setupGithooks 2>&1 | tee -a "$CONTAINER_SETUP_DIR/.setup-runtime.log"
+setupGithooks 2>&1 | tee -a "$TECHMD_SETUP_DIR/.setup-runtime.log"

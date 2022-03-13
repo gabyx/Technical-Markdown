@@ -29,12 +29,12 @@ function installParallel() {
 
 function installJq() {
     local version="1.6"
-    printInfo " -> Installing 'jq' ..."
+    printInfo " -> Installing 'jq' ..." 
 
     [ "$arch" = "amd64" ] && local arch="linux64"
 
     if haveHomebrew; then
-        brew install jq@1.6
+        brew install jq@1.6 || die "Failed to install 'jq'."
     elif [ "$os" = "alpine" ]; then
         sudo apk add jq
     elif [ "$os" = "ubuntu" ]; then
@@ -58,7 +58,7 @@ function installYq() {
     printInfo " -> Installing 'yq' ..."
 
     if haveHomebrew; then
-        brew install yq@$version || return 1
+        brew install yq@$version || die "Failed to install 'yq'."
     elif [ "$os" = "ubuntu" ] ||
         [ "$os" = "alpine" ]; then
 
@@ -78,6 +78,16 @@ function installYq() {
     return 0
 }
 
+function installJDK() {
+     if haveHomebrew; then
+        brew install openjdk || die "Failed to install JDK"
+    elif [ "$os" = "ubuntu" ] ||
+        [ "$os" = "alpine" ]; then
+       sudo apk add openjdk11 || die "Failed to install JDK"
+    else
+        die "Operating system '$os' not supported."
+    fi
+}
 
 os="$1"
 # osRelease="$2"
@@ -88,3 +98,4 @@ printInfo "Installing general build tools ..."
 installParallel 
 installJq 
 installYq
+installJDK

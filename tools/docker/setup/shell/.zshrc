@@ -83,7 +83,7 @@ fi
 
 # Execute verison check if enabled.
 # Get this containers latest version.
-export TECHMD_BUILD_VERSION_REMOTE=$(curl -fsSL "https://api.github.com/repos/gabyx/technicalmarkdown/releases/latest" 2>/dev/null | jq '.tag_name | sub("^v";"";"g")' -r)
+export TECHMD_BUILD_VERSION_REMOTE=$(curl --max-time 5 -fsSL "https://api.github.com/repos/gabyx/technicalmarkdown/releases/latest" 2>/dev/null | jq '.tag_name | sub("^v";"";"g")' -r)
 # Load splash screen.
 if [ -f ~/.shell-entry-splash.sh ]; then
     ~/.shell-entry-splash.sh "$(echo "$TECHMD_CONTAINER_NAME" | sed -E 's/-/ /g')"

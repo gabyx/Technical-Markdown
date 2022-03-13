@@ -7,14 +7,14 @@
 # @author Gabriel Nützi, gnuetzi@gmail.com
 # =============================================================================
 
-. "$CONTAINER_SETUP_DIR/common/version.sh"
+. "$TECHMD_SETUP_DIR/common/version.sh"
 
 containerName="$1"
 
 UPDATE_MESSAGE=""
 if [ -n "$TECHMD_BUILD_VERSION_REMOTE" ]; then
     # shellcheck disable=SC2181
-    if versionCompare "$TECHMD_BUILD_VERSION_REMOTE" ">" "$TECHMD_VERSION_BUILD"; then
+    if versionCompare "$TECHMD_BUILD_VERSION_REMOTE" ">" "$TECHMD_BUILD_VERSION"; then
         UPDATE_MESSAGE="[ NEW version '$TECHMD_BUILD_VERSION_REMOTE' available ]"
     fi
 fi

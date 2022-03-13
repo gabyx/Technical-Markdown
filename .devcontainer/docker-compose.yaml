@@ -1,7 +1,7 @@
 version: "3.5"
 services:
   dev:
-    image: "docker.io/gabyxgabyx/technical-markdown:latest"
+    image: "technical-markdown:latest"
     security_opt:
       - seccomp:unconfined
     cap_add:
