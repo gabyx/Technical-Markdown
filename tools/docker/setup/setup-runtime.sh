@@ -2,7 +2,7 @@
 # shellcheck disable=SC1090,SC2015,SC1091
 # =============================================================================
 # TechnicalMarkdown
-# 
+#
 # @date Sun Mar 06 2022
 # @author Gabriel Nützi, gnuetzi@gmail.com
 # =============================================================================
@@ -15,10 +15,11 @@ set -e
 set -o pipefail
 
 function setup() {
+    local cacheFile="$CONTAINER_SETUP_DIR/.setup-runtime-done"
 
-    if [ -f "$TECHMD_SETUP_DIR/.setup-runtime-done" ]; then
+    if [ -f "$cacheFile" ]; then
         printInfo "Setup runtime already done." \
-            "Existing file '$TECHMD_SETUP_DIR/.setup-runtime-done'."
+            "Existing file '$cacheFile'."
         return 0
     fi
 
@@ -57,14 +58,14 @@ function setup() {
     fi
 
     # Synchronize git identity from host config
-    gitConfigHost="$TECHMD_SETUP_DIR/.gitconfig-host"
+    gitConfigHost="$CONTAINER_SETUP_DIR/.gitconfig-host"
     if [ -f "$gitConfigHost" ]; then
         printInfo "Synchronizing Git user/email from '.gitconfig-host'."
         hostName=$(git config -f "$gitConfigHost" user.name)
         hostEmail=$(git config -f "$gitConfigHost" user.email)
 
         # shellcheck disable=SC2154,SC2008
-        "$TECHMD_SETUP_DIR/setup-credentials.sh" \
+        "$CONTAINER_SETUP_DIR/setup-credentials.sh" \
             --git-user-name "$hostName" \
             --git-user-email "$hostEmail" \
             --non-interactive ||
@@ -73,26 +74,17 @@ function setup() {
 
     # Timezone setup.
     if [ -n "${TIME_ZONE:-}" ]; then
-        "$TECHMD_SETUP_DIR/setup-time-zone.sh" \
+        "$CONTAINER_SETUP_DIR/setup-time-zone.sh" \
             "--non-interactive" \
             --time-zone "$TIME_ZONE" || die "Could not setup timezone."
     fi
 
-    # Update githooks if possible.
-    local gitRoot
-    gitRoot=$(git rev-parse --show-toplevel &>/dev/null || true)
-    if [ -n "$gitRoot" ]; then
-        git -C "$gitRoot" hooks shared update || {
-            printError "Could not update shared Githooks in '$gitRoot'."
-        }
-    fi
-
-    echo "setup-runtime.sh successfull" >>"$TECHMD_SETUP_DIR/.setup-runtime-done"
+    echo "setup-runtime.sh successfull" >"$cacheFile"
     printInfo "Container setup successful."
 
     return 0
 }
 
-setup
+setup 2>&1 | tee "$CONTAINER_SETUP_DIR/.setup-runtime.log"
 
 exec "$@"

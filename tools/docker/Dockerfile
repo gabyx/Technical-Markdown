@@ -41,10 +41,10 @@ ENV LC_ALL $LOCALE.UTF-8
 ENV LANGUAGE $LOCALE.UTF-8
 
 # Add common scripts.
-COPY docker/setup/common $TECHMD_SETUP_DIR/common
+COPY tools/docker/setup/common $TECHMD_SETUP_DIR/common
 
 # Configure timezone.
-COPY docker/setup/setup-time-zone.sh $TECHMD_SETUP_DIR/
+COPY tools/docker/setup/setup-time-zone.sh $TECHMD_SETUP_DIR/
 RUN chmod +x $TECHMD_SETUP_DIR/setup-time-zone.sh && \
     $TECHMD_SETUP_DIR/setup-time-zone.sh \
     "--non-interactive" \
@@ -59,43 +59,44 @@ RUN adduser "$USER_NAME" -s /bin/zsh -D -u "$USER_UID" -g "$USER_GID" -h "/home/
 USER "$USER_NAME"
 
 # Install Git.
-COPY --chown=$USER_NAME:$USER_NAME docker/setup/setup-git.sh $TECHMD_SETUP_DIR/
+COPY --chown=$USER_NAME:$USER_NAME tools/docker/setup/setup-git.sh $TECHMD_SETUP_DIR/
 RUN chmod +x $TECHMD_SETUP_DIR/setup-git.sh && \
     $TECHMD_SETUP_DIR/setup-git.sh "$TECHMD_OS_DIST"
 
 # Add Zsh shell and plugins.
-COPY --chown=$USER_NAME:$USER_NAME docker/setup/setup-zsh.sh $TECHMD_SETUP_DIR/
-COPY --chown=$USER_NAME:$USER_NAME docker/setup/shell $TECHMD_SETUP_DIR/shell/
+COPY --chown=$USER_NAME:$USER_NAME tools/docker/setup/setup-zsh.sh $TECHMD_SETUP_DIR/
+COPY --chown=$USER_NAME:$USER_NAME tools/docker/setup/shell $TECHMD_SETUP_DIR/shell/
 RUN chmod +x $TECHMD_SETUP_DIR/setup-zsh.sh && \
     $TECHMD_SETUP_DIR/setup-zsh.sh \
     "$TECHMD_OS_DIST"
 
 # Install python requirements.
 ENV PATH="$PYTHON_ENV/bin:$PATH"
-COPY --chown=$USER_NAME:$USER_NAME docker/setup/setup-python.sh docker/setup/python.requirements $TECHMD_SETUP_DIR/
+COPY --chown=$USER_NAME:$USER_NAME tools/docker/setup/setup-python.sh tools/docker/setup/python.requirements $TECHMD_SETUP_DIR/
 RUN chmod +x $TECHMD_SETUP_DIR/setup-python.sh && \
     $TECHMD_SETUP_DIR/setup-python.sh "$TECHMD_OS_DIST" "$TECHMD_OS_RELEASE" \
     "$PYTHON_ENV" \
     "$TECHMD_SETUP_DIR/python.requirements"
 
 # Add build tools.
-COPY --chown=$USER_NAME:$USER_NAME docker/setup/setup-build-tools.sh $TECHMD_SETUP_DIR/
+COPY --chown=$USER_NAME:$USER_NAME tools/docker/setup/setup-build-tools.sh $TECHMD_SETUP_DIR/
 RUN chmod +x $TECHMD_SETUP_DIR/setup-build-tools.sh && \
     $TECHMD_SETUP_DIR/setup-build-tools.sh "$TECHMD_OS_DIST"
 
-COPY --chown=$USER_NAME:$USER_NAME docker/setup/setup-runtime.sh $TECHMD_SETUP_DIR/
+COPY --chown=$USER_NAME:$USER_NAME tools/docker/setup/setup-runtime.sh $TECHMD_SETUP_DIR/
 RUN chmod +x $TECHMD_SETUP_DIR/setup-runtime.sh
 
 ENTRYPOINT [ "/container-setup/setup-runtime.sh" ]
 CMD [ "zsh" ]
 
 
-# Make
+# Make full convertion image.
 FROM technical-markdown-minimal as technical-markdown
 ARG TECHMD_SETUP_DIR
 ARG USER_NAME
 
 ENV TECHMD_CONTAINER_NAME="Technical-Markdown"
-COPY --chown=$USER_NAME:$USER_NAME convert ~/technical-markdown/convert
-ENV TECHMD_CONVERT_DIR="/home/$USER_NAME/technical-markdown/convert"
+COPY --chown=$USER_NAME:$USER_NAME tools ~/technical-markdown/tools
+ENV TECHMD_TOOLS_DIR="/home/$USER_NAME/technical-markdown/tools"
+ENV TECHMD_CONVERT_DIR="/home/$USER_NAME/technical-markdown/tools/convert"
 WORKDIR "/workspace"

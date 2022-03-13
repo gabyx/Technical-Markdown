@@ -26,7 +26,7 @@ technical documents:**
 - **[pandoc filters](https://pandoc.org/filters.html)** for different AST
   (abstract syntax tree) conversions:
 
-  - [own filters](https://github.com/gabyx/TechnicalMarkdown/tree/master/convert/filters)
+  - [own filters](https://github.com/gabyx/TechnicalMarkdown/tree/master/tools/convert/filters)
     with [panflute](https://github.com/sergiocorreia/panflute)
     [[doc](http://scorreia.com/software/panflute)]
   - [--crosscite](https://github.com/jgm/pandoc-citeproc)
@@ -107,13 +107,13 @@ The following directories are important for the styling of the output:
 
 - [`convert`](convert) : The main directory containing pandoc related output
   configs:
-  - [`convert/defaults`](convert/defaults) : `pandoc` defaults .
-  - [`convert/includes`](convert/includes) : `pandoc` templates in for HTML and
+  - [`tools/convert/defaults`](tools/convert/defaults) : `pandoc` defaults .
+  - [`tools/convert/includes`](tools/convert/includes) : `pandoc` templates in for HTML and
     PDF output settings.
-  - [`convert/css`](convert/css) CSS styling for HTML output.
-  - [`convert/filters`](convert/filters) : `pandoc` filters in for modifying
+  - [`tools/convert/css`](tools/convert/css) CSS styling for HTML output.
+  - [`tools/convert/filters`](tools/convert/filters) : `pandoc` filters in for modifying
     `pandoc`s abstract syntax tree.
-  - [`convert/scripts`](convert/scripts) : Some workaround scripts for
+  - [`tools/convert/scripts`](tools/convert/scripts) : Some workaround scripts for
     converting tables based on a config file in
 
 ## Dependencies
@@ -171,7 +171,7 @@ Setup a python environment in `.venv` with
 ```shell
 python -m venv --system-site-packages .venv # or simply symlink to an existing one.
 source .venv/bin/activate
-pip3 install -r tools/.requirements
+pip3 install -r tools/docker/setup/python.requirements
 ```
 
 The VS Code tasks pass the config `${config:python.pythonEnv}` directly as an
@@ -202,7 +202,7 @@ or use the following shell commands:
   ```
 
   - The conversion with pandoc applies the following filters in
-    [defaults](convert/defaults/pandoc-filters.yaml).
+    [defaults](tools/convert/defaults/pandoc-filters.yaml).
   - The HTML output can be inspected in `Content.html`.
 
 - **Convert Markdown -> PDF**: Runs the markdown conversion with Pandoc
@@ -213,7 +213,7 @@ or use the following shell commands:
   ```
 
   - The conversion with pandoc applies the following filters in
-    [defaults](convert/defaults/pandoc-filters.yaml).
+    [defaults](tools/convert/defaults/pandoc-filters.yaml).
   - The PDF output can be inspected in [`Content.pdf`](build/Content.pdf).
   - The LaTeX output can be inspected in `build/output-tex/input.tex`.
 
@@ -225,36 +225,36 @@ or use the following shell commands:
   ```
 
   - The conversion with pandoc applies the following filters in
-    [defaults](convert/defaults/pandoc-filters.yaml).
+    [defaults](tools/convert/defaults/pandoc-filters.yaml).
   - The Jira output can be inspected in `Content.jira`.
 
 ## Editing Styles
 
 ### HTML
 
-You can edit the [main.less](convert/css/src/main.less) file to change the look
-of the markdown. Edit the [main.less](convert/css/src/main.less) file to see
+You can edit the [main.less](tools/convert/css/src/main.less) file to change the look
+of the markdown. Edit the [main.less](tools/convert/css/src/main.less) file to see
 changes in the conversion from [Content.md](Content.md).
 
 ### LaTeX
 
 The following templates are responsible for the LaTeX output:
 
-- [Template.tex](convert/includes/Template.tex) : The main template.
-- [Header.tex](convert/includes/Header.tex) : The class, packages and styles
+- [Template.tex](tools/convert/includes/Template.tex) : The main template.
+- [Header.tex](tools/convert/includes/Header.tex) : The class, packages and styles
   defining the document, included by the main template with `include-in-header`
-  in [pandoc-latex.yaml](convert/defaults/pandoc-latex.yaml)
+  in [pandoc-latex.yaml](tools/convert/defaults/pandoc-latex.yaml)
 
 ### Pandoc Filters
 
 Pandoc filters are harder to debug. There is an included unix-like
-[tee.py](convert/filters/tee.py) filter which can be put anywhere into the
+[tee.py](tools/convert/filters/tee.py) filter which can be put anywhere into the
 filter chain as needed, to see the AST JSON output in the folder
-`build/pandoc-filter-out` (see [dev.py](convert/filters/module/dev.py) for
-adjustments). The filter [teeStart.py](convert/filters/teeStart.py) first clears
-all output before doing the same as [tee.py](convert/filters/tee.py). Uncomment
+`build/pandoc-filter-out` (see [dev.py](tools/convert/filters/module/dev.py) for
+adjustments). The filter [teeStart.py](tools/convert/filters/teeStart.py) first clears
+all output before doing the same as [tee.py](tools/convert/filters/tee.py). Uncomment
 the `tee.py` filters in
-[pandoc-filters.yaml](convert/defaults/pandoc-filters.yaml).
+[pandoc-filters.yaml](tools/convert/defaults/pandoc-filters.yaml).
 
 ## Issues
 

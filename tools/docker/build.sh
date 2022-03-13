@@ -11,7 +11,7 @@ ROOT_DIR=$(git rev-parse --show-toplevel)
 set -e
 set -u
 
-. "$ROOT_DIR/docker/setup/common/log.sh"
+. "$ROOT_DIR/tools/docker/setup/common/log.sh"
 
 # Arguments
 tag="latest"
@@ -49,8 +49,6 @@ function parseArgs() {
     return 0
 }
 
-cp "$ROOT_DIR/tools/.requirements" "$ROOT_DIR/docker/setup/python.requirements"
-
 # Define name.
 name="technical-markdown"
 if [ "$push" = "true" ]; then
@@ -71,7 +69,7 @@ printInfo "Building image '$name'..."
 cd "$ROOT_DIR" &&
     docker build \
         "$@" \
-        -f docker/Dockerfile \
+        -f tools/docker/Dockerfile \
         -t "$name" \
         --progress=plain \
         --build-arg "TECHMD_BUILD_VERSION=$repoVersion" \

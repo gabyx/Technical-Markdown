@@ -5,7 +5,7 @@ format="$1"
 
 rootDir=$(git rev-parse --show-toplevel)
 
-filters="$rootDir/convert/filters"
+filters="$rootDir/tools/convert/filters"
 export LUA_PATH="$filters/?;$filters/?.lua;$LUA_PATH"
 export PYTHONPATH="$filters"
 

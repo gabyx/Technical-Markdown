@@ -24,8 +24,15 @@ fun getEnvDirOrRelative(envVar: String, relDir: String) : File {
 }
 
 project.buildDir = file("${project.rootDir}/build")
-val convertDir = getEnvDirOrRelative("TECHMD_CONVERT_DIR", "convert")
+val convertDir = getEnvDirOrRelative("TECHMD_CONVERT_DIR", "tools/convert")
 val toolsDir = getEnvDirOrRelative("TECHMD_TOOLS_DIR", "tools")
+
+if (!toolsDir.exists()) {
+    raise RuntimeException("Tools dir 'tools' not available.")
+}
+if (!convertDir.exists()) {
+    raise RuntimeException("Convert dir 'tools/convert' not available.")
+}
 
 // Import all functions
 @Suppress("unchecked_cast", "nothing_to_inline")
@@ -151,7 +158,7 @@ val compileLess by tasks.register<Exec>("compileLess") {
 
     val lessMainFile = fileTree("${convertDir}/css/src/"){ include("main.less") }.getFiles().elementAt(0)
     val lessFiles = fileTree("${convertDir}/css/src/"){ include("*.less") }.getFiles()
-    val cssFile = file("${project.buildDir}/css/main.css")
+    val cssFile = file("${convertDir}/css/main.css")
 
     inputs.files(lessMainFile, lessFiles)
     outputs.file(cssFile)
@@ -168,6 +175,12 @@ val compileLess by tasks.register<Exec>("compileLess") {
     workingDir(project.rootDir)
 }
 
+val buildCSS by tasks.register<Copy>("copyLess") {
+    dependsOn(compileLess)
+    from("${convertDir}/css/main.css")
+    into("${project.buildDir}/css")
+}
+
 val copyAssets by tasks.register<Copy>("copyAssets") {
     from("${project.rootDir}/files")
     into("${project.buildDir}/files")
@@ -180,6 +193,7 @@ fun getFileSizeMb(file: File) : Long {
 data class PandocSettings(
     val pandocExe: File,
     val dataDir: File,
+    val resourceDir: File,
     val workingDir: File,
     val env: Map<String, String>)
 
@@ -192,7 +206,7 @@ fun createPandocSettings(): PandocSettings {
         env["PYTHON_PATH"] = env.getOrDefault("PYTHON_PATH", "") + pathSep + pythonPaths.joinToString(separator = pathSep)
         env["LUA_PATH"] = env.getOrDefault("LUA_PATH", "") + pathSep + luaPaths.flatMap({v -> listOf("$v/?", "$v/?.lua") }).joinToString(separator=";")
 
-        return PandocSettings(pandocExe, convertDir, project.rootDir, env)
+        return PandocSettings(pandocExe, convertDir, convertDir, project.rootDir, env)
 }
 
 val pandocSettings = createPandocSettings()
@@ -228,11 +242,13 @@ abstract class PandocTask @Inject constructor() : Exec() {
     fun makePandocArgs(exportType: String, 
                        verbose: Boolean, 
                        failIfWarning: Boolean = true, 
-                       dataDir: File) : Array<String> {
+                       dataDir: File,
+                       resourceDir: File) : Array<String> {
     return arrayOf(
             if(failIfWarning) "--fail-if-warnings" else null,
             if(verbose) "--verbose" else null,
             "--data-dir=${dataDir.getPath()}",
+            "--resource-path=${resourceDir.getPath()}",
             "--defaults=pandoc-dirs.yaml",
             "--defaults=pandoc-general.yaml",
             "--defaults=pandoc-$exportType.yaml",
@@ -256,14 +272,18 @@ abstract class PandocTask @Inject constructor() : Exec() {
 
         executable(settings.pandocExe)
 
-        args(*makePandocArgs(exportType.get(), verbose.get(), failIfWarning.get(), settings.dataDir))
+        args(*makePandocArgs(exportType.get(), 
+                             verbose.get(), 
+                             failIfWarning.get(), 
+                             settings.dataDir, 
+                             settings.resourceDir))
+
         if(additionalArgs.isPresent()){
             args(*additionalArgs.get())
         }
         args("-o",
              outputFile.get(),
              inputFile.get())
-
 
         environment(settings.env)
         workingDir(project.rootDir)
@@ -329,7 +349,7 @@ val transformMath = project.task<Copy>("transform-math") {
 }
 
 val buildHTML = tasks.register<PandocTask>("build-html") {
-    dependsOn(initBuild, defineEnvironment, convertTables, compileLess, copyAssets)
+    dependsOn(initBuild, defineEnvironment, convertTables, buildCSS, copyAssets)
     inputFile.set(mainFileMarkdown)
     exportType.set("html")
     verbose.set(true)
