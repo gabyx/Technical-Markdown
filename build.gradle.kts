@@ -2,11 +2,11 @@ import java.lang.module.ModuleDescriptor.Version
 
 plugins {
   //id "com.liferay.yarn" version "7.2.6"
-  id("org.siouan.frontend-jdk11") version "5.1.0"
+  id("org.siouan.frontend-jdk11") version "6.0.0"
 }
 apply(plugin = "java")
 
-val globalEnv = System.getenv()
+val globalEnv = System.getenv().toMutableMap()
 val pathSep = System.getProperty("path.separator")
 
 fun getEnvDirOrRelative(envVar: String, relDir: String) : File {
@@ -51,19 +51,30 @@ fun List<String>.runCommand(
         .inputStream.bufferedReader().readText()
 }.getOrNull()
 
+fun  MutableMap<String, String>.addExecutableDirToPath(exe: String) {
+    if(this["PATH"] != null && this["PATH"]!!.contains(exe)) {
+        return
+    }
+    else if(exe.contains("/") || exe.contains("\\")) {
+        this["PATH"] = file(exe).getParent() + if(this["PATH"] != null ) pathSep + this["PATH"] else ""
+    }
+}
+
 // Node/Yarn frontend
 frontend {
     nodeVersion.set("17.7.1")
     nodeInstallDirectory.set(file("${project.buildDir}/node"))
     yarnEnabled.set(true)
-    yarnVersion.set("1.22.17")
+    yarnVersion.set("1.22.18")
     packageJsonDirectory.set(file("${toolsDir}"))
     installScript.set("install '--modules-folder=${project.buildDir}/node_modules'")
-    yarnInstallDirectory.set(file("${project.buildDir}/yarn"))
 }
 
 // Tweak to only run installFront once
 tasks.named("installFrontend") {
+    doLast({
+        globalEnv.addExecutableDirToPath("${project.buildDir}/node/bin")
+    })
     outputs.upToDateWhen({true})
 }
 
@@ -80,12 +91,6 @@ val mainFileMarkdown = file("${project.rootDir}/Content.md")
 val outputFileHTML = file("${project.buildDir}/Content.html")
 val outputFileJira = file("${project.buildDir}/Content.jira")
 val outputFilePDF = file("${project.buildDir}/Content.pdf")
-
-fun  MutableMap<String, String>.addExecutableDirToPath(exe: String) {
-    if(exe.contains("/") || exe.contains("\\")) {
-        this["PATH"] = file(exe).getParent() + if(this["PATH"] != null ) pathSep + this["PATH"] else ""
-    }
-}
 
 fun checkPandocInstall(pandocExe: File){
     var pandocAvailable = false

@@ -16,12 +16,13 @@ set -u
 # Arguments
 tag="latest"
 push="false"
+dockerArgs=()
 
 # Parse all arguments.
 function parseArgs() {
 
     local prev=""
-
+    local count=0
     for p in "$@"; do
         if [ "$p" = "--tag" ]; then
             true
@@ -34,20 +35,24 @@ function parseArgs() {
                 "Usage:" \
                 "   --tag <string>       Container tag."
             exit 0
+        elif [ "$p" = "--" ]; then
+            break
         else
             printError "Wrong argument '$p' !"
             return 1
         fi
+
+        count=$((count + 1))
         prev="$p"
     done
 
-    [ -n "$containerType" ] || die "Argument '--container' needs to be given" \
-        "Choose from:" \
-        "$(find "$ROOT_DIR" -type d \( -name "build-*" -or -name "dev-*" \) -exec basename {} \; |
-            sed -E "s/^(.*)/ - '\1'/g")"
+    shift $count
+    dockerArgs=("$@")
 
     return 0
 }
+
+parseArgs "$@"
 
 # Define name.
 name="technical-markdown"
@@ -68,7 +73,7 @@ printInfo "Repository Version: '$repoVersion'."
 printInfo "Building image '$name'..."
 cd "$ROOT_DIR" &&
     docker build \
-        "$@" \
+        "${dockerArgs[@]}" \
         -f tools/docker/Dockerfile \
         -t "$name" \
         --progress=plain \
