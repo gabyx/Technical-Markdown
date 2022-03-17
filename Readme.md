@@ -3,6 +3,8 @@
 
 ![](https://img.shields.io/badge/dependencies-pandoc%20%7C%20python3%20%7C%20gradle%20%7C%20vscode-green)
 
+**Note: Docker build setup is coming soon. Which will facilitate lots of things and makes your project more portable!**
+
 ## Quick Intro
 
 **This is a markdown setup demonstrating the power and use of markdown for technical documents:**
