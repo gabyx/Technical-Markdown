@@ -108,13 +108,13 @@ The following directories are important for the styling of the output:
 - [`convert`](convert) : The main directory containing pandoc related output
   configs:
   - [`tools/convert/defaults`](tools/convert/defaults) : `pandoc` defaults .
-  - [`tools/convert/includes`](tools/convert/includes) : `pandoc` templates in for HTML and
-    PDF output settings.
+  - [`tools/convert/includes`](tools/convert/includes) : `pandoc` templates in
+    for HTML and PDF output settings.
   - [`tools/convert/css`](tools/convert/css) CSS styling for HTML output.
-  - [`tools/convert/filters`](tools/convert/filters) : `pandoc` filters in for modifying
-    `pandoc`s abstract syntax tree.
-  - [`tools/convert/scripts`](tools/convert/scripts) : Some workaround scripts for
-    converting tables based on a config file in
+  - [`tools/convert/filters`](tools/convert/filters) : `pandoc` filters in for
+    modifying `pandoc`s abstract syntax tree.
+  - [`tools/convert/scripts`](tools/convert/scripts) : Some workaround scripts
+    for converting tables based on a config file in
 
 ## Dependencies
 
@@ -219,24 +219,34 @@ or use the following shell commands:
 
 ## Docker Build
 
-We provide to images.
+We provide 2 images:
+
+- `technical-markdown-minmal:1.7.0` : Minimal docker images including pandoc and all
+  necessary tools to fully build your markdown. It does not include the folder
+  `tools` and `convert` and your mounted Git repository needs to contain these
+  as in this repository or by setting the environement variables described
+  below.
+- `technical-markdown:1.7.0` : The full-fledged image which is used in this VS
+  Code `.devcontainer` setup. It contains its baked `tools` and `convert`
+  folders which are used to compile your markdown.
 
 ## Editing Styles
 
 ### HTML
 
-You can edit the [main.less](tools/convert/css/src/main.less) file to change the look
-of the markdown. Edit the [main.less](tools/convert/css/src/main.less) file to see
-changes in the conversion from [Content.md](Content.md).
+You can edit the [main.less](tools/convert/css/src/main.less) file to change the
+look of the markdown. Edit the [main.less](tools/convert/css/src/main.less) file
+to see changes in the conversion from [Content.md](Content.md).
 
 ### LaTeX
 
 The following templates are responsible for the LaTeX output:
 
 - [Template.tex](tools/convert/includes/Template.tex) : The main template.
-- [Header.tex](tools/convert/includes/Header.tex) : The class, packages and styles
-  defining the document, included by the main template with `include-in-header`
-  in [pandoc-latex.yaml](tools/convert/defaults/pandoc-latex.yaml)
+- [Header.tex](tools/convert/includes/Header.tex) : The class, packages and
+  styles defining the document, included by the main template with
+  `include-in-header` in
+  [pandoc-latex.yaml](tools/convert/defaults/pandoc-latex.yaml)
 
 ### Pandoc Filters
 
@@ -244,9 +254,9 @@ Pandoc filters are harder to debug. There is an included unix-like
 [tee.py](tools/convert/filters/tee.py) filter which can be put anywhere into the
 filter chain as needed, to see the AST JSON output in the folder
 `build/pandoc-filter-out` (see [dev.py](tools/convert/filters/module/dev.py) for
-adjustments). The filter [teeStart.py](tools/convert/filters/teeStart.py) first clears
-all output before doing the same as [tee.py](tools/convert/filters/tee.py). Uncomment
-the `tee.py` filters in
+adjustments). The filter [teeStart.py](tools/convert/filters/teeStart.py) first
+clears all output before doing the same as
+[tee.py](tools/convert/filters/tee.py). Uncomment the `tee.py` filters in
 [pandoc-filters.yaml](tools/convert/defaults/pandoc-filters.yaml).
 
 ## Issues

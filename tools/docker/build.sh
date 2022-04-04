@@ -54,13 +54,6 @@ function parseArgs() {
 
 parseArgs "$@"
 
-# Define name.
-name="technical-markdown"
-if [ "$push" = "true" ]; then
-    name="docker.io/gabyxgabyx/$name"
-fi
-name="$name:$tag"
-
 # Define repo version.
 printInfo "Define tag and version."
 repoCommitSHA="$(git rev-parse HEAD)"
@@ -70,18 +63,32 @@ repoVersion="$(git describe --tags --match "v*" --abbrev=0 2>/dev/null | sed -E 
 printInfo "Repository SHA: '$repoCommitSHA'."
 printInfo "Repository Version: '$repoVersion'."
 
-printInfo "Building image '$name'..."
-cd "$ROOT_DIR" &&
-    docker build \
-        "${dockerArgs[@]}" \
-        -f tools/docker/Dockerfile \
-        -t "$name" \
-        --progress=plain \
-        --build-arg "TECHMD_BUILD_VERSION=$repoVersion" \
-        --build-arg "TECHMD_COMMIT_SHA=$repoCommitSHA" \
-        --target "technical-markdown" \
-        .
+for addTag in "" "-minimal"; do
 
-if [ "$push" = "true" ]; then
-    docker push "$name"
-fi
+    # Define name.
+    name="technical-markdown"
+    if [ "$push" = "true" ]; then
+        name="docker.io/gabyxgabyx/$name"
+    fi
+    imageName="$name:$repoVersion$addTag"
+
+    printInfo "Building image '$name'..."
+    cd "$ROOT_DIR" &&
+        DOCKER_BUILDKIT=1 \
+            docker build \
+            "${dockerArgs[@]}" \
+            -f tools/docker/Dockerfile \
+            -t "$imageName" \
+            --build-arg "TECHMD_BUILD_VERSION=$repoVersion" \
+            --build-arg "TECHMD_COMMIT_SHA=$repoCommitSHA" \
+            --target "technical-markdown" \
+            .
+
+    if [ "$push" = "true" ]; then
+        docker push "$imageName"
+        if [ "$addTag" = "" ]; then
+            docker tag "$imageName" "$name:latest"
+            docker push "$name:latest"
+        fi
+    fi
+done
