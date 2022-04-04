@@ -34,13 +34,13 @@ fi
 
 # We can delete this file too, its Linux, files are ref-counted.
 # This shell still has a valid reference.
-find "$CONTAINER_SETUP_DIR" -mindepth 1 \
+find "$TECHMD_SETUP_DIR" -mindepth 1 \
     -not \( -name "setup-time-zone*" \
     -or -name "setup-locales*" \
     -or -name "setup-credentials*" \
     -or -name "setup-runtime*" \
     -or -path "*/common*" \) \
     -exec rm -rf {} \; >/dev/null ||
-    printWarning "Could not clean '$CONTAINER_SETUP_DIR'."
+    printWarning "Could not clean '$TECHMD_SETUP_DIR'."
 
 exit 0

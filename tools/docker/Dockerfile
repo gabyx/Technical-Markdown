@@ -94,10 +94,12 @@ COPY --chown=$USER_NAME:$USER_NAME tools/docker/setup/setup-runtime-githooks.sh 
 RUN chmod +x $TECHMD_SETUP_DIR/setup-runtime.sh \
     $TECHMD_SETUP_DIR/setup-runtime-githooks.sh
 
-RUN chmod +x $TECHMD_SETUP_DIR/setup-clean.sh \
+COPY --chown=$USER_NAME:$USER_NAME tools/docker/setup/setup-clean.sh $TECHMD_SETUP_DIR/
+RUN chmod +x $TECHMD_SETUP_DIR/setup-clean.sh && \
     $TECHMD_SETUP_DIR/setup-clean.sh "$TECHMD_OS_DIST"
 
 ENTRYPOINT [ "/container-setup/setup-runtime.sh" ]
+WORKDIR "/workspace"
 CMD [ "zsh" ]
 
 
@@ -108,4 +110,3 @@ ENV TECHMD_CONTAINER_NAME="Technical-Markdown"
 COPY --chown=$USER_NAME:$USER_NAME tools /home/$USER_NAME/technical-markdown/tools
 ENV TECHMD_TOOLS_DIR="/home/$USER_NAME/technical-markdown/tools"
 ENV TECHMD_CONVERT_DIR="/home/$USER_NAME/technical-markdown/tools/convert"
-WORKDIR "/workspace"
