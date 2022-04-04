@@ -1,9 +1,11 @@
-import java.lang.module.ModuleDescriptor.Version
 
 plugins {
-  //id "com.liferay.yarn" version "7.2.6"
-  id("org.siouan.frontend-jdk11") version "6.0.0"
+   id("com.github.node-gradle.node") version "3.2.1"
 }
+
+import java.lang.module.ModuleDescriptor.Version
+import com.github.gradle.node.yarn.task.YarnTask
+
 apply(plugin = "java")
 
 val globalEnv = System.getenv().toMutableMap()
@@ -60,22 +62,14 @@ fun  MutableMap<String, String>.addExecutableDirToPath(exe: String) {
     }
 }
 
-// Node/Yarn frontend
-frontend {
-    nodeVersion.set("17.7.1")
-    nodeInstallDirectory.set(file("${project.buildDir}/node"))
-    yarnEnabled.set(true)
-    yarnVersion.set("1.22.18")
-    packageJsonDirectory.set(file("${toolsDir}"))
-    installScript.set("install '--modules-folder=${project.buildDir}/node_modules'")
-}
-
-// Tweak to only run installFront once
-tasks.named("installFrontend") {
-    doLast({
-        globalEnv.addExecutableDirToPath("${project.buildDir}/node/bin")
-    })
-    outputs.upToDateWhen({true})
+node {
+    download.set(true)
+    version.set("17.7.1")
+    npmInstallCommand.set("install")
+    workDir.set(file("${project.buildDir}/node/nodejs"))
+    npmWorkDir.set(file("${project.buildDir}/node/npm"))
+    yarnWorkDir.set(file("${project.buildDir}/node/yarn"))
+    nodeProjectDir.set(file("${toolsDir}"))
 }
 
 val binDir = file("${project.buildDir}/node_modules/.bin")
@@ -116,10 +110,10 @@ fun checkPandocInstall(pandocExe: File){
 }
 
 
-val initBuild by tasks.register<Task>("initBuild") {
+val initBuild by tasks.register<YarnTask>("initBuild") {
     group = "TechnicalMarkdown"
     description = "Setups node/yarn and modules."
-    dependsOn("installFrontend")
+    args.set(listOf("install", "--modules-folder", "${project.buildDir}/node_modules"))
 
     outputs.upToDateWhen({true})
 }
