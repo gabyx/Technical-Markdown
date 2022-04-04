@@ -119,7 +119,7 @@ The following directories are important for the styling of the output:
 ## Dependencies
 
 If you have `docker`, you can directly open this project in VS Code with the
-provided `.devcontainer` setup.
+provided `.devcontainer` setup. See [Docker Setup](#docker-build).
 
 ### Gradle
 
@@ -132,17 +132,6 @@ brew install java
 
 You should not need to install Gradle, since everything is setup by the
 checked-in `gradlew` Gradle wrapper.
-
-### Yarn
-
-You should not need to install `yarn` since everything is handled by the
-dependent Gradle task `installFrontend`. If you experience problems with having
-the node modules not correctly setup, use
-
-```
-cd tools
-../build/yarn/bin/yarn install --modules-path build/node_modules
-```
 
 ### Pandoc
 
@@ -227,6 +216,10 @@ or use the following shell commands:
   - The conversion with pandoc applies the following filters in
     [defaults](tools/convert/defaults/pandoc-filters.yaml).
   - The Jira output can be inspected in `Content.jira`.
+
+## Docker Build
+
+We provide to images.
 
 ## Editing Styles
 
