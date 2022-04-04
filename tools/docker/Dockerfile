@@ -94,8 +94,8 @@ COPY --chown=$USER_NAME:$USER_NAME tools/docker/setup/setup-runtime-githooks.sh 
 RUN chmod +x $TECHMD_SETUP_DIR/setup-runtime.sh \
     $TECHMD_SETUP_DIR/setup-runtime-githooks.sh
 
-RUN chmod +x $TECHMD_SETUP_DIR/setup-cleanup.sh \
-    $TECHMD_SETUP_DIR/setup-cleanup.sh
+RUN chmod +x $TECHMD_SETUP_DIR/setup-clean.sh \
+    $TECHMD_SETUP_DIR/setup-clean.sh "$TECHMD_OS_DIST"
 
 ENTRYPOINT [ "/container-setup/setup-runtime.sh" ]
 CMD [ "zsh" ]
