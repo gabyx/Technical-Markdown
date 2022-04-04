@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1.4.0
 FROM alpine:latest as base
 ARG NAME="1234"
 RUN echo "base:: $NAME"
