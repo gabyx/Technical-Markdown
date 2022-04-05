@@ -26,6 +26,7 @@ fun getEnvDirOrRelative(envVar: String, relDir: String) : File {
 }
 
 project.buildDir = file("${project.rootDir}/build")
+
 val convertDir = getEnvDirOrRelative("TECHMD_CONVERT_DIR", "tools/convert")
 val toolsDir = getEnvDirOrRelative("TECHMD_TOOLS_DIR", "tools")
 
@@ -63,7 +64,7 @@ fun  MutableMap<String, String>.addExecutableDirToPath(exe: String) {
 }
 
 node {
-    download.set(true)
+    download.set(false)
     version.set("17.7.1")
     npmInstallCommand.set("install")
     workDir.set(file("${project.buildDir}/node/nodejs"))

@@ -3,8 +3,8 @@
 
 ARG TECHMD_OS_DIST="alpine"
 ARG TECHMD_OS_RELEASE="3.14.3"
-
-FROM pandoc/latex:latest-${TECHMD_OS_DIST} as technical-markdown-minimal
+ARG TECHMD_PANDOC_VERISON=2.17
+FROM pandoc/latex:${TECHMD_PANDOC_VERISON}-${TECHMD_OS_DIST} as technical-markdown-minimal
 
 
 ARG TECHMD_OS_DIST
@@ -26,7 +26,7 @@ ENV TECHMD_SETUP_DIR="/container-setup"
 ENV TECHMD_BUILD_VERSION="$TECHMD_BUILD_VERSION"
 ENV TECHMD_COMMIT_SHA="$TECHMD_COMMIT_SHA"
 
-RUN apk add  --update-cache --repository http://dl-3.alpinelinux.org/alpine/edge/main \
+RUN apk add \
     bash \
     curl \
     tree \

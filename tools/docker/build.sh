@@ -63,7 +63,7 @@ repoVersion="$(git describe --tags --match "v*" --abbrev=0 2>/dev/null | sed -E 
 printInfo "Repository SHA: '$repoCommitSHA'."
 printInfo "Repository Version: '$repoVersion'."
 
-for addTag in "" "-minimal"; do
+for addTag in "-minimal" ""; do
 
     # Define name.
     name="technical-markdown"

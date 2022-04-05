@@ -118,8 +118,9 @@ The following directories are important for the styling of the output:
 
 ## Dependencies
 
-If you have `docker`, you can directly open this project in VS Code with the
-provided `.devcontainer` setup. See [Docker Setup](#docker-build).
+If you have `docker`, you should directly open this project in VS Code with the
+provided `.devcontainer` setup which gives you a hassle free experience.
+See [Docker Setup](#docker-build) for more information. Building on a native system, you need the following dependencies:
 
 ### Gradle
 
@@ -132,6 +133,22 @@ brew install java
 
 You should not need to install Gradle, since everything is setup by the
 checked-in `gradlew` Gradle wrapper.
+
+### Yarn
+
+So far `yarn` is required on the system, because of this
+
+- [issue](https://github.com/node-gradle/gradle-node-plugin/issues/223).
+  ![Status](https://img.shields.io/badge/dynamic/json?color=%23FF0000&label=Status&query=%24.state&url=https%3A%2F%2Fapi.github.com%2Frepos%2Fnodejs%2Fnode%2Fissues%2F42367)
+
+When this issue is fixed, you should not need to install `yarn` since everything
+is handled by the dependent Gradle task `installNodeModules`. If you experience
+problems with having the node modules not correctly setup, use
+
+```shell
+cd tools
+../build/yarn/bin/yarn install --modules-path build/node_modules
+```
 
 ### Pandoc
 
@@ -219,7 +236,7 @@ or use the following shell commands:
 
 ## Docker Build
 
-We provide 2 images in
+We provide 2 images based on `pandoc/latex:2.17-alpine` in
 [gabyxgabyx/technical-markdown](https://hub.docker.com/r/gabyxgabyx/technical-markdown):
 
 1. [**`gabyxgabyx/technical-markdown:1.7.0-minmal`**](https://hub.docker.com/r/gabyxgabyx/technical-markdown/tags)

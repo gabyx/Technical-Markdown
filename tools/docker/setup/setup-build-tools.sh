@@ -83,7 +83,18 @@ function installJDK() {
         brew install openjdk || die "Failed to install JDK"
     elif [ "$os" = "ubuntu" ] ||
         [ "$os" = "alpine" ]; then
-       sudo apk add openjdk11 || die "Failed to install JDK"
+       sudo apk add openjdk17-jdk --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community || die "Failed to install JDK"
+    else
+        die "Operating system '$os' not supported."
+    fi
+}
+
+function installNode() {
+     if haveHomebrew; then
+        brew install node npm || die "Failed to install Node"
+    elif [ "$os" = "ubuntu" ] ||
+        [ "$os" = "alpine" ]; then
+       sudo apk add nodejs npm yarn || die "Failed to install Node"
     else
         die "Operating system '$os' not supported."
     fi
@@ -99,3 +110,4 @@ installParallel
 installJq 
 installYq
 installJDK
+installNode
