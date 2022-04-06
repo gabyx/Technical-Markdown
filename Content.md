@@ -27,9 +27,9 @@ secnumdepth: 3
 
 :::{include-if-format=}
 Reasonable applied defaults before the above yaml meta block are found in:
-- `convert/pandoc/defaults/pandoc-general.yaml` for all output formats
-- `convert/pandoc/defaults/pandoc-html.yaml` for HTML
-- `convert/pandoc/defaults/pandoc-latex.yaml` for LaTex output
+- `tools/convert/defaults/pandoc-general.yaml` for all output formats
+- `tools/convert/defaults/pandoc-html.yaml` for HTML
+- `tools/convert/defaults/pandoc-latex.yaml` for LaTex output
 Note: This is a Div block which get discarded because of the `{include-if-format=}`
 :::
 
@@ -45,9 +45,9 @@ for futher information.
 # Samples
 
 ```{.include}
-${env:ROOT_DIR}/chapters/KonvexeProbleme.md
-${env:ROOT_DIR}/chapters/MarkdownSamples.md
-${env:ROOT_DIR}/chapters/TableSamples.md
+${env:TECHMD_ROOT_DIR}/chapters/KonvexeProbleme.md
+${env:TECHMD_ROOT_DIR}/chapters/MarkdownSamples.md
+${env:TECHMD_ROOT_DIR}/chapters/TableSamples.md
 ```
 
 # References

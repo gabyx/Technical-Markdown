@@ -1,0 +1,10 @@
+[
+    {
+        "globs": "{rootDir}/chapters/tables/TableExample.html",
+        "to": "latex",
+        "outputDir": "{rootDir}/chapters/tables-{ext}",
+        "defaultPostProcessing": true,
+        "scaleColumnsToFull": true,
+        "scaleColumnsToFullMargin": 0.05
+    }
+]

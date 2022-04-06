@@ -1,0 +1,5 @@
+version: "3.5"
+services:
+  dev:
+    volumes:
+      - ~/.git-shared-config:/home/developer/.gitconfig-shared

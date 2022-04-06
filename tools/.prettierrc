@@ -1,13 +1,9 @@
 {
-    "trailingComma": "none",
-    "tabWidth": 4,
-    "quoteProps": "preserve",
-    "printWidth": 120,
-
+    "printWidth": 80,
+    "tabWidth": 2,
+    "semi": false,
+    "singleQuote": false,
     "overrides": [
-        {
-            "files": "Tabelle*.md",
-            "options": { "tabWidth": 2 }
-        }
+        { "files": "*.md", "options": { "proseWrap": "always", "tabWidth": 2 } }
     ]
 }
