@@ -21,8 +21,6 @@ def loadPandocDefault(dataDir: str):
 def setEnvironment(dataDir: str):
     # Setting important env. variables
     filters = os.path.join(dataDir, "filters")
-    s = os.environ.get("LUA_PATH")
-    os.environ["LUA_PATH"] = "{0}/?;{0}/?.lua;{1}".format(filters, s if s else "")
     s = os.environ.get("PYTHONPATH")
     os.environ["PYTHONPATH"] = "{0}:{1}".format(filters, s if s else "")
 

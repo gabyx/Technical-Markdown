@@ -21,7 +21,8 @@ printInfo "Installing Zsh shell ..."
 if [ "$os" = "ubuntu" ]; then
     sudo apt-get install -y zsh perl libncurses5-dev libncursesw5-dev jq
 elif [ "$os" = "alpine" ]; then
-    sudo apk add zsh perl jq
+    sudo apk add zsh perl jq util-linux
+    # util-linux is removed after.
 else
     die "Operating system '$os' not supported."
 fi
@@ -41,8 +42,11 @@ chmod +x ~/.p10k.zsh
 
 # Start ZSH once to install all plugins.
 # `</dev/null` because: https://github.com/zplug/zplug/issues/272#issuecomment-348393440
-zsh -c ". ~/.zshrc" </dev/null ||
+echo exit | script -qec zsh /dev/null ||
     die "Could not source '.zshrc'."
+if [ "$os" = "alpine" ]; then
+    sudo apk del util-linux
+fi
 
 # Place splash entry file
 if [ "$os" = "ubuntu" ]; then

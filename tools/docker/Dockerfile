@@ -3,8 +3,8 @@
 
 ARG TECHMD_OS_DIST="alpine"
 ARG TECHMD_OS_RELEASE="3.14.3"
-ARG TECHMD_PANDOC_VERISON=2.17
-FROM pandoc/latex:${TECHMD_PANDOC_VERISON}-${TECHMD_OS_DIST} as technical-markdown-minimal
+ARG TECHMD_PANDOC_VERSION=latest
+FROM pandoc/latex:${TECHMD_PANDOC_VERSION}-${TECHMD_OS_DIST} as technical-markdown-minimal
 
 
 ARG TECHMD_OS_DIST
@@ -105,8 +105,14 @@ CMD [ "zsh" ]
 
 # Make full convertion image.
 FROM technical-markdown-minimal as technical-markdown
-
 ENV TECHMD_CONTAINER_NAME="Technical-Markdown"
 COPY --chown=$USER_NAME:$USER_NAME tools /home/$USER_NAME/technical-markdown/tools
+RUN find /home/$USER_NAME/technical-markdown/tools \
+    -type f -and \( \
+    -name "*.sh" \
+    -or -name "*.lua" \
+    -or -name "*.py" \) \
+    -exec chmod +x {} \;
+
 ENV TECHMD_TOOLS_DIR="/home/$USER_NAME/technical-markdown/tools"
 ENV TECHMD_CONVERT_DIR="/home/$USER_NAME/technical-markdown/tools/convert"

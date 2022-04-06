@@ -19,7 +19,7 @@ if [ -n "$TECHMD_BUILD_VERSION_REMOTE" ]; then
     fi
 fi
 
-TECHMD_SPLASH_TEXT=$(echo "$containerName" | figlet -f slant -w 120 | sed -E "s/^/  /g")
+TECHMD_SPLASH_TEXT=$(echo "$containerName" | figlet -f slant -w 140 | sed -E "s/^/  /g")
 COMMIT_SHA=$(echo "$TECHMD_COMMIT_SHA" | cut -c -7)
 
 echo -e "\e[34m\e[1m

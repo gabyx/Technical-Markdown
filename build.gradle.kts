@@ -110,7 +110,6 @@ fun checkPandocInstall(pandocExe: File){
     }
 }
 
-
 val initBuild by tasks.register<YarnTask>("initBuild") {
     group = "TechnicalMarkdown"
     description = "Setups node/yarn and modules."
@@ -204,7 +203,6 @@ fun createPandocSettings(): PandocSettings {
         //env.addExecutableDirToPath(pandocExe)
         env["TECHMD_ROOT_DIR"] = "${project.rootDir}"
         env["PYTHON_PATH"] = env.getOrDefault("PYTHON_PATH", "") + pathSep + pythonPaths.joinToString(separator = pathSep)
-        env["LUA_PATH"] = env.getOrDefault("LUA_PATH", "") + pathSep + luaPaths.flatMap({v -> listOf("$v/?", "$v/?.lua") }).joinToString(separator=";")
 
         return PandocSettings(pandocExe, convertDir, convertDir, project.rootDir, env)
 }

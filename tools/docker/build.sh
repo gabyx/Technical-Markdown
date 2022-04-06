@@ -16,6 +16,7 @@ set -u
 # Arguments
 tag="latest"
 push="false"
+noCacheArg=""
 dockerArgs=()
 
 # Parse all arguments.
@@ -30,6 +31,8 @@ function parseArgs() {
             tag="$p"
         elif [ "$p" = "--push" ]; then
             push="true"
+        elif [ "$p" = "--no-cache" ]; then
+            noCacheArg="--no-cache"
         elif [ "$p" = "-h" ] || [ "$p" = "--help" ]; then
             printInfo "Build a container." \
                 "Usage:" \
@@ -66,29 +69,31 @@ printInfo "Repository Version: '$repoVersion'."
 for addTag in "-minimal" ""; do
 
     # Define name.
-    name="technical-markdown"
-    if [ "$push" = "true" ]; then
-        name="docker.io/gabyxgabyx/$name"
-    fi
-    imageName="$name:$repoVersion$addTag"
 
-    printInfo "Building image '$name'..."
+    name="technical-markdown"
+    imageName="$name:$repoVersion$addTag"
+    imageNameLatest="$name:latest$addTag"
+
+    printInfo "Building image '$imageName'..."
     cd "$ROOT_DIR" &&
         DOCKER_BUILDKIT=1 \
             docker build \
             "${dockerArgs[@]}" \
             -f tools/docker/Dockerfile \
             -t "$imageName" \
+            $noCacheArg \
+            --target "$name$addTag" \
             --build-arg "TECHMD_BUILD_VERSION=$repoVersion" \
             --build-arg "TECHMD_COMMIT_SHA=$repoCommitSHA" \
-            --target "technical-markdown" \
             .
 
+    docker tag "$imageName" "$imageNameLatest"
+
     if [ "$push" = "true" ]; then
-        docker push "$imageName"
-        if [ "$addTag" = "" ]; then
-            docker tag "$imageName" "$name:latest"
-            docker push "$name:latest"
-        fi
+
+        docker tag "$imageName" "docker.io/gabyxgabyx/$imageName"
+        docker tag "$imageNameLatest" "docker.io/gabyxgabyx/$imageNameLatest"
+        docker push "docker.io/gabyxgabyx/$imageName"
+        docker push "docker.io/gabyxgabyx/$imageNameLatest"
     fi
 done
