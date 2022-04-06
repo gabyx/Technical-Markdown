@@ -12,7 +12,7 @@ major clean up on the directory structure of the repository. The major changes
 include
 
 - Pandoc `2.17` is used in all docker images.
-- `convert` folder has been moved to `tools/convert` to **decouple** the build
+- The `convert` folder has been moved to `tools/convert` to **decouple** the build
   from the markdown source. The upgrade makes it possible to use docker images
   `technical-markdown:<version>` to build your own sources without the need to
   have the `tools` folder also in your own repository. Also a different source
