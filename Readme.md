@@ -4,7 +4,7 @@ A markdown setup for technical documents, reports, theses & papers.
 
 ![](https://img.shields.io/badge/dependencies-docker%20%7C%20pandoc%20%7C%20python3%20%7C%20gradle%20%7C%20vscode-green)
 
-**Note: Docker build setup is coming soon. Which will facilitate lots of things and makes your project more portable!**
+**Note: A `docker` build setup has been implemented! Read more in [here](#docker-build).**
 
 ## Quick Intro
 
