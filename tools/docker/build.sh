@@ -14,10 +14,11 @@ set -u
 . "$ROOT_DIR/tools/docker/setup/common/log.sh"
 
 # Arguments
-tag="latest"
 push="false"
 noCacheArg=""
 dockerArgs=()
+baseName="technical-markdown"
+pushBaseName="docker.io/gabyxgabyx"
 
 # Parse all arguments.
 function parseArgs() {
@@ -25,10 +26,15 @@ function parseArgs() {
     local prev=""
     local count=0
     for p in "$@"; do
-        if [ "$p" = "--tag" ]; then
+        
+        if [ "$p" = "--base-name" ]; then
             true
-        elif [ "$prev" = "--tag" ]; then
-            tag="$p"
+        elif [ "$prev" = "--base-name" ]; then
+            baseName="$p"
+        elif [ "$p" = "--base-name" ]; then
+            true
+        elif [ "$prev" = "--push-base-name" ]; then
+            pushBaseName="$p"
         elif [ "$p" = "--push" ]; then
             push="true"
         elif [ "$p" = "--no-cache" ]; then
@@ -36,7 +42,8 @@ function parseArgs() {
         elif [ "$p" = "-h" ] || [ "$p" = "--help" ]; then
             printInfo "Build a container." \
                 "Usage:" \
-                "   --tag <string>       Container tag."
+                "   --base-name <string>  Image base name (default 'technical-markdown')." \
+                "   --push-base-name <string>  Image base name (default 'docker.io/gabyxgabyx')."
             exit 0
         elif [ "$p" = "--" ]; then
             break
@@ -60,19 +67,19 @@ parseArgs "$@"
 # Define repo version.
 printInfo "Define tag and version."
 repoCommitSHA="$(git rev-parse HEAD)"
+
 # Get the tag (on CI possibly not there.)
-repoVersion="$(git describe --tags --match "v*" --abbrev=0 2>/dev/null | sed -E "s/^v//g")" || repoVersion="not-found"
+repoVersion="$(git describe --tags --match "v*" \
+    --abbrev=0 2>/dev/null | sed -E "s/^v//g")" || repoVersion="not-found"
 
 printInfo "Repository SHA: '$repoCommitSHA'."
 printInfo "Repository Version: '$repoVersion'."
 
 for addTag in "-minimal" ""; do
 
-    # Define name.
-
-    name="technical-markdown"
-    imageName="$name:$repoVersion$addTag"
-    imageNameLatest="$name:latest$addTag"
+    # Define image name.
+    imageName="$baseName:$repoVersion$addTag"
+    imageNameLatest="$baseName:latest$addTag"
 
     printInfo "Building image '$imageName'..."
     cd "$ROOT_DIR" &&
@@ -82,7 +89,7 @@ for addTag in "-minimal" ""; do
             -f tools/docker/Dockerfile \
             -t "$imageName" \
             $noCacheArg \
-            --target "$name$addTag" \
+            --target "technical-markdown$addTag" \
             --build-arg "TECHMD_BUILD_VERSION=$repoVersion" \
             --build-arg "TECHMD_COMMIT_SHA=$repoCommitSHA" \
             .
@@ -90,10 +97,9 @@ for addTag in "-minimal" ""; do
     docker tag "$imageName" "$imageNameLatest"
 
     if [ "$push" = "true" ]; then
-
-        docker tag "$imageName" "docker.io/gabyxgabyx/$imageName"
-        docker tag "$imageNameLatest" "docker.io/gabyxgabyx/$imageNameLatest"
-        docker push "docker.io/gabyxgabyx/$imageName"
-        docker push "docker.io/gabyxgabyx/$imageNameLatest"
+        docker tag "$imageName" "$pushBaseName/$imageName"
+        docker tag "$imageNameLatest" "$pushBaseName/$imageNameLatest"
+        docker push "$pushBaseName/$imageName"
+        docker push "$pushBaseName/$imageNameLatest"
     fi
 done
