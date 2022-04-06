@@ -1,58 +1,50 @@
-import java.lang.module.ModuleDescriptor.Version
 
 plugins {
-  //id "com.liferay.yarn" version "7.2.6"
-  id("org.siouan.frontend-jdk11") version "5.1.0"
+   id("com.github.node-gradle.node") version "3.2.1"
 }
 
-@Suppress("unchecked_cast", "nothing_to_inline")
-inline fun <T> uncheckedCast(target: Any?): T = target as T
+import java.lang.module.ModuleDescriptor.Version
+import com.github.gradle.node.yarn.task.YarnTask
 
 apply(plugin = "java")
-apply(from = "gradle/runCommand.gradle.kts")
-val checkCmd = project.extensions.getByName("checkCommand")
-                as (Array<String>, String?) -> Void
+
+val globalEnv = System.getenv().toMutableMap()
+val pathSep = System.getProperty("path.separator")
+
+fun getEnvDirOrRelative(envVar: String, relDir: String) : File {
+    var d = globalEnv.getOrDefault(envVar, "")
+    if (d == "") {
+        d = "${project.rootDir}/${relDir}"
+    }
+
+    var f = file(d)
+    if (!f.exists()){
+         throw RuntimeException(
+            "Convert directory '${f}' does not exist relative.")
+    }
+    return f
+}
 
 project.buildDir = file("${project.rootDir}/build")
 
-// Node/Yarn frontend
-frontend {
-    nodeVersion.set("10.19.0")
-    nodeInstallDirectory.set(file("${project.buildDir}/node"))
-    yarnEnabled.set(true)
-    yarnVersion.set("1.22.10")
-    packageJsonDirectory.set(file("${project.rootDir}/tools"))
-    installScript.set("install --modules-folder='${project.buildDir}/node_modules'")
-    yarnInstallDirectory.set(file("${project.buildDir}/yarn"))
+val convertDir = getEnvDirOrRelative("TECHMD_CONVERT_DIR", "tools/convert")
+val toolsDir = getEnvDirOrRelative("TECHMD_TOOLS_DIR", "tools")
+
+if (!toolsDir.exists()) {
+    throw RuntimeException("Tools dir 'tools' not available.")
+}
+if (!convertDir.exists()) {
+    throw RuntimeException("Convert dir 'tools/convert' not available.")
 }
 
-// Tweak to only run installFront once
-tasks.named("installFrontend") {
-    outputs.upToDateWhen({true})
-}
+// Import all functions
+@Suppress("unchecked_cast", "nothing_to_inline")
+inline fun <T> uncheckedCast(target: Any?): T = target as T
+apply(from = "${toolsDir}/gradle/runCommand.gradle.kts")
+val checkCmd = project.extensions.getByName("checkCommand")
+                as (Array<String>, String?) -> Void
 
-val globalEnv = System.getenv()
-val pathSep = System.getProperty("path.separator")
-val binDir = file("${project.buildDir}/node_modules/.bin")
-
-val pandocVersionMin = Version.parse("2.14")
-val pandocExe: String = project.properties.getOrDefault("pandoc", "pandoc") as String
-val pythonExe: String = project.properties.getOrDefault("python", "python") as String
-
-val pythonPaths : Array<File> = arrayOf(file("${project.rootDir}/convert/pandoc/filters"))
-val luaPaths : Array<File> = arrayOf(file("${project.rootDir}/convert/pandoc/filters"))
-
-val mainFileMarkdown = file("${project.rootDir}/Content.md")
-val outputFileHTML = file("${project.rootDir}/Content.html")
-val outputFileJira = file("${project.rootDir}/Content.jira")
-val outputFilePDF = file("${project.rootDir}/Content.pdf")
-
-fun  MutableMap<String, String>.addExecutableDirToPath(exe: String) {
-    if(exe.contains("/") || exe.contains("\\")) {
-        this["PATH"] = file(exe).getParent() + if(this["PATH"] != null ) pathSep + this["PATH"] else ""
-    }
-}
-
+// RunCommand function.
 fun List<String>.runCommand(
     workingDir: File = File(".")
 ): String? = runCatching {
@@ -62,15 +54,48 @@ fun List<String>.runCommand(
         .inputStream.bufferedReader().readText()
 }.getOrNull()
 
+fun  MutableMap<String, String>.addExecutableDirToPath(exe: String) {
+    if(this["PATH"] != null && this["PATH"]!!.contains(exe)) {
+        return
+    }
+    else if(exe.contains("/") || exe.contains("\\")) {
+        this["PATH"] = file(exe).getParent() + if(this["PATH"] != null ) pathSep + this["PATH"] else ""
+    }
+}
 
-fun checkPandocInstall(pandocExe: String){
+node {
+    download.set(false)
+    version.set("17.7.1")
+    npmInstallCommand.set("install")
+    workDir.set(file("${project.buildDir}/node/nodejs"))
+    npmWorkDir.set(file("${project.buildDir}/node/npm"))
+    yarnWorkDir.set(file("${project.buildDir}/node/yarn"))
+    nodeProjectDir.set(file("${toolsDir}"))
+}
+
+val binDir = file("${project.buildDir}/node_modules/.bin")
+
+val pandocVersionMin = Version.parse("2.14")
+val pandocExe = File(project.properties.getOrDefault("pandoc", "pandoc") as String)
+val pythonExe = File(project.properties.getOrDefault("python", "python") as String)
+
+val pythonPaths : Array<File> = arrayOf(file("${convertDir}/filters"))
+val luaPaths : Array<File> = arrayOf(file("${convertDir}/filters"))
+
+val mainFileMarkdown = file("${project.rootDir}/Content.md")
+val outputFileHTML = file("${project.buildDir}/Content.html")
+val outputFileJira = file("${project.buildDir}/Content.jira")
+val outputFilePDF = file("${project.buildDir}/Content.pdf")
+
+fun checkPandocInstall(pandocExe: File){
     var pandocAvailable = false
-    var version : String? = listOf<String>(pandocExe, "--version").runCommand()
+    var version : String? = listOf<String>(pandocExe.getPath(), "--version").runCommand()
 
     if(version != null){ 
         var m = Regex("""pandoc\s*(.*)""").find(version)
         if(m != null) {
             var v = Version.parse(m.groupValues[1])
+            println("Pandoc version: ${v}")
             if(v.compareTo(pandocVersionMin) >= 0){
                 pandocAvailable = true
             }
@@ -85,11 +110,10 @@ fun checkPandocInstall(pandocExe: String){
     }
 }
 
-
-val initBuild by tasks.register<Task>("initBuild") {
+val initBuild by tasks.register<YarnTask>("initBuild") {
     group = "TechnicalMarkdown"
     description = "Setups node/yarn and modules."
-    dependsOn("installFrontend")
+    args.set(listOf("install", "--modules-folder", "${project.buildDir}/node_modules"))
 
     outputs.upToDateWhen({true})
 }
@@ -114,7 +138,7 @@ val defineEnvironment by tasks.register<Task>("defineEnvironment") {
         }
 
         logger.quiet("Checking executables ...")
-        checkCmd(arrayOf(pythonExe, "--version"), null)
+        checkCmd(arrayOf(pythonExe.getPath(), "--version"), null)
         checkPandocInstall(pandocExe)
 
         logger.info("Pandoc Exe: $pandocExe")
@@ -131,9 +155,9 @@ val compileLess by tasks.register<Exec>("compileLess") {
     description = "Compile Less"
     dependsOn(initBuild, defineEnvironment)
 
-    val lessMainFile = fileTree("${project.rootDir}/convert/css/src/"){ include("main.less") }.getFiles().elementAt(0)
-    val lessFiles = fileTree("${project.rootDir}/convert/css/src/"){ include("*.less") }.getFiles()
-    val cssFile = file("${project.rootDir}/convert/css/main.css")
+    val lessMainFile = fileTree("${convertDir}/css/src/"){ include("main.less") }.getFiles().elementAt(0)
+    val lessFiles = fileTree("${convertDir}/css/src/"){ include("*.less") }.getFiles()
+    val cssFile = file("${convertDir}/css/main.css")
 
     inputs.files(lessMainFile, lessFiles)
     outputs.file(cssFile)
@@ -145,9 +169,20 @@ val compileLess by tasks.register<Exec>("compileLess") {
     })
 
     executable(lessCompiler)
-    args("--include-path=convert/css/src", lessMainFile, cssFile)
+    args("--include-path=${convertDir}/css/src", lessMainFile, cssFile)
 
     workingDir(project.rootDir)
+}
+
+val buildCSS by tasks.register<Copy>("copyLess") {
+    dependsOn(compileLess)
+    from("${convertDir}/css/main.css")
+    into("${project.buildDir}/css")
+}
+
+val copyAssets by tasks.register<Copy>("copyAssets") {
+    from("${project.rootDir}/files")
+    into("${project.buildDir}/files")
 }
 
 fun getFileSizeMb(file: File) : Long {
@@ -155,7 +190,9 @@ fun getFileSizeMb(file: File) : Long {
 }
 
 data class PandocSettings(
-    val pandocExe: String,
+    val pandocExe: File,
+    val dataDir: File,
+    val resourceDir: File,
     val workingDir: File,
     val env: Map<String, String>)
 
@@ -164,11 +201,10 @@ fun createPandocSettings(): PandocSettings {
         var env = globalEnv.toMutableMap()
         //env.addExecutableDirToPath(pythonExe)
         //env.addExecutableDirToPath(pandocExe)
-        env["ROOT_DIR"] = "${project.rootDir}"
+        env["TECHMD_ROOT_DIR"] = "${project.rootDir}"
         env["PYTHON_PATH"] = env.getOrDefault("PYTHON_PATH", "") + pathSep + pythonPaths.joinToString(separator = pathSep)
-        env["LUA_PATH"] = env.getOrDefault("LUA_PATH", "") + pathSep + luaPaths.flatMap({v -> listOf("$v/?", "$v/?.lua") }).joinToString(separator=";")
 
-        return PandocSettings(pandocExe, project.rootDir, env)
+        return PandocSettings(pandocExe, convertDir, convertDir, project.rootDir, env)
 }
 
 val pandocSettings = createPandocSettings()
@@ -201,11 +237,16 @@ abstract class PandocTask @Inject constructor() : Exec() {
     @get:OutputFile
     abstract val outputFile: Property<File>
 
-    fun makePandocArgs(exportType: String, verbose: Boolean, failIfWarning: Boolean = true) : Array<String> {
+    fun makePandocArgs(exportType: String, 
+                       verbose: Boolean, 
+                       failIfWarning: Boolean = true, 
+                       dataDir: File,
+                       resourceDir: File) : Array<String> {
     return arrayOf(
             if(failIfWarning) "--fail-if-warnings" else null,
             if(verbose) "--verbose" else null,
-            "--data-dir=convert/pandoc",
+            "--data-dir=${dataDir.getPath()}",
+            "--resource-path=${resourceDir.getPath()}",
             "--defaults=pandoc-dirs.yaml",
             "--defaults=pandoc-general.yaml",
             "--defaults=pandoc-$exportType.yaml",
@@ -222,25 +263,25 @@ abstract class PandocTask @Inject constructor() : Exec() {
         markdownFiles.convention(project.fileTree("${project.rootDir}/chapters/"){include("**/*.md", "**/*.html")})
         assetFiles.convention(project.fileTree("${project.rootDir}/files/"){ include("**/*") })
         literatureFiles.convention(project.fileTree("${project.rootDir}/literature/"){ include("**/*") })
-        convertFiles.convention(project.fileTree("${project.rootDir}/convert/"){ 
-            include("pandoc/**/*")
-            include("scripts/**/*")
-            include("css/**/*.css")
-        })
+        convertFiles.convention(project.fileTree("${settings.dataDir}"){ include("**/*") })
 
         inputs.files(inputFile, markdownFiles, assetFiles, convertFiles, literatureFiles)
         outputs.file(outputFile)
 
         executable(settings.pandocExe)
 
-        args(*makePandocArgs(exportType.get(), verbose.get(), failIfWarning.get()))
+        args(*makePandocArgs(exportType.get(), 
+                             verbose.get(), 
+                             failIfWarning.get(), 
+                             settings.dataDir, 
+                             settings.resourceDir))
+
         if(additionalArgs.isPresent()){
             args(*additionalArgs.get())
         }
         args("-o",
              outputFile.get(),
              inputFile.get())
-
 
         environment(settings.env)
         workingDir(project.rootDir)
@@ -265,17 +306,21 @@ abstract class PandocTask @Inject constructor() : Exec() {
 
 val convertTables = tasks.create<Exec>("convert-tables") {
     group = "TechnicalMarkdown"
-    description = "Converte Tables"
+    description = "Convert Tables"
     dependsOn(initBuild, defineEnvironment)
 
-    inputs.files("convert/scripts/convert-tables.py",
+    inputs.files("${convertDir}/scripts/convert-tables.py",
                  fileTree("${project.rootDir}/chapters/tables"){include("**/*.html")})
     outputs.files(fileTree("${project.rootDir}/chapters/tables-tex"){include("**/*.tex")})
 
     executable(pythonExe)
-    args(file("${project.rootDir}/convert/scripts/convert-tables.py"),
+    args(file("${convertDir}/scripts/convert-tables.py"),
+         "--root-dir",
+         "${project.rootDir}",
+         "--data-dir", 
+         "${convertDir}",
          "--config",
-         file("${project.rootDir}/convert/scripts/tables.json"),
+        "${project.rootDir}/includes/convert-tables.json",
          "--parallel")
 
     environment(pandocSettings.env)
@@ -302,7 +347,7 @@ val transformMath = project.task<Copy>("transform-math") {
 }
 
 val buildHTML = tasks.register<PandocTask>("build-html") {
-    dependsOn(initBuild, defineEnvironment, convertTables, compileLess)
+    dependsOn(initBuild, defineEnvironment, convertTables, buildCSS, copyAssets)
     inputFile.set(mainFileMarkdown)
     exportType.set("html")
     verbose.set(true)
@@ -342,9 +387,10 @@ val viewHTML = tasks.register<Exec>("view-html") {
         executable(browserSync)
         args("start",
              "--server",
-             "--config", file("${project.rootDir}/gradle/browser-sync-config.js"),
+             "--config", file("${project.rootDir}/tools/gradle/browser-sync-config.js"),
              "--files", outputFileHTML,
              "--files", "**/*.css",
+             "--startPath", "build",
              "--index", outputFileHTML.getName())
 
         workingDir(project.rootDir)

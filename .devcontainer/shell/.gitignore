@@ -1,0 +1,4 @@
+# The history shall never be commited
+**/*
+!.gitkeep
+!.gitignore

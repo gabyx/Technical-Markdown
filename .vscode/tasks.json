@@ -7,7 +7,7 @@
             "label": "🛠️ Convert Markdown ⇉ HTML",
             "type": "shell",
             "command": "${workspaceFolder}/gradlew",
-            "args": ["-t", "build-html", "-Ppython=${config:python.pythonPath}", "--warning-mode", "all"],
+            "args": ["-t", "build-html", "-Ppython=${command:python.interpreterPath}", "--warning-mode", "all"],
             "problemMatcher": [],
             "presentation": {
                 "panel": "dedicated",
@@ -18,7 +18,7 @@
             "label": "🛠️ Convert Markdown ⇉ PDF",
             "type": "shell",
             "command": "${workspaceFolder}/gradlew",
-            "args": ["-t", "build-pdf-tex", "-Ppython=${config:python.pythonPath}", "--warning-mode", "all"],
+            "args": ["-t", "build-pdf-tex", "-Ppython=${command:python.interpreterPath}", "--warning-mode", "all"],
             "problemMatcher": [],
             "presentation": {
                 "panel": "dedicated",
@@ -29,7 +29,7 @@
             "label": "🛠️ Convert Markdown ⇉ Jira",
             "type": "shell",
             "command": "${workspaceFolder}/gradlew",
-            "args": ["-t", "build-jira", "-Ppython=${config:python.pythonPath}", "--warning-mode", "all"],
+            "args": ["-t", "build-jira", "-Ppython=${command:python.interpreterPath}", "--warning-mode", "all"],
             "problemMatcher": [],
             "presentation": {
                 "panel": "dedicated",
@@ -43,7 +43,7 @@
         //     "args": [
         //         "-t",
         //         "build-pdf-chrome",
-        //         "-Ppython=${config:python.pythonPath}",
+        //         "-Ppython=${command:python.interpreterPath}",
         //     ],
         //     "problemMatcher": [],
         //     "presentation": {
@@ -54,7 +54,7 @@
             "label": "📄 View HTML",
             "type": "shell",
             "command": "${workspaceFolder}/gradlew",
-            "args": ["-t", "view-html", "-Ppython=${config:python.pythonPath}", "--warning-mode", "all"],
+            "args": ["-t", "view-html", "-Ppython=${command:python.interpreterPath}", "--warning-mode", "all"],
             "problemMatcher": [],
             "presentation": {
                 "group": "converter"
@@ -64,7 +64,7 @@
             "label": "🛠️ Convert Markdown ⇉ HTML, PDF",
             "type": "shell",
             "command": "${workspaceFolder}/gradlew",
-            "args": ["-parallel", "-t", "build-html", "build-pdf", "-Ppython=${config:python.pythonPath}", "--warning-mode", "all"],
+            "args": ["-parallel", "-t", "build-html", "build-pdf", "-Ppython=${command:python.interpreterPath}", "--warning-mode", "all"],
             "problemMatcher": [],
             "isBackground": true,
             "presentation": {
