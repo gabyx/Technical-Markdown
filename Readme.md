@@ -261,9 +261,9 @@ minus the `v` prefix.
 
 | Env. Name            | Default Value                                       | Description                                                                     |
 | -------------------- | --------------------------------------------------- | ------------------------------------------------------------------------------- |
-| `TECHMD_TOOLS_DIR`   | 1. empty                                            | The tools directory containing all files needed for the conversion.             |
+| `TECHMD_TOOLS_DIR`   | 1. not set                                          | The tools directory containing all files needed for the conversion.             |
 |                      | 2 . `/home/techmd/technical-markdown/tools`         |                                                                                 |
-| `TECHMD_CONVERT_DIR` | 1. `""`                                             | The convert directory containing the files needed for the `pandoc` converstion. |
+| `TECHMD_CONVERT_DIR` | 1. not set                                          | The convert directory containing the files needed for the `pandoc` converstion. |
 |                      | 2 . `/home/techmd/technical-markdown/tools/convert` |                                                                                 |
 
 ### Using the Docker Image
