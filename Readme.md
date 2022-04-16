@@ -140,14 +140,8 @@ checked-in `gradlew` Gradle wrapper.
 
 ### Yarn
 
-So far `yarn` is required on the system, because of this
-
-- [issue](https://github.com/node-gradle/gradle-node-plugin/issues/223).
-  ![Status](https://img.shields.io/badge/dynamic/json?color=%23FF0000&label=Status&query=%24.state&url=https%3A%2F%2Fapi.github.com%2Frepos%2Fnodejs%2Fnode%2Fissues%2F42367)
-
-When this issue is fixed, you should not need to install `yarn` since everything
-is handled by the dependent Gradle task `installNodeModules`. If you experience
-problems with having the node modules not correctly setup, use
+So far `yarn` is not required on the system and handled by the dependent Gradle task `nodeSetup`.
+If you experience problems with having the node modules not correctly setup, use
 
 ```shell
 cd tools
@@ -259,12 +253,14 @@ minus the `v` prefix.
 
 ### Environment Variables
 
-| Env. Name            | Default Value                                       | Description                                                                     |
-| -------------------- | --------------------------------------------------- | ------------------------------------------------------------------------------- |
-| `TECHMD_TOOLS_DIR`   | 1. not set                                          | The tools directory containing all files needed for the conversion.             |
-|                      | 2 . `/home/techmd/technical-markdown/tools`         |                                                                                 |
-| `TECHMD_CONVERT_DIR` | 1. not set                                          | The convert directory containing the files needed for the `pandoc` converstion. |
-|                      | 2 . `/home/techmd/technical-markdown/tools/convert` |                                                                                 |
+| Env. Name                | Default Value                                       | Description                                                                                     |
+| ------------------------ | --------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `TECHMD_TOOLS_DIR`       | 1. not set                                          | The tools directory containing all files needed for the conversion.                             |
+|                          | 2 . `/home/techmd/technical-markdown/tools`         |                                                                                                 |
+| `TECHMD_CONVERT_DIR`     | 1. not set                                          | The convert directory containing the files needed for the `pandoc` converstion.                 |
+|                          | 2 . `/home/techmd/technical-markdown/tools/convert` |                                                                                                 |
+| `TECHMD_USE_SYSTEM_NODE` | 1. `true`                                           | Use the node installation on the system instead of installing a local one into the build folder |
+|                          | 2. `true`                                           |                                                                                                 |
 
 ### Using the Docker Image
 
