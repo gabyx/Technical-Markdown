@@ -29,6 +29,7 @@ project.buildDir = file("${project.rootDir}/build")
 
 val convertDir = getEnvDirOrRelative("TECHMD_CONVERT_DIR", "tools/convert")
 val toolsDir = getEnvDirOrRelative("TECHMD_TOOLS_DIR", "tools")
+val useSystemNode = globalEnv.getOrDefault("TECHMD_USE_SYSTEM_NODE", "false") == "true"
 
 if (!toolsDir.exists()) {
     throw RuntimeException("Tools dir 'tools' not available.")
@@ -64,7 +65,7 @@ fun  MutableMap<String, String>.addExecutableDirToPath(exe: String) {
 }
 
 node {
-    download.set(false)
+    download.set(!useSystemNode)
     version.set("17.7.1")
     npmInstallCommand.set("install")
     workDir.set(file("${project.buildDir}/node/nodejs"))

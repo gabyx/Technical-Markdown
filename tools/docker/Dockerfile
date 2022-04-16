@@ -116,3 +116,4 @@ RUN find /home/$USER_NAME/technical-markdown/tools \
 
 ENV TECHMD_TOOLS_DIR="/home/$USER_NAME/technical-markdown/tools"
 ENV TECHMD_CONVERT_DIR="/home/$USER_NAME/technical-markdown/tools/convert"
+ENV TECHMD_USE_SYSTEM_NODE="true"
