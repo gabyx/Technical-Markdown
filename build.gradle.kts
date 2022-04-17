@@ -397,3 +397,8 @@ val viewHTML = tasks.register<Exec>("view-html") {
         workingDir(project.rootDir)
 }
 
+val packageHTML = tasks.register<Copy>("package-html") {
+    from("${project.buildDir}")
+    include("files/**", "css/**", "Content.html")
+    into("${project.rootDir}/docs/html-package")
+}

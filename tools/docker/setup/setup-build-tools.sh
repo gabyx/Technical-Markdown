@@ -117,10 +117,31 @@ function installLatexPackages() {
         collection-pictures \
         collection-xetex ||
         printWarning "Not all packages installed."
+
+    sudo tlmgr install \
+        adjustbox bigfoot \
+        catchfile \
+        cellspace \
+        collcell \
+        collectbox \
+        enumitem \
+        footmisc \
+        leftidx \
+        makecell \
+        mathdots \
+        quoting \
+        svg \
+        tablefootnote \
+        titling \
+        transparent \
+        wrapfig ||
+        printWarning "Not all additional packages installed."
 }
 
 function installFonts() {
     sudo apk add --no-cache fontconfig || die "Could not install fontconfig."
+    
+    sudo apk add --no-cache ttf-dejavu || die "Could not install Deja Vue font."
 
     local dir=$(mktemp -d)
     (
@@ -134,18 +155,30 @@ function installFonts() {
             find "latinmodern-math-1959/otf" -name "*.otf" -exec sudo install -m644 {} /usr/share/fonts/opentype/latin-modern-fonts/ \;
     ) || die "Could not install latin modern font."
 
-    # (
-    #     cd "$dir" &&
-    #         curl -L https://github.com/google/fonts/archive/main.tar.gz -o gf.tar.gz &&
-    #         tar -xf gf.tar.gz &&
-    #         sudo mkdir -p /usr/share/fonts/truetype/google-fonts &&
-    #          find "fonts-main" -name "*.ttf" -exec sudo install -m644 {} /usr/share/fonts/truetype/google-fonts/ \; || return 1
-    # ) || die "Could not install google fonts."
+    (
+        cd "$dir" &&
+            curl -L https://github.com/google/fonts/archive/main.tar.gz -o gf.tar.gz &&
+            tar -xf gf.tar.gz &&
+            sudo mkdir -p /usr/share/fonts/truetype/google-fonts &&
+             find "fonts-main" -name "*.ttf" -exec sudo install -m644 {} /usr/share/fonts/truetype/google-fonts/ \; || return 1
+    ) || die "Could not install google fonts."
 
     rm -rf "$dir" &&
         sudo rm -rf /var/cache/* &&
         fc-cache -f
 }
+
+function installInkscape() {
+    if haveHomebrew; then
+        brew install inkscape || die "Failed to install inkscape"
+    elif [ "$os" = "ubuntu" ] ||
+        [ "$os" = "alpine" ]; then
+        sudo apk add inkscape || die "Failed to install inkscape"
+    else
+        die "Operating system '$os' not supported."
+    fi
+}
+
 
 os="$1"
 # osRelease="$2"
@@ -153,10 +186,11 @@ arch=$(getPlatformArch)
 
 printInfo "Installing general build tools ..."
 
-installLatexPackages
-installFonts
-installParallel
 installJq
 installYq
+installFonts
+installLatexPackages
 installJDK
 installNode
+installInkscape
+# installParallel
