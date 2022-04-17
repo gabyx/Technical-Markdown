@@ -22,7 +22,7 @@ technical documents:**
   - **export to PDF** with `pandoc` to `xelatex` using `latexmk`
     [See Output](build/Content.pdf)
   - **export to HTML** with `pandoc` to `html`
-    [See Output](https://gabyx.github.io/TechnicalMarkdown/Content.html)
+    [See Output](https://gabyx.github.io/TechnicalMarkdown/docs/html-archive/Content.html)
   - [todo] **export to PDF** with `pandoc` to `html` then to `chrome` with
     `pupeteer`
 

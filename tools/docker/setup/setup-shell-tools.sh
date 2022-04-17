@@ -11,6 +11,7 @@ DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd)"
 . "$DIR/common/log.sh"
 . "$DIR/common/general.sh"
 . "$DIR/common/platform.sh"
+. "$DIR/common/packages.sh"
 
 set -e
 set -u
@@ -114,6 +115,6 @@ arch=$(getPlatformArch)
 
 installShellcheck || die "Could not setup 'shellcheck'."
 installShellformat || die "Could not setup 'shellformat'."
-installEncodingTools || die "Could not setup encoding tools."
-installBinaryTools || die "Could not setup binary tools."
-installManTools || die "Could not setup 'man' tools."
+# installEncodingTools || die "Could not setup encoding tools."
+# installBinaryTools || die "Could not setup binary tools."
+# installManTools || die "Could not setup 'man' tools."
