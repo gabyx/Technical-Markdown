@@ -234,16 +234,16 @@ or use the following shell commands:
 
 ## Docker Build
 
-We provide 2 images based on `pandoc/latex:2.17-alpine` in
+We provide 2 images based on `pandoc/latex:2.18-alpine` in
 [gabyxgabyx/technical-markdown](https://hub.docker.com/r/gabyxgabyx/technical-markdown):
 
-1. [**`gabyxgabyx/technical-markdown:2.0.0-minimal`**](https://hub.docker.com/r/gabyxgabyx/technical-markdown/tags)
+1. [**`gabyxgabyx/technical-markdown:latest-minimal`**](https://hub.docker.com/r/gabyxgabyx/technical-markdown/tags)
    : Minimal docker images including pandoc and all necessary tools to fully
    build your markdown. It does not include the folder `tools` and `convert` and
    your mounted Git repository needs to contain these as in this repository or
    by setting the environment variables described below. This is useful if you
    want to tweak the layout and styling of the document.
-2. [**`gabyxgabyx/technical-markdown:2.0.0`**](https://hub.docker.com/r/gabyxgabyx/technical-markdown/tags)
+2. [**`gabyxgabyx/technical-markdown:latest`**](https://hub.docker.com/r/gabyxgabyx/technical-markdown/tags)
    : The full-fledged image which is used in this VS Code `.devcontainer` setup.
    It contains its baked `tools` and `tools/convert` folders which are used to
    compile your markdown.
