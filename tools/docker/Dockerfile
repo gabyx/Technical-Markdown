@@ -3,7 +3,7 @@
 
 ARG TECHMD_OS_DIST="alpine"
 ARG TECHMD_OS_RELEASE="3.14.3"
-ARG TECHMD_PANDOC_VERSION=2.17.1
+ARG TECHMD_PANDOC_VERSION=2.18
 FROM pandoc/latex:${TECHMD_PANDOC_VERSION}-${TECHMD_OS_DIST} as technical-markdown-minimal
 
 
@@ -83,10 +83,13 @@ RUN chmod +x $TECHMD_SETUP_DIR/setup-python.sh && \
     "$PYTHON_ENV" \
     "$TECHMD_SETUP_DIR/python.requirements"
 
-# Add build tools.
 COPY --chown=$USER_NAME:$USER_NAME tools/docker/setup/setup-build-tools.sh $TECHMD_SETUP_DIR/
 RUN chmod +x $TECHMD_SETUP_DIR/setup-build-tools.sh && \
     $TECHMD_SETUP_DIR/setup-build-tools.sh "$TECHMD_OS_DIST"
+
+COPY --chown=$USER_NAME:$USER_NAME tools/docker/setup/setup-shell-tools.sh $TECHMD_SETUP_DIR/
+RUN chmod +x $TECHMD_SETUP_DIR/setup-shell-tools.sh && \
+    $TECHMD_SETUP_DIR/setup-shell-tools.sh "$TECHMD_OS_DIST"
 
 COPY --chown=$USER_NAME:$USER_NAME tools/docker/setup/setup-runtime.sh $TECHMD_SETUP_DIR/
 COPY --chown=$USER_NAME:$USER_NAME tools/docker/setup/setup-runtime-githooks.sh $TECHMD_SETUP_DIR/

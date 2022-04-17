@@ -2,7 +2,7 @@
 # shellcheck disable=SC1090,SC2015,SC1091
 # =============================================================================
 # TechnicalMarkdown
-# 
+#
 # @date Sun Mar 06 2022
 # @author Gabriel Nützi, gnuetzi@gmail.com
 # =============================================================================
@@ -29,7 +29,7 @@ function installParallel() {
 
 function installJq() {
     local version="1.6"
-    printInfo " -> Installing 'jq' ..." 
+    printInfo " -> Installing 'jq' ..."
 
     [ "$arch" = "amd64" ] && local arch="linux64"
 
@@ -79,26 +79,106 @@ function installYq() {
 }
 
 function installJDK() {
-     if haveHomebrew; then
+    if haveHomebrew; then
         brew install openjdk || die "Failed to install JDK"
     elif [ "$os" = "ubuntu" ] ||
         [ "$os" = "alpine" ]; then
-       sudo apk add openjdk17-jdk --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community || die "Failed to install JDK"
+        sudo apk add openjdk17-jdk --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community || die "Failed to install JDK"
     else
         die "Operating system '$os' not supported."
     fi
 }
 
 function installNode() {
-     if haveHomebrew; then
+    if haveHomebrew; then
         brew install node npm || die "Failed to install Node"
     elif [ "$os" = "ubuntu" ] ||
         [ "$os" = "alpine" ]; then
-       sudo apk add nodejs npm yarn || die "Failed to install Node"
+        sudo apk add nodejs npm yarn || die "Failed to install Node"
     else
         die "Operating system '$os' not supported."
     fi
 }
+
+function installLatexPackages() {
+    sudo tlmgr install \
+        koma-script \
+        collection-basic \
+        collection-bibtexextra \
+        collection-binextra \
+        collection-fontsutil \
+        collection-fontsrecommended \
+        collection-langenglish \
+        collection-langeuropean \
+        collection-latex \
+        collection-latexetra \
+        collection-latexrecommended \
+        collection-mathscience \
+        collection-pictures \
+        collection-xetex ||
+        printWarning "Not all packages installed."
+
+    sudo tlmgr install \
+        adjustbox bigfoot \
+        catchfile \
+        cellspace \
+        collcell \
+        collectbox \
+        enumitem \
+        footmisc \
+        leftidx \
+        makecell \
+        mathdots \
+        quoting \
+        svg \
+        tablefootnote \
+        titling \
+        transparent \
+        wrapfig ||
+        printWarning "Not all additional packages installed."
+}
+
+function installFonts() {
+    sudo apk add --no-cache fontconfig || die "Could not install fontconfig."
+    
+    sudo apk add --no-cache ttf-dejavu || die "Could not install Deja Vue font."
+
+    local dir=$(mktemp -d)
+    (
+        cd "$dir" &&
+            curl -L http://www.gust.org.pl/projects/e-foundry/latin-modern/download/lm2.005bas.zip -o lm.zip &&
+            curl -L http://www.gust.org.pl/projects/e-foundry/lm-math/download/latinmodern-math-1959.zip -o lmmath.zip
+        unzip lm.zip &&
+            unzip lmmath.zip &&
+            sudo mkdir -p /usr/share/fonts/opentype/latin-modern-fonts &&
+            find "lm2.005bas/fonts/opentype" -name "*.otf" -exec sudo install -m644 {} /usr/share/fonts/opentype/latin-modern-fonts/ \; &&
+            find "latinmodern-math-1959/otf" -name "*.otf" -exec sudo install -m644 {} /usr/share/fonts/opentype/latin-modern-fonts/ \;
+    ) || die "Could not install latin modern font."
+
+    (
+        cd "$dir" &&
+            curl -L https://github.com/google/fonts/archive/main.tar.gz -o gf.tar.gz &&
+            tar -xf gf.tar.gz &&
+            sudo mkdir -p /usr/share/fonts/truetype/google-fonts &&
+             find "fonts-main" -name "*.ttf" -exec sudo install -m644 {} /usr/share/fonts/truetype/google-fonts/ \; || return 1
+    ) || die "Could not install google fonts."
+
+    rm -rf "$dir" &&
+        sudo rm -rf /var/cache/* &&
+        fc-cache -f
+}
+
+function installInkscape() {
+    if haveHomebrew; then
+        brew install inkscape || die "Failed to install inkscape"
+    elif [ "$os" = "ubuntu" ] ||
+        [ "$os" = "alpine" ]; then
+        sudo apk add inkscape || die "Failed to install inkscape"
+    else
+        die "Operating system '$os' not supported."
+    fi
+}
+
 
 os="$1"
 # osRelease="$2"
@@ -106,8 +186,11 @@ arch=$(getPlatformArch)
 
 printInfo "Installing general build tools ..."
 
-installParallel 
-installJq 
+installJq
 installYq
+installFonts
+installLatexPackages
 installJDK
 installNode
+installInkscape
+# installParallel
