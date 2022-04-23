@@ -9,6 +9,8 @@ A markdown setup for technical documents, reports, theses & papers.
 
 Check the [`Changelog.md`](Changelog.md) for the latest changes.
 
+![Demo](docs/Demo.png)
+
 ## Quick Intro
 
 **This is a markdown setup demonstrating the power and use of markdown for
