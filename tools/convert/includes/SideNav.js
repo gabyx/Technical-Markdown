@@ -6,16 +6,28 @@
 
         sidnav.style.width = `${expandWidth}px`;
         if (m.offsetLeft - expandWidth < 0) {
-            m.style.marginLeft = `${expandWidth + 40}px`
+            m.style.marginLeft = `${expandWidth + 40}px`;
         }
-    
-        document.getElementById("nav-content-inline").style.display = "none";
+
+        document.getElementById("nav-content").style.display = "none";
+
+        toc = document.getElementById("TOC");        
+        // Append to sidebar.
+        toc.parentNode.removeChild(toc);
+        document.getElementById("side-nav-content").append(toc);
     }
 
     function closeSideNav() {
         document.getElementById("side-nav").style.width = "0";
         document.getElementById("main-markdown").style.marginLeft = null;
-        document.getElementById("nav-content-inline").style.display = "initial";
+
+        navContent = document.getElementById("nav-content");
+        navContent.style.display = "initial";
+        
+        toc = document.getElementById("TOC");        
+        // Append to inline.
+        toc.parentNode.removeChild(toc);
+        document.getElementById("nav-content").append(toc);
     }
 
     var EXPAND_ALL = "⊞";

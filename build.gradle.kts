@@ -261,7 +261,7 @@ abstract class PandocTask @Inject constructor() : Exec() {
         failIfWarning.convention(true)
         verbose.convention(false)
         additionalArgs.convention(arrayOf())
-        markdownFiles.convention(project.fileTree("${project.rootDir}/chapters/"){include("**/*.md", "**/*.html")})
+        markdownFiles.convention(project.fileTree("${project.rootDir}/chapters/"){include("**/*.md", "**/*.html", "**/*.tex")})
         assetFiles.convention(project.fileTree("${project.rootDir}/files/"){ include("**/*") })
         literatureFiles.convention(project.fileTree("${project.rootDir}/literature/"){ include("**/*") })
         convertFiles.convention(project.fileTree("${settings.dataDir}"){ include("**/*") })

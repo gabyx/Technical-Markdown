@@ -17,7 +17,6 @@
   svgnames,
   dvipsnames]{scrreprt}
 \usepackage{amsmath,amssymb}
-\usepackage{lmodern}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
@@ -811,6 +810,50 @@ Some inline code \texttt{int\ a;\ a\ +=\ "asd"}
 \end{Highlighting}
 \end{Shaded}
 
+\hypertarget{pdf-include-sample}{%
+\section{PDF Include Sample}\label{pdf-include-sample}}
+
+You can also include PDFs directly by: Selecting pages works only in
+\texttt{latex} output.
+
+\includePDF{files/PandocUsersGuide.pdf}[5]{10}[width=\textwidth]
+
+\hypertarget{questionaire-sample}{%
+\section{Questionaire Sample}\label{questionaire-sample}}
+
+\hypertarget{personal}{%
+\subsection*{Personal}\label{personal}}
+
+\begin{itemize}
+\tightlist
+\item
+  Name:\xhrulefill[,fill=10cm,thickness=0.5pt]
+\item
+  Email:\xhrulefill[,fill=10cm,thickness=0.5pt]
+\end{itemize}
+
+\hypertarget{how-hard-is-markdown}{%
+\subsection*{How hard is Markdown?}\label{how-hard-is-markdown}}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  easy
+\item[$\square$]
+  medium hard
+\item[$\square$]
+  ridiculuous hard
+\end{itemize}
+
+\hypertarget{which-features-would-you-like-to-have-which-markdown-does-currently-not-support}{%
+\subsection*{Which features would you like to have which Markdown does
+currently not
+support?}\label{which-features-would-you-like-to-have-which-markdown-does-currently-not-support}}
+
+\xhrulefill[,fill=1.0000\textwidth,thickness=0.5pt]\\
+\xhrulefill[,fill=1.0000\textwidth,thickness=0.5pt]\\
+\xhrulefill[,fill=0.5000\textwidth,thickness=0.5pt]\\
+
 \hypertarget{tables}{%
 \section{Tables}\label{tables}}
 
@@ -838,29 +881,30 @@ Some inline code \texttt{int\ a;\ a\ +=\ "asd"}
 \caption{Table by included \texttt{.html} file.}\tabularnewline
 \toprule()
 \begin{minipage}[b]{\linewidth}\raggedright
-Fruits
+\textbf{Fruits asd}
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Vegetables
+\textbf{Vegetables}
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Constraints
+\textbf{Constraints}
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Properties
+\textbf{Properties}
 \end{minipage} \\
 \midrule()
 \endfirsthead
 \toprule()
 \begin{minipage}[b]{\linewidth}\raggedright
-Fruits
+\textbf{Fruits asd}
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Vegetables
+\textbf{Vegetables}
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Constraints
+\textbf{Constraints}
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
-Properties
+\textbf{Properties}
 \end{minipage} \\
 \midrule()
 \endhead
-\textbf{First} & \begin{minipage}[t]{\linewidth}\raggedright
+Pre & Zuccini & ripe & long \\
+First & \begin{minipage}[t]{\linewidth}\raggedright
 \begin{enumerate}
 \tightlist
 \item
@@ -877,7 +921,7 @@ Properties
 \(x^2\) is a squared variable
 \end{description}
 \end{minipage} & \\
-\textbf{Second} & \begin{minipage}[t]{\linewidth}\raggedright
+Second & \begin{minipage}[t]{\linewidth}\raggedright
 \begin{itemize}
 \tightlist
 \item
@@ -914,7 +958,7 @@ Properties
   Included latex file as raw \texttt{latex}.
 \item
   Converted from \texttt{.html} by \texttt{convert-tables.py} and
-  \texttt{table.json}.
+  \texttt{convert-tables.json}.
 \item
   Latex citations do work inside.
 \end{itemize}
@@ -926,17 +970,19 @@ Properties
   >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3000}}@{}}
 \caption{Table by included \texttt{.html} file.}\tabularnewline
 \toprule()
-Fruits
+\textbf{Fruits asd}
  & 
-Vegetables
+\textbf{Vegetables}
  & 
-Constraints
+\textbf{Constraints}
  & 
-Properties
+\textbf{Properties}
  \\
 \midrule()
 \endhead
-\textbf{First} & 
+Pre & Zuccini & ripe & long \\ \midrule
+
+First & 
 \begin{enumerate}
 \tightlist
 \item
@@ -952,8 +998,9 @@ Properties
 \item[Definition 2]
 \(x^2\) is a squared variable
 \end{description}
- & \\
-\textbf{Second} & 
+ & \\ \midrule
+
+Second & 
 \begin{itemize}
 \tightlist
 \item

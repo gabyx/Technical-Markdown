@@ -85,7 +85,7 @@ $-- $endif$
 $if(fontfamily)$
 \usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
 $else$
-\usepackage{lmodern}
+$-- \usepackage{lmodern}
 $endif$
 $if(linestretch)$
 \usepackage{setspace}

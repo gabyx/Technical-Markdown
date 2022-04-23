@@ -5,6 +5,7 @@
         "outputDir": "{rootDir}/chapters/tables-{ext}",
         "defaultPostProcessing": true,
         "scaleColumnsToFull": true,
-        "scaleColumnsToFullMargin": 0.05
+        "scaleColumnsToFullMargin": 0.05,
+        "addMidRules" : true
     }
 ]

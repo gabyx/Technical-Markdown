@@ -16,7 +16,7 @@ tables/TableExample.html
 :::{include-if-format=latex;json;native}
 ## \LaTeX\ Table
 - Included latex file as raw `latex`.
-- Converted from `.html` by `convert-tables.py` and `table.json`.
+- Converted from `.html` by `convert-tables.py` and `convert-tables.json`.
 - Latex citations do work inside.
 
 ```{.include format=latex raw=true include-if-format=latex;json;native .relative-to-current}
