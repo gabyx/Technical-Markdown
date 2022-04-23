@@ -49,6 +49,14 @@
   \group_end:
  }
 
+ \NewDocumentCommand{\xhrule}{O{}}
+ {
+  \group_begin:
+  \severin_xhrule:n { #1 }
+  \group_end:
+ }
+
+
 \keys_define:nn { severin/xhrulefill }
  {
   height .dim_set:N    = \l_severin_xhrule_height_dim,
@@ -58,6 +66,12 @@
   thickness .initial:n = 0.4pt,
   fill .initial:n      = 0pt plus 1fill,
  }
+
+\cs_new_protected:Nn \severin_xhrule:n
+ {
+    \keys_set:nn { severin/xhrulefill } { #1 }
+    \rule[\l_severin_xhrule_height_dim]{\l_severin_xhrule_fill_skip}{\l_severin_xhrule_thickness_dim}
+}
 
 \cs_new_protected:Nn \severin_xhrulefill:n
  {
@@ -69,4 +83,5 @@
   \skip_horizontal:N \l_severin_xhrule_fill_skip
   \kern 0pt
 }
+
 \ExplSyntaxOff
