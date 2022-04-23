@@ -137,7 +137,7 @@ def getColumnSizes(output, scaleToOne=False, scaleToFullMargin=0, columnRatios=N
 
 
 def setColumnFormat(output, widths, formats):
-    
+
     # Remove all minipages
     reg = re.compile(r"\\end\{minipage\}")
     output = reg.sub(r"", output)
@@ -151,17 +151,23 @@ def deleteEmptyLines(output):
     return reg.sub("", output)
 
 
+def addMidRules(match):
+    s = match.group(0)
+    count = s.count(r"\\")
+    return s.replace(r"\\", r"\\ \midrule" + "\n", count - 1)
+
+
 def postProcessLatexTables(config, output):
     print("Post-process latex tables ...")
-    r = re.compile(r"\\begin\{longtable\}.*?\\end\{longtable\}", re.DOTALL)
+    rTable = re.compile(r"\\begin\{longtable\}.*?\\end\{longtable\}", re.DOTALL)
+    rLines = re.compile(r"\\endhead.*?\\bottomrule", re.DOTALL)
 
     def postProcessLatexTable(match):
         table = match.group(0)
 
         # Count column sized
         widths, formats = getColumnSizes(table, config.get("scaleColumnsToFull", False),
-                                         config.get("scaleColumnsToFullMargin", 0.0),
-                                         config.get("columnRatios", None))
+                                         config.get("scaleColumnsToFullMargin", 0.0), config.get("columnRatios", None))
 
         table = setColumnFormat(table, widths, formats)
 
@@ -171,9 +177,14 @@ def postProcessLatexTables(config, output):
             print("Apply spacing ...")
             table = setLatexSpacing(table, spacing)
 
-        return deleteEmptyLines(table)
+        table = deleteEmptyLines(table)
 
-    return r.sub(postProcessLatexTable, output)
+        if config.get("addMidRules", False):
+            table = rLines.sub(addMidRules, table)
+
+        return table
+
+    return rTable.sub(postProcessLatexTable, output)
 
 
 def convertTable(file, config, rootDir, dataDir, pandocDefaults):
@@ -205,7 +216,8 @@ def convertTable(file, config, rootDir, dataDir, pandocDefaults):
         "-t",
         toFormat,
         file,
-    ], encoding="utf-8")
+    ],
+                                     encoding="utf-8")
 
     # Pre save...
     with open(outFile, "w") as o:
@@ -251,7 +263,8 @@ def run(configs, rootDir, dataDir, parallel=False):
 
     if parallel:
         with ProcessPoolExecutor() as executor:
-            executor.map(lambda x: convertTables(x, rootDir, dataDir, pandocDefaults), configs)
+            for r in executor.map(lambda x: convertTables(x, rootDir, dataDir, pandocDefaults), configs):
+                pass
     else:
         for c in configs:
             convertTables(c, rootDir, dataDir, pandocDefaults)
@@ -260,16 +273,8 @@ def run(configs, rootDir, dataDir, parallel=False):
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        '--data-dir',
-        required=True,
-        help="Pandoc data directory."
-    )
-    parser.add_argument(
-        '--root-dir',
-        required=True,
-        help="The repository with the source."
-    )
+    parser.add_argument('--data-dir', required=True, help="Pandoc data directory.")
+    parser.add_argument('--root-dir', required=True, help="The repository with the source.")
     parser.add_argument(
         '--config',
         required=True,

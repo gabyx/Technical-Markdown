@@ -140,7 +140,7 @@ function installLatexPackages() {
 
 function installFonts() {
     sudo apk add --no-cache fontconfig || die "Could not install fontconfig."
-    
+
     sudo apk add --no-cache ttf-dejavu || die "Could not install Deja Vue font."
 
     local dir=$(mktemp -d)
@@ -160,7 +160,7 @@ function installFonts() {
             curl -L https://github.com/google/fonts/archive/main.tar.gz -o gf.tar.gz &&
             tar -xf gf.tar.gz &&
             sudo mkdir -p /usr/share/fonts/truetype/google-fonts &&
-             find "fonts-main" -name "*.ttf" -exec sudo install -m644 {} /usr/share/fonts/truetype/google-fonts/ \; || return 1
+            find "fonts-main" -name "*.ttf" -exec sudo install -m644 {} /usr/share/fonts/truetype/google-fonts/ \; || return 1
     ) || die "Could not install google fonts."
 
     rm -rf "$dir" &&
@@ -170,15 +170,22 @@ function installFonts() {
 
 function installInkscape() {
     if haveHomebrew; then
-        brew install inkscape || die "Failed to install inkscape"
+        brew install inkscape || die "Failed to install 'inkscape'"
     elif [ "$os" = "ubuntu" ] ||
         [ "$os" = "alpine" ]; then
-        sudo apk add inkscape || die "Failed to install inkscape"
+        sudo apk add inkscape || die "Failed to install 'inkscape'"
     else
         die "Operating system '$os' not supported."
     fi
 }
 
+function installPdfTools() {
+    printInfo " -> Installing pdf tools ..."
+    installPackages "$os" \
+        --ubuntu poppler-utils \
+        --alpine poppler-utils ||
+        die "Failed to install 'poppler-utils'"
+}
 
 os="$1"
 # osRelease="$2"
@@ -194,3 +201,4 @@ installJDK
 installNode
 installInkscape
 # installParallel
+installPdfTools

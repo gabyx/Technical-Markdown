@@ -94,3 +94,41 @@ protected:
     OutputSockets m_outputs;  //!< The output sockets.
 };
 ```
+
+# PDF Include Sample
+
+You can also include PDFs directly by:
+Selecting pages works only in `latex` output.
+
+![Pandoc User's Guide](files/PandocUsersGuide.pdf){.includepdf pages=5- style="width:100%;height:20cm;max-width:100%"}
+
+# Questionaire Sample
+
+## Personal {.unnumbered .unlisted}
+
+- Name: __________________ 
+- Email: _________________
+
+## How hard is Markdown? {.unnumbered .unlisted}
+
+- [ ] easy
+- [ ] medium hard
+- [ ] ridiculuous hard
+  
+## Which features would you like to have which Markdown does currently not support? {.unnumbered .unlisted}
+
+:::{include-if-format=latex;native;json}
+\rule{\textwidth}{0.5pt}
+\rule{\textwidth}{0.5pt}
+\rule{\textwidth}{0.5pt}
+\rule{\textwidth}{0.5pt}
+\rule{\textwidth}{0.5pt}
+:::
+
+:::{include-if-format=html;html5;native;json}
+<hr class="empty-line-onehalf"/>
+<hr class="empty-line-onehalf"/>
+<hr class="empty-line-onehalf"/>
+<hr class="empty-line-onehalf"/>
+<hr class="empty-line-onehalf"/>
+:::

@@ -301,16 +301,24 @@
                         id="toc-code-sample"><span
                         class="toc-section-number">2.2</span> Code
                         Sample</a></li>
+                        <li><a href="#pdf-include-sample"
+                        id="toc-pdf-include-sample"><span
+                        class="toc-section-number">2.3</span> PDF
+                        Include Sample</a></li>
+                        <li><a href="#questionaire-sample"
+                        id="toc-questionaire-sample"><span
+                        class="toc-section-number">2.4</span>
+                        Questionaire Sample</a></li>
                         <li><a href="#tables" id="toc-tables"><span
-                        class="toc-section-number">2.3</span> Tables</a>
+                        class="toc-section-number">2.5</span> Tables</a>
                         <ul>
                         <li><a href="#html-table"
                         id="toc-html-table"><span
-                        class="toc-section-number">2.3.1</span> HTML
+                        class="toc-section-number">2.5.1</span> HTML
                         Table</a></li>
                         <li><a href="#sec:multi-line-table"
                         id="toc-sec:multi-line-table"><span
-                        class="toc-section-number">2.3.2</span> Markdown
+                        class="toc-section-number">2.5.2</span> Markdown
                         Table</a></li>
                         </ul></li>
                         </ul></li>
@@ -383,15 +391,23 @@ href="https://pandoc.org"><code>pandoc</code></a>.
                 <li><a href="#code-sample" id="toc-code-sample"><span
                 class="toc-section-number">2.2</span> Code
                 Sample</a></li>
+                <li><a href="#pdf-include-sample"
+                id="toc-pdf-include-sample"><span
+                class="toc-section-number">2.3</span> PDF Include
+                Sample</a></li>
+                <li><a href="#questionaire-sample"
+                id="toc-questionaire-sample"><span
+                class="toc-section-number">2.4</span> Questionaire
+                Sample</a></li>
                 <li><a href="#tables" id="toc-tables"><span
-                class="toc-section-number">2.3</span> Tables</a>
+                class="toc-section-number">2.5</span> Tables</a>
                 <ul>
                 <li><a href="#html-table" id="toc-html-table"><span
-                class="toc-section-number">2.3.1</span> HTML
+                class="toc-section-number">2.5.1</span> HTML
                 Table</a></li>
                 <li><a href="#sec:multi-line-table"
                 id="toc-sec:multi-line-table"><span
-                class="toc-section-number">2.3.2</span> Markdown
+                class="toc-section-number">2.5.2</span> Markdown
                 Table</a></li>
                 </ul></li>
                 </ul></li>
@@ -835,10 +851,47 @@ class="sourceCode numberSource cpp numberLines"><code class="sourceCode cpp"><sp
 <span id="cb1-89"><a href="#cb1-89"></a>    InputSockets <span class="va">m_inputs</span><span class="op">;</span>    <span class="co">//!&lt; The input sockets.</span></span>
 <span id="cb1-90"><a href="#cb1-90"></a>    OutputSockets <span class="va">m_outputs</span><span class="op">;</span>  <span class="co">//!&lt; The output sockets.</span></span>
 <span id="cb1-91"><a href="#cb1-91"></a><span class="op">};</span></span></code></pre></div>
-<h2 data-number="2.3" id="tables"><span
-class="header-section-number">2.3</span> Tables</h2>
-<h3 data-number="2.3.1" id="html-table"><span
-class="header-section-number">2.3.1</span> HTML Table</h3>
+<h2 data-number="2.3" id="pdf-include-sample"><span
+class="header-section-number">2.3</span> PDF Include Sample</h2>
+<p>You can also include PDFs directly by: Selecting pages works only in
+<code>latex</code> output.</p>
+<figure>
+<embed src="files/PandocUsersGuide.pdf" class="includepdf"
+data-pages="5-" style="width:100%;height:20cm;max-width:100%" />
+<figcaption aria-hidden="true">Pandoc User’s Guide</figcaption>
+</figure>
+<h2 data-number="2.4" id="questionaire-sample"><span
+class="header-section-number">2.4</span> Questionaire Sample</h2>
+<h3 class="unnumbered unlisted" id="personal">Personal</h3>
+<ul>
+<li>Name: __________________</li>
+<li>Email: _________________</li>
+</ul>
+<h3 class="unnumbered unlisted" id="how-hard-is-markdown">How hard is
+Markdown?</h3>
+<ul class="task-list">
+<li><input type="checkbox" disabled="" />
+easy</li>
+<li><input type="checkbox" disabled="" />
+medium hard</li>
+<li><input type="checkbox" disabled="" />
+ridiculuous hard</li>
+</ul>
+<h3 class="unnumbered unlisted"
+id="which-features-would-you-like-to-have-which-markdown-does-currently-not-support">Which
+features would you like to have which Markdown does currently not
+support?</h3>
+<div>
+<hr class="empty-line-onehalf"/>
+<hr class="empty-line-onehalf"/>
+<hr class="empty-line-onehalf"/>
+<hr class="empty-line-onehalf"/>
+<hr class="empty-line-onehalf"/>
+</div>
+<h2 data-number="2.5" id="tables"><span
+class="header-section-number">2.5</span> Tables</h2>
+<h3 data-number="2.5.1" id="html-table"><span
+class="header-section-number">2.5.1</span> HTML Table</h3>
 <div>
 <ul>
 <li>Included html file as <code>html</code>.</li>
@@ -857,15 +910,21 @@ as extension.</li>
 </colgroup>
 <thead>
 <tr class="header">
-<th>Fruits</th>
-<th>Vegetables</th>
-<th>Constraints</th>
-<th>Properties</th>
+<th><strong>Fruits asd</strong></th>
+<th><strong>Vegetables</strong></th>
+<th><strong>Constraints</strong></th>
+<th><strong>Properties</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>First</strong></td>
+<td>Pre</td>
+<td>Zuccini</td>
+<td>ripe</td>
+<td>long</td>
+</tr>
+<tr class="even">
+<td>First</td>
 <td><ol>
 <li>Lorem ipsum.</li>
 <li>Aliquam tinc.</li>
@@ -882,8 +941,8 @@ as extension.</li>
 </dl></td>
 <td></td>
 </tr>
-<tr class="even">
-<td><strong>Second</strong></td>
+<tr class="odd">
+<td>Second</td>
 <td><ul>
 <li>Lorem ipsum.</li>
 <li>Mauris eu.</li>
@@ -900,8 +959,8 @@ as extension.</li>
 </tbody>
 </table>
 </div>
-<h3 data-number="2.3.2" id="sec:multi-line-table"><span
-class="header-section-number">2.3.2</span> Markdown Table</h3>
+<h3 data-number="2.5.2" id="sec:multi-line-table"><span
+class="header-section-number">2.5.2</span> Markdown Table</h3>
 <ul>
 <li>Included markdown files.</li>
 <li>Cross references do work here.</li>
@@ -959,7 +1018,7 @@ lines.</td>
 <td><ul>
 <li>cures scurvy</li>
 <li>tasty</li>
-<li>Link chap. <a href="#sec:multi-line-table">2.3.2</a></li>
+<li>Link chap. <a href="#sec:multi-line-table">2.5.2</a></li>
 </ul></td>
 </tr>
 </tbody>
