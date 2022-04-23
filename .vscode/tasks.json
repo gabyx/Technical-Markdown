@@ -137,25 +137,6 @@
       "presentation": {
         "group": "converter"
       }
-    },
-    {
-      "label": "🛠️ Convert Markdown ⇉ HTML (package)",
-      "type": "shell",
-      "command": "${workspaceFolder}/gradlew",
-      "args": [
-        "-parallel",
-        "-t",
-        "package-html",
-        "-Ppython=${command:python.interpreterPath}",
-        "--warning-mode",
-        "all"
-      ],
-      "problemMatcher": [],
-      "isBackground": true,
-      "presentation": {
-        "panel": "dedicated",
-        "group": "converter"
-      }
     }
   ]
 }
