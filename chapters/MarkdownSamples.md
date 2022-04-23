@@ -106,8 +106,8 @@ Selecting pages works only in `latex` output.
 
 ## Personal {.unnumbered .unlisted}
 
-- Name: __________________ 
-- Email: _________________
+- [Name:]{.hrule-fill thickness=0.5pt width=10cm}
+- [Email:]{.hrule-fill thickness=0.5pt width=10cm}
 
 ## How hard is Markdown? {.unnumbered .unlisted}
 
@@ -117,18 +117,6 @@ Selecting pages works only in `latex` output.
   
 ## Which features would you like to have which Markdown does currently not support? {.unnumbered .unlisted}
 
-:::{include-if-format=latex;native;json}
-\rule{\textwidth}{0.5pt}
-\rule{\textwidth}{0.5pt}
-\rule{\textwidth}{0.5pt}
-\rule{\textwidth}{0.5pt}
-\rule{\textwidth}{0.5pt}
-:::
-
-:::{include-if-format=html;html5;native;json}
-<hr class="empty-line-onehalf"/>
-<hr class="empty-line-onehalf"/>
-<hr class="empty-line-onehalf"/>
-<hr class="empty-line-onehalf"/>
-<hr class="empty-line-onehalf"/>
-:::
+[]{.hrule-fill thickness=0.5pt width=100% .linebreak} \
+[]{.hrule-fill thickness=0.5pt width=100% .linebreak} \
+[]{.hrule-fill thickness=0.5pt width=50% .linebreak}  \

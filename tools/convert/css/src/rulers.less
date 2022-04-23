@@ -1,21 +1,8 @@
 .define-rulers() {
-    .empty-line() {
+    span.hrule-fill {
+    display: inline-block;
         width: 100%;
-        border: none;
-        margin-left: auto;
-        margin-right: auto;
-        height: 1pt;
-        background-color: #bbbbbb;
-        margin-top: @main-line-height;
-        margin-bottom: 0;
-    }
-
-    hr.empty-line {
-        .empty-line();
-    }
-
-    hr.empty-line-onehalf {
-        .empty-line();
-        margin-top: 1.5 * @main-line-height;
+        border-bottom-style: solid;
+        border-bottom-width: 1pt;
     }
 }

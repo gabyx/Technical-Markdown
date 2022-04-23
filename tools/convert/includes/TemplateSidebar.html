@@ -14,13 +14,7 @@
         <a class="close-btn" href="javascript:void(0)" onclick="closeSideNav()">&times;</a>
     </div>
     $if(toc)$
-    <div id="nav-content">
-        <nav id="$idprefix$TOC" role="doc-toc">
-            $if(toc-title)$
-            <h2 id="$idprefix$toc-title">$toc-title$</h2>
-            $endif$
-            $table-of-contents$
-        </nav>
+    <div id="side-nav-content">
     </div>
     $endif$
 </div>
