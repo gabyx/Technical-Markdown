@@ -1,4 +1,5 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
 Pandoc filter to convert image includes to latex commands:
     - `\imageWithCaption` or `\svgWithCaption` (for `.svg` extensions)
@@ -25,7 +26,7 @@ def latexblock(code):
     return RawInline(code, format="tex")
 
 
-def includeImage(
+def include_image(
     attributes,
     baseCommand,
     url,
@@ -42,7 +43,7 @@ def includeImage(
     ]
 
 
-def getPdfPages(url):
+def get_pdf_pages(url):
     pages = None
     try:
         cmd = None
@@ -63,7 +64,7 @@ def getPdfPages(url):
     return pages if pages else None
 
 
-def includePDF(
+def include_pdf(
     attributes,
     baseCommand,
     url,
@@ -77,7 +78,7 @@ def includePDF(
 
     try:
         if not pages:
-            pageEnd = getPdfPages(url)
+            pageEnd = get_pdf_pages(url)
         else:
             if "-" in pages:
                 p = pages.split("-")
@@ -87,7 +88,7 @@ def includePDF(
                 if p[1]:
                     pageEnd = int(p[1])
                 else:
-                    pageEnd = getPdfPages(url)
+                    pageEnd = get_pdf_pages(url)
             else:
                 pageEnd = int(p)
     except ValueError:
@@ -120,7 +121,7 @@ def includePDF(
     ]
 
 
-def transformImgToLatex(image: Image):
+def transform_img_to_latex(image: Image):
 
     url = image.url
     label = image.identifier
@@ -138,26 +139,26 @@ def transformImgToLatex(image: Image):
 
     if "includepdf" in image.classes:
         baseCommand = r"includePDF"
-        blockBuilder = includePDF
+        blockBuilder = include_pdf
     else:
         baseCommand = r"imageWithCaption"
         if os.path.splitext(url)[1] == ".svg":
             baseCommand = r"svgWithCaption"
-        blockBuilder = includeImage
+        blockBuilder = include_image
 
     # Parse witdh/height
-    def toScaling(size: Union[str, None], proportionalTo: str):
+    def to_scaling(size: Union[str, None], proportionalTo: str):
         if size and "%" in size:
             s = float(size.strip().replace("%", "")) / 100.0
             return "{0}{1}".format(s, proportionalTo)
         else:
             return size
 
-    width = toScaling(
+    width = to_scaling(
         image.attributes.get("width", None),
         proportionalTo=r"\textwidth",
     )
-    height = toScaling(
+    height = to_scaling(
         image.attributes.get("height", None),
         proportionalTo=r"\textwidth",
     )
@@ -179,14 +180,14 @@ def transformImgToLatex(image: Image):
     )
 
 
-def transformImages(elem: Element, doc: Doc):
+def transform_images(elem: Element, doc: Doc):
     if doc.format == "latex":
         if isinstance(elem, Image):
-            return transformImgToLatex(elem)
+            return transform_img_to_latex(elem)
 
 
 def main(doc: Doc = None):
-    return run_filter(transformImages, doc=doc)
+    return run_filter(transform_images, doc=doc)
 
 
 if __name__ == "__main__":

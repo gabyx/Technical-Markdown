@@ -10,13 +10,15 @@ filters:
     # - tee.py
     - pandoc-crossref
     # - tee.py
-    - transformImages.py
+    - transform-images.py
     # - tee.py
-    - transformEmoji.lua
-    # - tee.py
+    - transform-emoji.lua
+    # tee.py
+    - create-rulers.lua
+    # tee.py
     - citeproc
     # - tee.py
-    - setAbstract.lua
+    - set-abstract.lua
     # - tee.py
     # Quote replacement is not needed.
     # - pandoc-quotes.lua

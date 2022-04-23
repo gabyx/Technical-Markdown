@@ -15,6 +15,7 @@
 @import "numbered-headings.less";
 @import "quotes.less";
 @import "references.less";
+@import "rulers.less";
 @import "scrollbar.less";
 @import "sidenav.less";
 @import "table.less";
@@ -52,6 +53,7 @@
     .define-quotes();
     .define-blockquote();
     .define-tables();
+    .define-rulers();
     .define-references();
 
     // custom styles applied
@@ -72,7 +74,7 @@ html {
 
         .define-links();
 
-        #nav-content > #TOC {
+        #side-nav-content > #TOC {
             .define-toc-style(@main-heading-color, 1.2*@main-font-size);
             .define-collapsable-list(18pt, @topShift:2.5pt);
             padding-left: 3ex;
@@ -85,7 +87,7 @@ html {
         max-width: 21cm - 2 * 1.5cm;
         margin: auto;
 
-        #nav-content-inline > #TOC {
+        #nav-content > #TOC {
             .define-toc-style(@main-heading-color, @main-font-size);
         }
 

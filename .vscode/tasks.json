@@ -51,6 +51,22 @@
         //     }
         // },
         {
+            "label": "🛠️ Build with latexmk",
+            "type": "shell",
+            "command": "latexmk",
+            "args": [
+                    "-xelatex",
+                    "-r",
+                    "tools/.latexmkrc",
+                    "-gg",
+                    "-outdir=build/output-tex",
+                    "build/output-tex/input.tex"],
+            "problemMatcher": [],
+            "presentation": {
+                "group": "converter"
+            },
+        },
+        {
             "label": "📄 View HTML",
             "type": "shell",
             "command": "${workspaceFolder}/gradlew",

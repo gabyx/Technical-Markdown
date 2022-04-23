@@ -44,30 +44,6 @@
         "**/CVS": true
     },
     "files.trimTrailingWhitespace": false,
-    "latex-workshop.latex.autoBuild.run": "never",
-    "latex-workshop.latex.recipes": [
-        {
-            "name": "latexmk 🔃",
-            "tools": [
-                "latexmk"
-            ]
-        }
-    ],
-    "latex-workshop.latex.tools": [
-        {
-            "args": [
-                "-r",
-                "../tools/.latexmkrc",
-                "-xelatex",
-                "-cd-",
-                "%DOC%"
-            ],
-            "command": "latexmk",
-            "cwd": "",
-            "env": {},
-            "name": "latexmk"
-        }
-    ],
     "prettier.configPath": "tools/.prettierrc",
     "python.defaultInterpreterPath": "${workspaceFolder}/.venv",
     "python.formatting.provider": "yapf",

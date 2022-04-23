@@ -94,3 +94,29 @@ protected:
     OutputSockets m_outputs;  //!< The output sockets.
 };
 ```
+
+# PDF Include Sample
+
+You can also include PDFs directly by:
+Selecting pages works only in `latex` output.
+
+![Pandoc User's Guide](files/PandocUsersGuide.pdf){.includepdf pages=5- style="width:100%;height:20cm;max-width:100%"}
+
+# Questionaire Sample
+
+## Personal {.unnumbered .unlisted}
+
+- [Name:]{.hrule-fill thickness=0.5pt width=10cm}
+- [Email:]{.hrule-fill thickness=0.5pt width=10cm}
+
+## How hard is Markdown? {.unnumbered .unlisted}
+
+- [ ] easy
+- [ ] medium hard
+- [ ] ridiculuous hard
+  
+## Which features would you like to have which Markdown does currently not support? {.unnumbered .unlisted}
+
+[]{.hrule-fill thickness=0.5pt width=100% .linebreak} \
+[]{.hrule-fill thickness=0.5pt width=100% .linebreak} \
+[]{.hrule-fill thickness=0.5pt width=50% .linebreak}  \

@@ -279,58 +279,58 @@ html #main a.anchorjs-link:hover {
   color: #034575;
   background-color: #ffffff00;
 }
-html #main #nav-content > #TOC {
+html #main #side-nav-content > #TOC {
   font-size: 14.4pt;
   line-height: 14.4pt;
   padding-left: 3ex;
   padding-right: 2ex;
   padding-bottom: 3em;
 }
-html #main #nav-content > #TOC h1,
-html #main #nav-content > #TOC h2,
-html #main #nav-content > #TOC h3,
-html #main #nav-content > #TOC h4,
-html #main #nav-content > #TOC h5,
-html #main #nav-content > #TOC h6 {
+html #main #side-nav-content > #TOC h1,
+html #main #side-nav-content > #TOC h2,
+html #main #side-nav-content > #TOC h3,
+html #main #side-nav-content > #TOC h4,
+html #main #side-nav-content > #TOC h5,
+html #main #side-nav-content > #TOC h6 {
   color: #00acd1;
   font-family: 'Museo Sans', "Fira Sans", "Helvetica", sans-serif;
   font-weight: bold;
 }
-html #main #nav-content > #TOC ul li ul li a {
+html #main #side-nav-content > #TOC ul li ul li a {
   font-size: 12.96pt;
 }
-html #main #nav-content > #TOC ul li ul li ul li a {
+html #main #side-nav-content > #TOC ul li ul li ul li a {
   font-size: 11.52pt;
 }
-html #main #nav-content > #TOC ul {
+html #main #side-nav-content > #TOC ul {
   padding-inline-start: 2ex;
   list-style-type: none;
 }
-html #main #nav-content > #TOC li {
+html #main #side-nav-content > #TOC li {
   color: #00acd1;
 }
-html #main #nav-content > #TOC a {
+html #main #side-nav-content > #TOC a {
   color: #00acd1;
   padding-top: 0.5ex;
   padding-bottom: 0.5ex;
   display: block;
   transition: 0.3s;
 }
-html #main #nav-content > #TOC ul li {
+html #main #side-nav-content > #TOC ul li {
   list-style-type: none;
   position: relative;
 }
-html #main #nav-content > #TOC ul li ul {
+html #main #side-nav-content > #TOC ul li ul {
   display: none;
   padding-left: 15px;
 }
-html #main #nav-content > #TOC ul li.open > ul {
+html #main #side-nav-content > #TOC ul li.open > ul {
   display: block;
 }
-html #main #nav-content > #TOC ul li a {
+html #main #side-nav-content > #TOC ul li a {
   text-decoration: none;
 }
-html #main #nav-content > #TOC ul li:before {
+html #main #side-nav-content > #TOC ul li:before {
   /* the expand/collapse symbols before each item */
   display: block;
   position: absolute;
@@ -340,10 +340,10 @@ html #main #nav-content > #TOC ul li:before {
   font-size: 18pt;
   font-weight: bold;
 }
-html #main #nav-content > #TOC ul li.open:before {
+html #main #side-nav-content > #TOC ul li.open:before {
   content: "▾";
 }
-html #main #nav-content > #TOC ul li.leaf:before {
+html #main #side-nav-content > #TOC ul li.leaf:before {
   content: "";
 }
 html #main-markdown {
@@ -351,34 +351,34 @@ html #main-markdown {
   margin: auto;
   /* base style */
 }
-html #main-markdown #nav-content-inline > #TOC {
+html #main-markdown #nav-content > #TOC {
   font-size: 12pt;
   line-height: 12pt;
 }
-html #main-markdown #nav-content-inline > #TOC h1,
-html #main-markdown #nav-content-inline > #TOC h2,
-html #main-markdown #nav-content-inline > #TOC h3,
-html #main-markdown #nav-content-inline > #TOC h4,
-html #main-markdown #nav-content-inline > #TOC h5,
-html #main-markdown #nav-content-inline > #TOC h6 {
+html #main-markdown #nav-content > #TOC h1,
+html #main-markdown #nav-content > #TOC h2,
+html #main-markdown #nav-content > #TOC h3,
+html #main-markdown #nav-content > #TOC h4,
+html #main-markdown #nav-content > #TOC h5,
+html #main-markdown #nav-content > #TOC h6 {
   color: #00acd1;
   font-family: 'Museo Sans', "Fira Sans", "Helvetica", sans-serif;
   font-weight: bold;
 }
-html #main-markdown #nav-content-inline > #TOC ul li ul li a {
+html #main-markdown #nav-content > #TOC ul li ul li a {
   font-size: 10.8pt;
 }
-html #main-markdown #nav-content-inline > #TOC ul li ul li ul li a {
+html #main-markdown #nav-content > #TOC ul li ul li ul li a {
   font-size: 9.6pt;
 }
-html #main-markdown #nav-content-inline > #TOC ul {
+html #main-markdown #nav-content > #TOC ul {
   padding-inline-start: 2ex;
   list-style-type: none;
 }
-html #main-markdown #nav-content-inline > #TOC li {
+html #main-markdown #nav-content > #TOC li {
   color: #00acd1;
 }
-html #main-markdown #nav-content-inline > #TOC a {
+html #main-markdown #nav-content > #TOC a {
   color: #00acd1;
   padding-top: 0.5ex;
   padding-bottom: 0.5ex;
@@ -833,6 +833,12 @@ html #main-markdown td :last-child {
 }
 html #main-markdown tr:hover {
   background-color: #f5f5f5;
+}
+html #main-markdown span.hrule-fill {
+  display: inline-block;
+  width: 100%;
+  border-bottom-style: solid;
+  border-bottom-width: 1pt;
 }
 html #main-markdown #refs {
   text-align: left;
@@ -1328,6 +1334,12 @@ html #main-markdown-numbered td :last-child {
 }
 html #main-markdown-numbered tr:hover {
   background-color: #f5f5f5;
+}
+html #main-markdown-numbered span.hrule-fill {
+  display: inline-block;
+  width: 100%;
+  border-bottom-style: solid;
+  border-bottom-width: 1pt;
 }
 html #main-markdown-numbered #refs {
   text-align: left;
