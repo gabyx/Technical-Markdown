@@ -1,109 +1,161 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "🛠️ Convert Markdown ⇉ HTML",
-            "type": "shell",
-            "command": "${workspaceFolder}/gradlew",
-            "args": ["-t", "build-html", "-Ppython=${command:python.interpreterPath}", "--warning-mode", "all"],
-            "problemMatcher": [],
-            "presentation": {
-                "panel": "dedicated",
-                "group": "converter"
-            }
-        },
-        {
-            "label": "🛠️ Convert Markdown ⇉ PDF",
-            "type": "shell",
-            "command": "${workspaceFolder}/gradlew",
-            "args": ["-t", "build-pdf-tex", "-Ppython=${command:python.interpreterPath}", "--warning-mode", "all"],
-            "problemMatcher": [],
-            "presentation": {
-                "panel": "dedicated",
-                "group": "converter"
-            }
-        },
-        {
-            "label": "🛠️ Convert Markdown ⇉ Jira",
-            "type": "shell",
-            "command": "${workspaceFolder}/gradlew",
-            "args": ["-t", "build-jira", "-Ppython=${command:python.interpreterPath}", "--warning-mode", "all"],
-            "problemMatcher": [],
-            "presentation": {
-                "panel": "dedicated",
-                "group": "converter"
-            }
-        },
-        // {
-        //     "label": "Convert Markdown ⇉ PDF [chrome]",
-        //     "type": "shell",
-        //     "command": "${workspaceFolder}/gradlew",
-        //     "args": [
-        //         "-t",
-        //         "build-pdf-chrome",
-        //         "-Ppython=${command:python.interpreterPath}",
-        //     ],
-        //     "problemMatcher": [],
-        //     "presentation": {
-        //         "group": "converter"
-        //     }
-        // },
-        {
-            "label": "🛠️ Build with latexmk",
-            "type": "shell",
-            "command": "latexmk",
-            "args": [
-                    "-xelatex",
-                    "-r",
-                    "tools/.latexmkrc",
-                    "-gg",
-                    "-outdir=build/output-tex",
-                    "build/output-tex/input.tex"],
-            "problemMatcher": [],
-            "presentation": {
-                "group": "converter"
-            },
-        },
-        {
-            "label": "📄 View HTML",
-            "type": "shell",
-            "command": "${workspaceFolder}/gradlew",
-            "args": ["-t", "view-html", "-Ppython=${command:python.interpreterPath}", "--warning-mode", "all"],
-            "problemMatcher": [],
-            "presentation": {
-                "group": "converter"
-            }
-        },
-        {
-            "label": "🛠️ Convert Markdown ⇉ HTML, PDF",
-            "type": "shell",
-            "command": "${workspaceFolder}/gradlew",
-            "args": ["-parallel", "-t", "build-html", "build-pdf", "-Ppython=${command:python.interpreterPath}", "--warning-mode", "all"],
-            "problemMatcher": [],
-            "isBackground": true,
-            "presentation": {
-                "panel": "dedicated",
-                "group": "converter"
-            }
-        },
-        {
-            "label": "🛠️ Convert Markdown ⇉ HTML, PDF  + 📄 View HTML",
-            "dependsOn": ["🛠️ Convert Markdown ⇉ HTML, PDF", "📄 View HTML"],
-            "problemMatcher": [],
-            "presentation": {
-                "group": "converter"
-            }
-        },
-        {
-            "label": "🛠️ Convert Markdown ⇉ HTML + 📄 View HTML",
-            "type": "shell",
-            "dependsOn": ["🛠️ Convert Markdown ⇉ HTML", "📄 View HTML"],
-            "problemMatcher": [],
-            "presentation": {
-                "group": "converter"
-            }
-        }
-    ]
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "🛠️ Convert Markdown ⇉ HTML",
+      "type": "shell",
+      "command": "${workspaceFolder}/gradlew",
+      "args": [
+        "-t",
+        "build-html",
+        "-Ppython=${command:python.interpreterPath}",
+        "--warning-mode",
+        "all"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "panel": "dedicated",
+        "group": "converter"
+      }
+    },
+    {
+      "label": "🛠️ Convert Markdown ⇉ PDF",
+      "type": "shell",
+      "command": "${workspaceFolder}/gradlew",
+      "args": [
+        "-t",
+        "build-pdf-tex",
+        "-Ppython=${command:python.interpreterPath}",
+        "--warning-mode",
+        "all"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "panel": "dedicated",
+        "group": "converter"
+      }
+    },
+    {
+      "label": "🛠️ Convert Markdown ⇉ Jira",
+      "type": "shell",
+      "command": "${workspaceFolder}/gradlew",
+      "args": [
+        "-t",
+        "build-jira",
+        "-Ppython=${command:python.interpreterPath}",
+        "--warning-mode",
+        "all"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "panel": "dedicated",
+        "group": "converter"
+      }
+    },
+    // {
+    //     "label": "Convert Markdown ⇉ PDF [chrome]",
+    //     "type": "shell",
+    //     "command": "${workspaceFolder}/gradlew",
+    //     "args": [
+    //         "-t",
+    //         "build-pdf-chrome",
+    //         "-Ppython=${command:python.interpreterPath}",
+    //     ],
+    //     "problemMatcher": [],
+    //     "presentation": {
+    //         "group": "converter"
+    //     }
+    // },
+    {
+      "label": "🛠️ Build with latexmk",
+      "type": "shell",
+      "command": "latexmk",
+      "args": [
+        "-xelatex",
+        "-r",
+        "tools/.latexmkrc",
+        "-gg",
+        "-outdir=build/output-tex",
+        "build/output-tex/input.tex"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "group": "converter"
+      }
+    },
+    {
+      "label": "📄 View HTML",
+      "type": "shell",
+      "command": "${workspaceFolder}/gradlew",
+      "args": [
+        "-t",
+        "view-html",
+        "-Ppython=${command:python.interpreterPath}",
+        "--warning-mode",
+        "all"
+      ],
+      "problemMatcher": [],
+      "presentation": {
+        "group": "converter"
+      }
+    },
+    {
+      "label": "🛠️ Convert Markdown ⇉ HTML, PDF",
+      "type": "shell",
+      "command": "${workspaceFolder}/gradlew",
+      "args": [
+        "-parallel",
+        "-t",
+        "build-html",
+        "build-pdf",
+        "-Ppython=${command:python.interpreterPath}",
+        "--warning-mode",
+        "all"
+      ],
+      "problemMatcher": [],
+      "isBackground": true,
+      "presentation": {
+        "panel": "dedicated",
+        "group": "converter"
+      }
+    },
+    {
+      "label": "🛠️ Convert Markdown ⇉ HTML, PDF  + 📄 View HTML",
+      "dependsOn": ["🛠️ Convert Markdown ⇉ HTML, PDF", "📄 View HTML"],
+      "problemMatcher": [],
+      "presentation": {
+        "group": "converter"
+      }
+    },
+    {
+      "label": "🛠️ Convert Markdown ⇉ HTML + 📄 View HTML",
+      "type": "shell",
+      "dependsOn": ["🛠️ Convert Markdown ⇉ HTML", "📄 View HTML"],
+      "problemMatcher": [],
+      "presentation": {
+        "group": "converter"
+      }
+    },
+    {
+      "label": "🛠️ Convert Markdown ⇉ HTML (package)",
+      "type": "shell",
+      "command": "${workspaceFolder}/gradlew",
+      "args": [
+        "-parallel",
+        "-t",
+        "package-html",
+        "-Ppython=${command:python.interpreterPath}",
+        "--warning-mode",
+        "all"
+      ],
+      "problemMatcher": [],
+      "isBackground": true,
+      "presentation": {
+        "panel": "dedicated",
+        "group": "converter"
+      }
+    }
+  ]
 }

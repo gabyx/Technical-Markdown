@@ -1,15 +1,18 @@
 --- Pandoc filter for replacing the rule elements: 
---- - `[]{.ruler-empty-line}` (an empty span with class attribute `.ruler-empty-line`)
+---
+--- - `[]{.hrule-fill thickness=0.5pt height=5pt}` corresponding to `\hrulefill`.
+--- - `[]{.hrule thickness=0.5pt width=2cm height=5pt}` corresponding to `\rule`.
+---
 --- with the corresponding rule element in HTML and Latex.
 
 local List = require 'pandoc.List'
 
-function create_latex_rule(element)
+function create_latex_rule(element, cmd)
     width = element.attributes["width"]
     thickness = element.attributes["thickness"]
     height = element.attributes["height"]
     
-    cmd =  "\\xhrulefill"
+    cmd =  "\\" ..  cmd
 
     args = ""
     if width ~= nil then
@@ -28,7 +31,7 @@ function create_latex_rule(element)
     if height ~= nil then
         if height:match("%d*%%") then
             _, _, percentage = string.find(height, "^(%d*)")
-            width = string.format("%0.4f", tonumber(percentage)/100.0) .. "\\baselineskip"
+            height = string.format("%0.4f", tonumber(percentage)/100.0) .. "\\baselineskip"
         end
         args = args .. string.format(",height=%s", height)
     end
@@ -43,6 +46,10 @@ function create_latex_rule(element)
         elements = elements .. element.content
     end
     elements = elements .. {pandoc.RawInline("latex", cmd)}
+
+    if element.classes:includes(".linebreak") then
+        elements = elements .. {pandoc.Linebreak()}
+    end
 
     return elements
 end
@@ -73,7 +80,13 @@ function add_rulers(element)
         if FORMAT:match("html*") then
             return create_html_rule(element)
         elseif FORMAT:match("latex") then
-            return create_latex_rule(element)
+            return create_latex_rule(element, "xhrulefill")
+        end
+    elseif element.classes:includes("hrule") then
+        if FORMAT:match("html*") then
+            return create_html_rule(element)
+        elseif FORMAT:match("latex") then
+            return create_latex_rule(element, "xhrule")
         end
     end
 
