@@ -1,7 +1,7 @@
 <script>
     function openSideNav() {
         expandWidth = 300;
-        var sidnav = document.getElementById("side-nav");
+        var sidnav = document.getElementById("sidenav");
         var m = document.getElementById("main-markdown");
 
         sidnav.style.width = `${expandWidth}px`;
@@ -14,11 +14,11 @@
         toc = document.getElementById("TOC");        
         // Append to sidebar.
         toc.parentNode.removeChild(toc);
-        document.getElementById("side-nav-content").append(toc);
+        document.getElementById("sidenav-content").append(toc);
     }
 
     function closeSideNav() {
-        document.getElementById("side-nav").style.width = "0";
+        document.getElementById("sidenav").style.width = "0";
         document.getElementById("main-markdown").style.marginLeft = null;
 
         navContent = document.getElementById("nav-content");

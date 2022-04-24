@@ -264,7 +264,7 @@ abstract class PandocTask @Inject constructor() : Exec() {
         markdownFiles.convention(project.fileTree("${project.rootDir}/chapters/"){include("**/*.md", "**/*.html", "**/*.tex")})
         assetFiles.convention(project.fileTree("${project.rootDir}/files/"){ include("**/*") })
         literatureFiles.convention(project.fileTree("${project.rootDir}/literature/"){ include("**/*") })
-        convertFiles.convention(project.fileTree("${settings.dataDir}"){ include("**/*") })
+        convertFiles.convention(project.fileTree("${settings.dataDir}/"){ include("**/*") })
 
         inputs.files(inputFile, markdownFiles, assetFiles, convertFiles, literatureFiles)
         outputs.file(outputFile)
@@ -311,7 +311,7 @@ val convertTables = tasks.create<Exec>("convert-tables") {
     dependsOn(initBuild, defineEnvironment)
 
     inputs.files("${convertDir}/scripts/convert-tables.py",
-                 fileTree("${project.rootDir}/chapters/tables"){include("**/*.html")})
+                 fileTree("${project.rootDir}/chapters/tables"){include("**/*.html", "**/*.md")})
     outputs.files(fileTree("${project.rootDir}/chapters/tables-tex"){include("**/*.tex")})
 
     executable(pythonExe)
