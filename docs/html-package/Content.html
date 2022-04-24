@@ -161,7 +161,7 @@
         <script>
             function openSideNav() {
                 expandWidth = 300;
-                var sidnav = document.getElementById("side-nav");
+                var sidnav = document.getElementById("sidenav");
                 var m = document.getElementById("main-markdown");
 
                 sidnav.style.width = `${expandWidth}px`;
@@ -174,11 +174,11 @@
                 toc = document.getElementById("TOC");        
                 // Append to sidebar.
                 toc.parentNode.removeChild(toc);
-                document.getElementById("side-nav-content").append(toc);
+                document.getElementById("sidenav-content").append(toc);
             }
 
             function closeSideNav() {
-                document.getElementById("side-nav").style.width = "0";
+                document.getElementById("sidenav").style.width = "0";
                 document.getElementById("main-markdown").style.marginLeft = null;
 
                 navContent = document.getElementById("nav-content");
@@ -265,12 +265,12 @@
     </svg>
 </a>
 
-<div id="side-nav" class="sidenav">
+<div id="sidenav" class="sidenav">
     <div id="nav-menu">
         <a class="expand-btn" id="expand" href="javascript:void(0)" onClick="toggleExpandCollapse()" style="baseline-shift:-10%">⊞</a>
         <a class="close-btn" href="javascript:void(0)" onclick="closeSideNav()">&times;</a>
     </div>
-        <div id="side-nav-content">
+        <div id="sidenav-content">
     </div>
     </div><div id="main-markdown">
 <header>
@@ -350,10 +350,9 @@ href="https://pandoc.org"><code>pandoc</code></a>.
                 <li><a href="#html-table" id="toc-html-table"><span
                 class="toc-section-number">2.5.1</span> HTML
                 Table</a></li>
-                <li><a href="#sec:multi-line-table"
-                id="toc-sec:multi-line-table"><span
+                <li><a href="#sec:tables" id="toc-sec:tables"><span
                 class="toc-section-number">2.5.2</span> Markdown
-                Table</a></li>
+                Tables</a></li>
                 </ul></li>
                 </ul></li>
                 <li><a href="#references"
@@ -905,12 +904,14 @@ as extension.</li>
 </tbody>
 </table>
 </div>
-<h3 data-number="2.5.2" id="sec:multi-line-table"><span
-class="header-section-number">2.5.2</span> Markdown Table</h3>
+<h3 data-number="2.5.2" id="sec:tables"><span
+class="header-section-number">2.5.2</span> Markdown Tables</h3>
 <ul>
-<li>Included markdown files.</li>
-<li>Cross references do work here.</li>
+<li>Included markdown file.</li>
+<li>Cross references do work here inside.</li>
 </ul>
+<h4 data-number="2.5.2.1" id="multline-table"><span
+class="header-section-number">2.5.2.1</span> Multline Table</h4>
 <table style="width:85%;">
 <caption>Here’s a multiline table without a header.</caption>
 <colgroup>
@@ -935,12 +936,14 @@ lines.</td>
 </tr>
 </tbody>
 </table>
-<table style="width:56%;">
+<h4 data-number="2.5.2.2" id="grid-table"><span
+class="header-section-number">2.5.2.2</span> Grid Table</h4>
+<table style="width:59%;">
 <caption>Sample grid table.</caption>
 <colgroup>
 <col style="width: 20%" />
 <col style="width: 10%" />
-<col style="width: 26%" />
+<col style="width: 28%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -964,8 +967,44 @@ lines.</td>
 <td><ul>
 <li>cures scurvy</li>
 <li>tasty</li>
-<li>Link chap. <a href="#sec:multi-line-table">2.5.2</a></li>
+<li>Link chap. <a href="#sec:tables">2.5.2</a></li>
 </ul></td>
+</tr>
+</tbody>
+</table>
+<h4 data-number="2.5.2.3" id="rst-style-table"><span
+class="header-section-number">2.5.2.3</span> RST-Style Table</h4>
+<p>This is a <code>RST-style</code> table which is converted by <a
+href="tools/convert/filters/pandoc-list-table.lua"><code>filters/pandoc-list-table.lua</code></a></p>
+<table style="width:100%;">
+<caption>Sample Table</caption>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 50%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Key</th>
+<th style="text-align: left;">Name</th>
+<th style="text-align: center;">Italic</th>
+<th style="text-align: center;">Code</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th style="text-align: left;">A</th>
+<td style="text-align: left;">This is some random text to demonstrate
+line breaks across cells. And it should happen.</td>
+<td rowspan="2" style="text-align: center;"> <code>*italic*</code></td>
+<td style="text-align: center;"><code>`code`</code></td>
+</tr>
+<tr class="even">
+<th style="text-align: left;">B</th>
+<td style="text-align: left;">This is some random text to demonstrate
+line breaks across cells. And it should happen.</td>
+<td style="text-align: center;"><code>``code``</code></td>
 </tr>
 </tbody>
 </table>

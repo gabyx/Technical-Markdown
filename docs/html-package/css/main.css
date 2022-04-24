@@ -222,18 +222,18 @@ html #main .sidenav #nav-menu a:hover {
   color: #f1f1f1;
   background-color: #dddddd65;
 }
-html #main .sidenav #nav-content {
+html #main .sidenav #sidenav-content {
   overflow-y: scroll;
   height: 100%;
 }
-html #main .sidenav #nav-content::-webkit-scrollbar-track {
+html #main .sidenav #sidenav-content::-webkit-scrollbar-track {
   background-color: rgba(119, 119, 119, 0.541);
 }
-html #main .sidenav #nav-content::-webkit-scrollbar {
+html #main .sidenav #sidenav-content::-webkit-scrollbar {
   width: 5px;
   background-color: #1d1d1d;
 }
-html #main .sidenav #nav-content::-webkit-scrollbar-thumb {
+html #main .sidenav #sidenav-content::-webkit-scrollbar-thumb {
   background-color: #d4d4d4;
 }
 html #main .sidenav .close-btn {
@@ -279,58 +279,58 @@ html #main a.anchorjs-link:hover {
   color: #034575;
   background-color: #ffffff00;
 }
-html #main #side-nav-content > #TOC {
+html #main #sidenav-content > #TOC {
   font-size: 14.4pt;
   line-height: 14.4pt;
   padding-left: 3ex;
   padding-right: 2ex;
   padding-bottom: 3em;
 }
-html #main #side-nav-content > #TOC h1,
-html #main #side-nav-content > #TOC h2,
-html #main #side-nav-content > #TOC h3,
-html #main #side-nav-content > #TOC h4,
-html #main #side-nav-content > #TOC h5,
-html #main #side-nav-content > #TOC h6 {
+html #main #sidenav-content > #TOC h1,
+html #main #sidenav-content > #TOC h2,
+html #main #sidenav-content > #TOC h3,
+html #main #sidenav-content > #TOC h4,
+html #main #sidenav-content > #TOC h5,
+html #main #sidenav-content > #TOC h6 {
   color: #00acd1;
   font-family: 'Museo Sans', "Fira Sans", "Helvetica", sans-serif;
   font-weight: bold;
 }
-html #main #side-nav-content > #TOC ul li ul li a {
+html #main #sidenav-content > #TOC ul li ul li a {
   font-size: 12.96pt;
 }
-html #main #side-nav-content > #TOC ul li ul li ul li a {
+html #main #sidenav-content > #TOC ul li ul li ul li a {
   font-size: 11.52pt;
 }
-html #main #side-nav-content > #TOC ul {
+html #main #sidenav-content > #TOC ul {
   padding-inline-start: 2ex;
   list-style-type: none;
 }
-html #main #side-nav-content > #TOC li {
+html #main #sidenav-content > #TOC li {
   color: #00acd1;
 }
-html #main #side-nav-content > #TOC a {
+html #main #sidenav-content > #TOC a {
   color: #00acd1;
   padding-top: 0.5ex;
   padding-bottom: 0.5ex;
   display: block;
   transition: 0.3s;
 }
-html #main #side-nav-content > #TOC ul li {
+html #main #sidenav-content > #TOC ul li {
   list-style-type: none;
   position: relative;
 }
-html #main #side-nav-content > #TOC ul li ul {
+html #main #sidenav-content > #TOC ul li ul {
   display: none;
   padding-left: 15px;
 }
-html #main #side-nav-content > #TOC ul li.open > ul {
+html #main #sidenav-content > #TOC ul li.open > ul {
   display: block;
 }
-html #main #side-nav-content > #TOC ul li a {
+html #main #sidenav-content > #TOC ul li a {
   text-decoration: none;
 }
-html #main #side-nav-content > #TOC ul li:before {
+html #main #sidenav-content > #TOC ul li:before {
   /* the expand/collapse symbols before each item */
   display: block;
   position: absolute;
@@ -340,10 +340,10 @@ html #main #side-nav-content > #TOC ul li:before {
   font-size: 18pt;
   font-weight: bold;
 }
-html #main #side-nav-content > #TOC ul li.open:before {
+html #main #sidenav-content > #TOC ul li.open:before {
   content: "▾";
 }
-html #main #side-nav-content > #TOC ul li.leaf:before {
+html #main #sidenav-content > #TOC ul li.leaf:before {
   content: "";
 }
 html #main-markdown {

@@ -401,5 +401,6 @@ val packageHTML = tasks.register<Copy>("package-html") {
     dependsOn(buildHTML)
     from("${project.buildDir}")
     include("files/**", "css/**", "Content.html")
+    exclude("files/generated/**")
     into("${project.rootDir}/docs/html-package")
 }
