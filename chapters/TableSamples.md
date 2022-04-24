@@ -24,12 +24,11 @@ tables-tex/TableExample.tex
 ```
 :::
 
+## Markdown Tables {#sec:tables}
 
-## Markdown Table {#sec:multi-line-table}
-
-- Included markdown files.
-- Cross references do work here.
+- Included markdown file.
+- Cross references do work here inside.
 
 ```{.include .relative-to-current}
-TableExample.md
+tables/TableExample.md
 ```

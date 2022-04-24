@@ -7,6 +7,8 @@ filters:
     - pandoc-block-filter-format.lua
     # - tee.py
     - pandoc-unique-identifiers.lua
+    # -  tee.py
+    - pandoc-list-table.lua
     # - tee.py
     - pandoc-crossref
     # - tee.py

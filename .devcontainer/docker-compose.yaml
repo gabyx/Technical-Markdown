@@ -1,7 +1,7 @@
 version: "3.5"
 services:
   dev:
-    image: "gabyxgabyx/technical-markdown:latest"
+    image: "gabyxgabyx/technical-markdown:latest-minimal"
     security_opt:
       - seccomp:unconfined
     cap_add:
