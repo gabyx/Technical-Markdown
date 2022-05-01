@@ -5,6 +5,12 @@ in the diff view in the pull request or in a more direct link.
 
 <!--UPDATE-TAG min-version:1.0.5 max-version:9.9.9-->
 
+## Version `v2.0.4` (2022-04-23)
+
+Features:
+
+- feat: Latex template update.
+
 
 ## Version `v2.0.3` (2022-04-23)
 
