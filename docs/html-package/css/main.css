@@ -730,6 +730,12 @@ html #main-markdown header .title-logo {
 html #main-markdown header .title-logo img {
   width: 100%;
 }
+html #main-markdown .acknowledgement {
+  font-style: italic;
+}
+html #main-markdown .acknowledgement-title {
+  font-weight: bold;
+}
 html #main-markdown .abstract {
   font-style: italic;
 }
@@ -1230,6 +1236,12 @@ html #main-markdown-numbered header .title-logo {
 }
 html #main-markdown-numbered header .title-logo img {
   width: 100%;
+}
+html #main-markdown-numbered .acknowledgement {
+  font-style: italic;
+}
+html #main-markdown-numbered .acknowledgement-title {
+  font-weight: bold;
 }
 html #main-markdown-numbered .abstract {
   font-style: italic;
