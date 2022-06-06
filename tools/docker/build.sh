@@ -19,6 +19,7 @@ noCacheArg=""
 dockerArgs=()
 baseName="technical-markdown"
 pushBaseName="docker.io/gabyxgabyx"
+baseMinimalOn=""
 
 # Parse all arguments.
 function parseArgs() {
@@ -26,15 +27,19 @@ function parseArgs() {
     local prev=""
     local count=0
     for p in "$@"; do
-        
+
         if [ "$p" = "--base-name" ]; then
             true
         elif [ "$prev" = "--base-name" ]; then
             baseName="$p"
-        elif [ "$p" = "--base-name" ]; then
+        elif [ "$p" = "--push-base-name" ]; then
             true
         elif [ "$prev" = "--push-base-name" ]; then
             pushBaseName="$p"
+        elif [ "$p" = "--base-minimal-on" ]; then
+            true
+        elif [ "$prev" = "--base-minimal-on" ]; then
+            baseMinimalOn="$p"
         elif [ "$p" = "--push" ]; then
             push="true"
         elif [ "$p" = "--no-cache" ]; then
@@ -81,25 +86,44 @@ for addTag in "-minimal" ""; do
     imageName="$baseName:$repoVersion$addTag"
     imageNameLatest="$baseName:latest$addTag"
 
-    printInfo "Building image '$imageName'..."
-    cd "$ROOT_DIR" &&
-        DOCKER_BUILDKIT=1 \
-            docker build \
-            "${dockerArgs[@]}" \
-            -f tools/docker/Dockerfile \
-            -t "$imageName" \
-            $noCacheArg \
-            --target "technical-markdown$addTag" \
-            --build-arg "TECHMD_BUILD_VERSION=$repoVersion" \
-            --build-arg "TECHMD_COMMIT_SHA=$repoCommitSHA" \
-            .
+    printInfo "Build '$imageName'..."
+
+    if [ "$addTag" = "-minimal" ] &&
+        [ -n "$baseMinimalOn" ]; then
+        printInfo "Base minimal on '$baseMinimalOn'. Tagging instead of skip build..."
+        docker pull "gabyxgabyx/technical-markdown:$baseMinimalOn-minimal"
+
+        # Change build version number
+        echo "FROM gabyxgabyx/technical-markdown:$baseMinimalOn-minimal as technical-markdown-minimal
+              ENV TECHMD_BUILD_VERSION=$repoVersion" |
+            DOCKER_BUILDKIT=1 \
+                docker build - \
+                -t "$imageName" \
+                --target "technical-markdown$addTag"
+                
+    else
+        printInfo "Building image '$imageName'..."
+        cd "$ROOT_DIR" &&
+            DOCKER_BUILDKIT=1 \
+                docker build \
+                "${dockerArgs[@]}" \
+                -f "tools/docker/Dockerfile$addTag" \
+                -t "$imageName" \
+                $noCacheArg \
+                --target "technical-markdown$addTag" \
+                --build-arg "TECHMD_BUILD_VERSION=$repoVersion" \
+                --build-arg "TECHMD_COMMIT_SHA=$repoCommitSHA" \
+                .
+    fi
 
     docker tag "$imageName" "$imageNameLatest"
 
     if [ "$push" = "true" ]; then
         docker tag "$imageName" "$pushBaseName/$imageName"
         docker tag "$imageNameLatest" "$pushBaseName/$imageNameLatest"
+        printInfo "Pushing '$pushBaseName/$imageName' ..."
         docker push "$pushBaseName/$imageName"
+        printInfo "Pushing '$pushBaseName/$imageNameLatest' ..."
         docker push "$pushBaseName/$imageNameLatest"
     fi
 done
