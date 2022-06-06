@@ -45,6 +45,7 @@ for futher information.
 # Samples
 
 ```{.include}
+${env:TECHMD_ROOT_DIR}/chapters/Acknowledgement.md
 ${env:TECHMD_ROOT_DIR}/chapters/KonvexeProbleme.md
 ${env:TECHMD_ROOT_DIR}/chapters/MarkdownSamples.md
 ${env:TECHMD_ROOT_DIR}/chapters/TableSamples.md
