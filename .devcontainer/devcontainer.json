@@ -9,7 +9,7 @@
   // Set *default* container specific settings.json values on container create.
   "settings": {
     "python.defaultInterpreterPath": "~/python-envs/default/bin/python",
-    "python.venvFolders": ["python-envs"]
+    "python.venvFolders": ["~/python-envs"]
   },
 
   "postCreateCommand": ["/container-setup/setup-runtime-githooks.sh"],
@@ -29,7 +29,8 @@
     "notZaki.pandocciter",
     "naco-siren.gradle-language",
     "koihik.vscode-lua-format",
-    "mathiasfrohlich.kotlin"
+    "mathiasfrohlich.kotlin",
+    "tomoki1207.pdf"
   ],
 
   // Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.

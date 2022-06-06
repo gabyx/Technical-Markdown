@@ -20,7 +20,7 @@ filters:
     # tee.py
     - citeproc
     # - tee.py
-    - set-abstract.lua
+    - move-to-meta.lua
     # - tee.py
     # Quote replacement is not needed.
     # - pandoc-quotes.lua

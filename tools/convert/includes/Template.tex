@@ -446,6 +446,7 @@ $if(has-frontmatter)$
 \frontmatter
 $endif$
 $if(title)$
+\pagenumbering{roman}
 $-- $if(beamer)$
 $-- \frame{\titlepage}
 $-- $else$
@@ -456,7 +457,13 @@ $if(abstract)$
 $abstract$
 \end{abstract}
 $endif$
+$if(acknowledgement)$
+${ Acknowledgement.tex() }
 $endif$
+$endif$
+
+\pagenumbering{arabic}
+\pagestyle{headings}
 
 $for(include-before)$
 $include-before$

@@ -4,6 +4,7 @@
 \PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
 %
 \documentclass[
+  british,
   12pt,
   paper=a4,
   twoside,
@@ -48,19 +49,6 @@
   \KOMAoptions{parskip=half}}
 \makeatother
 \usepackage{xcolor}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
-\hypersetup{
-  pdftitle={Technical Documents},
-  pdfauthor={Gabriel Nützi; The Community},
-  pdflang={en-GB},
-  colorlinks=true,
-  linkcolor={DarkBlue},
-  filecolor={DarkBlue},
-  citecolor={DarkBlue},
-  urlcolor={MediumBlue},
-  pdfcreator={LaTeX via pandoc}}
-\urlstyle{same} % disable monospaced font for URLs
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -146,6 +134,23 @@
 % get rid of language-specific shorthands (see #6817):
 \let\LanguageShortHands\languageshorthands
 \def\languageshorthands#1{}
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  pdftitle={Technical Documents},
+  pdfauthor={Gabriel Nützi; The Community},
+  pdflang={en-GB},
+  colorlinks=true,
+  linkcolor={DarkBlue},
+  filecolor={DarkBlue},
+  citecolor={DarkBlue},
+  urlcolor={MediumBlue},
+  pdfcreator={LaTeX via pandoc}}
+
 % Set include paths
 \makeatletter
 \providecommand*{\input@path}{}
@@ -407,9 +412,6 @@
 % General Settings
 \KOMAoptions{cleardoublepage=empty}
 \raggedbottom
-\ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
 
 \title{Technical Documents}
 \usepackage{etoolbox}
@@ -421,7 +423,9 @@
 \subtitle{Demonstrating the Power of Markdown with Pandoc}
 \author{Gabriel Nützi \and The Community}
 \date{2. December 2020}
+
 \begin{document}
+\pagenumbering{roman}
 \begin{titlepage}
 \makeatletter
 \begin{center}
@@ -452,9 +456,17 @@ Zürich, Switzerland
 This is a setup demonstrating the power and use of markdown for
 technical documents by using a fully automated conversion sequence with
 \href{https://gradle.org}{\texttt{gradle}} and of course
-\href{https://pandoc.org}{\texttt{pandoc}}.
+\href{https://pandoc.org}{\texttt{pandoc}}.”
 \end{abstract}
+\renewcommand{\abstractname}{Acknowledgement}
+\begin{abstract}
+Acknowledgements go to the authors of this setup.
+\end{abstract}
+\cleardoublepage
+\pagenumbering{arabic}
+\pagestyle{headings}
 
+\renewcommand*\contentsname{Contents}
 {
 \hypersetup{linkcolor=Black}
 \setcounter{tocdepth}{2}

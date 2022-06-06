@@ -51,12 +51,18 @@ $if(abstract)$
 $abstract$
 </div>
 $endif$
+$if(acknowledgement)$
+<div class="acknowledgement">
+<div class="acknowledgement-title">$acknowledgement-title$</div>
+$acknowledgement$
+</div>
+$endif$
 $if(toc)$
 <div id="nav-content">
+    $if(toc-title)$
+    <h2 id="$idprefix$toc-title">$toc-title$</h2>
+    $endif$
     <nav id="$idprefix$TOC">
-        $if(toc-title)$
-        <h2 id="$idprefix$toc-title">$toc-title$</h2>
-        $endif$
         $table-of-contents$
     </nav>
 </div>
