@@ -293,71 +293,66 @@ with Pandoc</h3>
     </div>
 </header><div class="abstract">
 <div class="abstract-title">Abstract</div>
-This is a setup demonstrating the power and use of markdown for
+<p>This is a setup demonstrating the power and use of markdown for
 technical documents by using a fully automated conversion sequence with
 <a href="https://gradle.org"><code>gradle</code></a> and of course <a
-href="https://pandoc.org"><code>pandoc</code></a>.
+href="https://pandoc.org"><code>pandoc</code></a>.”</p>
+</div>
+<div class="acknowledgement">
+<div class="acknowledgement-title">Acknowledgement</div>
+<p>Acknowledgements go to the authors of this setup.</p>
 </div>
 <div id="nav-content">
-    <nav id="TOC">
-                <ul>
-                <li><a href="#intro" id="toc-intro"><span
-                class="toc-section-number">1</span> Intro</a></li>
-                <li><a href="#samples" id="toc-samples"><span
-                class="toc-section-number">2</span> Samples</a>
-                <ul>
-                <li><a href="#konvexe-probleme"
-                id="toc-konvexe-probleme"><span
-                class="toc-section-number">2.1</span> Konvexe
-                Probleme</a>
-                <ul>
-                <li><a href="#konvexe-menge"
-                id="toc-konvexe-menge"><span
-                class="toc-section-number">2.1.1</span> Konvexe
-                Menge</a></li>
-                <li><a href="#proximaler-punkt"
-                id="toc-proximaler-punkt"><span
-                class="toc-section-number">2.1.2</span> Proximaler
-                Punkt</a></li>
-                <li><a href="#normalkegel" id="toc-normalkegel"><span
-                class="toc-section-number">2.1.3</span>
-                Normalkegel</a></li>
-                <li><a
-                href="#zusammenhang-von-normalkegel-und-proximaler-punkt"
-                id="toc-zusammenhang-von-normalkegel-und-proximaler-punkt"><span
-                class="toc-section-number">2.1.4</span> Zusammenhang von
-                Normalkegel und Proximaler Punkt</a></li>
-                <li><a
-                href="#zusammenhang-von-normalkegel-und-konvexer-optimierung"
-                id="toc-zusammenhang-von-normalkegel-und-konvexer-optimierung"><span
-                class="toc-section-number">2.1.5</span> Zusammenhang von
-                Normalkegel und Konvexer Optimierung</a></li>
-                </ul></li>
-                <li><a href="#code-sample" id="toc-code-sample"><span
-                class="toc-section-number">2.2</span> Code
-                Sample</a></li>
-                <li><a href="#pdf-include-sample"
-                id="toc-pdf-include-sample"><span
-                class="toc-section-number">2.3</span> PDF Include
-                Sample</a></li>
-                <li><a href="#questionaire-sample"
-                id="toc-questionaire-sample"><span
-                class="toc-section-number">2.4</span> Questionaire
-                Sample</a></li>
-                <li><a href="#tables" id="toc-tables"><span
-                class="toc-section-number">2.5</span> Tables</a>
-                <ul>
-                <li><a href="#html-table" id="toc-html-table"><span
-                class="toc-section-number">2.5.1</span> HTML
-                Table</a></li>
-                <li><a href="#sec:tables" id="toc-sec:tables"><span
-                class="toc-section-number">2.5.2</span> Markdown
-                Tables</a></li>
-                </ul></li>
-                </ul></li>
-                <li><a href="#references"
-                id="toc-references">References</a></li>
-                </ul>
+        <h2 id="toc-title">Contents</h2>
+        <nav id="TOC">
+        <ul>
+        <li><a href="#intro" id="toc-intro"><span
+        class="toc-section-number">1</span> Intro</a></li>
+        <li><a href="#samples" id="toc-samples"><span
+        class="toc-section-number">2</span> Samples</a>
+        <ul>
+        <li><a href="#konvexe-probleme" id="toc-konvexe-probleme"><span
+        class="toc-section-number">2.1</span> Konvexe Probleme</a>
+        <ul>
+        <li><a href="#konvexe-menge" id="toc-konvexe-menge"><span
+        class="toc-section-number">2.1.1</span> Konvexe Menge</a></li>
+        <li><a href="#proximaler-punkt" id="toc-proximaler-punkt"><span
+        class="toc-section-number">2.1.2</span> Proximaler
+        Punkt</a></li>
+        <li><a href="#normalkegel" id="toc-normalkegel"><span
+        class="toc-section-number">2.1.3</span> Normalkegel</a></li>
+        <li><a href="#zusammenhang-von-normalkegel-und-proximaler-punkt"
+        id="toc-zusammenhang-von-normalkegel-und-proximaler-punkt"><span
+        class="toc-section-number">2.1.4</span> Zusammenhang von
+        Normalkegel und Proximaler Punkt</a></li>
+        <li><a
+        href="#zusammenhang-von-normalkegel-und-konvexer-optimierung"
+        id="toc-zusammenhang-von-normalkegel-und-konvexer-optimierung"><span
+        class="toc-section-number">2.1.5</span> Zusammenhang von
+        Normalkegel und Konvexer Optimierung</a></li>
+        </ul></li>
+        <li><a href="#code-sample" id="toc-code-sample"><span
+        class="toc-section-number">2.2</span> Code Sample</a></li>
+        <li><a href="#pdf-include-sample"
+        id="toc-pdf-include-sample"><span
+        class="toc-section-number">2.3</span> PDF Include
+        Sample</a></li>
+        <li><a href="#questionaire-sample"
+        id="toc-questionaire-sample"><span
+        class="toc-section-number">2.4</span> Questionaire
+        Sample</a></li>
+        <li><a href="#tables" id="toc-tables"><span
+        class="toc-section-number">2.5</span> Tables</a>
+        <ul>
+        <li><a href="#html-table" id="toc-html-table"><span
+        class="toc-section-number">2.5.1</span> HTML Table</a></li>
+        <li><a href="#sec:tables" id="toc-sec:tables"><span
+        class="toc-section-number">2.5.2</span> Markdown Tables</a></li>
+        </ul></li>
+        </ul></li>
+        <li><a href="#references"
+        id="toc-references">References</a></li>
+        </ul>
     </nav>
 </div>
 <div class="latex-math-define">

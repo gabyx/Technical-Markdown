@@ -13,14 +13,10 @@ function set(meta)
 end
 
 function move_to_meta(d)
-
   if d.classes:includes 'move-to-meta' then
-      -- Only in latex emoticons need to be replaced
-      if FORMAT:match("latex") then
-        varName = d.attributes['var']
-        metaVars[varName] = d.content
-        return List() -- remove the content
-      end
+    varName = d.attributes['var']
+    metaVars[varName] = d.content
+    return List() -- remove the content
   end
   return nil -- dont do anything
 end

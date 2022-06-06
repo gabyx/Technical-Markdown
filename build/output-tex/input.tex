@@ -456,18 +456,17 @@ Zürich, Switzerland
 This is a setup demonstrating the power and use of markdown for
 technical documents by using a fully automated conversion sequence with
 \href{https://gradle.org}{\texttt{gradle}} and of course
-\href{https://pandoc.org}{\texttt{pandoc}}.
+\href{https://pandoc.org}{\texttt{pandoc}}.”
 \end{abstract}
-\pagestyle{plain}
-\hypertarget{acknowledgement}{%
-\subsection*{Acknowledgement}\label{acknowledgement}}
-
-This is a simple acknowledgement line.
+\renewcommand{\abstractname}{Acknowledgement}
+\begin{abstract}
+Acknowledgements go to the authors of this setup.
+\end{abstract}
 \cleardoublepage
-
 \pagenumbering{arabic}
 \pagestyle{headings}
 
+\renewcommand*\contentsname{Contents}
 {
 \hypersetup{linkcolor=Black}
 \setcounter{tocdepth}{2}

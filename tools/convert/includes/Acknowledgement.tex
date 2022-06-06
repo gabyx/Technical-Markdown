@@ -1,0 +1,9 @@
+$if(acknowledgement-title)$
+\renewcommand{\abstractname}{$acknowledgement-title$}
+$else$
+\renewcommand{\abstractname}{Acknowledgement}
+$endif$
+\begin{abstract}
+$acknowledgement$
+\end{abstract}
+\cleardoublepage
