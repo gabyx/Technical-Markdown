@@ -11,10 +11,10 @@ apply(plugin = "java")
 val globalEnv = System.getenv().toMutableMap()
 val pathSep = System.getProperty("path.separator")
 
-fun getEnvDirOrRelative(envVar: String, relDir: String) : File {
+fun getEnvDirOrDefault(envVar: String, default: String) : File {
     var d = globalEnv.getOrDefault(envVar, "")
     if (d == "") {
-        d = "${project.rootDir}/${relDir}"
+        d = default
     }
 
     var f = file(d)
@@ -25,10 +25,10 @@ fun getEnvDirOrRelative(envVar: String, relDir: String) : File {
     return f
 }
 
-project.buildDir = file("${project.rootDir}/build")
+project.buildDir = file("${project.rootDir}/build/${project.name}")
 
-val convertDir = getEnvDirOrRelative("TECHMD_CONVERT_DIR", "tools/convert")
-val toolsDir = getEnvDirOrRelative("TECHMD_TOOLS_DIR", "tools")
+val convertDir = getEnvDirOrDefault("TECHMD_CONVERT_DIR", "${project.rootDir}/tools/convert")
+val toolsDir = getEnvDirOrDefault("TECHMD_TOOLS_DIR", "${project.rootDir}/tools")
 val useSystemNode = globalEnv.getOrDefault("TECHMD_USE_SYSTEM_NODE", "false") == "true"
 
 if (!toolsDir.exists()) {
@@ -83,7 +83,7 @@ val pythonExe = File(project.properties.getOrDefault("python", "python") as Stri
 val pythonPaths : Array<File> = arrayOf(file("${convertDir}/filters"))
 val luaPaths : Array<File> = arrayOf(file("${convertDir}/filters"))
 
-val mainFileMarkdown = file("${project.rootDir}/Content.md")
+val mainFileMarkdown = file("${project.projectDir}/Content.md")
 val outputFileHTML = file("${project.buildDir}/Content.html")
 val outputFileJira = file("${project.buildDir}/Content.jira")
 val outputFilePDF = file("${project.buildDir}/Content.pdf")
@@ -172,7 +172,7 @@ val compileLess by tasks.register<Exec>("compileLess") {
     executable(lessCompiler)
     args("--include-path=${convertDir}/css/src", lessMainFile, cssFile)
 
-    workingDir(project.rootDir)
+    workingDir(project.projectDir)
 }
 
 val buildCSS by tasks.register<Copy>("copyLess") {
@@ -182,7 +182,7 @@ val buildCSS by tasks.register<Copy>("copyLess") {
 }
 
 val copyAssets by tasks.register<Copy>("copyAssets") {
-    from("${project.rootDir}/files")
+    from("${project.projectDir}/files")
     into("${project.buildDir}/files")
 }
 
@@ -194,6 +194,7 @@ data class PandocSettings(
     val pandocExe: File,
     val dataDir: File,
     val resourceDir: File,
+    val toolsDir: File,
     val workingDir: File,
     val env: Map<String, String>)
 
@@ -202,10 +203,10 @@ fun createPandocSettings(): PandocSettings {
         var env = globalEnv.toMutableMap()
         //env.addExecutableDirToPath(pythonExe)
         //env.addExecutableDirToPath(pandocExe)
-        env["TECHMD_ROOT_DIR"] = "${project.rootDir}"
+        env["TECHMD_ROOT_DIR"] = "${project.projectDir}"
         env["PYTHON_PATH"] = env.getOrDefault("PYTHON_PATH", "") + pathSep + pythonPaths.joinToString(separator = pathSep)
 
-        return PandocSettings(pandocExe, convertDir, convertDir, project.rootDir, env)
+        return PandocSettings(pandocExe, convertDir, convertDir, toolsDir, project.projectDir, env)
 }
 
 val pandocSettings = createPandocSettings()
@@ -242,7 +243,21 @@ abstract class PandocTask @Inject constructor() : Exec() {
                        verbose: Boolean, 
                        failIfWarning: Boolean = true, 
                        dataDir: File,
-                       resourceDir: File) : Array<String> {
+                       resourceDir: File,
+                       toolsDir: File,
+                       projectDir: File,
+                       buildDir: File) : Array<String> {
+    
+    var latexArgs : Array<String> = emptyArray()
+    if(exportType == "latex") {
+        latexArgs = arrayOf(
+            "-M", "latex-include-paths=${dataDir}/includes",
+            "-M", "latex-include-paths=${projectDir}",
+            "--pdf-engine-opt=-r",
+            "--pdf-engine-opt=${toolsDir}/.latexmkrc",
+            "--pdf-engine-opt=-outdir=${buildDir}/output-tex")
+    }
+    
     return arrayOf(
             if(failIfWarning) "--fail-if-warnings" else null,
             if(verbose) "--verbose" else null,
@@ -251,7 +266,9 @@ abstract class PandocTask @Inject constructor() : Exec() {
             "--defaults=pandoc-dirs.yaml",
             "--defaults=pandoc-general.yaml",
             "--defaults=pandoc-$exportType.yaml",
-            "--defaults=pandoc-filters.yaml").filterNotNull().toTypedArray()
+            "--defaults=pandoc-filters.yaml",
+            *latexArgs,
+            "--log=${project.buildDir}/pandoc-$exportType.log").filterNotNull().toTypedArray()
     }
 
     public fun setup(settings: PandocSettings, project: Project, desc: String) {
@@ -261,9 +278,9 @@ abstract class PandocTask @Inject constructor() : Exec() {
         failIfWarning.convention(true)
         verbose.convention(false)
         additionalArgs.convention(arrayOf())
-        markdownFiles.convention(project.fileTree("${project.rootDir}/chapters/"){include("**/*.md", "**/*.html", "**/*.tex")})
-        assetFiles.convention(project.fileTree("${project.rootDir}/files/"){ include("**/*") })
-        literatureFiles.convention(project.fileTree("${project.rootDir}/literature/"){ include("**/*") })
+        markdownFiles.convention(project.fileTree("${project.projectDir}/chapters/"){include("**/*.md", "**/*.html", "**/*.tex")})
+        assetFiles.convention(project.fileTree("${project.projectDir}/files/"){ include("**/*") })
+        literatureFiles.convention(project.fileTree("${project.projectDir}/literature/"){ include("**/*") })
         convertFiles.convention(project.fileTree("${settings.dataDir}/"){ include("**/*") })
 
         inputs.files(inputFile, markdownFiles, assetFiles, convertFiles, literatureFiles)
@@ -275,7 +292,10 @@ abstract class PandocTask @Inject constructor() : Exec() {
                              verbose.get(), 
                              failIfWarning.get(), 
                              settings.dataDir, 
-                             settings.resourceDir))
+                             settings.resourceDir,
+                             settings.toolsDir,
+                             project.projectDir,
+                             project.buildDir))
 
         if(additionalArgs.isPresent()){
             args(*additionalArgs.get())
@@ -285,7 +305,7 @@ abstract class PandocTask @Inject constructor() : Exec() {
              inputFile.get())
 
         environment(settings.env)
-        workingDir(project.rootDir)
+        workingDir(project.projectDir)
 
         doFirst({
             logger.quiet("Executing Pandoc: '$desc'")
@@ -311,21 +331,21 @@ val convertTables = tasks.create<Exec>("convert-tables") {
     dependsOn(initBuild, defineEnvironment)
 
     inputs.files("${convertDir}/scripts/convert-tables.py",
-                 fileTree("${project.rootDir}/chapters/tables"){include("**/*.html", "**/*.md")})
-    outputs.files(fileTree("${project.rootDir}/chapters/tables-tex"){include("**/*.tex")})
+                 fileTree("${project.projectDir}/chapters/tables"){include("**/*.html", "**/*.md")})
+    outputs.files(fileTree("${project.projectDir}/chapters/tables-tex"){include("**/*.tex")})
 
     executable(pythonExe)
     args(file("${convertDir}/scripts/convert-tables.py"),
          "--root-dir",
-         "${project.rootDir}",
+         "${project.projectDir}",
          "--data-dir", 
          "${convertDir}",
          "--config",
-        "${project.rootDir}/includes/convert-tables.json",
+        "${project.projectDir}/includes/convert-tables.json",
          "--parallel")
 
     environment(pandocSettings.env)
-    workingDir("${project.rootDir}")
+    workingDir("${project.projectDir}")
 }
 
 val transformMath = project.task<Copy>("transform-math") {
@@ -333,9 +353,9 @@ val transformMath = project.task<Copy>("transform-math") {
     description = "Transform Math"
     dependsOn(initBuild, defineEnvironment)
 
-    from("${project.rootDir}/includes/Math.html")
+    from("${project.projectDir}/includes/Math.html")
     rename("(.*)\\.html", "$1.tex")
-    into("${project.rootDir}/includes/generated")
+    into("${project.projectDir}/includes/generated")
 
     // Take only `\command` lines.
     filter { line: String ->
@@ -388,13 +408,13 @@ val viewHTML = tasks.register<Exec>("view-html") {
         executable(browserSync)
         args("start",
              "--server",
-             "--config", file("${project.rootDir}/tools/gradle/browser-sync-config.js"),
+             "--config", file("${project.projectDir}/tools/gradle/browser-sync-config.js"),
              "--files", outputFileHTML,
              "--files", "**/*.css",
              "--startPath", "build",
              "--index", outputFileHTML.getName())
 
-        workingDir(project.rootDir)
+        workingDir(project.projectDir)
 }
 
 val packageHTML = tasks.register<Copy>("package-html") {
@@ -402,5 +422,5 @@ val packageHTML = tasks.register<Copy>("package-html") {
     from("${project.buildDir}")
     include("files/**", "css/**", "Content.html")
     exclude("files/generated/**")
-    into("${project.rootDir}/docs/html-package")
+    into("${project.projectDir}/docs/html-package")
 }

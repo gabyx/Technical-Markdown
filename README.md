@@ -4,7 +4,8 @@ A markdown setup for technical documents, reports, theses & papers.
 
 ![](https://img.shields.io/badge/dependencies-docker%20%7C%20pandoc%20%7C%20python3%20%7C%20gradle%20%7C%20vscode-green)
 
-**History rewritten**: Due to LFS mistakes, `main` branch was rewritten and a reclone of this repository is needed.
+**History rewritten**: Due to LFS mistakes, `main` branch was rewritten and a
+reclone of this repository is needed.
 
 **Note: A `docker` build setup has been implemented! Read more in
 [here](#docker-build).**
@@ -97,7 +98,8 @@ helpful. That is why we rely heavily on pandoc.
 
 ## Project Layout
 
-The following directories are important for the content of the output:
+The following directories of a single project in [`src`](src) (e.g.
+[`src/techmd`](src/techmd)) are important for the content of the output:
 
 - [`Content.md`](Content.md) : The main markdown document.
 - [`chapters`](chapters) : All markdown source included in the
@@ -112,8 +114,11 @@ The following directories are important for the content of the output:
 
 The following directories are important for the styling of the output:
 
-- [`convert`](convert) : The main directory containing pandoc related output
-  configs:
+- [`tools/convert`](tools/convert) : The main _tools_ directory containing
+  pandoc related output configs. It acts as pandocs
+  [`data-dir`](https://pandoc.org/MANUAL.html#option--data-dir). See
+  [env. variables](#environment-variables) in docker builds.
+
   - [`tools/convert/defaults`](tools/convert/defaults) : `pandoc` defaults .
   - [`tools/convert/includes`](tools/convert/includes) : `pandoc` templates in
     for HTML and PDF output settings.
@@ -144,8 +149,9 @@ checked-in `gradlew` Gradle wrapper.
 
 ### Yarn
 
-So far `yarn` is not required on the system and handled by the dependent Gradle task `nodeSetup`.
-If you experience problems with having the node modules not correctly setup, use
+So far `yarn` is not required on the system and handled by the dependent Gradle
+task `nodeSetup`. If you experience problems with having the node modules not
+correctly setup, use
 
 ```shell
 cd tools
@@ -256,6 +262,8 @@ The `<version>` above corresponds to either `latest` or the Git version tag
 minus the `v` prefix.
 
 ### Environment Variables
+
+Numbers refer to the container images above:
 
 | Env. Name                | Default Value                                       | Description                                                                                     |
 | ------------------------ | --------------------------------------------------- | ----------------------------------------------------------------------------------------------- |

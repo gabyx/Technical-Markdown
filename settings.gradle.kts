@@ -1,1 +1,1 @@
-rootProject.name = "TechnicalMarkdown"
+include("src:techmd")

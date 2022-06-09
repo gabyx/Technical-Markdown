@@ -21,4 +21,3 @@ cite-method: citeproc
 html-q-tags: true
 
 eol: lf
-log-file: build/pandoc-html.log

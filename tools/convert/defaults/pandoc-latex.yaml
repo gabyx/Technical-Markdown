@@ -39,13 +39,10 @@ pdf-engine: latexmk
 pdf-engine-opt:
     - "-xelatex"
     - --silent
-    - "-r"
-    - "tools/.latexmkrc"
     - "-gg"
-    - "-outdir=build/output-tex"
 
 template: includes/Template.tex
 include-in-header: ["includes/Header.tex"]
 
 eol: lf
-log-file: build/pandoc-latex.log
+
