@@ -1,5 +1,15 @@
 @import "defines.less";
 
+.define-code-border() {
+    background-color: @main-float-background-color;
+    padding: 1ex;
+    border-style: solid;
+    border-color: @main-float-border-color;
+    border-width: 1.5pt;
+    margin: 0.5ex;
+    border-radius: 5pt;
+}
+
 .define-code() {
     code {
         font-family: Fira Code;
@@ -11,19 +21,17 @@
     }
 
     div.sourceCode {
-        background-color: @main-float-background-color;
-        padding: 1ex;
-        border-style: solid;
-        border-color: @main-float-border-color;
-        border-width: 1.5pt;
-        margin: 0.5ex;
-        border-radius: 5pt;
+        .define-code-border();
 
         code {
             padding-left: 0pt;
             padding-right: 0pt;
             background-color: transparent
         }
+    }
+
+    pre:not(.sourceCode) {
+        .define-code-border()
     }
 
     pre.numberSource {

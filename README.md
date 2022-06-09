@@ -150,12 +150,12 @@ checked-in `gradlew` Gradle wrapper.
 ### Yarn
 
 So far `yarn` is not required on the system and handled by the dependent Gradle
-task `nodeSetup`. If you experience problems with having the node modules not
+task `yarnSetup`. If you experience problems with having the node modules not
 correctly setup, use
 
 ```shell
 cd tools
-../build/yarn/bin/yarn install --modules-path build/node_modules
+../build/techmd/yarn/bin/yarn install --modules-path build/techmd/node_modules
 ```
 
 ### Pandoc
