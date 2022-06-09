@@ -98,7 +98,7 @@ protected:
 A normal code block without syntax highlighting:
 
 ```
-Some special text here.
+Some special text here. Some special text here. Some special text here. Some special text here. Some special text here. Some special text here. Some special text here. 
 ```
 
 # PDF Include Sample
