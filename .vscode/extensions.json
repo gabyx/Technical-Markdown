@@ -1,12 +1,19 @@
 {
-    "recommendations": [
-        "ms-python.python",
-        "esbenp.prettier-vscode",
-        "monofon.pandoc-format",
-        "davidanson.vscode-markdownlint",
-        "notZaki.pandocciter",
-        "naco-siren.gradle-language",
-        "koihik.vscode-lua-format",
-        "mathiasfrohlich.kotlin",
-    ]
+  "recommendations": [
+    "ms-python.python",
+    "foxundermoon.shell-format",
+    "timonwong.shellcheck",
+    "EditorConfig.EditorConfig",
+    "esbenp.prettier-vscode",
+    "doi.fileheadercomment",
+    "richie5um2.vscode-sort-json",
+    "redhat.vscode-yaml",
+    "monofon.pandoc-format",
+    "davidanson.vscode-markdownlint",
+    "notZaki.pandocciter",
+    "naco-siren.gradle-language",
+    "koihik.vscode-lua-format",
+    "mathiasfrohlich.kotlin",
+    "tomoki1207.pdf"
+  ]
 }
