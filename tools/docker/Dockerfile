@@ -4,6 +4,8 @@ ARG VERSION=latest
 
 # Make full convertion image.
 FROM gabyxgabyx/technical-markdown:$VERSION-minimal as technical-markdown
+ARG USER_NAME="techmd"
+
 ENV TECHMD_CONTAINER_NAME="Technical-Markdown"
 COPY --chown=$USER_NAME:$USER_NAME tools /home/$USER_NAME/technical-markdown/tools
 RUN find /home/$USER_NAME/technical-markdown/tools \
