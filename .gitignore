@@ -8,10 +8,5 @@ __pycache__
 
 Test*
 
-!Content.pdf
-!Content.html
-Content.jira
-
 .venv
 .envrc
-node_modules
