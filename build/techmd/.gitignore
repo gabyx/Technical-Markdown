@@ -1,5 +1,4 @@
 *
 !.gitignore
-!build.gradle.kts
 !output-tex
 !output-tex/input.tex

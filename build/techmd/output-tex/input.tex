@@ -154,7 +154,7 @@
 % Set include paths
 \makeatletter
 \providecommand*{\input@path}{}
-\edef\input@path{{tools/convert/includes/}{./}\input@path}% prepend
+\edef\input@path{{/Volumes/Data/Repositories/technicalmarkdown/tools/convert/includes}{/Volumes/Data/Repositories/technicalmarkdown/src/techmd}{./}\input@path}% prepend
 \makeatother
 
 % Calculations =======================================
@@ -892,7 +892,7 @@ support?}\label{which-features-would-you-like-to-have-which-markdown-does-curren
   >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3500}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3000}}@{}}
 \caption{Table by included \texttt{.html} file.}\tabularnewline
-\toprule()
+\toprule
 \begin{minipage}[b]{\linewidth}\raggedright
 \textbf{Fruits asd}
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
@@ -902,9 +902,9 @@ support?}\label{which-features-would-you-like-to-have-which-markdown-does-curren
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 \textbf{Properties}
 \end{minipage} \\
-\midrule()
+\midrule
 \endfirsthead
-\toprule()
+\toprule
 \begin{minipage}[b]{\linewidth}\raggedright
 \textbf{Fruits asd}
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
@@ -914,7 +914,7 @@ support?}\label{which-features-would-you-like-to-have-which-markdown-does-curren
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 \textbf{Properties}
 \end{minipage} \\
-\midrule()
+\midrule
 \endhead
 Pre & Zuccini & ripe & long \\
 First & \begin{minipage}[t]{\linewidth}\raggedright
@@ -959,7 +959,7 @@ Second & \begin{minipage}[t]{\linewidth}\raggedright
   Auctor neque.
 \end{enumerate}
 \end{minipage} \\
-\bottomrule()
+\bottomrule
 \end{longtable}
 
 \hypertarget{table}{%
@@ -982,7 +982,7 @@ Second & \begin{minipage}[t]{\linewidth}\raggedright
   >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3500}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3000}}@{}}
 \caption{Table by included \texttt{.html} file.}\tabularnewline
-\toprule()
+\toprule
 \textbf{Fruits asd}
  & 
 \textbf{Vegetables}
@@ -991,7 +991,7 @@ Second & \begin{minipage}[t]{\linewidth}\raggedright
  & 
 \textbf{Properties}
  \\
-\midrule()
+\midrule
 \endhead
 Pre & Zuccini & ripe & long \\ \midrule
 
@@ -1038,7 +1038,7 @@ Second &
   Auctor neque.
 \end{enumerate}
  \\
-\bottomrule()
+\bottomrule
 \end{longtable}
 
 \hypertarget{sec:tables}{%
@@ -1061,11 +1061,11 @@ Second &
   >{\raggedleft\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.2750}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.3250}}@{}}
 \caption{Here’s a multiline table without a header.}\tabularnewline
-\toprule()
+\toprule
 \endhead
 First & row & 12.0 & Example of a row that spans multiple lines. \\
 Second & row & 5.0 & Here’s another one. \\
-\bottomrule()
+\bottomrule
 \end{longtable}
 
 \hypertarget{grid-table}{%
@@ -1076,7 +1076,7 @@ Second & row & 5.0 & Here’s another one. \\
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.1000}}
   >{\raggedright\arraybackslash}p{(\columnwidth - 4\tabcolsep) * \real{0.2875}}@{}}
 \caption{Sample grid table.}\tabularnewline
-\toprule()
+\toprule
 \begin{minipage}[b]{\linewidth}\raggedright
 Fruit
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
@@ -1084,9 +1084,9 @@ Price
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Advantages
 \end{minipage} \\
-\midrule()
+\midrule
 \endfirsthead
-\toprule()
+\toprule
 \begin{minipage}[b]{\linewidth}\raggedright
 Fruit
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
@@ -1094,7 +1094,7 @@ Price
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
 Advantages
 \end{minipage} \\
-\midrule()
+\midrule
 \endhead
 Bananas & \$1.34 & \begin{minipage}[t]{\linewidth}\raggedright
 \begin{itemize}
@@ -1116,7 +1116,7 @@ Oranges & \$2.10 & \begin{minipage}[t]{\linewidth}\raggedright
   Link \cref{sec:tables}
 \end{itemize}
 \end{minipage} \\
-\bottomrule()
+\bottomrule
 \end{longtable}
 
 \hypertarget{rst-style-table}{%
@@ -1131,7 +1131,7 @@ This is a \texttt{RST-style} table which is converted by
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1667}}
   >{\centering\arraybackslash}p{(\columnwidth - 6\tabcolsep) * \real{0.1667}}@{}}
 \caption{Sample Table}\tabularnewline
-\toprule()
+\toprule
 \begin{minipage}[b]{\linewidth}\raggedright
 Key
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
@@ -1141,9 +1141,9 @@ Italic
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 Code
 \end{minipage} \\
-\midrule()
+\midrule
 \endfirsthead
-\toprule()
+\toprule
 \begin{minipage}[b]{\linewidth}\raggedright
 Key
 \end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
@@ -1153,7 +1153,7 @@ Italic
 \end{minipage} & \begin{minipage}[b]{\linewidth}\centering
 Code
 \end{minipage} \\
-\midrule()
+\midrule
 \endhead
 A & This is some random text to demonstrate line breaks across cells.
 And it should happen. & \multirow{2}{*}{ \texttt{*italic*}} &
@@ -1161,7 +1161,7 @@ And it should happen. & \multirow{2}{*}{ \texttt{*italic*}} &
 B & This is some random text to demonstrate line breaks across cells.
 And it should happen. & &
 \texttt{\textasciigrave{}\textasciigrave{}code\textasciigrave{}\textasciigrave{}} \\
-\bottomrule()
+\bottomrule
 \end{longtable}
 
 \hypertarget{references}{%
@@ -1171,14 +1171,14 @@ And it should happen. & &
 \hypertarget{refs}{}
 \begin{CSLReferences}{0}{0}
 \leavevmode\vadjust pre{\hypertarget{ref-nuetzig_thesis_2016}{}}%
-\CSLLeftMargin{{[}1{]} }%
+\CSLLeftMargin{{[}1{]} }
 \CSLRightInline{G. Nützi,
 {‘\href{https://doi.org/10.3929/ethz-a-010662262}{Non-smooth granular
 rigid body dynamics with applications to chute flows}’}, PhD thesis, ETH
 Zurich; ETH Zürich, Zürich, 2016. }
 
 \leavevmode\vadjust pre{\hypertarget{ref-rockafellar_convex_2015}{}}%
-\CSLLeftMargin{{[}2{]} }%
+\CSLLeftMargin{{[}2{]} }
 \CSLRightInline{R. T. Rockafellar, \emph{Convex analysis}. Princeton:
 Princeton University Press, 2015 {[}Online{]}. Available:
 \url{https://www.degruyter.com/view/title/516543}}
