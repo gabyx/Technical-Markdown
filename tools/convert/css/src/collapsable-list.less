@@ -1,34 +1,34 @@
 .define-collapsable-list(@toggleSize: 100%, @openChar: "▾", @closeChar: "▸", @topShift: 0.2em) {
-    ul li {
-        list-style-type: none;
-        position: relative;
-    }
-    ul li ul {
-        display: none;
-        padding-left: 15px;
-    }
-    ul li.open > ul {
-        display: block;
-    }
-    ul li a {
-        text-decoration: none;
-    }
-    ul li:before {
-        /* the expand/collapse symbols before each item */
-        display: block;
-        position: absolute;
-        left: -1.2em;
-        top: @topShift;
-        content: @closeChar;
-        font-size: @toggleSize;
-        font-weight: bold;
-    }
+  ul li {
+    list-style-type: none;
+    position: relative;
+  }
+  ul li ul {
+    display: none;
+    padding-left: 15px;
+  }
+  ul li.open > ul {
+    display: block;
+  }
+  ul li a {
+    text-decoration: none;
+  }
+  ul li:before {
+    /* the expand/collapse symbols before each item */
+    display: block;
+    position: absolute;
+    left: -1.2em;
+    top: @topShift;
+    content: @closeChar;
+    font-size: @toggleSize;
+    font-weight: bold;
+  }
 
-    ul li.open:before {
-        content: @openChar;
-    }
+  ul li.open:before {
+    content: @openChar;
+  }
 
-    ul li.leaf:before {
-        content: ""
-    }
+  ul li.leaf:before {
+    content: "";
+  }
 }

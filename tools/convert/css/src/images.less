@@ -4,32 +4,32 @@
 @import "numbered-images.less";
 
 .define-images() {
-    figure {
-        text-align: center;
-        padding-top: 18pt;
+  figure {
+    text-align: center;
+    padding-top: 18pt;
 
-        display        : flex;
-        flex-direction : column;
-        justify-content: center;
-        align-items    : center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
-        > img {
-            padding: 5px;
-            display: inline-flex;
-            vertical-align: middle;
-            border: 2pt solid @main-float-border-color;
-            border-radius: 4pt;
-            background-color: @main-float-background-color;
-            max-width: 150%;
-        }
-
-        > figcaption {
-            margin: auto;
-            padding-top: 12pt;
-            padding-bottom: 12pt;
-            padding-left: 18pt;
-            padding-right: 18pt;
-            font-size: 12pt;
-        }
+    > img {
+      padding: 5px;
+      display: inline-flex;
+      vertical-align: middle;
+      border: 2pt solid @main-float-border-color;
+      border-radius: 4pt;
+      background-color: @main-float-background-color;
+      max-width: 150%;
     }
+
+    > figcaption {
+      margin: auto;
+      padding-top: 12pt;
+      padding-bottom: 12pt;
+      padding-left: 18pt;
+      padding-right: 18pt;
+      font-size: 12pt;
+    }
+  }
 }

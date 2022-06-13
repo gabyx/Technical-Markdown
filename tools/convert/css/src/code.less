@@ -1,53 +1,53 @@
 @import "defines.less";
 
 .define-code-border() {
-    background-color: @main-float-background-color;
-    padding: 1ex;
-    border-style: solid;
-    border-color: @main-float-border-color;
-    border-width: 1.5pt;
-    margin: 0.5ex;
-    border-radius: 5pt;
+  background-color: @main-float-background-color;
+  padding: 1ex;
+  border-style: solid;
+  border-color: @main-float-border-color;
+  border-width: 1.5pt;
+  margin: 0.5ex;
+  border-radius: 5pt;
 }
 
 .define-code() {
+  code {
+    font-family: Fira Code;
+    font-size: 11pt;
+    padding-left: 3pt;
+    padding-right: 3pt;
+    border-radius: 3pt;
+    background-color: @main-float-background-color;
+  }
+
+  div.sourceCode {
+    .define-code-border();
+
     code {
-        font-family: Fira Code;
-        font-size: 11pt;
-        padding-left: 3pt;
-        padding-right: 3pt;
-        border-radius: 3pt;
-        background-color: @main-float-background-color;
+      padding-left: 0pt;
+      padding-right: 0pt;
+      background-color: transparent;
     }
+  }
 
-    div.sourceCode {
-        .define-code-border();
+  pre:not(.sourceCode) {
+    .define-code-border();
+    overflow: auto;
+    code {
+      white-space: pre;
+    }
+  }
 
-        code {
-            padding-left: 0pt;
-            padding-right: 0pt;
-            background-color: transparent
+  pre.numberSource {
+    margin-left: 2em;
+    code {
+      span {
+        a:first-child::before {
+          text-decoration: none;
+          width: 3.5em;
+          left: -0.8em;
         }
+      }
     }
-
-    pre:not(.sourceCode) {
-        .define-code-border();
-        overflow: auto;
-        code {
-            white-space: pre;
-        }
-    }
-
-    pre.numberSource {
-        margin-left: 2em;
-        code {
-            span {
-                a:first-child::before {
-                    text-decoration: none;
-                    width: 3.5em;
-                    left: -0.8em;
-                }
-            }
-        }
-    }
+  }
 }

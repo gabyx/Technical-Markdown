@@ -23,86 +23,86 @@
 @import "toc.less";
 
 .define-title-style() {
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        color: @main-heading-color;
-        font-family: @main-font-headers, "Fira Sans", "Helvetica", sans-serif;
-        font-weight: bold;
-    }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: @main-heading-color;
+    font-family: @main-font-headers, "Fira Sans", "Helvetica", sans-serif;
+    font-weight: bold;
+  }
 }
 
 .define-markdown-style() {
-    /* base style */
-    .github(#1d1d1d, #fdf6e3, #08c, @main-font-text, @main-font-size, @main-line-height);
+  /* base style */
+  .github(#1d1d1d, #fdf6e3, #08c, @main-font-text, @main-font-size, @main-line-height);
 
-    .define-title-style();
+  .define-title-style();
 
-    p {
-        text-align: justify;
-        text-justify: auto;
-    }
+  p {
+    text-align: justify;
+    text-justify: auto;
+  }
 
-    .define-header();
-    .define-acknowledgement();
-    .define-abstract();
-    .define-images();
-    .define-math();
-    .define-definition-list();
-    .define-quotes();
-    .define-blockquote();
-    .define-tables();
-    .define-rulers();
-    .define-references();
+  .define-header();
+  .define-acknowledgement();
+  .define-abstract();
+  .define-images();
+  .define-math();
+  .define-definition-list();
+  .define-quotes();
+  .define-blockquote();
+  .define-tables();
+  .define-rulers();
+  .define-references();
 
-    // custom styles applied
-    // with pandoc attributing in 2.10
-    .define-centering();
+  // custom styles applied
+  // with pandoc attributing in 2.10
+  .define-centering();
 
-    .define-code();
+  .define-code();
 }
 
 html {
-    .define-scrollbar();
-    
-    #main {        
-        font-family: @main-font-text, "Fira Sans", "Helvetica", serif;
+  .define-scrollbar();
 
-        .define-button();
-        .define-sidenav();
+  #main {
+    font-family: @main-font-text, "Fira Sans", "Helvetica", serif;
 
-        .define-links();
+    .define-button();
+    .define-sidenav();
 
-        #sidenav-content > #TOC {
-            .define-toc-style(@main-heading-color, 1.2*@main-font-size);
-            .define-collapsable-list(18pt, @topShift:2.5pt);
-            padding-left: 3ex;
-            padding-right: 2ex;
-            padding-bottom: 3em;
-        }
+    .define-links();
+
+    #sidenav-content > #TOC {
+      .define-toc-style(@main-heading-color, 1.2*@main-font-size);
+      .define-collapsable-list(18pt, @topShift:2.5pt);
+      padding-left: 3ex;
+      padding-right: 2ex;
+      padding-bottom: 3em;
+    }
+  }
+
+  #main-markdown {
+    max-width: 21cm - 2 * 1.5cm;
+    margin: auto;
+
+    #nav-content > #TOC {
+      .define-toc-style(@main-heading-color, @main-font-size);
     }
 
-    #main-markdown {
-        max-width: 21cm - 2 * 1.5cm;
-        margin: auto;
+    .define-markdown-style();
+  }
 
-        #nav-content > #TOC {
-            .define-toc-style(@main-heading-color, @main-font-size);
-        }
+  #main-markdown-numbered {
+    max-width: 21cm - 2 * 1.5cm;
+    margin: auto;
 
-        .define-markdown-style();
-    }
+    .define-markdown-style();
 
-    #main-markdown-numbered {
-        max-width: 21cm - 2 * 1.5cm;
-        margin: auto;
-
-        .define-markdown-style();
-
-        .define-numbered-headings();
-        .define-numbered-images();
-    }
+    .define-numbered-headings();
+    .define-numbered-images();
+  }
 }
