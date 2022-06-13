@@ -888,9 +888,6 @@ html #main-markdown pre:not(.sourceCode) {
   border-radius: 5pt;
   overflow: auto;
 }
-html #main-markdown pre:not(.sourceCode) code {
-  white-space: nowrap;
-}
 html #main-markdown pre.numberSource {
   margin-left: 2em;
 }
@@ -1407,9 +1404,6 @@ html #main-markdown-numbered pre:not(.sourceCode) {
   margin: 0.5ex;
   border-radius: 5pt;
   overflow: auto;
-}
-html #main-markdown-numbered pre:not(.sourceCode) code {
-  white-space: nowrap;
 }
 html #main-markdown-numbered pre.numberSource {
   margin-left: 2em;
