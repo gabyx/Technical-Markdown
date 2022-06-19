@@ -74,8 +74,9 @@ printInfo "Define tag and version."
 repoCommitSHA="$(git rev-parse HEAD)"
 
 # Get the tag (on CI possibly not there.)
-repoVersion="$(git describe --tags --match "v*" \
-    --abbrev=0 2>/dev/null | sed -E "s/^v//g")" || repoVersion="not-found"
+repoTag=$(git describe --tags --match "v*" \
+    --abbrev=0 2>/dev/null)
+repoVersion=$(echo "$repoTag" | sed -E "s/^v//g") || repoVersion="not-found"
 
 printInfo "Repository SHA: '$repoCommitSHA'."
 printInfo "Repository Version: '$repoVersion'."
@@ -100,7 +101,7 @@ for addTag in "-minimal" ""; do
                 docker build - \
                 -t "$imageName" \
                 --target "technical-markdown$addTag"
-                
+
     else
         printInfo "Building image '$imageName'..."
         cd "$ROOT_DIR" &&
@@ -126,6 +127,6 @@ for addTag in "-minimal" ""; do
         printInfo "Pushing '$pushBaseName/$imageNameLatest' ..."
         docker push "$pushBaseName/$imageNameLatest"
 
-        git push origin "$repoVersion"
+        git push origin "$repoTag"
     fi
 done
