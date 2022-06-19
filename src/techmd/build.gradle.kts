@@ -251,8 +251,8 @@ abstract class PandocTask @Inject constructor() : Exec() {
     var latexArgs : Array<String> = emptyArray()
     if(exportType == "latex") {
         latexArgs = arrayOf(
-            "-M", "latex-include-paths=${dataDir}/includes",
-            "-M", "latex-include-paths=${projectDir}",
+            "-M", "latex-include-paths=${dataDir}/includes/",
+            "-M", "latex-include-paths=${projectDir}/",
             "--pdf-engine-opt=-r",
             "--pdf-engine-opt=${toolsDir}/.latexmkrc",
             "--pdf-engine-opt=-outdir=${buildDir}/output-tex")

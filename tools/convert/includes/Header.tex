@@ -37,22 +37,28 @@
     format=plain,%
     justification=justified,%
     margin=3mm,%
-    font=normal,%
+    font={normal},%
     labelfont=bf%
 ]{caption}
 
-\DeclareCaptionStyle{mycaption}{
-    format=plain,%
-    justification=justified,%
-    margin=12pt,%
-    font=normal,%
-    labelfont=bf,%
-    %aboveskip=10pt,
-    belowskip=-5pt%
+\DeclareCaptionStyle{figcaption}{
+    justification=justified,
+    font={normal},
+    labelfont=bf,
+    belowskip=-5pt
+}
+
+\DeclareCaptionStyle{tablecaption}{
+    justification=justified,
+    font={normal},
+    labelfont=bf,
+    belowskip=5pt
 }
 
 \usepackage[]{subcaption}
-\captionsetup[figure]{style=mycaption}
+\captionsetup[figure]{style=figcaption}
+\captionsetup[table]{style=tablecaption}
+\captionsetup[longtable]{style=tablecaption}
 % ====================================================
 
 %% Header/Footer =====================================

@@ -154,7 +154,7 @@
 % Set include paths
 \makeatletter
 \providecommand*{\input@path}{}
-\edef\input@path{{/Volumes/Data/Repositories/technicalmarkdown/tools/convert/includes}{/Volumes/Data/Repositories/technicalmarkdown/src/techmd}{./}\input@path}% prepend
+\edef\input@path{{/home/gabyx/Desktop/Repository/TechnicalMarkdown/tools/convert/includes/}{/home/gabyx/Desktop/Repository/TechnicalMarkdown/src/techmd/}{./}\input@path}% prepend
 \makeatother
 
 % Calculations =======================================
@@ -196,22 +196,28 @@
     format=plain,%
     justification=justified,%
     margin=3mm,%
-    font=normal,%
+    font={normal},%
     labelfont=bf%
 ]{caption}
 
-\DeclareCaptionStyle{mycaption}{
-    format=plain,%
-    justification=justified,%
-    margin=12pt,%
-    font=normal,%
-    labelfont=bf,%
-    %aboveskip=10pt,
-    belowskip=-5pt%
+\DeclareCaptionStyle{figcaption}{
+    justification=justified,
+    font={normal},
+    labelfont=bf,
+    belowskip=-5pt
+}
+
+\DeclareCaptionStyle{tablecaption}{
+    justification=justified,
+    font={normal},
+    labelfont=bf,
+    belowskip=5pt
 }
 
 \usepackage[]{subcaption}
-\captionsetup[figure]{style=mycaption}
+\captionsetup[figure]{style=figcaption}
+\captionsetup[table]{style=tablecaption}
+\captionsetup[longtable]{style=tablecaption}
 % ====================================================
 
 %% Header/Footer =====================================
@@ -425,7 +431,8 @@
 \date{2. December 2020}
 
 \begin{document}
-\pagenumbering{roman}
+%
+%
 \begin{titlepage}
 \makeatletter
 \begin{center}
@@ -451,27 +458,34 @@ Zürich, Switzerland
 \vspace{1cm}
 \end{center}
 \makeatother
-\end{titlepage}
-\begin{abstract}
+\end{titlepage}%
+\cleardoublepage
+\pagenumbering{roman}
+\pagestyle{scrheadings}
+\setcounter{page}{1}
+%
+\newcommand{\abstracttitle}{Abstract}
+\chapter*{\abstracttitle}
+\thispagestyle{plain}
 This is a setup demonstrating the power and use of markdown for
 technical documents by using a fully automated conversion sequence with
 \href{https://gradle.org}{\texttt{gradle}} and of course
 \href{https://pandoc.org}{\texttt{pandoc}}.”
-\end{abstract}
-\renewcommand{\abstractname}{Acknowledgement}
-\begin{abstract}
+\cleardoublepage%
+\newcommand{\acknowledgementtitle}{Thanks}
+\thispagestyle{plain}
+\chapter*{\acknowledgementtitle}
 Acknowledgements go to the authors of this setup.
-\end{abstract}
-\cleardoublepage
-\pagenumbering{arabic}
-\pagestyle{headings}
-
+\cleardoublepage%
 \renewcommand*\contentsname{Contents}
 {
 \hypersetup{linkcolor=Black}
-\setcounter{tocdepth}{2}
 \tableofcontents
+\cleardoublepage
 }
+%
+\cleardoublepage
+\pagenumbering{arabic}
 \hypertarget{intro}{%
 \chapter{Intro}\label{intro}}
 
@@ -822,6 +836,12 @@ Some inline code \texttt{int\ a;\ a\ +=\ "asd"}
 \OperatorTok{\};}
 \end{Highlighting}
 \end{Shaded}
+
+A normal code block without syntax highlighting:
+
+\begin{verbatim}
+Some special text here. Some special text here. Some special text here. Some special text here. Some special text here. Some special text here. Some special text here. 
+\end{verbatim}
 
 \hypertarget{pdf-include-sample}{%
 \section{PDF Include Sample}\label{pdf-include-sample}}
@@ -1184,5 +1204,7 @@ Princeton University Press, 2015 {[}Online{]}. Available:
 \url{https://www.degruyter.com/view/title/516543}}
 
 \end{CSLReferences}
+%
+
 
 \end{document}

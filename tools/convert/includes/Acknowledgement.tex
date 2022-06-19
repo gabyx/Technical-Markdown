@@ -1,9 +1,9 @@
 $if(acknowledgement-title)$
-\renewcommand{\abstractname}{$acknowledgement-title$}
+\newcommand{\acknowledgementtitle}{$acknowledgement-title$}
 $else$
-\renewcommand{\abstractname}{Acknowledgement}
+\newcommand{\acknowledgementtitle}{Acknowledgement}
 $endif$
-\begin{abstract}
+\thispagestyle{plain}
+\chapter*{\acknowledgementtitle}
 $acknowledgement$
-\end{abstract}
 \cleardoublepage

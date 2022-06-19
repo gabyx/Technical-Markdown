@@ -17,7 +17,7 @@ fontsize: 12pt
 lang: en-GB
 
 abstract-title: Abstract
-acknowledgement-title: Acknowledgement
+acknowledgement-title: Thanks
 toc-title: Contents
 abstract: >  
     This is a setup demonstrating the power and use 

@@ -72,13 +72,14 @@
       "label": "🛠️ Build with latexmk",
       "type": "shell",
       "command": "latexmk",
+      
       "args": [
         "-xelatex",
         "-r",
         "tools/.latexmkrc",
         "-gg",
-        "-outdir=build/output-tex",
-        "build/output-tex/input.tex"
+        "-outdir=build/techmd/output-tex",
+        "build/techmd/output-tex/input.tex"
       ],
       "problemMatcher": [],
       "presentation": {
