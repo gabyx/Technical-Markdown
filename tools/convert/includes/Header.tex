@@ -80,6 +80,10 @@
 \usepackage[perpage,para]{footmisc}
 % ====================================================
 
+%% Enumitems =========================================
+\usepackage{enumitem}
+\setlist[description,1]{leftmargin=0.5cm,font=\rmfamily}
+
 %% Tables ============================================
 \usepackage{array}
 \usepackage{longtable}
@@ -88,7 +92,6 @@
 \usepackage{makecell}
 \usepackage{footnotehyper}
 \usepackage{tablefootnote}
-\usepackage{enumitem}
 \AtBeginEnvironment{longtable}{%
 \setlist[itemize]{nosep=0pt,
                  leftmargin=*,

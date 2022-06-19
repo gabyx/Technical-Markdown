@@ -125,5 +125,7 @@ for addTag in "-minimal" ""; do
         docker push "$pushBaseName/$imageName"
         printInfo "Pushing '$pushBaseName/$imageNameLatest' ..."
         docker push "$pushBaseName/$imageNameLatest"
+
+        git push origin "$repoVersion"
     fi
 done
