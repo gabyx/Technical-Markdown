@@ -1,4 +1,4 @@
-# TechnicalMarkdown
+# Technical Markdown
 
 A markdown setup for technical documents, reports, theses & papers.
 
@@ -58,6 +58,11 @@ Execute the following in a shell:
 ```
 
 This will build the HTML output from its [markdown main file](Content.md).
+
+## Demo Project
+
+There is also a demo showing a [full thesis](https://github.com/gabyx/technical-markdown-demo) project.
+
 
 ## Rational
 
