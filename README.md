@@ -47,7 +47,7 @@ technical documents:**
     for file transclusion
 
 - Full-fledged [VS Code](https://code.visualstudio.com/) setup to write and
-  style your document in one of the best IDEs.
+  style your document in one of the best IDEs (*nvim is better 😏*).
 
 ## Quick-Start
 
